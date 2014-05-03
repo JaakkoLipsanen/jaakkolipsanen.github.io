@@ -2,7 +2,10 @@
 <html>
 	<head>
 		<title>flai</title>
-		<link rel="stylesheet" href="CSS.css"><link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="general.css" />
+		<link rel="stylesheet" type="text/css" href="me.css" />
+		
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   </head>
 	<body style="">
@@ -14,63 +17,28 @@
 		
 		<div id="navigation-div">
 			<ul id="navigation-list">
-				<li><a href="Nettisivu.html">Me</a></li>
-				<li><a class="selected" href="Nettisivu.html">Games</a></li>
+				<li><a class="selected" href="index.html">Me</a></li>
+				<li><a href="games.html">Games</a></li>
 				</ul>
 		</div>	
 		
-		<!-- Games -->
-		<div id="games-div">  
-			<h1> Games </h1>
-			<hr style="width: 400px" />
+		<!-- Content -->
+		<div id="content-div">  
+			<h1 style="text-align: center;">Welcome</h1>
+			<hr />
 			
-			<ul id="game-list" style="background-color: white">
+			<p>My name is Jaakko Lipsanen. I am an 18-year-old game developer from Helsinki, Finland. Most of my completed projects can be found on this site.</p>
+			<p>I have programmed and develoedg games for three years. During that time, I have released several games for Windows Phone with over 800,000 downloads.</p>
+			<p>I consider myself to be proficient in C# and Java and moderate in C++. I also know the basics of Clojure, Python as well as HTML and CSS (this page proves that!).</p>
+			<p>I have developed my games mainly using C# and <a href="http://en.wikipedia.org/wiki/Microsoft_XNA">XNA</a>, but recently I have changed to using <a href="https://unity3d.com/">Unity</a>. I have also made some projects using SFML and C++.</p>
+			<p>I am graduating from high school in the spring of 2014 and I am planning to start studying Computer Science at the University of Helsinki in the fall of 2014.<p>
 			
-				<!-- FFZ -->
-				<div class="game-description-div">
-					<h2>Final Fight Z</h2>
-					<img src="Icons/FFZ.Icon.png" </img>
-					<p class="game-description">Final Fight Z is a top-down twin-stick shooter where you try to survive from hordes of zombies by using various different weapons. The game features global leaderboards, achievements and a great pixel-art graphics.</p>
-					<p class="game-description">Final Fight Z was made in the fall of 2013 in a period of 3 months using C# and XNA. It is available for free in the Windows Phone Store.</p>
-					
-					<a href="http://www.windowsphone.com/en-us/store/app/final-fight-z/348e313f-8963-4356-a403-04785eaff9bc">
-						<img  src="Icons/DownloadWP.png" style="width: 40%" />
-					</a>
-				</div>
-				
-				<hr style="width: 400px" />
-				
-				<!-- Doodle Run -->
-				<div class="game-description-div">
-					<h2>Doodle Run</h2>
-					<img src="Icons/DoodleRun.Icon.png" </img>
-					<p class="game-description">Doodle Run is an addictive endless runner with great doodle graphics! Doodle Run has random generated maps and global leaderboards.</p>
-					<p class="game-description">I developed Doodle Run in the late 2012 in two months using C# and XNA. The game was a suprise success with over 800,000 downloads. It is available for free in the Windows Phone Store.</p>
-					
-					<a href="http://www.windowsphone.com/en-us/store/app/doodle-run/a608d3f4-51ec-4f3c-bca0-b205f311de85">
-						<img  src="Icons/DownloadWP.png" style="width: 40%" />
-					</a>
-				</div>
-				
-				
-				<hr style="width: 400px" />
-				
-				<!-- boxStrike -->
-				<div class="game-description-div">
-					<h2>boxStrike</h2>
-					<img src="Icons/boxStrike.Icon.png" </img>
-					<p class="game-description">In boxStrike, your goal is to evade other boxes and survive as long as possible. It features four unique graphical themes and global leaderboards.</p>
-					<p class="game-description">boxStrike was the first game I published. The development took me about one month and I used C# and XNA. It is available for free in the Windows Phone Store.</p>
-					
-					<a href="http://www.windowsphone.com/en-us/store/app/boxstrike/2c125639-a3cd-4588-ba99-bc78cc2fc2f9">
-						<img  src="Icons/DownloadWP.png" style="width: 40%" />
-					</a>
-				</div>
-					
-			</ul>
-			
-			<hr style="width: 400px" />
-			<p style="font-size: 14px; color: rgb(128, 128, 128)">&copy; Jaakko Lipsanen. All Rights Reserved</p> 
+			<!-- COPYRIGHT -->
+			<div style="margin: 36px;" />
+			<hr />
+			<p id="copyright-text">&copy; Jaakko Lipsanen. All Rights Reserved</p> 
 		</div>
+		
+		
 	</body>
 </html>

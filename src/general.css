@@ -1,28 +1,4 @@
 
-@media only screen and (max-device-width: 740px) 
-{ 
-	.game-description {
-		width: 400px !important;
-	
-	}
-	
-	.game-description-div {
-		width: 400px !important;
-	}
-}
-
-.game-description {
-	width: 600px; 
-	text-align: center;
-
-}
-
-.game-description-div {
-	width: 600px;
-	text-align: center; 
-	margin: auto;
-}
-
 /**** HEADER ****/
 #header-text {
     color: white;
@@ -80,27 +56,14 @@
 	color: rgb(96, 96, 96);
 }
 
-/**** GAMES ****/
-#games-div {
-	text-align: center;
-}
-
-#games-div h1 {
+/**** CONTENT ****/
+#content-div h1 {
 	font-family: 'Yanone Kaffeesatz';
 }
 
 
-#games-div h2 {
+#content-div h2 {
 	font-family: 'Yanone Kaffeesatz';
-}
-
-#game-list {
-
-}
-
-#game-list div img {
-	width: 120px;
-	text-align: center;
 }
 
 /**** MISC ****/
@@ -110,7 +73,12 @@ body {
 	margin: 0px;
 }
 
+html {
+	overflow: -moz-scrollbars-vertical; 
+	overflow-y: scroll;
+}
 
+/**** TEXTS ****/
 h1 {
 	font-size: 36px;
 }
@@ -130,4 +98,16 @@ p {
 
 a {
 	font-family: Open Sans;
+}
+
+/* The horizontal line which divides groups */
+hr {
+	width: 400px;
+}
+
+/**** COPYRIGHT ****/
+#copyright-text {
+	font-size: 14px;
+	color: rgb(128, 128, 128);
+	text-align: center;
 }

@@ -1,0 +1,45 @@
+
+/**** GAMES ****/
+
+#game-list {
+	margin: 0px;
+	padding: 0px;	
+}
+
+#game-list div img {
+	width: 120px;
+	text-align: center;
+}
+
+#content-div ul a img { 
+	width: 40%;
+}
+
+.game-description {
+	width: 600px; 
+	text-align: center;
+
+}
+
+.game-description-div {
+	width: 600px;
+	text-align: center; 
+	margin: auto;
+}
+
+@media only screen and (max-device-width: 740px) 
+{ 
+	.game-description {
+		width: 400px !important;
+	
+	}
+	
+	.game-description-div {
+		width: 400px !important;
+	}
+}
+
+/**** MISC ****/
+#content-div {
+	text-align: center;
+}
