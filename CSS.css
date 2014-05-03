@@ -1,0 +1,133 @@
+
+@media only screen and (max-device-width: 740px) 
+{ 
+	.game-description {
+		width: 400px !important;
+	
+	}
+	
+	.game-description-div {
+		width: 400px !important;
+	}
+}
+
+.game-description {
+	width: 600px; 
+	text-align: center;
+
+}
+
+.game-description-div {
+	width: 600px;
+	text-align: center; 
+	margin: auto;
+}
+
+/**** HEADER ****/
+#header-text {
+    color: white;
+	text-align: center;
+	font-size: 400%;
+	font-family:'Yanone Kaffeesatz', sans-serif;
+	margin: auto;
+}
+
+#header-div {
+	width: 100%;
+	height: 70px;
+	background: rgb(48, 48, 48);
+	vertical-align: middle;
+}
+
+/**** NAVIGATION LIST ****/
+
+/* Navigation List LI */
+#navigation-list li {
+	float: left;
+	display: block;
+	width: 100px;
+}
+
+#navigation-list li .selected {
+	float: left;
+	display: block;
+	width: 100px;
+	background-color: rgb(48, 48, 48);
+	color: white;
+}
+
+#navigation-list li:hover {
+	background-color: rgb(208, 208, 208);
+}
+
+
+/* Other */
+#navigation-list {
+	list-style-type: none;
+	text-align: center;
+	padding: 0px;
+	width: 204px;
+	height: 50px;
+	margin: auto;
+}
+
+#navigation-list li a {
+	font-family: Yanone Kaffeesatz;
+	font-size: 250%;
+	margin: 0px;
+	padding: 0px;
+	text-decoration: none;
+	color: rgb(96, 96, 96);
+}
+
+/**** GAMES ****/
+#games-div {
+	text-align: center;
+}
+
+#games-div h1 {
+	font-family: 'Yanone Kaffeesatz';
+}
+
+
+#games-div h2 {
+	font-family: 'Yanone Kaffeesatz';
+}
+
+#game-list {
+
+}
+
+#game-list div img {
+	width: 120px;
+	text-align: center;
+}
+
+/**** MISC ****/
+body {
+	background-color: white;
+	padding: 0px;
+	margin: 0px;
+}
+
+
+h1 {
+	font-size: 36px;
+}
+
+h2 {
+	font-size: 30px;
+}
+
+h3 {
+	font-size: 24px;
+}
+
+p {
+	font-size: 16px;
+	font-family: Open Sans;
+}
+
+a {
+	font-family: Open Sans;
+}
