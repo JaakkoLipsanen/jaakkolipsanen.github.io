@@ -8,11 +8,13 @@
 
 .game-description-div img {
 	width: 120px;
+	height: 120px;
 	text-align: center;
 }
 
 .game-description-div a img { 
 	width: 50%;
+	height: 50%;
 }
 
 .game-description {
