@@ -48,7 +48,7 @@
 }
 
 #navigation-list li a {
-	font-family: Yanone Kaffeesatz;
+	font-family: Yanone Kaffeesatz, sans-serif;
 	font-size: 250%;
 	margin: 0px;
 	padding: 0px;
@@ -59,12 +59,12 @@
 
 /**** CONTENT ****/
 #content-div h1 {
-	font-family: 'Yanone Kaffeesatz';
+	font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
 
 #content-div h2 {
-	font-family: 'Yanone Kaffeesatz';
+	font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
 /**** MISC ****/
@@ -94,11 +94,11 @@ h3 {
 
 p {
 	font-size: 16px;
-	font-family: Open Sans;
+	font-family: Open Sans, sans-serif;
 }
 
 a {
-	font-family: Open Sans;
+	font-family: Open Sans, sans-serif;
 }
 
 /* The horizontal line which divides groups */
