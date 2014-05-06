@@ -6,12 +6,12 @@
 	padding: 0px;	
 }
 
-#game-list div img {
+.game-description-div img {
 	width: 120px;
 	text-align: center;
 }
 
-#content-div ul a img { 
+.game-description-div a img { 
 	width: 50%;
 }
 
