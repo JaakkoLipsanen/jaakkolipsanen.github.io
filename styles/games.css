@@ -1,6 +1,4 @@
 
-/**** GAMES ****/
-
 #game-list {
 	margin: 0px;
 	padding: 0px;	
@@ -13,14 +11,13 @@
 }
 
 .game-description-div a img { 
-	width: 50%;
-	height: 50%;
+	width: 231px;
+	height: 60px;
 }
 
 .game-description {
 	width: 600px; 
 	text-align: center;
-
 }
 
 .game-description-div {
