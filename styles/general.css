@@ -115,6 +115,14 @@ hr {
 /**** COPYRIGHT ****/
 #copyright-text {
 	font-size: 14px;
-	color: rgb(128, 128, 128);
+	color: rgb(172, 172, 172);
 	text-align: center;
+	margin-top: 4px;
+}
+
+#email-text {
+	font-size: 14px;
+	color: gray;
+	text-align: center;
+	margin: 0px;
 }
