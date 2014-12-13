@@ -112,7 +112,14 @@ hr {
 	width: 400px;
 }
 
-/**** COPYRIGHT ****/
+/**** FOOTER ****/
+#email-text {
+	font-size: 14px;
+	color: gray;
+	text-align: center;
+	margin: 0px;
+}
+
 #copyright-text {
 	font-size: 14px;
 	color: rgb(180, 180, 180);
@@ -120,9 +127,12 @@ hr {
 	margin-top: 4px;
 }
 
-#email-text {
+#github-text {
 	font-size: 14px;
-	color: gray;
+	color: rgb(180, 180, 180);
 	text-align: center;
-	margin: 0px;
+}
+
+#github-text a  {
+	color: rgb(128, 128, 216);
 }
