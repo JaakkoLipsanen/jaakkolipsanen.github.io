@@ -1,13 +1,7 @@
 
-#game-list {
-	margin: 0px;
-	padding: 0px;	
-}
-
 .game-description-div img {
 	width: 120px;
 	height: 120px;
-	text-align: center;
 }
 
 .game-description-div a img { 
@@ -15,20 +9,12 @@
 	height: 60px;
 }
 
-.game-description {
-	width: 85%;
-	max-width: 600px;
-	text-align: center;
-}
-
-.game-description-div {
-	width: 85%;
-	max-width: 600px;
-	text-align: center; 
-	margin: auto;
-}
-
 /**** MISC ****/
 #content-div {
 	text-align: center;
+	display: block;
+	
+	width: 85%;
+	max-width: 600px;
+	margin: auto;
 }
