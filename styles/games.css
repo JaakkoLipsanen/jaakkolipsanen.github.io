@@ -28,18 +28,6 @@
 	margin: auto;
 }
 
-@media only screen and (max-device-width: 740px) 
-{ 
-	.game-description {
-		width: 400px !important;
-	
-	}
-	
-	.game-description-div {
-		width: 400px !important;
-	}
-}
-
 /**** MISC ****/
 #content-div {
 	text-align: center;
