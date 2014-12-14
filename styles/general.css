@@ -110,6 +110,7 @@ a {
 /* The horizontal line which divides groups */
 hr {
 	width: 400px;
+	max-width: 80%;
 }
 
 /**** FOOTER ****/
@@ -133,6 +134,6 @@ hr {
 	text-align: center;
 }
 
-#github-text a  {
+#github-text a, #email-text a  {
 	color: rgb(128, 128, 216);
 }
