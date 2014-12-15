@@ -191,6 +191,11 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 			this._nightMarkers[i].setMap(null);
 		}
 	}.bind(this);
+	
+	// when window is resized, re-center and re-zoom the map
+	window.onresize = function(event) {	
+		this._googleMap.fitBounds(routeBounds);
+	}.bind(this);
 }
 
 function isTouchDevice() {
