@@ -42,9 +42,19 @@
 	list-style-type: none;
 	text-align: center;
 	padding: 0px;
-	width: 204px;
-	height: 50px;
-	margin: auto;
+		
+	margin-top: 0px;
+}
+
+#navigation-div {
+	text-align: center;
+	
+	display: table;
+	width: auto;
+	height: auto;
+	
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #navigation-list li a {
@@ -111,6 +121,33 @@ hr {
 	width: 400px;
 	max-width: 80%;
 }
+
+/* CYCLE LINK */
+#cycle-or-code-link {
+	padding: 0px;
+				
+	background-color: transparent;
+	color: rgb(144, 144, 144);
+	position: absolute;
+	left: 0px;
+	
+	top: 0px;		
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 4px;
+	font-family: Yanone Kaffeesatz, courier;
+	font-weight: normal;
+	font-size: 1.5em;
+				
+	text-decoration: none;
+}
+			
+#cycle-or-code-link:hover {		
+	background-color: rgb(96, 96, 96);
+	color: rgb(255, 255, 255);
+}
+
+
 
 /**** FOOTER ****/
 #email-text {
