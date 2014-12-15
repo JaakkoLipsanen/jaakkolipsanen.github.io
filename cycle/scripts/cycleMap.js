@@ -19,6 +19,7 @@ function MapProperties(mapType, labelType) {
 	this.MapType = mapType;
 	this.LabelType = labelType;
 	this.ShowStreetView = true;
+	this.AutomaticallyFitOnResize = true;
 }
 
 // meh.. it would be nice if there was another constructor that accepted a LatLng[] ("points") ....
@@ -192,10 +193,14 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 		}
 	}.bind(this);
 	
-	// when window is resized, re-center and re-zoom the map
-	window.onresize = function(event) {	
-		this._googleMap.fitBounds(routeBounds);
-	}.bind(this);
+	if(mapProperties.AutomaticallyFitOnResize) {
+		// when window is resized, re-center and re-zoom the map
+		window.onresize = function(event) {	
+			setTimeout(function() {
+				this._googleMap.fitBounds(routeBounds);
+			}.bind(this), 150);
+		}.bind(this);
+	}
 }
 
 function isTouchDevice() {
