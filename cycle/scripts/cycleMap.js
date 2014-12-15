@@ -170,7 +170,7 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 		var marker = new google.maps.Marker({
 			position: night.Location,
 			icon: (night.NightType == NightType.Tent ? tentIcon : hotelIcon),
-			map : null, // null by default. nights are shown when mouse is over the container element
+			map : isTouchDevice() ? this._googleMap : null, // null by default. nights are shown when mouse is over the container element
 		});
 		
 		this._nightMarkers.push(marker);
@@ -192,6 +192,11 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 		}
 	}.bind(this);
 }
+
+function isTouchDevice() {
+	return 'ontouchstart' in window // works on most browsers
+		|| 'onmsgesturechange' in window; // works on ie10
+};
 
 function Style(styleArray) {
 	this.NormalStyle = styleArray;
