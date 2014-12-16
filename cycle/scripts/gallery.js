@@ -37,12 +37,24 @@ function Gallery(galleryDescriptionFilePath) {
 	for(var i = 0, currentIndex = 3; i < photoCount; i++) {
 		this.Photos.push(new Photo(lines[currentIndex++], lines[currentIndex++]));
 	}
+	
+	var getImageSource = function(index) {
+		return "data/spain14/photos/fullsize/" + this.Photos[index].PhotoName
+	}.bind(this);
+	
+	var preloadedImage = new Image();
+	var preloadImage = function() {
+		if(currentIndex < this.Photos.length - 1) {
+			preloadImage.src = getImageSource(currentIndex + 1); 
+		}
+	};
 		
 	var currentIndex = 0;
 	var updateImage = function() {
-		document.getElementById("gallery-current-image").src = "data/spain14/photos/fullsize/" + this.Photos[currentIndex].PhotoName;	
+		document.getElementById("gallery-current-image").src = getImageSource(currentIndex);
 		document.getElementById("current-image-index-label").innerHTML = currentIndex + 1; 
-	}.bind(this);;
+	}.bind(this);
+	
 	
 	this.MovePrevious = function() {
 		if(currentIndex != 0) {
