@@ -45,9 +45,9 @@ function Gallery(galleryDescriptionFilePath) {
 	var preloadedImage = new Image();
 	var preloadNextImage = function() {
 		if(currentIndex < this.Photos.length - 1) {
-			preloadImage.src = getImageSource(currentIndex + 1); 
+			preloadedImage.src = getImageSource(currentIndex + 1); 
 		}
-	};
+	}.bind(this);
 		
 	var currentIndex = 0;
 	var updateImage = function() {
