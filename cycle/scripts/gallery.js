@@ -43,7 +43,7 @@ function Gallery(galleryDescriptionFilePath) {
 	}.bind(this);
 	
 	var preloadedImage = new Image();
-	var preloadImage = function() {
+	var preloadNextImage = function() {
 		if(currentIndex < this.Photos.length - 1) {
 			preloadImage.src = getImageSource(currentIndex + 1); 
 		}
@@ -53,6 +53,8 @@ function Gallery(galleryDescriptionFilePath) {
 	var updateImage = function() {
 		document.getElementById("gallery-current-image").src = getImageSource(currentIndex);
 		document.getElementById("current-image-index-label").innerHTML = currentIndex + 1; 
+		
+		preloadNextImage();
 	}.bind(this);
 	
 	
