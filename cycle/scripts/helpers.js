@@ -11,3 +11,14 @@ function loadXML(filePath) {
 	var xmlDoc = parser.parseFromString(xhttp.responseText, "application/xml");
 	return xmlDoc;
 } 
+
+// http://stackoverflow.com/a/7934009
+function enterFullScreen(element) {
+	var func = element.requestFullScreen || element.mozRequestFullScreen || element.webkitRequestFullScreen;
+	func.call(element);
+}
+			
+function exitFullScreen() {
+	var func = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+	func.call(document);
+}
