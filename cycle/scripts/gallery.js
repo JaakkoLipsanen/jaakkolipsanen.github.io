@@ -57,7 +57,6 @@ function Gallery(galleryDescriptionFilePath) {
 		preloadNextImage();
 	}.bind(this);
 	
-	
 	this.MovePrevious = function() {
 		if(currentIndex != 0) {
 			currentIndex--;
@@ -117,5 +116,6 @@ function Gallery(galleryDescriptionFilePath) {
 		this.MoveNext();
 	}.bind(this);
 	
+	updateImage();
 	document.getElementById("total-image-count-label").innerHTML = photoCount; 
 }

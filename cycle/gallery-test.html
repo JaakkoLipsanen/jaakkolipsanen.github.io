@@ -61,24 +61,13 @@
 
 		<!-- Content -->
 		<div id="gallery-div" style="overflow-y: hidden; display: block; max-width: 1000px; width: 90%; max-height: 800px; min-height: 300px;  height: 75vh; margin: auto;">  
-					
-			
-			<div id="gallery-background-layout" style="background-color: rgb(48, 48, 48); height: 100%">
-				
-				<!-- TOP BAR -->
-				<div id="gallery-topbar" style="background-color: rgb(16, 16, 16); margin: auto; width: 100%; height: 30px; opacity: 0.75">
-						
-					<!-- TODO: on hover, change background -->
-					<div style="background-color: rgb(16, 16, 16); width; auto; float: right; width: 30px; height: 30px; vertical-align: center;">
-						<img id="gallery-toggle-fullscreen" src="icons/gallery-expand.png" style="width: 16px; height: 16px;  display: block;  opacity: 0.65; margin-left: auto; margin-right: auto; padding-top: 6px;"  />
-					</div>
-					
-					<p id="gallery-topbar-title" style="text-align: center; float:none; margin: auto; width: auto; color: white;">Spain '14</p>	
-				</div>
+	
+			<div id="gallery-background-layout" style="background-color: rgb(48, 48, 48); height: 100%; position: relative">
 
-				<div style="height: calc(100% - 54px); text-align: center; position: relative">
-					<img id="gallery-current-image" src="data/spain14/photos/fullsize/IMG_20141123_102709381.jpg" style="width: auto; height: auto; max-height: 100%; max-width: 100%; margin: 0;" />
-									
+				<div style="height: calc(100% - 30px); text-align: center; position: relative">	
+					<img id="gallery-current-image" src="data/spain14/photos/fullsize/IMG_20141123_102709381.jpg" style="width: auto; height: auto; max-height: 100%; max-width: 100%; margin: 0;" />	
+					<img id="gallery-previous-image" src="" style="position: absolute; left: 0px; top: 0px; width: auto; height: auto; max-height: 100%; max-width: 100%; margin: 0; opacity: 0;" />
+					
 					<div style="position: absolute; left: 0px; top: calc(50% - 32px);">
 						<img id="previous-image" src="icons/previous-icon.png" style=" height: 64px; opacity: 0.45;" />
 					</div>
@@ -90,12 +79,31 @@
 					
 				</div>
 				
-				<div id="bottom-bar" style="text-align: center;">
-					<div style="margin: 0px; color: rgb(192, 192, 192); font-size: 18px; margin: 0px; white-space: nowrap;">
-						<a id="current-image-index-label">0</a>
-						<a> of </a>
-						<a id="total-image-count-label">0</a>
+				<!-- TOP BAR -->
+				<div id="gallery-topbar" style=" position: absolute; top: 0px;  width: 100%; height: 32px; text-align: center;">
+					<div style="position: absolute; opacity: 0.6; background-color: rgb(16, 16, 16);  width: 100%; height: 100%; 
+						background: radial-gradient(at 50% 0%, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.75) 30%,  rgba(0,0,0,0) 70%);">
 					</div>
+					<p id="gallery-topbar-title" style="position: relative;  text-align: center; margin: auto; width: auto; color: white; opacity: 0.9; text-shadow: 1px 1px rgb(48, 48, 48)">Spain '14</p>	
+				</div>
+
+				<!-- BOTTOM BAR -->
+				<div id="gallery-bottombar" style="background-color: rgb(16, 16, 16); margin: auto; width: 100%; height: 30px; opacity: 0.75">
+					
+					<!-- TODO: on hover, change background -->
+					<div style="background-color: rgb(16, 16, 16); float: right; width: 30px; height: 30px; vertical-align: center;">
+						<img id="gallery-toggle-fullscreen" src="icons/gallery-expand.png" style="width: 16px; height: 16px;  display: block;  opacity: 0.65; margin-left: auto; margin-right: auto; padding-top: 6px;"  />
+					</div>	
+					
+					<div id="bottom-bar" style="text-align: center;">
+						<div style="margin: 0px; color: rgb(192, 192, 192); font-size: 18px; margin: 0px; white-space: nowrap;">
+							<a id="current-image-index-label">0</a>
+							<a> of </a>
+							<a id="total-image-count-label">0</a>
+						</div>
+					</div>
+					
+					
 				</div>
 				
 			</div>
