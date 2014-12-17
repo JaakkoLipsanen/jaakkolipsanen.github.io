@@ -49,8 +49,11 @@ function Gallery(galleryDescriptionFilePath) {
 		}
 	}.bind(this);
 	
-	var isImageLoaded = function(image) {
-		return image.complete && image.naturalWidth != 0;
+	// http://stackoverflow.com/a/7847366
+	var isImageLoaded = function(url) { 
+		var test = document.createElement("img");
+		test.src = url;
+		return test.complete || test.width+test.height > 0;
 	};
 		
 	var currentIndex = 0;
@@ -71,7 +74,7 @@ function Gallery(galleryDescriptionFilePath) {
 			
 		//document.getElementById("gallery-fade-div").style.opacity = 0.5;
 		currentImage.src = getImageSource(currentIndex);
-		console.log(isImageLoaded(currentImage));
+		console.log(isImageLoaded(getImageSource(currentIndex)));
 		document.getElementById("gallery-current-description").innerHTML = this.Photos[currentIndex].Description;
 		document.getElementById("current-image-index-label").innerHTML = currentIndex + 1; 
 		
