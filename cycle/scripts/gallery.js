@@ -89,6 +89,14 @@ function Gallery(galleryDescriptionFilePath) {
 			galleryDiv.style.maxHeight= nonFullScreenMaxHeight;
 		}
 	}.bind(this));
+	
+	document.addEventListener("webkitfullscreenchange", function() {
+		alert('x');
+	}, false);
+	
+	document.addEventListener("fullscreenchange", function() {
+		alert('x');
+	}, false);
 
 	document.getElementById("gallery-toggle-fullscreen").onclick = function() {
 	
