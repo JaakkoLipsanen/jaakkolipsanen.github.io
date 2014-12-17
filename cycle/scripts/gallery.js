@@ -60,21 +60,30 @@ function Gallery(galleryDescriptionFilePath) {
 	var currentImageIndex = 0;
 	var updateImage = function() {
 			
-		var currentImage = document.getElementById("gallery-image-" + (currentImageIndex % 2));
-		var previousImage = document.getElementById("gallery-image-" + ((currentImageIndex + 1) % 2));
-
-		currentImageIndex++;
-		currentImage.onload = function() {
+		var onImageLoaded = function() {
 			document.getElementById("gallery-fade-div").style.opacity = 0;
 			
 			currentImage.style.opacity = 1;
 			previousImage.style.opacity = 0;
 		};
+		
+		var currentImage = document.getElementById("gallery-image-" + (currentImageIndex % 2));
+		var previousImage = document.getElementById("gallery-image-" + ((currentImageIndex + 1) % 2));
+
+		currentImageIndex++;
+		currentImage.onload = function() {
+			onImageLoaded();
+		};
 
 		var newImageSource = getImageSource(currentIndex);
-		currentImage.src = newImageSource;
-		if(!isImageLoaded(newImageSource)) {
-			document.getElementById("gallery-fade-div").style.opacity = 0.5;	
+		if(currentImage.src != newImageSource) {
+			currentImage.src = newImageSource;
+			if(!isImageLoaded(newImageSource)) {
+				document.getElementById("gallery-fade-div").style.opacity = 0.5;	
+			}
+		}
+		else {
+			onImageLoaded();
 		}
 		
 		document.getElementById("gallery-current-description").innerHTML = this.Photos[currentIndex].Description;
