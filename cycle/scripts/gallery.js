@@ -50,13 +50,21 @@ function Gallery(galleryDescriptionFilePath) {
 	}.bind(this);
 		
 	var currentIndex = 0;
+	var currentImageIndex = 0;
 	var updateImage = function() {
-	
-		var currentImage = document.getElementById("gallery-current-image");
+			
+		var currentImage = document.getElementById("gallery-image-" + (currentImageIndex % 2));
+		var previousImage = document.getElementById("gallery-image-" + ((currentImageIndex + 1) % 2));
+
+		currentImageIndex++;
 		currentImage.onload = function() {
 			document.getElementById("gallery-fade-div").style.opacity = 0;
+
+			currentImage.style.opacity = 1;
+			previousImage.style.opacity = 0;
 		};
 		
+			
 		document.getElementById("gallery-fade-div").style.opacity = 0.5;
 		currentImage.src = getImageSource(currentIndex);
 		document.getElementById("gallery-current-description").innerHTML = this.Photos[currentIndex].Description;
