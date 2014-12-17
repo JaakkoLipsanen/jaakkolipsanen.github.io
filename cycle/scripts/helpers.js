@@ -34,3 +34,9 @@ function addMultiEventListener(events, func) {
 		document.addEventListener(arr[i], func, false);
 	}
 }	
+
+function getAbsolutePath(url) {
+    var link = document.createElement("a");
+    link.href = url;
+    return (link.protocol+"//"+link.host+link.pathname+link.search+link.hash);
+}

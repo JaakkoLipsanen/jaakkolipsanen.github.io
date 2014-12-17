@@ -75,7 +75,7 @@ function Gallery(galleryDescriptionFilePath) {
 			onImageLoaded();
 		};
 
-		var newImageSource = getImageSource(currentIndex);
+		var newImageSource = getAbsolutePath(getImageSource(currentIndex));
 		if(currentImage.src != newImageSource) {
 			currentImage.src = newImageSource;
 			if(!isImageLoaded(newImageSource)) {
