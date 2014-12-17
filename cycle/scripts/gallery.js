@@ -72,34 +72,31 @@ function Gallery(galleryDescriptionFilePath) {
 		}
 	};
 
-	var nonFullScreenMaxWidth = "";
-	var nonFullScreenMaxHeight = "";
+	var galleryDiv = document.getElementById("gallery-div");
+	var nonFullScreenMaxWidth = galleryDiv.style.maxWidth;
+	var nonFullScreenMaxHeight = galleryDiv.style.maxHeight;
+	
+	addMultiEventListener("fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange", function() {
+		
+		if(isFullScreen()) {
+			document.getElementById("gallery-toggle-fullscreen").src = "icons/gallery-reduce.png";
+			galleryDiv.style.maxWidth = "100%";
+			galleryDiv.style.maxHeight = "100%";
+		}
+		else {
+			document.getElementById("gallery-toggle-fullscreen").src = "icons/gallery-expand.png";
+			galleryDiv.style.maxWidth = nonFullScreenMaxWidth;
+			galleryDiv.style.maxHeight= nonFullScreenMaxHeight;
+		}
+	}.bind(this));
+
 	document.getElementById("gallery-toggle-fullscreen").onclick = function() {
 	
-		var galleryDiv = document.getElementById("gallery-div");
 		if(!isFullScreen()) {	
-			nonFullScreenMaxWidth = galleryDiv.style.maxWidth;
-			nonFullScreenMaxHeight = galleryDiv.style.maxHeight;
-			
 			enterFullScreen(galleryDiv);
-			document.getElementById("gallery-toggle-fullscreen").src = isFullScreen() ? 
-				"icons/gallery-expand.png" : 
-				"icons/gallery-reduce.png";
-				
-			if(isFullScreen()) {
-				galleryDiv.style.maxWidth = "100%";
-				galleryDiv.style.maxHeight = "100%";
-			}
-			
 		}
 		else {
 			exitFullScreen();
-			document.getElementById("gallery-toggle-fullscreen").src = isFullScreen() ? 
-				"icons/gallery-reduce.png" : 
-				"icons/gallery-expand.png";
-				
-			galleryDiv.style.maxWidth = nonFullScreenMaxWidth;
-			galleryDiv.style.maxHeight = nonFullScreenMaxHeight;
 		}
 	}.bind(this);
 	

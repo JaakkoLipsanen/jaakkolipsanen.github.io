@@ -26,3 +26,11 @@ function exitFullScreen() {
 function isFullScreen() {
 	return (document.fullscreenElement && document.fullscreenElement !== null) || document.mozFullScreen || document.webkitIsFullScreen;
 }
+
+function addMultiEventListener(events, func) {
+	var arr = events.split(" ");
+	
+	for(var i = 0; i < arr.length; i++) {
+		document.addEventListener(arr[i], func, false);
+	}
+}	
