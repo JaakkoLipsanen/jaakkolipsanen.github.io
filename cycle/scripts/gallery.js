@@ -91,11 +91,11 @@ function Gallery(galleryDescriptionFilePath) {
 	}.bind(this));
 	
 	document.addEventListener("webkitfullscreenchange", function() {
-		alert('x');
+		alert('webkit');
 	}, false);
 	
 	document.addEventListener("fullscreenchange", function() {
-		alert('x');
+		alert('std');
 	}, false);
 
 	document.getElementById("gallery-toggle-fullscreen").onclick = function() {
