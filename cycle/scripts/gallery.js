@@ -51,7 +51,14 @@ function Gallery(galleryDescriptionFilePath) {
 		
 	var currentIndex = 0;
 	var updateImage = function() {
-		document.getElementById("gallery-current-image").src = getImageSource(currentIndex);
+	
+		var currentImage = document.getElementById("gallery-current-image");
+		currentImage.onload = function() {
+			document.getElementById("gallery-fade-div").style.opacity = 0;
+		};
+		
+		document.getElementById("gallery-fade-div").style.opacity = 0.5;
+		currentImage.src = getImageSource(currentIndex);
 		document.getElementById("gallery-current-description").innerHTML = this.Photos[currentIndex].Description;
 		document.getElementById("current-image-index-label").innerHTML = currentIndex + 1; 
 		
@@ -100,7 +107,6 @@ function Gallery(galleryDescriptionFilePath) {
 	}.bind(this));
 	
 	document.getElementById("gallery-toggle-fullscreen").onclick = function() {
-	
 		if(!isFullScreen()) {	
 			enterFullScreen(galleryDiv);
 		}
