@@ -48,6 +48,10 @@ function Gallery(galleryDescriptionFilePath) {
 			preloadedImage.src = getImageSource(currentIndex + 1); 
 		}
 	}.bind(this);
+	
+	var isImageLoaded = function(image) {
+		return image.complete && image.naturalWidth != 0;
+	};
 		
 	var currentIndex = 0;
 	var currentImageIndex = 0;
@@ -59,7 +63,7 @@ function Gallery(galleryDescriptionFilePath) {
 		currentImageIndex++;
 		currentImage.onload = function() {
 			//document.getElementById("gallery-fade-div").style.opacity = 0;
-
+			
 			currentImage.style.opacity = 1;
 			previousImage.style.opacity = 0;
 		};
@@ -67,6 +71,7 @@ function Gallery(galleryDescriptionFilePath) {
 			
 		//document.getElementById("gallery-fade-div").style.opacity = 0.5;
 		currentImage.src = getImageSource(currentIndex);
+		console.log(isImageLoaded(currentImage));
 		document.getElementById("gallery-current-description").innerHTML = this.Photos[currentIndex].Description;
 		document.getElementById("current-image-index-label").innerHTML = currentIndex + 1; 
 		
