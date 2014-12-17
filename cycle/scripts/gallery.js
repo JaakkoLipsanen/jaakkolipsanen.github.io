@@ -71,13 +71,25 @@ function Gallery(galleryDescriptionFilePath) {
 			updateImage();
 		}
 	};
-	
+
+	var nonFullScreenMaxWidth = "";
+	var nonFullScreenMaxHeight = "";
 	document.getElementById("gallery-toggle-fullscreen").onclick = function() {
-		if(!isFullScreen()) {
-			enterFullScreen(document.getElementById("gallery-div"));
+	
+		var galleryDiv = document.getElementById("gallery-div");
+		if(!isFullScreen()) {	
+			nonFullScreenMaxWidth = galleryDiv.style.maxWidth;
+			nonFullScreenMaxHeight = galleryDiv.style.maxHeight;
+			
+			enterFullScreen(galleryDiv);
 			document.getElementById("gallery-toggle-fullscreen").src = isFullScreen() ? 
 				"icons/gallery-expand.png" : 
 				"icons/gallery-reduce.png";
+				
+			if(isFullScreen()) {
+				galleryDiv.style.maxWidth = "100%";
+				galleryDiv.style.maxHeight = "100%";
+			}
 			
 		}
 		else {
@@ -85,6 +97,9 @@ function Gallery(galleryDescriptionFilePath) {
 			document.getElementById("gallery-toggle-fullscreen").src = isFullScreen() ? 
 				"icons/gallery-expand.png" : 
 				"icons/gallery-reduce.png";
+				
+			galleryDiv.style.maxWidth = nonFullScreenMaxWidth;
+			galleryDiv.style.maxHeight = nonFullScreenMaxHeight;
 		}
 	}.bind(this);
 	
