@@ -73,8 +73,13 @@ function Gallery(galleryDescriptionFilePath) {
 	};
 
 	var galleryDiv = document.getElementById("gallery-div");
-	var nonFullScreenMaxWidth = galleryDiv.style.maxWidth;
-	var nonFullScreenMaxHeight = galleryDiv.style.maxHeight;
+	
+	var savedStyleValues = {
+		maxWidth: galleryDiv.style.maxWidth,
+		maxHeight: galleryDiv.style.maxHeight,
+		width: galleryDiv.style.width,
+		height: galleryDiv.style.height,
+	};
 	
 	addMultiEventListener("fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange", function() {
 		
@@ -82,22 +87,18 @@ function Gallery(galleryDescriptionFilePath) {
 			document.getElementById("gallery-toggle-fullscreen").src = "icons/gallery-reduce.png";
 			galleryDiv.style.maxWidth = "100%";
 			galleryDiv.style.maxHeight = "100%";
+			galleryDiv.style.width = "100%";
+			galleryDiv.style.height = "100%";
 		}
 		else {
 			document.getElementById("gallery-toggle-fullscreen").src = "icons/gallery-expand.png";
-			galleryDiv.style.maxWidth = nonFullScreenMaxWidth;
-			galleryDiv.style.maxHeight= nonFullScreenMaxHeight;
+			galleryDiv.style.maxWidth = savedStyleValues.maxWidth;
+			galleryDiv.style.maxHeight= savedStyleValues.maxHeight;
+			galleryDiv.style.width = savedStyleValues.width;
+			galleryDiv.style.height= savedStyleValues.height;
 		}
 	}.bind(this));
 	
-	document.addEventListener("webkitfullscreenchange", function() {
-		alert('webkit');
-	}, false);
-	
-	document.addEventListener("fullscreenchange", function() {
-		alert('std');
-	}, false);
-
 	document.getElementById("gallery-toggle-fullscreen").onclick = function() {
 	
 		if(!isFullScreen()) {	
