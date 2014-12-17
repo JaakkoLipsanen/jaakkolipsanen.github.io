@@ -58,14 +58,14 @@ function Gallery(galleryDescriptionFilePath) {
 
 		currentImageIndex++;
 		currentImage.onload = function() {
-			document.getElementById("gallery-fade-div").style.opacity = 0;
+			//document.getElementById("gallery-fade-div").style.opacity = 0;
 
 			currentImage.style.opacity = 1;
 			previousImage.style.opacity = 0;
 		};
 		
 			
-		document.getElementById("gallery-fade-div").style.opacity = 0.5;
+		//document.getElementById("gallery-fade-div").style.opacity = 0.5;
 		currentImage.src = getImageSource(currentIndex);
 		document.getElementById("gallery-current-description").innerHTML = this.Photos[currentIndex].Description;
 		document.getElementById("current-image-index-label").innerHTML = currentIndex + 1; 
