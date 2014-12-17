@@ -24,5 +24,5 @@ function exitFullScreen() {
 }
 
 function isFullScreen() {
-	return document.fullScreen || document.mozFullScreen || document.webkitFullScreen;
+	return document.fullscreenElement || document.mozFullScreen || document.webkitFullScreen;
 }
