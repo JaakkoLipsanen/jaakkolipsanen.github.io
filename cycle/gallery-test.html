@@ -88,21 +88,24 @@
 				</div>
 
 				<!-- BOTTOM BAR -->
-				<div id="gallery-bottombar" style="background-color: rgb(16, 16, 16); margin: auto; width: 100%; height: 30px; opacity: 0.75">
+				<div id="gallery-bottombar" style="background-color: rgb(16, 16, 16); margin: auto; width: 100%; height: 30px; opacity: 1; margin: 0px;">
 					
-					<!-- TODO: on hover, change background -->
-					<div style="background-color: rgb(16, 16, 16); float: right; width: 30px; height: 30px; vertical-align: center;">
-						<img id="gallery-toggle-fullscreen" src="icons/gallery-expand.png" style="width: 16px; height: 16px;  display: block;  opacity: 0.65; margin-left: auto; margin-right: auto; padding-top: 6px;"  />
-					</div>	
 					
-					<div id="bottom-bar" style="text-align: center;">
-						<div style="margin: 0px; color: rgb(192, 192, 192); font-size: 18px; margin: 0px; white-space: nowrap;">
-							<a id="current-image-index-label">0</a>
-							<a> of </a>
-							<a id="total-image-count-label">0</a>
+					
+					<div id="bottom-bar" style="display: inline-block; text-align: left; margin: 0px; margin-left: 8px; width: auto; max-width: calc(100% -  38px); height: 30px; vertical-align: center; position: relative; white-space: nowrap; overflow: hidden">
+						<div style="color: rgb(192, 192, 192); font-size: 14px; padding-top: 4px; width: auto; max-width: 100%; height: 26px; margin-bottom: auto; vertical-align: center;white-space: nowrap; overflow: hidden;">
+							<a style="opacity: 0.75" id="current-image-index-label">0</a>
+							<a style="opacity: 0.75"> of </a>
+							<a style="opacity: 0.75" id="total-image-count-label">0</a>
+							<div style="display: inline-block; position: relative; left: 4px; top: 2px; border-left: 1px solid rgb(192, 192, 192); height: 16px; opacity: 0.75" ></div>
+							<a id="gallery-current-description" style="margin-left: 8px;">!</a>
 						</div>
 					</div>
 					
+					<!-- TODO: on hover, change background -->
+					<div style="background-color: rgb(16, 16, 16); float: right; width: 30px; height: 30px; vertical-align: center;">
+						<img id="gallery-toggle-fullscreen" src="icons/gallery-expand.png" style="width: 16px; height: 16px;  display: block;  opacity: 1; margin-left: auto; margin-right: auto; padding-top: 6px;"  />
+					</div>	
 					
 				</div>
 				

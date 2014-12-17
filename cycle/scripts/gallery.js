@@ -52,6 +52,7 @@ function Gallery(galleryDescriptionFilePath) {
 	var currentIndex = 0;
 	var updateImage = function() {
 		document.getElementById("gallery-current-image").src = getImageSource(currentIndex);
+		document.getElementById("gallery-current-description").innerHTML = this.Photos[currentIndex].Description;
 		document.getElementById("current-image-index-label").innerHTML = currentIndex + 1; 
 		
 		preloadNextImage();
