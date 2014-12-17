@@ -43,8 +43,14 @@ function Gallery(galleryDescriptionFilePath) {
 	}.bind(this);
 	
 	var preloadedImage = new Image();
+	var isPreloadCompleted = true;
 	var preloadNextImage = function() {
 		if(currentIndex < this.Photos.length - 1) {
+			isPreloadCompleted = false;
+			preloadedImage.onload = function() {
+				isPreloadCompleted = true;
+			};
+			
 			preloadedImage.src = getImageSource(currentIndex + 1); 
 		}
 	}.bind(this);
@@ -57,7 +63,9 @@ function Gallery(galleryDescriptionFilePath) {
 	};
 		
 	var currentIndex = 0;
-	var currentImageIndex = 0;
+	var currentImageElementIndex = 0;
+	var previousImageIndex = -1;
+	
 	var updateImage = function() {
 			
 		var onImageLoaded = function() {
@@ -67,10 +75,10 @@ function Gallery(galleryDescriptionFilePath) {
 			previousImage.style.opacity = 0;
 		};
 		
-		var currentImage = document.getElementById("gallery-image-" + (currentImageIndex % 2));
-		var previousImage = document.getElementById("gallery-image-" + ((currentImageIndex + 1) % 2));
+		var currentImage = document.getElementById("gallery-image-" + (currentImageElementIndex % 2));
+		var previousImage = document.getElementById("gallery-image-" + ((currentImageElementIndex + 1) % 2));
 
-		currentImageIndex++;
+		currentImageElementIndex++;
 		currentImage.onload = function() {
 			onImageLoaded();
 		};
@@ -78,7 +86,7 @@ function Gallery(galleryDescriptionFilePath) {
 		var newImageSource = getAbsolutePath(getImageSource(currentIndex));
 		if(currentImage.src != newImageSource) {
 			currentImage.src = newImageSource;
-			if(!isImageLoaded(newImageSource)) {
+			if(!isImageLoaded(newImageSource) || (!isPreloadCompleted && currentIndex == previousImageIndex + 1)) {
 				document.getElementById("gallery-fade-div").style.opacity = 0.5;	
 			}
 		}
@@ -89,6 +97,7 @@ function Gallery(galleryDescriptionFilePath) {
 		document.getElementById("gallery-current-description").innerHTML = this.Photos[currentIndex].Description;
 		document.getElementById("current-image-index-label").innerHTML = currentIndex + 1; 
 		
+		previousImageIndex = currentIndex;
 		preloadNextImage();
 	}.bind(this);
 	
