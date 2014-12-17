@@ -95,8 +95,8 @@ function Gallery(galleryDescriptionFilePath) {
 		else {
 			exitFullScreen();
 			document.getElementById("gallery-toggle-fullscreen").src = isFullScreen() ? 
-				"icons/gallery-expand.png" : 
-				"icons/gallery-reduce.png";
+				"icons/gallery-reduce.png" : 
+				"icons/gallery-expand.png";
 				
 			galleryDiv.style.maxWidth = nonFullScreenMaxWidth;
 			galleryDiv.style.maxHeight = nonFullScreenMaxHeight;
