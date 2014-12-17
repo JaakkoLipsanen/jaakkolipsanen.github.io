@@ -22,3 +22,7 @@ function exitFullScreen() {
 	var func = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
 	func.call(document);
 }
+
+function isFullScreen() {
+	return document.fullScreen || document.mozFullScreen || document.webkitFullScreen;
+}

@@ -37,15 +37,14 @@
 					}
 				};
 				
-				document.getElementById("open-gallery-button").onclick = function() { 
-					document.getElementById("content-div").style.display = "block";  
-					enterFullScreen(document.getElementById("content-div"));
+			/*	document.getElementById("open-gallery-button").onclick = function() { 
+					document.getElementById("gallery-div").style.display = "block";  
 				};
 				
 				document.getElementById("gallery-topbar-exit-button").onclick = function() { 
-					document.getElementById("content-div").style.display = "none";  
-					exitFullScreen();
-				};
+					document.getElementById("gallery-div").style.display = "block";  
+					enterFullScreen(document.getElementById("gallery-div"));
+				}; */
 			}
 				
 			google.maps.event.addDomListener(window, 'load', initialize);
@@ -70,25 +69,34 @@
 		<p id="open-gallery-button" style="text-align: center";> <a href="javascript:void(0)">OPEN GALLERY</a> </p>
 		
 		<!-- Content -->
-		<div id="content-div" style="overflow-y: hidden; display: none">  
+		<div id="gallery-div" style="overflow-y: hidden; display: block; max-width: 1000px; width: 90%; max-height: 800px; min-height: 300px;  height: 75vh; margin: auto;">  
 					
 			
-			<div id="block-input-background" style="position: absolute; left: 0px; top: 0px; float: left; width: 100%; height: 100%;"> </div>
-			<div id="gallery-background-layout" style="background-color: rgb(48, 48, 48); position: absolute; left: 0%; top: 0%; float: left; width: 100%; height: 100%; ">
+			<div id="gallery-background-layout" style="background-color: rgb(48, 48, 48); height: 100%">
 				
 				<!-- TOP BAR -->
-				<div id="gallery-topbar" style="background-color: rgb(16, 16, 16); margin: auto; width: 100%; height: 30px;">
+				<div id="gallery-topbar" style="background-color: rgb(16, 16, 16); margin: auto; width: 100%; height: 30px; opacity: 0.75">
 						
 					<!-- TODO: on hover, change background -->
-					<div style="background-color: rgb(16, 16, 16); width; auto; float:right; width: 30px; height: 30px">
-						<img id="gallery-topbar-exit-button" src="icons/gallery-exit-icon.png" style="width: 16px; height: 16px;  vertical-align: middle;  padding-top: 2px;  opacity: 1; opacity: 0.65;" />
+					<div style="background-color: rgb(16, 16, 16); width; auto; float: right; width: 30px; height: 30px; vertical-align: center;">
+						<img id="gallery-toggle-fullscreen" src="icons/gallery-expand.png" style="width: 16px; height: 16px;  display: block;  opacity: 0.65; margin-left: auto; margin-right: auto; padding-top: 6px;"  />
 					</div>
 					
 					<p id="gallery-topbar-title" style="text-align: center; float:none; margin: auto; width: auto; color: white;">Spain '14</p>	
 				</div>
 
-				<div style="height: calc(100% - 160px); text-align: center;">
-					<img id="gallery-current-image" src="data/spain14/photos/fullsize/IMG_20141123_102709381.jpg" style="height: 100%; max-width: 100%; margin: 0 auto;" />
+				<div style="height: calc(100% - 100px); text-align: center; position: relative">
+					<img id="gallery-current-image" src="data/spain14/photos/fullsize/IMG_20141123_102709381.jpg" style="width: auto; height: auto; max-height: 100%; max-width: 100%; margin: 0;" />
+									
+					<div style="position: absolute; left: 0px; top: calc(50% - 32px);">
+						<img id="previous-image" src="icons/previous-icon.png" style=" height: 64px; opacity: 0.45;" />
+					</div>
+					
+					<div style="position: absolute; right: 0px; top: calc(50% - 32px);">
+						<img id="next-image" src="icons/next-icon.png" style="height: 64px; opacity: 0.45;" />
+					</div>
+					
+					
 				</div>
 				
 				<div id="bottom-bar" style="text-align: center;">

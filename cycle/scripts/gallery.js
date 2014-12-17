@@ -72,6 +72,29 @@ function Gallery(galleryDescriptionFilePath) {
 		}
 	};
 	
+	document.getElementById("gallery-toggle-fullscreen").onclick = function() {
+		if(!isFullScreen()) {
+			enterFullScreen(document.getElementById("gallery-div"));
+			document.getElementById("gallery-toggle-fullscreen").src = isFullScreen() ? 
+				"icons/gallery-expand.png" : 
+				"icons/gallery-reduce.png";
+			
+		}
+		else {
+			exitFullScreen();
+			document.getElementById("gallery-toggle-fullscreen").src = isFullScreen() ? 
+				"icons/gallery-expand.png" : 
+				"icons/gallery-reduce.png";
+		}
+	}.bind(this);
+	
+	document.getElementById("previous-image").onclick = function() {
+		this.MovePrevious();
+	}.bind(this);
+	
+	document.getElementById("next-image").onclick = function() {
+		this.MoveNext();
+	}.bind(this);
 	
 	document.getElementById("total-image-count-label").innerHTML = photoCount; 
 }
