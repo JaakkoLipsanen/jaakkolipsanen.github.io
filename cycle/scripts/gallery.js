@@ -70,6 +70,8 @@ function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath) {
 			if(!IsImageLoaded(newImageSource) || (!preloader.IsPreloadCompleted && imageLoadDirection == ImageLoadDirection.Next)) {
 				$(containerElement).find(".gallery-image-fade").css("opacity", "0.5");
 			}
+			
+			console.log(!IsImageLoaded(newImageSource) || (!preloader.IsPreloadCompleted && imageLoadDirection == ImageLoadDirection.Next));
 		}
 		else {
 			onImageLoaded();
