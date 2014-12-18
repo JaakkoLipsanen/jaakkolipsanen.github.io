@@ -51,9 +51,22 @@ function GetAbsolutePath(url) {
     return (link.protocol+"//"+link.host+link.pathname+link.search+link.hash);
 }
 
+// http://stackoverflow.com/a/1420902
+function GetRootPath() {
+	var pathArray = window.location.href.split( '/' );
+	var protocol = pathArray[0];
+	var host = pathArray[2];
+	return protocol + '//' + host;
+}
+
 // http://stackoverflow.com/a/7847366
 function IsImageLoaded(url) { 
 	var test = document.createElement("img");
 	test.src = url;
 	return test.complete || test.width + test.height > 0;
 };
+
+// $(selector).exists()
+jQuery.fn.exists = function(){
+	return this.length > 0;
+}

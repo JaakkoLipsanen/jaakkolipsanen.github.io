@@ -26,7 +26,7 @@ function MapProperties(mapType, labelType) {
 function Path(gpxFile) { 
 	this.Points = [];
 
-	var xmlDoc = loadXML(gpxFile);
+	var xmlDoc = LoadXML(gpxFile);
 	var trackPoints = xmlDoc.getElementsByTagName('trkpt');
 	
 	for(var i = 0; i < trackPoints.length; i++) {
@@ -55,7 +55,7 @@ function NightCollection(nightsXml) {
 		return; 
 	}
 	
-	var xmlDoc = loadXML(nightsXml); // nightsXml is currently in GPX format
+	var xmlDoc = LoadXML(nightsXml); // nightsXml is currently in GPX format
 	
 	var waypoints = xmlDoc.getElementsByTagName('wpt');			
 	var names = xmlDoc.getElementsByTagName('name');

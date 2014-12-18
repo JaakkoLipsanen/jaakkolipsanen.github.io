@@ -23,7 +23,7 @@ function Photo(photoName, description) {
 	this.Description = description;
 }
 
-function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath) {
+function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath, galleryFolder) {
 	this.Photos = LoadGalleryPhotos(galleryDescriptionFilePath);
 	this.PhotoCount = this.Photos.length;
 		
@@ -33,7 +33,11 @@ function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath) {
 	var currentImageElementIndex = 0;
 	var previousImageIndex = -1;
 	
-	$(containerElement).append(LoadTextFile("gallery.html"));
+	$(containerElement).append(LoadTextFile(galleryFolder + "gallery.html"));
+	
+	if($("#gallery-style").exists() == false) {
+		$("body").append("<link rel='stylesheet' type='text/css' href='" + galleryFolder + "styles/gallery.css' />");
+	}
 	
 	var updateImage = function(imageLoadDirection) {	
 	
@@ -70,8 +74,6 @@ function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath) {
 			if(!IsImageLoaded(newImageSource) || (!preloader.IsPreloadCompleted && imageLoadDirection == ImageLoadDirection.Next)) {
 				$(containerElement).find(".gallery-image-fade").css("opacity", "0.5");
 			}
-			
-			console.log(!IsImageLoaded(newImageSource) || (!preloader.IsPreloadCompleted && imageLoadDirection == ImageLoadDirection.Next));
 		}
 		else {
 			onImageLoaded();
@@ -104,21 +106,25 @@ function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath) {
 		height: containerStyle.height,
 	};
 	
-	$(document).on("fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange", function() {	
+	var onFullScreenChange = function() {
 		if(IsFullScreen()) {
-			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", "icons/gallery-reduce.png");
+			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", galleryFolder + "icons/gallery-reduce.png");
 			containerElement.style.maxWidth = "100%";
 			containerElement.style.maxHeight = "100%";
 			containerElement.style.width = "100%";
 			containerElement.style.height = "100%";
 		}
 		else {
-			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", "icons/gallery-expand.png");
+			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", galleryFolder + "icons/gallery-expand.png");
 			containerElement.style.maxWidth = containerStyleDefaultValues.maxWidth;
 			containerElement.style.maxHeight= containerStyleDefaultValues.maxHeight;
 			containerElement.style.width = containerStyleDefaultValues.width;
 			containerElement.style.height= containerStyleDefaultValues.height;
 		}
+	};
+	
+	$(document).on("fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange", function() {	
+		onFullScreenChange();
 	}.bind(this));
 	
 	$(containerElement).find(".gallery-toggle-fullscreen").click(function() {
@@ -138,9 +144,13 @@ function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath) {
 		this.MoveNext();
 	}.bind(this));
 	
+	onFullScreenChange();
 	updateImage(ImageLoadDirection.Current);
+	
 	$(containerElement).find(".gallery-total-image-count").text(this.PhotoCount); 
 	$(containerElement).find(".gallery-topbar-title").text(galleryTitle);
+	$(containerElement).find(".gallery-previous-button").attr("src", galleryFolder + "icons/previous-icon.png");
+	$(containerElement).find(".gallery-next-button").attr("src", galleryFolder + "icons/next-icon.png");
 }
 
 function LoadGalleryPhotos(galleryDescriptionFilePath) {
