@@ -1,16 +1,146 @@
+var ImageLoadDirection = {
+	Current : 0,
+	Previous: -1,
+	Next: 1,
+};
+
+function ImagePreloader() {
+	this.IsPreloadCompleted = true;
+
+	var preloadedImage = new Image();
+	preloadedImage.onload = function() {
+		isPreloadCompleted = true;
+	};
+	
+	this.PreloadImage = function(url) {
+		isPreloadCompleted = false;
+		preloadedImage.src = url; 
+	
+	};
+}
+
 function Photo(photoName, description) {
 	this.PhotoName = photoName;
 	this.Description = description;
 }
 
-function Gallery(galleryDescriptionFilePath) {
-	this.Photos = [];
+function Gallery(containerElement, galleryDescriptionFilePath) {
+	this.Photos = LoadGalleryPhotos(galleryDescriptionFilePath);
+	this.PhotoCount = this.Photos.length;
+		
+	var currentImageIndex = 0;
+	var preloader = new ImagePreloader();
+
+	var currentImageElementIndex = 0;
+	var previousImageIndex = -1;
 	
-	var xhttp = new XMLHttpRequest();
-	xhttp.open("GET", galleryDescriptionFilePath, false);
-	xhttp.overrideMimeType('text/plain');
-	xhttp.send();
+	var updateImage = function(imageLoadDirection) {	
 	
+		var newIndex = currentImageIndex + imageLoadDirection;
+		if(newIndex < 0 || newIndex >= this.PhotoCount) {
+			return;
+		}
+		
+		currentImageIndex = newIndex;
+	
+		var currentImage = $("#gallery-image-" + (currentImageElementIndex % 2));
+		var previousImage = $("#gallery-image-" + ((currentImageElementIndex + 1) % 2));
+		
+		var onImageLoaded = function() {
+			$("#gallery-fade-div").css("opacity", "0");
+			
+			currentImage.css("opacity", "1");
+			previousImage.css("opacity", "0");
+		};
+		
+		var getPhotoSource = function(photoIndex) {
+			return "data/spain14/photos/fullsize/" + this.Photos[photoIndex].PhotoName
+		}.bind(this);
+
+		currentImageElementIndex++;
+		currentImage.load(function() {
+			onImageLoaded();
+		});
+
+		var newImageSource = GetAbsolutePath(getPhotoSource(currentImageIndex));
+		if(currentImage.attr("src") != newImageSource) {
+			currentImage.attr("src", newImageSource);
+			
+			// if image is not loaded OR the preloading is not completed and the new image is the next one (== the same one as what is being preloaded)
+			if(!IsImageLoaded(newImageSource) || (!preloader.IsPreloadCompleted && imageLoadDirection == ImageLoadDirection.Next)) {
+				$("#gallery-fade-div").css("opacity", "0.5");
+			}
+		}
+		else {
+			onImageLoaded();
+		}
+		
+		document.getElementById("gallery-current-description").innerHTML = this.Photos[currentImageIndex].Description;
+		document.getElementById("current-image-index-label").innerHTML = currentImageIndex + 1; 
+		
+		previousImageIndex = currentImageIndex;
+		
+		if(currentImageIndex < this.PhotoCount - 1) {
+			preloader.PreloadImage(getPhotoSource(currentImageIndex + 1));
+		}
+		
+	}.bind(this);
+	
+	this.MovePrevious = function() {
+		updateImage(ImageLoadDirection.Previous);
+	};
+	
+	this.MoveNext = function() {
+		updateImage(ImageLoadDirection.Next);
+	};
+
+	var containerStyle = containerElement.style;
+	var containerStyleDefaultValues = {
+		maxWidth: containerStyle.maxWidth,
+		maxHeight: containerStyle.maxHeight,
+		width: containerStyle.width,
+		height: containerStyle.height,
+	};
+	
+	$(document).on("fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange", function() {	
+		if(IsFullScreen()) {
+			$("#gallery-toggle-fullscreen").attr("src", "icons/gallery-reduce.png");
+			containerStyleDefaultValues.maxWidth = "100%";
+			containerStyleDefaultValues.maxHeight = "100%";
+			containerStyleDefaultValues.width = "100%";
+			containerStyleDefaultValues.height = "100%";
+		}
+		else {
+			$("#gallery-toggle-fullscreen").attr("src", "icons/gallery-expand.png");
+			containerStyleDefaultValues.maxWidth = savedStyleValues.maxWidth;
+			containerStyleDefaultValues.maxHeight= savedStyleValues.maxHeight;
+			containerStyleDefaultValues.width = savedStyleValues.width;
+			containerStyleDefaultValues.height= savedStyleValues.height;
+		}
+	}.bind(this));
+	
+	$("#gallery-toggle-fullscreen").click(function() {
+		if(!IsFullScreen()) {	
+			EnterFullScreen(containerElement);
+		}
+		else {
+			ExitFullScreen();
+		}
+	}.bind(this));
+	
+	$("#previous-image").click(function() {
+		this.MovePrevious();
+	}.bind(this));
+	
+	$("#next-image").click(function() {
+		this.MoveNext();
+	}.bind(this));
+	
+	updateImage(ImageLoadDirection.Current);
+	$("#total-image-count-label").html(this.PhotoCount); 
+}
+
+function LoadGalleryPhotos(galleryDescriptionFilePath) {
 	 /*
      * File Format:
      * 
@@ -24,141 +154,20 @@ function Gallery(galleryDescriptionFilePath) {
      * 
      * Line 1. Photo name
      * Line 2. Photo description
-     *
      * 
      * */
 	
-	var lines = xhttp.responseText.split("\n");
+	var text = LoadTextFile(galleryDescriptionFilePath);
+	var lines = text.split("\n");
 	
 	var versionString = lines[0];
 	var photoCount = parseInt(lines[1]);
 	var hasThumbnails = (lines[2] == "1");
 	
+	var photos = [];
 	for(var i = 0, currentIndex = 3; i < photoCount; i++) {
-		this.Photos.push(new Photo(lines[currentIndex++], lines[currentIndex++]));
+		photos.push(new Photo(lines[currentIndex++], lines[currentIndex++]));
 	}
 	
-	var getImageSource = function(index) {
-		return "data/spain14/photos/fullsize/" + this.Photos[index].PhotoName
-	}.bind(this);
-	
-	var preloadedImage = new Image();
-	var isPreloadCompleted = true;
-	var preloadNextImage = function() {
-		if(currentIndex < this.Photos.length - 1) {
-			isPreloadCompleted = false;
-			preloadedImage.onload = function() {
-				isPreloadCompleted = true;
-			};
-			
-			preloadedImage.src = getImageSource(currentIndex + 1); 
-		}
-	}.bind(this);
-	
-	// http://stackoverflow.com/a/7847366
-	var isImageLoaded = function(url) { 
-		var test = document.createElement("img");
-		test.src = url;
-		return test.complete || test.width+test.height > 0;
-	};
-		
-	var currentIndex = 0;
-	var currentImageElementIndex = 0;
-	var previousImageIndex = -1;
-	
-	var updateImage = function() {
-			
-		var onImageLoaded = function() {
-			document.getElementById("gallery-fade-div").style.opacity = 0;
-			
-			currentImage.style.opacity = 1;
-			previousImage.style.opacity = 0;
-		};
-		
-		var currentImage = document.getElementById("gallery-image-" + (currentImageElementIndex % 2));
-		var previousImage = document.getElementById("gallery-image-" + ((currentImageElementIndex + 1) % 2));
-
-		currentImageElementIndex++;
-		currentImage.onload = function() {
-			onImageLoaded();
-		};
-
-		var newImageSource = getAbsolutePath(getImageSource(currentIndex));
-		if(currentImage.src != newImageSource) {
-			currentImage.src = newImageSource;
-			if(!isImageLoaded(newImageSource) || (!isPreloadCompleted && currentIndex == previousImageIndex + 1)) {
-				document.getElementById("gallery-fade-div").style.opacity = 0.5;	
-			}
-		}
-		else {
-			onImageLoaded();
-		}
-		
-		document.getElementById("gallery-current-description").innerHTML = this.Photos[currentIndex].Description;
-		document.getElementById("current-image-index-label").innerHTML = currentIndex + 1; 
-		
-		previousImageIndex = currentIndex;
-		preloadNextImage();
-	}.bind(this);
-	
-	this.MovePrevious = function() {
-		if(currentIndex != 0) {
-			currentIndex--;
-			updateImage();
-		}
-	};
-	
-	this.MoveNext = function() {
-		if(currentIndex != this.Photos.length - 1) {
-			currentIndex++;
-			updateImage();
-		}
-	};
-
-	var galleryDiv = document.getElementById("gallery-div");
-	
-	var savedStyleValues = {
-		maxWidth: galleryDiv.style.maxWidth,
-		maxHeight: galleryDiv.style.maxHeight,
-		width: galleryDiv.style.width,
-		height: galleryDiv.style.height,
-	};
-	
-	addMultiEventListener("fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange", function() {
-		
-		if(isFullScreen()) {
-			document.getElementById("gallery-toggle-fullscreen").src = "icons/gallery-reduce.png";
-			galleryDiv.style.maxWidth = "100%";
-			galleryDiv.style.maxHeight = "100%";
-			galleryDiv.style.width = "100%";
-			galleryDiv.style.height = "100%";
-		}
-		else {
-			document.getElementById("gallery-toggle-fullscreen").src = "icons/gallery-expand.png";
-			galleryDiv.style.maxWidth = savedStyleValues.maxWidth;
-			galleryDiv.style.maxHeight= savedStyleValues.maxHeight;
-			galleryDiv.style.width = savedStyleValues.width;
-			galleryDiv.style.height= savedStyleValues.height;
-		}
-	}.bind(this));
-	
-	document.getElementById("gallery-toggle-fullscreen").onclick = function() {
-		if(!isFullScreen()) {	
-			enterFullScreen(galleryDiv);
-		}
-		else {
-			exitFullScreen();
-		}
-	}.bind(this);
-	
-	document.getElementById("previous-image").onclick = function() {
-		this.MovePrevious();
-	}.bind(this);
-	
-	document.getElementById("next-image").onclick = function() {
-		this.MoveNext();
-	}.bind(this);
-	
-	updateImage();
-	document.getElementById("total-image-count-label").innerHTML = photoCount; 
+	return photos;
 }

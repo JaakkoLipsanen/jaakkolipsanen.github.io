@@ -25,7 +25,7 @@
 		<script>
 		
 			function initialize() {		
-				var gallery = new Gallery("data/spain14/photos/gallery-description.txt");
+				var gallery = new Gallery(document.getElementById("gallery-div"), "data/spain14/photos/gallery-description.txt");
 				
 				var inputState = new InputState();
 				inputState.OnKeyPressed = function(key) {
@@ -36,8 +36,6 @@
 						gallery.MoveNext();
 					}
 				};
-				
-				$("#gallery-topbar-title").html("fuck tha police");
 			}
 				
 			google.maps.event.addDomListener(window, 'load', initialize);
