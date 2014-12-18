@@ -25,7 +25,8 @@
 		<script>
 		
 			function initialize() {		
-				var gallery = new Gallery(document.getElementById("gallery-div"), "data/spain14/photos/gallery-description.txt");
+				var gallery = new Gallery("Spain '14", document.getElementById("gallery1"), "data/spain14/photos/gallery-description.txt");
+				var gallery = new Gallery("Spain '14", document.getElementById("gallery2"), "data/spain14/photos/gallery-description.txt");
 				
 				var inputState = new InputState();
 				inputState.OnKeyPressed = function(key) {
@@ -45,7 +46,7 @@
 		<!-- This page specific styles -->
 		<style>
 		
-			#gallery-div {
+			.gallery-container {
 				overflow-y: hidden; 
 				display: block; 
 				max-width: 1000px; 
@@ -61,7 +62,7 @@
 		<!-- Gallery specific style -->
 		<style>
 		
-			.gallery-container {
+			.gallery-inner-container {
 				background-color: rgb(48, 48, 48); 
 				height: 100%; 
 				position: relative;
@@ -242,59 +243,12 @@
 		<div style="height: 36px" > </div>
 
 		<!-- Content -->
-		<div id="gallery-div">  
-	
-			<!-- TODO: MOVE ALL STUFF BELOW THIS TO gallery.js !! -->
-			<div class="gallery-container">
-
-				<!-- Image container -->
-				<div class="gallery-image-container">	
-					<img class="gallery-image" id="gallery-image-0" src="data/spain14/photos/fullsize/IMG_20141123_102709381.jpg"  />	
-					<img class="gallery-image" id="gallery-image-1" src="data/spain14/photos/fullsize/IMG_20141123_114621828.jpg" style="opacity: 0" />	
-					
-					<!-- fade div -->
-					<div class="gallery-image-fade" id="gallery-fade-div"> </div>
-
-					<!-- 'previous' button -->
-					<div class="gallery-change-image-container" style="left: 0px;">
-						<img class="gallery-change-image-button" id="previous-image" src="icons/previous-icon.png" />
-					</div>
-					
-					<!-- 'next' button -->
-					<div class="gallery-change-image-container" style="right: 0px;">
-						<img class="gallery-change-image-button" id="next-image" src="icons/next-icon.png" />
-					</div>
-					
-				</div>
-				
-				<!-- TOP BAR -->
-				<div class="gallery-topbar" id="gallery-topbar">
-					<div class="gallery-topbar-background"> </div>
-					
-					<p class="gallery-topbar-title" id="gallery-topbar-title" >Spain '14</p>	
-				</div>
-
-				<!-- BOTTOM BAR -->
-				<div class="gallery-bottombar" id="gallery-bottombar">
-					
-					<div class="gallery-bottombar-text-container" id="bottom-bar">
-						<div class="gallery-bottombar-text-background">
-							<a class="gallery-bottombar-faded" id="current-image-index-label">0</a>
-							<a class="gallery-bottombar-faded"> of </a>
-							<a class="gallery-bottombar-faded" id="total-image-count-label">0</a>
-							<div class="gallery-bottombar-faded gallery-bottombar-separator"></div>
-							<a class="gallery-current-description" id="gallery-current-description">halapalakala</a>
-						</div>
-					</div>
-					
-					<!-- TODO: on hover, change background -->
-					<div class="gallery-toggle-fullscreen-container">
-						<img class="gallery-toggle-fullscreen" id="gallery-toggle-fullscreen" src="icons/gallery-expand.png" />
-					</div>	
-					
-				</div>
-				
-			</div>
+		<div class="gallery-container" id="gallery1">  	
+		</div>
+		
+		<div style="height: 40px;" ></div>
+		<!-- Content -->
+		<div class="gallery-container" id="gallery2">  	
 		</div>
 		
 		<!-- Some empty space before footer -->

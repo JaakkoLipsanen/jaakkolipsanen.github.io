@@ -15,7 +15,6 @@ function ImagePreloader() {
 	this.PreloadImage = function(url) {
 		isPreloadCompleted = false;
 		preloadedImage.src = url; 
-	
 	};
 }
 
@@ -24,7 +23,7 @@ function Photo(photoName, description) {
 	this.Description = description;
 }
 
-function Gallery(containerElement, galleryDescriptionFilePath) {
+function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath) {
 	this.Photos = LoadGalleryPhotos(galleryDescriptionFilePath);
 	this.PhotoCount = this.Photos.length;
 		
@@ -33,6 +32,8 @@ function Gallery(containerElement, galleryDescriptionFilePath) {
 
 	var currentImageElementIndex = 0;
 	var previousImageIndex = -1;
+	
+	$(containerElement).append(LoadTextFile("gallery.html"));
 	
 	var updateImage = function(imageLoadDirection) {	
 	
@@ -43,11 +44,11 @@ function Gallery(containerElement, galleryDescriptionFilePath) {
 		
 		currentImageIndex = newIndex;
 	
-		var currentImage = $("#gallery-image-" + (currentImageElementIndex % 2));
-		var previousImage = $("#gallery-image-" + ((currentImageElementIndex + 1) % 2));
+		var currentImage = $(containerElement).find(".gallery-image-" + (currentImageElementIndex % 2));
+		var previousImage = $(containerElement).find(".gallery-image-" + ((currentImageElementIndex + 1) % 2));
 		
 		var onImageLoaded = function() {
-			$("#gallery-fade-div").css("opacity", "0");
+			$(containerElement).find(".gallery-image-fade").css("opacity", "0");
 			
 			currentImage.css("opacity", "1");
 			previousImage.css("opacity", "0");
@@ -68,15 +69,15 @@ function Gallery(containerElement, galleryDescriptionFilePath) {
 			
 			// if image is not loaded OR the preloading is not completed and the new image is the next one (== the same one as what is being preloaded)
 			if(!IsImageLoaded(newImageSource) || (!preloader.IsPreloadCompleted && imageLoadDirection == ImageLoadDirection.Next)) {
-				$("#gallery-fade-div").css("opacity", "0.5");
+				$(containerElement).find(".gallery-image-fade").css("opacity", "0.5");
 			}
 		}
 		else {
 			onImageLoaded();
 		}
 		
-		document.getElementById("gallery-current-description").innerHTML = this.Photos[currentImageIndex].Description;
-		document.getElementById("current-image-index-label").innerHTML = currentImageIndex + 1; 
+		$(containerElement).find(".gallery-current-description").text(this.Photos[currentImageIndex].Description);
+		$(containerElement).find(".gallery-current-image-index").text(currentImageIndex + 1);
 		
 		previousImageIndex = currentImageIndex;
 		
@@ -104,14 +105,14 @@ function Gallery(containerElement, galleryDescriptionFilePath) {
 	
 	$(document).on("fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange", function() {	
 		if(IsFullScreen()) {
-			$("#gallery-toggle-fullscreen").attr("src", "icons/gallery-reduce.png");
+			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", "icons/gallery-reduce.png");
 			containerElement.style.maxWidth = "100%";
 			containerElement.style.maxHeight = "100%";
 			containerElement.style.width = "100%";
 			containerElement.style.height = "100%";
 		}
 		else {
-			$("#gallery-toggle-fullscreen").attr("src", "icons/gallery-expand.png");
+			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", "icons/gallery-expand.png");
 			containerElement.style.maxWidth = containerStyleDefaultValues.maxWidth;
 			containerElement.style.maxHeight= containerStyleDefaultValues.maxHeight;
 			containerElement.style.width = containerStyleDefaultValues.width;
@@ -119,7 +120,7 @@ function Gallery(containerElement, galleryDescriptionFilePath) {
 		}
 	}.bind(this));
 	
-	$("#gallery-toggle-fullscreen").click(function() {
+	$(containerElement).find(".gallery-toggle-fullscreen").click(function() {
 		if(!IsFullScreen()) {	
 			EnterFullScreen(containerElement);
 		}
@@ -128,16 +129,17 @@ function Gallery(containerElement, galleryDescriptionFilePath) {
 		}
 	}.bind(this));
 	
-	$("#previous-image").click(function() {
+	$(containerElement).find(".gallery-previous-button").click(function() {
 		this.MovePrevious();
 	}.bind(this));
 	
-	$("#next-image").click(function() {
+	$(containerElement).find(".gallery-next-button").click(function() {
 		this.MoveNext();
 	}.bind(this));
 	
 	updateImage(ImageLoadDirection.Current);
-	$("#total-image-count-label").html(this.PhotoCount); 
+	$(containerElement).find(".gallery-total-image-count").text(this.PhotoCount); 
+	$(containerElement).find(".gallery-topbar-title").text(galleryTitle);
 }
 
 function LoadGalleryPhotos(galleryDescriptionFilePath) {
