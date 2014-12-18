@@ -31,7 +31,7 @@
 					new Route([ new Path("data/europe14/cycle-sweden-norway.gpx"), new Path("data/europe14/cycle-denmark-belgium.gpx")], [ new Path("data/europe14/boat-finland-sweden.gpx"), new Path("data/europe14/boat-norway-denmark.gpx")]),
 					new NightCollection("data/europe14/nights.gpx"));
 						
-				var gallery = new Gallery("Europe '14", document.getElementById("gallery"), "data/spain14/photos/gallery-description.txt", "../gallery/");
+				var gallery = new Gallery("Europe '14", document.getElementById("gallery"), "data/europe14/photos", "../gallery/");
 					
 				document.getElementById("tripKm").innerHTML = map.RouteLength + "km";
 				document.getElementById("tripNights").innerHTML = map.NightCount + " days";

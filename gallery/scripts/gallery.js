@@ -23,8 +23,8 @@ function Photo(photoName, description) {
 	this.Description = description;
 }
 
-function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath, galleryFolder) {
-	this.Photos = LoadGalleryPhotos(galleryDescriptionFilePath);
+function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFolder) {
+	this.Photos = LoadGalleryPhotos(galleryFolder + "/gallery-description.txt");
 	this.PhotoCount = this.Photos.length;
 		
 	var currentImageIndex = 0;
@@ -33,10 +33,10 @@ function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath, gal
 	var currentImageElementIndex = 0;
 	var previousImageIndex = -1;
 	
-	$(containerElement).append(LoadTextFile(galleryFolder + "gallery.html"));
+	$(containerElement).append(LoadTextFile(gallerySourceFolder + "gallery.html"));
 	
 	if($("#gallery-style").exists() == false) {
-		$("body").append("<link rel='stylesheet' type='text/css' href='" + galleryFolder + "styles/gallery.css' />");
+		$("body").append("<link rel='stylesheet' type='text/css' href='" + gallerySourceFolder + "styles/gallery.css' />");
 	}
 	
 	var updateImage = function(imageLoadDirection) {	
@@ -58,7 +58,7 @@ function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath, gal
 		};
 		
 		var getPhotoSource = function(photoIndex) {
-			return "data/spain14/photos/fullsize/" + this.Photos[photoIndex].PhotoName
+			return galleryFolder + "/fullsize/" + this.Photos[photoIndex].PhotoName
 		}.bind(this);
 
 		currentImageElementIndex++;
@@ -108,14 +108,14 @@ function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath, gal
 	
 	var onFullScreenChange = function() {
 		if(IsFullScreen()) {
-			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", galleryFolder + "icons/gallery-reduce.png");
+			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", gallerySourceFolder + "icons/gallery-reduce.png");
 			containerElement.style.maxWidth = "100%";
 			containerElement.style.maxHeight = "100%";
 			containerElement.style.width = "100%";
 			containerElement.style.height = "100%";
 		}
 		else {
-			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", galleryFolder + "icons/gallery-expand.png");
+			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", gallerySourceFolder + "icons/gallery-expand.png");
 			containerElement.style.maxWidth = containerStyleDefaultValues.maxWidth;
 			containerElement.style.maxHeight= containerStyleDefaultValues.maxHeight;
 			containerElement.style.width = containerStyleDefaultValues.width;
@@ -149,8 +149,8 @@ function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath, gal
 	
 	$(containerElement).find(".gallery-total-image-count").text(this.PhotoCount); 
 	$(containerElement).find(".gallery-topbar-title").text(galleryTitle);
-	$(containerElement).find(".gallery-previous-button").attr("src", galleryFolder + "icons/previous-icon.png");
-	$(containerElement).find(".gallery-next-button").attr("src", galleryFolder + "icons/next-icon.png");
+	$(containerElement).find(".gallery-previous-button").attr("src", gallerySourceFolder + "icons/previous-icon.png");
+	$(containerElement).find(".gallery-next-button").attr("src", gallerySourceFolder + "icons/next-icon.png");
 }
 
 function LoadGalleryPhotos(galleryDescriptionFilePath) {
