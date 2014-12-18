@@ -9,13 +9,13 @@ function ImagePreloader() {
 
 	var preloadedImage = new Image();
 	preloadedImage.onload = function() {
-		isPreloadCompleted = true;
-	};
+		this.IsPreloadCompleted = true;
+	}.bind(this);
 	
 	this.PreloadImage = function(url) {
-		isPreloadCompleted = false;
+		this.IsPreloadCompleted = false;
 		preloadedImage.src = url; 
-	};
+	}.bind(this);
 }
 
 function Photo(photoName, description) {
