@@ -49,7 +49,6 @@ function Gallery(galleryTitle, containerElement, galleryDescriptionFilePath) {
 		
 		var onImageLoaded = function() {
 			$(containerElement).find(".gallery-image-fade").css("opacity", "0");
-			
 			currentImage.css("opacity", "1");
 			previousImage.css("opacity", "0");
 		};
