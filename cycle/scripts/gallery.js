@@ -105,17 +105,17 @@ function Gallery(containerElement, galleryDescriptionFilePath) {
 	$(document).on("fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange", function() {	
 		if(IsFullScreen()) {
 			$("#gallery-toggle-fullscreen").attr("src", "icons/gallery-reduce.png");
-			containerStyleDefaultValues.maxWidth = "100%";
-			containerStyleDefaultValues.maxHeight = "100%";
-			containerStyleDefaultValues.width = "100%";
-			containerStyleDefaultValues.height = "100%";
+			containerElement.style.maxWidth = "100%";
+			containerElement.style.maxHeight = "100%";
+			containerElement.style.width = "100%";
+			containerElement.style.height = "100%";
 		}
 		else {
 			$("#gallery-toggle-fullscreen").attr("src", "icons/gallery-expand.png");
-			containerStyleDefaultValues.maxWidth = savedStyleValues.maxWidth;
-			containerStyleDefaultValues.maxHeight= savedStyleValues.maxHeight;
-			containerStyleDefaultValues.width = savedStyleValues.width;
-			containerStyleDefaultValues.height= savedStyleValues.height;
+			containerElement.style.maxWidth = containerStyleDefaultValues.maxWidth;
+			containerElement.style.maxHeight= containerStyleDefaultValues.maxHeight;
+			containerElement.style.width = containerStyleDefaultValues.width;
+			containerElement.style.height= containerStyleDefaultValues.height;
 		}
 	}.bind(this));
 	
