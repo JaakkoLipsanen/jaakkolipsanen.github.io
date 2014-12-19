@@ -39,7 +39,7 @@ function LoadTextFile(filePath) {
 } 
 
 // this function still fails in chrome in local mode. the online version works
-function LoadAsyncTextFile(filePath, callback) {
+function LoadAsyncText(filePath, callback) {
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", filePath, true);
 	xhttp.overrideMimeType('text/plain');

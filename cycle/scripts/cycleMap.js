@@ -23,17 +23,24 @@ function MapProperties(mapType, labelType) {
 }
 
 // meh.. it would be nice if there was another constructor that accepted a LatLng[] ("points") ....
-function Path(gpxFile) { 
+function Path(pathTextFile) { 
 	this.Points = [];
 
-	var trackPoints = gpxFile.getElementsByTagName('trkpt');
-	for(var i = 0; i < trackPoints.length; i++) {
-		var lat = trackPoints[i].getAttribute('lat');
-		var lon = trackPoints[i].getAttribute('lon');
-						
-		var point = new google.maps.LatLng(lat, lon);
-		this.Points.push(point);
+	var lines = pathTextFile.split('\n');
+	var pointCount = parseInt(lines[0]);
+	for(var i = 0; i < pointCount; i++) {
+		var point = new google.maps.LatLng(lines[i * 2 + 1], lines[i * 2 + 2]);
+		this.Points.push(point); 
 	}					
+}
+
+Path.prototype.getBounds = function() {
+	var bounds = new google.maps.LatLngBounds();
+	for(var i = 0; i < this.Points.length; i++) {
+		bounds.extend(this.Points[i]);
+	}
+	
+	return bounds;
 }
 
 var NightType = {
@@ -78,15 +85,6 @@ function NightCollection(nightsFile) {
 	};
 };
 
-Path.prototype.getBounds = function() {
-	var bounds = new google.maps.LatLngBounds();
-	for(var i = 0; i < this.Points.length; i++) {
-		bounds.extend(this.Points[i]);
-	}
-	
-	return bounds;
-}
-
 function Route(cyclingPaths, transportPaths) {
 	this.CyclingPaths = [];
 	this.TransportPaths = [];
@@ -114,7 +112,7 @@ function Route(cyclingPaths, transportPaths) {
 				onPathLoaded();
 			}.bind(this);
 			
-			LoadAsyncXML(cyclingPaths[i], onGPXLoaded);
+			LoadAsyncText(cyclingPaths[i], onGPXLoaded);
 		}
 		
 		// load transport paths
@@ -125,7 +123,7 @@ function Route(cyclingPaths, transportPaths) {
 				onPathLoaded();
 			}.bind(this);
 			
-			LoadAsyncXML(transportPaths[i], onGPXLoaded);
+			LoadAsyncText(transportPaths[i], onGPXLoaded);
 		}	
 	};
 }
