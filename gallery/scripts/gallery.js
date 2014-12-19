@@ -151,6 +151,16 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 	$(containerElement).find(".gallery-topbar-title").text(galleryTitle);
 	$(containerElement).find(".gallery-previous-button").attr("src", gallerySourceFolder + "icons/previous-icon.png");
 	$(containerElement).find(".gallery-next-button").attr("src", gallerySourceFolder + "icons/next-icon.png");
+	
+	var inputState = new InputState();
+	inputState.OnKeyPressed = function(key) {
+		if(key == KeyCode.Left && IsFullScreen()) {
+			this.MovePrevious();
+		}
+		else if(key == KeyCode.Right && IsFullScreen()) {
+			this.MoveNext();
+		}
+	}.bind(this);
 }
 
 function LoadGalleryPhotos(galleryDescriptionFilePath) {
