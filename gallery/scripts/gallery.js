@@ -171,7 +171,7 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 	$(containerElement).find(".gallery-previous-button").attr("src", gallerySourceFolder + "icons/previous-icon.png");
 	$(containerElement).find(".gallery-next-button").attr("src", gallerySourceFolder + "icons/next-icon.png");
 	
-	$(containerElement).find(".gallery-next-button").text(ImageQualityToText[this.CurrentImageQuality]);
+	$(containerElement).find(".gallery-toggle-quality").text(ImageQualityToText[this.CurrentImageQuality]);
 	$(containerElement).find(".gallery-toggle-quality").click(function() {
 		
 	});
