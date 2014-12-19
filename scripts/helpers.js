@@ -12,6 +12,22 @@ function LoadXML(filePath) {
 	return xmlDoc;
 } 
 
+function LoadAsyncXML(filePath, callback) {
+	var xhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP"); // ActiveX == for old IE's			
+					
+	xhttp.open("GET", filePath, true);
+	xhttp.setRequestHeader('Content-Type', 'text/xml');
+	
+	xhttp.onload = function(e) {
+		// xhttp.responseXml does not for some reason work on chrome or IE. so instead, use xhttp.responseText and parse "manually"
+		var parser = new DOMParser();
+		var xmlDoc = parser.parseFromString(xhttp.responseText, "application/xml");
+		callback(xmlDoc);
+	};
+	
+	xhttp.send();
+} 
+
 // this function still fails in chrome in local mode. the online version works
 function LoadTextFile(filePath) {
 	var xhttp = new XMLHttpRequest();
@@ -20,6 +36,19 @@ function LoadTextFile(filePath) {
 	xhttp.send();
 	
 	return xhttp.responseText;
+} 
+
+// this function still fails in chrome in local mode. the online version works
+function LoadAsyncTextFile(filePath, callback) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", filePath, true);
+	xhttp.overrideMimeType('text/plain');
+	
+	xhttp.onload = function(e) {
+		callback(xhttp.responseText);
+	};
+	
+	xhttp.send();
 } 
 
 // http://stackoverflow.com/a/7934009
