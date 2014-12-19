@@ -28,7 +28,7 @@
 				var map = new CycleMap(
 					document.getElementById("map-div"), 
 					new MapProperties(MapType.Terrain, LabelType.Hidden), 
-					new Route([ new Path("data/europe14/cycle-sweden-norway.gpx"), new Path("data/europe14/cycle-denmark-belgium.gpx")], [ new Path("data/europe14/boat-finland-sweden.gpx"), new Path("data/europe14/boat-norway-denmark.gpx")]),
+					new Route(["data/europe14/cycle-sweden-norway.gpx", "data/europe14/cycle-denmark-belgium.gpx"], ["data/europe14/boat-finland-sweden.gpx", "data/europe14/boat-norway-denmark.gpx"]),
 					new NightCollection("data/europe14/nights.gpx"));
 						
 				var gallery = new Gallery("Europe '14", document.getElementById("gallery"), "data/europe14/photos", "../gallery/");

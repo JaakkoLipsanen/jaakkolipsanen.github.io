@@ -109,10 +109,8 @@ function Route(cyclingPaths, transportPaths) {
 	
 		// load cycling paths
 		for(var i = 0; i < cyclingPaths.length; i++) {
-		
-			var cached = i;
 			var onGPXLoaded = function(gpxFile) {
-				this.CyclingPaths[cached] = new Path(gpxFile);
+				this.CyclingPaths.push(new Path(gpxFile));
 				onPathLoaded();
 			}.bind(this);
 			
@@ -122,9 +120,8 @@ function Route(cyclingPaths, transportPaths) {
 		// load transport paths
 		for(var i = 0; i < transportPaths.length; i++) {
 		
-			var cached = i;
 			var onGPXLoaded = function(gpxFile) {
-				this.TransportPaths[cached] = new Path(gpxFile);
+				this.TransportPaths.push(new Path(gpxFile));
 				onPathLoaded();
 			}.bind(this);
 			
