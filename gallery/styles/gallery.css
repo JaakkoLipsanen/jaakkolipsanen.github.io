@@ -172,3 +172,20 @@
 	
 	opacity: 1; 
 }
+
+.gallery-toggle-quality-container {
+	float: right;
+	width: auto; 
+	height: 30px;
+	
+	background-color: rgb(16, 16, 16); 
+}
+
+.gallery-toggle-quality {
+	color: white; 
+	font-weight: bold; 
+	
+	position: relative;
+	left: 0px; 
+	top: 1px
+}

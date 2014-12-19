@@ -26,6 +26,17 @@ function MapProperties(mapType, labelType) {
 function Path(pathTextFile) { 
 	this.Points = [];
 
+	/* 
+	
+	Point format:
+	- Line 1. lat
+	- Line 2. lon
+	
+	Path  format
+	- Line 1. Amount of points
+	- Line 2-end. <amount of points> * Point format
+	*/
+	
 	var lines = pathTextFile.split('\n');
 	var pointCount = parseInt(lines[0]);
 	for(var i = 0; i < pointCount; i++) {
@@ -246,7 +257,7 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 			var marker = new google.maps.Marker({
 				position: night.Location,
 				icon: (night.NightType == NightType.Tent ? tentIcon : hotelIcon),
-				map : isTouchDevice() ? _googleMap : null, // if using touch device, then markers should be visible.
+				map : IsTouchDevice() ? _googleMap : null, // if using touch device, then markers should be visible.
 			});
 		
 			_nightMarkers.push(marker);
@@ -279,11 +290,6 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 		};
 	}
 }
-
-function isTouchDevice() {
-	return 'ontouchstart' in window // works on most browsers
-		|| 'onmsgesturechange' in window; // works on ie10
-};
 
 function Style(styleArray) {
 	this.NormalStyle = styleArray;

@@ -4,6 +4,24 @@ var ImageLoadDirection = {
 	Next: 1,
 };
 
+var ImageQuality = {
+	LowQuality: 0,
+	HighQuality: 1,
+	UltraHighQuality: 2,
+};
+
+var ImageQualityToFolder = [
+	"720p",
+	"1080p",
+	"fullsize",
+];
+
+var ImageQualityToText = [
+	"LQ",
+	"HQ",
+	"UHQ",
+];
+
 function ImagePreloader() {
 	this.IsPreloadCompleted = true;
 
@@ -26,6 +44,7 @@ function Photo(photoName, description) {
 function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFolder) {
 	this.Photos = LoadGalleryPhotos(galleryFolder + "/gallery-description.txt");
 	this.PhotoCount = this.Photos.length;
+	this.CurrentImageQuality = IsMobile() ? ImageQuality.LowQuality : ImageQuality.HighQuality;
 		
 	var currentImageIndex = 0;
 	var preloader = new ImagePreloader();
@@ -151,6 +170,11 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 	$(containerElement).find(".gallery-topbar-title").text(galleryTitle);
 	$(containerElement).find(".gallery-previous-button").attr("src", gallerySourceFolder + "icons/previous-icon.png");
 	$(containerElement).find(".gallery-next-button").attr("src", gallerySourceFolder + "icons/next-icon.png");
+	
+	$(containerElement).find(".gallery-next-button").text(ImageQualityToText[this.CurrentImageQuality]);
+	$(containerElement).find(".gallery-toggle-quality").click(function() {
+		
+	});
 	
 	var inputState = new InputState();
 	inputState.OnKeyPressed = function(key) {
