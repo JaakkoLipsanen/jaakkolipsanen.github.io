@@ -132,7 +132,7 @@ function Route(cyclingPaths, transportPaths) {
 
 function CycleMap(containerElement, mapProperties, route, nightCollection) {
 	this.RouteLength = 0;
-	this.NightCount = nightCollection.Nights.length;
+	this.NightCount = 0; nightCollection.Nights.length;
 	
 	// 
 	var createIcon = function(url) {
@@ -164,8 +164,30 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 	var hotelIcon = createIcon("icons/hotel.png");
 	var routeBounds = new google.maps.LatLngBounds();
 	
-	route.Load(onRouteLoaded);
-	function onRouteLoaded() {
+	var loadCallbacks = [];
+	
+	var routeLoaded = false;
+	var nightsLoaded = false;
+	var checkIsMapLoaded = function() {
+		if(routeLoaded && nightsLoaded) {
+			this.NightCount = nightCollection.Nights.length;
+			
+			for(var i = 0; i < loadCallbacks.length; i++) {
+				loadCallbacks[i]();
+			}
+		}
+	}.bind(this);
+	
+	this.WhenLoaded = function(callback) {
+		if(routeLoaded && nightsLoaded) {
+			callback();
+		}
+		else {
+			loadCallbacks.push(callback);
+		}
+	};
+	
+	var onRouteLoaded = function () {
 		// cycling paths
 		for(var i = 0; i < route.CyclingPaths.length; i++) {
 			var cyclingPath = route.CyclingPaths[i];
@@ -209,7 +231,12 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 		}
 	
 		_googleMap.fitBounds(routeBounds);
-	};
+		routeLoaded = true;
+		checkIsMapLoaded();
+	}.bind(this);
+	
+	// load the route asynchronously
+	route.Load(onRouteLoaded);
 
 	var _nightMarkers = [];
 	nightCollection.Load(onNightsLoaded);	
@@ -226,6 +253,9 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 		
 			_nightMarkers.push(marker);
 		}
+		
+		nightsLoaded = true;
+		checkIsMapLoaded();
 	};
 	
 	// show night markers when the cursor is over the container element

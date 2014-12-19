@@ -33,8 +33,10 @@
 						
 				var gallery = new Gallery("Spain '14", document.getElementById("gallery"), "data/spain14/photos", "../gallery/");
 					
-				document.getElementById("tripKm").innerHTML = map.RouteLength + "km";
-				document.getElementById("tripNights").innerHTML = map.NightCount + " days";
+				map.WhenLoaded(function() {
+					document.getElementById("tripKm").innerHTML = map.RouteLength + "km";
+					document.getElementById("tripNights").innerHTML = map.NightCount + " days";
+				});
 			}
 				
 			google.maps.event.addDomListener(window, 'load', initialize);
@@ -96,8 +98,8 @@
 		
 		<!-- Map -->
 		<div id="content-div">  
-			<p id="tripKm"></p>
-			<p id="tripNights"></p>
+			<p id="tripKm"> </p>
+			<p id="tripNights"> </p>
 			<div id="map-div" style="; "></div>	
 		</div>
 		
