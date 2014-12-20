@@ -63,7 +63,7 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 		var image1 = $(containerElement).find(".gallery-image-1");
 
 		var updateImageStyle = function(img) {
-			if(img.naturalWidth / $(containerElement).width() > img.naturalHeight / ($(containerElement).height() - 30)) {
+			if(img.naturalWidth / $(containerElement).width() > img.naturalHeight / ($(containerElement).height())) {
 				img.style.width = "100%";
 				img.style.height = "auto";
 			}
