@@ -6,19 +6,16 @@ var ImageLoadDirection = {
 
 var ImageQuality = {
 	LowQuality: 0,
-	HighQuality: 1,
-	UltraHighQuality: 2,
+	UltraHighQuality: 1,
 };
 
 var ImageQualityToFolder = [
 	"720p",
-	"1080p",
 	"fullsize",
 ];
 
 var ImageQualityToText = [
 	"LQ",
-	"HQ",
 	"UHQ",
 ];
 
@@ -44,7 +41,7 @@ function Photo(photoName, description) {
 function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFolder) {
 	this.Photos = LoadGalleryPhotos(galleryFolder + "/gallery-description.txt");
 	this.PhotoCount = this.Photos.length;
-	this.CurrentImageQuality = IsMobile() ? ImageQuality.LowQuality : ImageQuality.HighQuality;
+	this.CurrentImageQuality = IsMobile() ? ImageQuality.LowQuality : ImageQuality.UltraHighQuality;
 		
 	var currentImageIndex = 0;
 	var preloader = new ImagePreloader();
@@ -57,6 +54,25 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 	if($("#gallery-style").exists() == false) {
 		$("body").append("<link rel='stylesheet' type='text/css' href='" + gallerySourceFolder + "styles/gallery.css' />");
 	}
+
+	var updateImageStyles = function() {
+		var image0 = $(containerElement).find(".gallery-image-0");
+		var image1 = $(containerElement).find(".gallery-image-1");
+
+		var updateImageStyle = function(img) {
+			if(img.naturalWidth / $(containerElement).width() > img.naturalHeight / ($(containerElement).height() - 30)) {
+				img.style.width = "100%";
+				img.style.height = "auto";
+			}
+			else {
+				img.style.width = "auto";
+				img.style.height = "100%";
+			}
+		};
+	
+		updateImageStyle(image0[0]);
+		updateImageStyle(image1[0]);
+	};
 	
 	var updateImage = function(imageLoadDirection) {	
 	
@@ -74,10 +90,12 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 			$(containerElement).find(".gallery-image-fade").css("opacity", "0");
 			currentImage.css("opacity", "1");
 			previousImage.css("opacity", "0");
+			
+			updateImageStyles();
 		};
 		
 		var getPhotoSource = function(photoIndex) {
-			return galleryFolder + "/fullsize/" + this.Photos[photoIndex].PhotoName
+			return galleryFolder + "/" + ImageQualityToFolder[this.CurrentImageQuality] + "/" + this.Photos[photoIndex].PhotoName
 		}.bind(this);
 
 		currentImageElementIndex++;
@@ -140,6 +158,8 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 			containerElement.style.width = containerStyleDefaultValues.width;
 			containerElement.style.height= containerStyleDefaultValues.height;
 		}
+		
+		updateImageStyles();
 	};
 	
 	$(document).on("fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange", function() {	
@@ -173,8 +193,14 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 	
 	$(containerElement).find(".gallery-toggle-quality").text(ImageQualityToText[this.CurrentImageQuality]);
 	$(containerElement).find(".gallery-toggle-quality").click(function() {
+		this.CurrentImageQuality++;
+		if(this.CurrentImageQuality > ImageQuality.UltraHighQuality) {
+			this.CurrentImageQuality = ImageQuality.LowQuality;
+		}
 		
-	});
+		$(containerElement).find(".gallery-toggle-quality").text(ImageQualityToText[this.CurrentImageQuality]);
+		updateImage(ImageLoadDirection.Current);
+	}.bind(this));
 	
 	var inputState = new InputState();
 	inputState.OnKeyPressed = function(key) {
@@ -185,6 +211,10 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 			this.MoveNext();
 		}
 	}.bind(this);
+	
+	$(window).resize(function() { 	
+		updateImageStyles();
+	});
 }
 
 function LoadGalleryPhotos(galleryDescriptionFilePath) {
