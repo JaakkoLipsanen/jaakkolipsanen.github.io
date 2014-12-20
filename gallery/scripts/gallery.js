@@ -6,16 +6,19 @@ var ImageLoadDirection = {
 
 var ImageQuality = {
 	LowQuality: 0,
-	UltraHighQuality: 1,
+	HighQuality: 1,
+	UltraHighQuality: 2,
 };
 
 var ImageQualityToFolder = [
 	"720p",
+	"1080p",
 	"fullsize",
 ];
 
 var ImageQualityToText = [
 	"LQ",
+	"HQ",
 	"UHQ",
 ];
 
@@ -41,7 +44,7 @@ function Photo(photoName, description) {
 function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFolder) {
 	this.Photos = LoadGalleryPhotos(galleryFolder + "/gallery-description.txt");
 	this.PhotoCount = this.Photos.length;
-	this.CurrentImageQuality = IsMobile() ? ImageQuality.LowQuality : ImageQuality.UltraHighQuality;
+	this.CurrentImageQuality = IsMobile() ? ImageQuality.LowQuality : ImageQuality.HighQuality;
 		
 	var currentImageIndex = 0;
 	var preloader = new ImagePreloader();

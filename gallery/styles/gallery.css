@@ -167,6 +167,7 @@
 	padding-top: 6px;
 	
 	opacity: 1; 
+	cursor: pointer;
 }
 
 .gallery-toggle-quality-container {
@@ -183,5 +184,6 @@
 	
 	position: relative;
 	left: 0px; 
-	top: 1px
+	top: 1px:;
+	cursor: pointer;
 }
