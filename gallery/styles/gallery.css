@@ -109,7 +109,7 @@
 	position: relative; 
 	width: auto; 
 	height: 30px; 
-	max-width: calc(100% -  38px);
+	max-width: calc(100% -  64px);
 	margin: 0px 0px 0px 8px; /* left is 8px */
 	
 	display: inline-block; 
@@ -187,6 +187,7 @@
 	
 	position: relative;
 	left: 0px; 
-	top: 1px:;
+	top: 2px;
 	cursor: pointer;
+	
 }
