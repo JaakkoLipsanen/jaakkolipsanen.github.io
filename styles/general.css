@@ -15,7 +15,7 @@
 	vertical-align: middle;
 }
 
-#github-icon {
+.navigation-icon {
 	position: absolute; 
 	right: 8px;
 	height: 48px; 
@@ -27,11 +27,11 @@
 	cursor: pointer;
 }
 			
-#github-icon:hover {
+.navigation-icon:hover {
 	opacity: 0.9;
 }
 			
-#github-icon-text {
+.navigation-icon-text {
 	position: absolute; 
 	right: calc(8px + 48px + 8px); /* 8px + 48px == github-icon's margin and size. 8px == margin */
 	height: 48px; 
