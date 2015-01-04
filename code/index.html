@@ -31,7 +31,7 @@
 			
 				$(".navigation-icon").hover(function(event) {
 					$(event.target).siblings(".navigation-icon-text").css("opacity", "0.35");
-				}, function() {
+				}, function(event) {
 					$(event.target).siblings(".navigation-icon-text").css("opacity", "0.0");
 				});
 			});

@@ -37,6 +37,12 @@
 					document.getElementById("tripKm").innerHTML = map.RouteLength + "km";
 					document.getElementById("tripNights").innerHTML = map.NightCount + " days";
 				});
+				
+				$(".navigation-icon").hover(function(event) {
+					$(event.target).siblings(".navigation-icon-text").css("opacity", "0.35");
+				}, function(event) {
+					$(event.target).siblings(".navigation-icon-text").css("opacity", "0.0");
+				});
 			}
 				
 			google.maps.event.addDomListener(window, 'load', initialize);
@@ -83,9 +89,13 @@
 		<!-- Top Header -->
 		<div id="header-div" class="cycle-header" >
 			
-			<!-- code-link -->
-			<a href="/code" id="cycle-or-code-link">code</a>
 			<p id="header-text">flai</p>
+			
+			<!-- left side "code" icon -->
+			<a href="/code"> 
+				<p class="navigation-icon-text" style="right: auto; left: calc(8px + 48px + 8px)">code</p>
+				<img class="navigation-icon" src="icons/CodeIcon.png" style="right: auto; left: calc(8px)" /> 
+			</a>
 			
 		</div>
 		
