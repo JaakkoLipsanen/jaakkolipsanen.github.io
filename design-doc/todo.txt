@@ -1,0 +1,18 @@
+- Games Section
+   - Thumbnail images to screenshots!!!
+   - Support for mp4's in the "screenshots"
+   - Previous/Next arrows to the popup images
+   - Maybe disable scrolling when screenshot is "popped up"
+
+- Gallery
+  - Possibility to preview all images (thumbnails) in one big and large grid
+  - Map? Map which shows the images on the map?
+  - There are some visual glitches sometimes..
+
+  - Should the games-section's "screenshot gallery" use the same "back-end" as the cycle gallery?
+
+
+- Cyclemap
+  - Checkbox to turn on/off labels in the map
+  - Fix the firefox performance. 
+    IIRC it has something to do with GMaps firing too many events (you need to limit the event count)
