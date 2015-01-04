@@ -34,8 +34,8 @@
 
 #navigation-list li:hover {
 	background-color: rgb(208, 208, 208);
+	transition: background-color 0.3s ease-in-out;
 }
-
 
 /* Other */
 #navigation-list {
