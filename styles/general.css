@@ -15,6 +15,35 @@
 	vertical-align: middle;
 }
 
+#github-icon {
+	position: absolute; 
+	right: 8px;
+	height: 48px; 
+	top: calc((70px - 48px) / 2);
+				
+	transition: opacity 0.4s ease-in-out;
+	opacity: 0.35;
+				
+	cursor: pointer;
+}
+			
+#github-icon:hover {
+	opacity: 0.9;
+}
+			
+#github-icon-text {
+	position: absolute; 
+	right: calc(8px + 48px + 8px); /* 8px + 48px == github-icon's margin and size. 8px == margin */
+	height: 48px; 
+	top: calc((70px - 48px) / 5); /* no clue why / 5 :P */
+				
+	transition: opacity 0.4s ease-in-out;
+	opacity: 0;
+	color: white;
+				
+	cursor: pointer;
+}
+
 /**** NAVIGATION LIST ****/
 
 /* Navigation List LI */

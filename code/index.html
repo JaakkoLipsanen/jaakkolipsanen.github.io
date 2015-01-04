@@ -12,7 +12,8 @@
 		<link rel="stylesheet" type="text/css" href="../styles/general.css" />
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans%7CYanone+Kaffeesatz' rel='stylesheet' type='text/css' />
 		
-		
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+			
 		<!-- Style inlined -->
 		<style>
 			#content-div {
@@ -22,10 +23,19 @@
 				display: block;
 				margin: auto;
 				overflow: auto;
-			}
-			
-			
+			}	
 		</style>
+		
+		<script>
+			$( document ).ready(function() {
+			
+				$("#github-icon").hover(function() {
+					$("#github-icon-text").css("opacity", "0.35");
+				}, function() {
+					$("#github-icon-text").css("opacity", "0.0");
+				});
+			});
+		</script>
   </head>
 	<body>
 	
@@ -36,6 +46,8 @@
 			<a href="/cycle" id="cycle-or-code-link">cycle</a>
 			<p id="header-text">flai</p>
 			
+			<p id="github-icon-text" >github</p>
+			<a href="https://github.com/JaakkoLipsanen/"> <img id="github-icon" src="icons/GithubIcon.png" style="" /> </a>	
 		</div>
 			
 		<div id="navigation-div">

@@ -84,7 +84,7 @@
 			.gallery-list li:hover {
 				opacity: 1;
 			}
-			
+
 		</style>
 		
 		<script>
@@ -116,8 +116,14 @@
 					});
 					
 				});
+				
+				$("#github-icon").hover(function() {
+					$("#github-icon-text").css("opacity", "0.35");
+				}, function() {
+					$("#github-icon-text").css("opacity", "0.0");
+				});
 			});
-		
+
 		</script>
 		
 	</head>
@@ -130,6 +136,8 @@
 			<a href="/cycle" id="cycle-or-code-link">cycle</a>	
 			<p id="header-text">flai</p>
 			
+			<p id="github-icon-text" >github</p>
+			<a href="https://github.com/JaakkoLipsanen/"> <img id="github-icon" src="../icons/GithubIcon.png" style="" /> </a>		
 		</div>
 		
 		<div id="navigation-div">
