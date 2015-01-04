@@ -12,9 +12,110 @@
 		<link rel="stylesheet" type="text/css" href="../../styles/general.css" />
 		<link rel="stylesheet" type="text/css" href="styles/games.css" />
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans%7CYanone+Kaffeesatz' rel='stylesheet' type='text/css' />
+		
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		
 		<meta charset="UTF-8">
+		
+		<style>
+			.gallery-list li {
+				width: 128px; height: 100%; 
+				list-style-type: none; 
+									
+				background-size: contain; 
+				background-repeat: no-repeat; 
+				background-position: center;
+									
+				display: inline-block;
+								
+				margin-left: 8px;
+				margin-right: 8px;
+			}
+						
+			.gallery-container {
+				transition: opacity 0.3s ease-in-out;
+				opacity: 0;
+			} 
+			
+			.gallery-background {	
+				position: fixed; 
+				left: 0; 
+				top: 0; 
+				width: 100%; 
+				height: 100%; 
+				
+				background-color: black; 
+				opacity: 0.4;
+			}
+			
+			.gallery-image {
+				position: fixed;
+				height: 75%; 
+				max-width: 90%;
+				max-height: 480px;    
+				
+				left: 0; 
+				right: 0;
+				bottom: 0;
+				top: 0; 
+				
+				margin: auto;
+			}
+			
+			.gallery-list {
+				width: 100%; 
+				height: 64px; 
+				
+				text-align: center;
+				padding: 0px;
+			}
+			
+			.gallery-list li {
+				opacity: 0.5;
+				transition: opacity 0.25s ease-in-out;
+			}
+			
+			.gallery-list li:hover {
+				opacity: 1;
+			}
+			
+		</style>
+		
+		<script>
+			$( document ).ready(function() {
+				$("li").click(function(event) {	
+				//	var ul = $($(event.target).closest("ul"));
+				//  var index = $(event.target).index() + 1;	
+				//	var length = ul.children("li").length;
+				//  "index / length" -> "1 / 4" for example
+					
+					var imagePath = $(event.target).css("background-image").replace("url(", "").replace(")", "").replace(/"/g, "");
+					var htmlCode = 
+						"<div class='gallery-container'>" +
+						"	<div class='gallery-background' style=''></div>" +
+						"	<img class='gallery-image' src='" + imagePath + "'  ' />" +
+						"</div>";
+						
+						
+					$("body").append(htmlCode);
+						$(".gallery-container").css("opacity");
+						$(".gallery-container").css("opacity", "1");
+				});
+				
+				$(document).on("click", ".gallery-background, .gallery-image", function(event) {
+					var parent = $($(event.target).parent());
+					parent.css("opacity", "0");
+					parent.on("transitionend", function() {
+						parent.remove();
+					});
+					
+				});
+			});
+		
+		</script>
+		
 	</head>
-	<body style="">
+	<body>
 	
 		<!-- Top Header -->
 		<div id="header-div" >
@@ -49,6 +150,13 @@
 					<a href="http://www.windowsphone.com/en-us/store/app/final-fight-z/348e313f-8963-4356-a403-04785eaff9bc">
 						<img src="icons/DownloadWP.png" alt="Download for Windows Phone">
 					</a>
+					
+					<ul class="gallery-list">
+						<li style="background-image: url(images/FFZ/1.png);"</li>
+						<li style="background-image: url(images/FFZ/2.png);"</li>
+						<li style="background-image: url(images/FFZ/3.png);"</li>
+						<li style="background-image: url(images/FFZ/4.png);"</li>
+					</ul>
 				</div>
 				
 				<hr />
@@ -63,6 +171,13 @@
 					<a href="http://www.windowsphone.com/en-us/store/app/doodle-run/a608d3f4-51ec-4f3c-bca0-b205f311de85">
 						<img  src="icons/DownloadWP.png" alt="Download for Windows Phone">
 					</a>
+					
+					<ul class="gallery-list">
+						<li style="background-image: url(images/Doodle/1.png);"</li>
+						<li style="background-image: url(images/Doodle/2.png);"</li>
+						<li style="background-image: url(images/Doodle/3.png);"</li>
+						<li style="background-image: url(images/Doodle/4.png);"</li>
+					</ul>			
 				</div>			
 				
 				<hr />
@@ -77,6 +192,13 @@
 					<a href="http://www.windowsphone.com/en-us/store/app/boxstrike/2c125639-a3cd-4588-ba99-bc78cc2fc2f9">
 						<img  src="icons/DownloadWP.png" alt="Download for Windows Phone">
 					</a>
+					
+					<ul class="gallery-list">
+						<li style="background-image: url(images/boxStrike/1.png);"</li>
+						<li style="background-image: url(images/boxStrike/2.png);"</li>
+						<li style="background-image: url(images/boxStrike/3.png);"</li>
+						<li style="background-image: url(images/boxStrike/4.png);"</li>
+					</ul>		
 				</div>
 				
 				<hr />
@@ -91,6 +213,12 @@
 					<a href="http://flai.me/installation-za-3/">
 						<p>Play</p>
 					</a>
+					
+					<ul class="gallery-list">
+						<li style="background-image: url(images/Installation/1.png);"</li>
+						<li style="background-image: url(images/Installation/2.png);"</li>
+						<li style="background-image: url(images/Installation/3.png);"</li>
+					</ul>	
 				</div>	
 				
 				<hr />
@@ -104,6 +232,12 @@
 					<a href="http://www.ludumdare.com/compo/ludum-dare-27/?action=preview&amp;uid=14346">
 						<p>Check it on Ludum Dare</p>
 					</a>
+					
+					<ul class="gallery-list">
+						<li style="background-image: url(images/WVVW/1.png);"</li>
+						<li style="background-image: url(images/WVVW/2.png);"</li>
+						<li style="background-image: url(images/WVVW/3.png);"</li>
+					</ul>	
 				</div>
 				
 				<hr />
@@ -117,6 +251,11 @@
 					<a href="http://www.ludumdare.com/compo/ludum-dare-25/?action=preview&amp;uid=14346">
 						<p>Check it on Ludum Dare</p>
 					</a>
+					
+					<ul class="gallery-list">
+						<li style="background-image: url(images/DEFCON/1.png);"</li>
+						<li style="background-image: url(images/DEFCON/2.png);"</li>
+					</ul>	
 				</div>				
 				
 				<hr />
