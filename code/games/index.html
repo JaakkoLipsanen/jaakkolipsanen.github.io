@@ -58,6 +58,9 @@
 				height: 75%; 
 				max-width: 90%;
 				max-height: 480px;    
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
 				
 				left: 0; 
 				right: 0;
@@ -96,14 +99,14 @@
 				//	var length = ul.children("li").length;
 				//  "index / length" -> "1 / 4" for example
 					
-					var imagePath = $(event.target).css("background-image").replace("url(", "").replace(")", "").replace(/"/g, "");
+				//	var imagePath = $(event.target).css("background-image").replace("url(", "").replace(")", "").replace(/"/g, "");
 					var htmlCode = 
 						"<div class='gallery-container'>" +
 						"	<div class='gallery-background' style=''></div>" +
-						"	<img class='gallery-image' src='" + imagePath + "'  ' />" +
+						"	<div class='gallery-image' style='background-image: " + $(event.target).css("background-image") + "'  ' />" +
 						"</div>";
 						
-						
+					
 					$("body").append(htmlCode);
 						$(".gallery-container").css("opacity");
 						$(".gallery-container").css("opacity", "1");
