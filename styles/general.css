@@ -1,7 +1,7 @@
 
 /**** HEADER ****/
 #header-text {
-    color: white;
+    color: rgb(211, 211, 211);
 	text-align: center;
 	font-size: 400%;
 	font-family:'Yanone Kaffeesatz', sans-serif;
@@ -11,7 +11,7 @@
 #header-div {
 	width: 100%;
 	height: 70px;
-	background: rgb(48, 48, 48);
+	background: rgb(32, 32, 32);
 	vertical-align: middle;
 }
 
@@ -39,7 +39,7 @@
 				
 	transition: opacity 0.4s ease-in-out;
 	opacity: 0;
-	color: white;
+	color: black;
 				
 	cursor: pointer;
 }
@@ -52,13 +52,14 @@
 	display: block;
 	width: 100px;
 	transition: background-color 0.3s ease-in-out;
+	background-color: rgb(34, 34, 34);
 }
 
 #navigation-list li .selected {
 	float: left;
 	display: block;
 	width: 100px;
-	background-color: rgb(48, 48, 48);
+	background-color: rgb(40, 40, 40);
 	color: white;
 }
 
@@ -113,7 +114,7 @@
 
 /**** MISC ****/
 body {
-	background-color: white;
+	background-color: rgb(24, 24, 24);
 	padding: 0px;
 	margin: 0px;
 }

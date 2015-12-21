@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		
+		<title>flai</title>
+		<meta name="description" content="The personal website of Jaakko Lipsanen">
+		<meta name="author" content="Jaakko Lipsanen">		
+		<meta name="keywords" content="gamedev, game, xna, unity, finland, developer, c#, c++, javascript, html5">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		
+		<link rel="stylesheet" type="text/css" href="../styles/general.css" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans%7CYanone+Kaffeesatz' rel='stylesheet' type='text/css' />
+		
+		
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=geometry&sensor=true&region=ES"></script>
+		
+		<script type="text/javascript" src="../gallery/scripts/gallery.js"></script>
+		<script type="text/javascript" src="scripts/cycleMap.js"></script>
+		<script type="text/javascript" src="../scripts/helpers.js"></script>
+		<script type="text/javascript" src="../scripts/inputState.js"></script>
+		
+		<script>
+		 
+			function initialize() {	
+
+				/*
+				 var map = new CycleMap(
+					document.getElementById("map-div"), 
+					new MapProperties(MapType.Terrain, LabelType.Hidden), 
+					new Route(["data/europe14/cycle-sweden-norway.path", "data/europe14/cycle-denmark-belgium.path"], ["data/europe14/boat-finland-sweden.path", "data/europe14/boat-norway-denmark.path"]),
+					new NightCollection("data/europe14/nights.gpx"));
+						
+				var gallery = new Gallery("Europe '14", document.getElementById("gallery"), "data/europe14/photos", "../gallery/");
+					
+				map.WhenLoaded(function() {
+					document.getElementById("tripKm").innerHTML = map.RouteLength + "km";
+					document.getElementById("tripNights").innerHTML = map.NightCount + " days";
+				});
+				
+				$(".navigation-icon").hover(function(event) {
+					$(event.target).siblings(".navigation-icon-text").css("opacity", "0.35");
+				}, function(event) {
+					$(event.target).siblings(".navigation-icon-text").css("opacity", "0.0");
+				});
+				
+				*/
+				
+				var europe14 = new Route(["data/europe14/cycle-sweden-norway.path", "data/europe14/cycle-denmark-belgium.path"], ["data/europe14/boat-finland-sweden.path", "data/europe14/boat-norway-denmark.path"]);
+				var spain14 = new Route([ "data/spain14/cycle-spain.path" ], [ ])
+
+				var paintRoute = function(context, route) {
+					var mapWidth = context.canvas.width;
+					var mapHeight = context.canvas.height;
+					var lonToX = function(longitude) {
+
+						// häx!! for some reason, longitude > 0 works pretty much perfectly, but with negative values it doesn't work properly (some values are correct, some are bit wrong)
+						if(longitude > 0)
+							return mapWidth / 2 + (longitude / 180 * (mapWidth / 2)) * 0.946;
+						else {
+							return mapWidth / 2 + (longitude / 187.480162 * (mapWidth / 2));
+						}
+					}
+					
+					var latToY = function(latitude) {
+						var latRad = latitude * Math.PI / 180;
+						var mercN = Math.log(Math.tan((Math.PI / 4) + (latRad / 2)));
+						return mapHeight * 0.65131894484 - (mapWidth * mercN / (2*Math.PI)) * 0.935;
+					}
+					
+					for(var i = 0; i < route.CyclingPaths.length; i++) {
+						var startPoint = route.CyclingPaths[i].Points[0];
+						context.moveTo(lonToX(startPoint.lng()), latToY(startPoint.lat()));
+						
+						for(var j = 1; j < route.CyclingPaths[i].Points.length; j += 25) {
+							var point = route.CyclingPaths[i].Points[j];
+							context.lineTo(lonToX(point.lng()), latToY(point.lat()));
+						}
+					}
+					
+					for(var i = 0; i < route.TransportPaths.length; i++) {
+						var startPoint = route.TransportPaths[i].Points[0];
+						context.moveTo(lonToX(startPoint.lng()), latToY(startPoint.lat()));
+						
+						for(var j = 1; j < route.TransportPaths[i].Points.length; j++) {
+							var point = route.TransportPaths[i].Points[j];
+							context.lineTo(lonToX(point.lng()), latToY(point.lat()));
+						}
+					}
+				};
+				
+				var canvas = document.getElementById("route-canvas");
+				var paintCanvas = function() {
+					var context = canvas.getContext('2d');
+					
+					context.beginPath();
+					paintRoute(context, europe14);
+					paintRoute(context, spain14);
+					/* tests 
+					var latFrom = 60.392033;
+					var lonFrom =  -1.278965;
+					
+
+					var latTo = 51.173100;
+					var lonTo = -79.868293;
+				
+					
+					
+					context.beginPath();
+
+					
+					var zeroLon = calcLongitudePixel(0);
+					context.moveTo(zeroLon, 0);
+					context.lineTo(zeroLon, canvas.height);
+					
+					var eastAustralia = calcLongitudePixel(153.608882);
+					context.moveTo(eastAustralia, 0);
+					context.lineTo(eastAustralia, canvas.height);
+					
+					var canadaAlaskaBorder = calcLongitudePixel(-141.001294);
+					context.moveTo(canadaAlaskaBorder, 0);
+					context.lineTo(canadaAlaskaBorder, canvas.height);
+					
+					var madagascarEast = calcLongitudePixel(50.467592);
+					context.moveTo(madagascarEast, 0);
+					context.lineTo(madagascarEast, canvas.height);
+					
+					var mexicoBayWest = calcLongitudePixel(-97.813492);
+					context.moveTo(mexicoBayWest, 0);
+					context.lineTo(mexicoBayWest, canvas.height);
+					 
+					 var brazilEast = calcLongitudePixel(-34.971687);
+					context.moveTo(brazilEast, 0);
+					context.lineTo(brazilEast, canvas.height);
+					 
+					 var dakarSenegal = calcLongitudePixel(-17.350072);
+					context.moveTo(dakarSenegal, 0);
+					context.lineTo(dakarSenegal, canvas.height);
+					
+					 var mongoliaNorth = calcLongitudePixel(97.857629);
+					context.moveTo(mongoliaNorth, 0);
+					context.lineTo(mongoliaNorth, canvas.height);
+					
+					 var papuaNewGuineaEastBorder = calcLongitudePixel(140.996968);
+					context.moveTo(papuaNewGuineaEastBorder, 0);
+					context.lineTo(papuaNewGuineaEastBorder, canvas.height);
+					
+					  var tianjinCoast = calcLongitudePixel(117.556706);
+					context.moveTo(tianjinCoast, 0);
+					context.lineTo(tianjinCoast, canvas.height);
+					  
+					var newZealandEast = calcLongitudePixel(178.429597);
+					context.moveTo(newZealandEast, 0);
+					context.lineTo(newZealandEast, canvas.height);
+					
+					var falklandEast = calcLongitudePixel( -57.787678);
+					context.moveTo(falklandEast, 0);
+					context.lineTo(falklandEast, canvas.height);
+					  
+					 var eastFlorida = calcLongitudePixel( -80.042519);
+					context.moveTo(eastFlorida, 0);
+					context.lineTo(eastFlorida, canvas.height);
+					
+					 var westUSA = calcLongitudePixel(-124.633742);
+					context.moveTo(westUSA, 0);
+					context.lineTo(westUSA, canvas.height);
+					
+					 var finlandWest = calcLongitudePixel(21.139307);
+					context.moveTo(finlandWest, 0);
+					context.lineTo(finlandWest, canvas.height);
+							
+					 var denmarkWest = calcLongitudePixel(8.086352);
+					context.moveTo(denmarkWest, 0);
+					context.lineTo(denmarkWest, canvas.height);
+					
+					// Latitude (vertical) tests
+					var equator = calcLatitudePixel(0);
+					context.moveTo(0, equator);
+					context.lineTo(canvas.width, equator);
+										
+					var usCanadaLat = calcLatitudePixel(49);
+					context.moveTo(0, usCanadaLat);
+					context.lineTo(canvas.width, usCanadaLat);
+					
+					var capeTownLat = calcLatitudePixel(-34.822990);
+					context.moveTo(0, capeTownLat);
+					context.lineTo(canvas.width, capeTownLat);
+					
+					var nuorgamLat = calcLatitudePixel(70.083951);
+					context.moveTo(0, nuorgamLat);
+					context.lineTo(canvas.width, nuorgamLat);
+					
+					var southNewZealand = calcLatitudePixel(-46.662151);
+					context.moveTo(0, southNewZealand);
+					context.lineTo(canvas.width, southNewZealand);
+					
+					var southEgypt = calcLatitudePixel(22.014689);
+					context.moveTo(0, southEgypt);
+					context.lineTo(canvas.width, southEgypt);
+				
+					*/
+					
+					context.lineWidth = 2;
+					context.strokeStyle = 'rgb(96, 96, 96)'; // "rgb(172, 32, 32)";
+					context.stroke();
+
+				};		
+				
+				var updateCanvasSize = function() {
+					canvas.width = $("#map-img").width();
+					canvas.height = $("#map-img").height();
+					
+					paintCanvas();
+				};
+				
+				$(window).resize(updateCanvasSize);
+				updateCanvasSize();
+				
+				spain14.Load(function() {
+					paintCanvas();
+				});
+				
+				europe14.Load(function() {
+					paintCanvas();
+				});
+			}
+			
+			google.maps.event.addDomListener(window, 'load', initialize);
+		</script>
+		
+		<!-- Style inlined -->
+		<style>
+			#content-div {
+				text-align: center;
+				display: block;
+				margin: auto;
+				
+				width: auto; 
+				height: auto;
+				
+				margin-top: 36px;
+				margin-bottom: 36px;
+			}
+			
+			#tripKm, #tripNights {
+				margin-bottom: 4px;
+				margin-top: 4px;
+			}
+			
+			#map-div {		
+				width: 80%; 
+				height: 80vh; 
+				margin: auto;	
+			}
+			
+			.gallery-container#gallery  {		
+				width: 80%;
+				height: 80vh;
+				margin: auto;	
+
+				max-width: 100%;
+				max-height: 100%;
+			}	
+
+				
+		</style>
+  </head>
+	<body>
+	
+		<!-- Top Header -->
+		<div id="header-div" class="cycle-header" >
+			
+			<p id="header-text">flai</p>
+			
+			<!-- left side "code" icon -->
+			<a href="/code"> 
+				<p class="navigation-icon-text" style="right: auto; left: calc(8px + 48px + 8px)">code</p>
+				<img class="navigation-icon" src="icons/CodeIcon.png" style="right: auto; left: calc(8px)" /> 
+			</a>
+			
+		</div>
+		
+		
+		<!-- Content -->
+		<div id="content-div">  
+
+			<div id="map-divider" style="max-width: 1600px; width: 90%; max-height: 70vh; position: relative; display: inline-block; margin: 0px; padding: 0px; text-align: center;">
+				<img id="map-img" src="icons/WorldMapBlank.png" style="max-width:100%; max-height: 70vh; position: relative; left: 0px; top: 0px; margin: 0; padding: 0;" ></img>
+				<canvas id="route-canvas" style="position: absolute; left: 0px; right: 0px; top: 0px; margin-left: auto;  margin-right: auto; padding: 0;" />
+			</div>
+			
+		</div>
+		
+		<!-- Some space before footer -->
+		<div style="height: 48px"></div>
+		
+		<!-- FOOTER -->
+		<div>
+			<hr />
+			<p id="email-text"><a href="mailto:jaakko.lipsanen@outlook.com">jaakko.lipsanen@outlook.com</a></p> 
+			<p id="copyright-text">&copy; Jaakko Lipsanen. All Rights Reserved</p> 
+			<p id="github-text">Hosted on <a href="http://github.io">github.io</a> </p>
+		</div>
+	</body>
+</html>
