@@ -52,19 +52,19 @@
 	display: block;
 	width: 100px;
 	transition: background-color 0.3s ease-in-out;
-	background-color: rgb(34, 34, 34);
+	background-color: rgb(24, 24, 24);
 }
 
 #navigation-list li .selected {
 	float: left;
 	display: block;
 	width: 100px;
-	background-color: rgb(40, 40, 40);
+	background-color: rgb(32, 32, 32);
 	color: white;
 }
 
 #navigation-list li:hover {
-	background-color: rgb(208, 208, 208);
+	background-color: rgb(192, 192, 192);
 }
 
 /* Other */
@@ -117,6 +117,8 @@ body {
 	background-color: rgb(24, 24, 24);
 	padding: 0px;
 	margin: 0px;
+	
+	color: rgb(144, 144, 144);
 }
 
 html {
