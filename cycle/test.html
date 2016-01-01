@@ -150,41 +150,27 @@
 				margin-top: 36px;
 				margin-bottom: 36px;
 			}
-			
-			#tripKm, #tripNights {
-				margin-bottom: 4px;
-				margin-top: 4px;
-			}
-			
-			#map-div {		
-				width: 80%; 
-				height: 80vh; 
-				margin: auto;	
-			}
-			
-			.gallery-container#gallery  {		
-				width: 80%;
-				height: 80vh;
-				margin: auto;	
 
-				max-width: 100%;
-				max-height: 100%;
-			}	
+			#route-selection-list-container {
+				display: table;
+				width: 100%;
+				margin-left: auto;
+				margin-right: auto; }
 
-			
+
 			#route-selection-list {
 				list-style-type: none; 
-				text-align: center; 
-				margin-top: 0px;
-				margin-bottom: 0px;
+				text-align: center;
+				margin: 0px;
+
+				display: inline-block;
 				
 				width: 600px;
 				max-width: 90%;
 				
 				height: 40px;
-				padding: 3px;
-				padding-bottom: 7px;
-				
+				padding: 3px 3px 7px; /* 3px == real padding. 7px == 3px + 4px. 4px because no fucking clue why it's needed on bottom */
+
 				background-color: rgb(64, 64, 64);
 				border-radius: 5px;
 				
@@ -250,10 +236,10 @@
 				<canvas id="route-canvas" style="position: absolute; left: 0px; right: 0px; top: 0px; margin-left: auto;  margin-right: auto; padding: 0;" />
 			</div>	
 
-			<div id="navigation-div" style="margin-top: 64px">
+			<div id="route-selection-list-container" style="margin-top: 64px">
 				<ul id="route-selection-list">
 					<li>
-						<p id="europe14-trip-button">Europe <span style="display: block;">2014</span></p>
+						<p id="europe14-trip-button">North Europe <span style="display: block;">2014</span></p>
 					</li>
 					
 					<li class="selected">
@@ -261,7 +247,7 @@
 					</li>
 					
 					<li>
-						<p>Europe <span style="display: block;">2015</span></p>
+						<p>Central Europe <span style="display: block;">2015</span></p>
 					</li>
 				</ul>
 			</div>	
@@ -274,9 +260,9 @@
 		<!-- FOOTER -->
 		<div>
 			<hr />
-			<p id="email-text"><a href="mailto:jaakko.lipsanen@outlook.com">jaakko.lipsanen@outlook.com</a></p> 
-			<p id="copyright-text">&copy; Jaakko Lipsanen. All Rights Reserved</p> 
-			<p id="github-text">Hosted on <a href="http://github.io">github.io</a> </p>
+			<p class="footer-text"><a href="mailto:jaakko.lipsanen@outlook.com">jaakko.lipsanen@outlook.com</a></p>
+			<p class="footer-text">&copy; Jaakko Lipsanen. All Rights Reserved</p>
+			<p class="footer-text" id="hosted-on-github-text">Hosted on <a href="https://pages.github.com/">GitHub Pages</a> </p>
 		</div>
 	</body>
 </html>
