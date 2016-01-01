@@ -1,20 +1,17 @@
 body {
-	background-color: white;
-	color: black;
-}
+  background-color: white;
+  color: black; }
 
 #header-div {
- 	background: rgb(48, 48, 48);
-}
- 
+  background: #303030; }
+
 .navigation-icon-text {
-	color: white;
-}
- 
+  color: white; }
+
 #navigation-list li {
-  background-color: white;
-}
+  background-color: white; }
 
 #navigation-list li .selected {
-	background-color: rgb(48, 48, 48);
-}
+  background-color: #303030; }
+
+/*# sourceMappingURL=code.css.map */
