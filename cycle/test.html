@@ -98,110 +98,7 @@
 					context.beginPath();
 					paintRoute(context, europe14);
 					paintRoute(context, spain14);
-					/* tests 
-					var latFrom = 60.392033;
-					var lonFrom =  -1.278965;
-					
 
-					var latTo = 51.173100;
-					var lonTo = -79.868293;
-				
-					
-					
-					context.beginPath();
-
-					
-					var zeroLon = calcLongitudePixel(0);
-					context.moveTo(zeroLon, 0);
-					context.lineTo(zeroLon, canvas.height);
-					
-					var eastAustralia = calcLongitudePixel(153.608882);
-					context.moveTo(eastAustralia, 0);
-					context.lineTo(eastAustralia, canvas.height);
-					
-					var canadaAlaskaBorder = calcLongitudePixel(-141.001294);
-					context.moveTo(canadaAlaskaBorder, 0);
-					context.lineTo(canadaAlaskaBorder, canvas.height);
-					
-					var madagascarEast = calcLongitudePixel(50.467592);
-					context.moveTo(madagascarEast, 0);
-					context.lineTo(madagascarEast, canvas.height);
-					
-					var mexicoBayWest = calcLongitudePixel(-97.813492);
-					context.moveTo(mexicoBayWest, 0);
-					context.lineTo(mexicoBayWest, canvas.height);
-					 
-					 var brazilEast = calcLongitudePixel(-34.971687);
-					context.moveTo(brazilEast, 0);
-					context.lineTo(brazilEast, canvas.height);
-					 
-					 var dakarSenegal = calcLongitudePixel(-17.350072);
-					context.moveTo(dakarSenegal, 0);
-					context.lineTo(dakarSenegal, canvas.height);
-					
-					 var mongoliaNorth = calcLongitudePixel(97.857629);
-					context.moveTo(mongoliaNorth, 0);
-					context.lineTo(mongoliaNorth, canvas.height);
-					
-					 var papuaNewGuineaEastBorder = calcLongitudePixel(140.996968);
-					context.moveTo(papuaNewGuineaEastBorder, 0);
-					context.lineTo(papuaNewGuineaEastBorder, canvas.height);
-					
-					  var tianjinCoast = calcLongitudePixel(117.556706);
-					context.moveTo(tianjinCoast, 0);
-					context.lineTo(tianjinCoast, canvas.height);
-					  
-					var newZealandEast = calcLongitudePixel(178.429597);
-					context.moveTo(newZealandEast, 0);
-					context.lineTo(newZealandEast, canvas.height);
-					
-					var falklandEast = calcLongitudePixel( -57.787678);
-					context.moveTo(falklandEast, 0);
-					context.lineTo(falklandEast, canvas.height);
-					  
-					 var eastFlorida = calcLongitudePixel( -80.042519);
-					context.moveTo(eastFlorida, 0);
-					context.lineTo(eastFlorida, canvas.height);
-					
-					 var westUSA = calcLongitudePixel(-124.633742);
-					context.moveTo(westUSA, 0);
-					context.lineTo(westUSA, canvas.height);
-					
-					 var finlandWest = calcLongitudePixel(21.139307);
-					context.moveTo(finlandWest, 0);
-					context.lineTo(finlandWest, canvas.height);
-							
-					 var denmarkWest = calcLongitudePixel(8.086352);
-					context.moveTo(denmarkWest, 0);
-					context.lineTo(denmarkWest, canvas.height);
-					
-					// Latitude (vertical) tests
-					var equator = calcLatitudePixel(0);
-					context.moveTo(0, equator);
-					context.lineTo(canvas.width, equator);
-										
-					var usCanadaLat = calcLatitudePixel(49);
-					context.moveTo(0, usCanadaLat);
-					context.lineTo(canvas.width, usCanadaLat);
-					
-					var capeTownLat = calcLatitudePixel(-34.822990);
-					context.moveTo(0, capeTownLat);
-					context.lineTo(canvas.width, capeTownLat);
-					
-					var nuorgamLat = calcLatitudePixel(70.083951);
-					context.moveTo(0, nuorgamLat);
-					context.lineTo(canvas.width, nuorgamLat);
-					
-					var southNewZealand = calcLatitudePixel(-46.662151);
-					context.moveTo(0, southNewZealand);
-					context.lineTo(canvas.width, southNewZealand);
-					
-					var southEgypt = calcLatitudePixel(22.014689);
-					context.moveTo(0, southEgypt);
-					context.lineTo(canvas.width, southEgypt);
-				
-					*/
-					
 					context.lineWidth = 2;
 					context.strokeStyle = 'rgb(96, 96, 96)'; // "rgb(172, 32, 32)";
 					context.stroke();
@@ -224,6 +121,16 @@
 				
 				europe14.Load(function() {
 					paintCanvas();
+				});
+			
+				$("#route-selection-list li").click(function() {
+					var clickedButton = $(this);
+					if(clickedButton.hasClass('selected')) {
+						return;
+					}
+					
+					$("#route-selection-list li").removeClass('selected');
+					clickedButton.addClass('selected');
 				});
 			}
 			
@@ -264,13 +171,64 @@
 				max-height: 100%;
 			}	
 
+			
+			#route-selection-list {
+				list-style-type: none; 
+				text-align: center; 
+				margin-top: 0px;
+				margin-bottom: 0px;
+				
+				width: 600px;
+				max-width: 90%;
+				
+				height: 40px;
+				padding: 3px;
+				padding-bottom: 7px;
+				
+				background-color: rgb(64, 64, 64);
+				border-radius: 5px;
+				
+				white-space: nowrap;
+			}
+			
+			#route-selection-list li {
+				float: left;
+				
+				width: 33.33333%;
+				height: auto;
+				
+				text-align: center;
+				vertical-align: middle;
+				display: table;
+				
+				background-color: rgb(24, 24, 24); /* the site background color */
+				transition: background-color 0.3s ease-in-out;
+			}
+			
+			#route-selection-list .selected {
+				background-color: rgb(64, 64, 64);
+			}
+			
+			#route-selection-list p {
+				height: 100%;
+				display: table-cell;
+				vertical-align: middle;
+				
+				font-size: 1em; 
+				font-family: Open Sans;
+				color: rgb(128, 128, 128);
+			}
+			
+			#route-selection-list span {
+				color: rgb(88, 88, 88);
+			}
 				
 		</style>
   </head>
 	<body>
 	
 		<!-- Top Header -->
-		<div id="header-div" class="cycle-header" >
+		<div style="background-color: rgb(24, 24, 24);" id="header-div" class="cycle-header" >
 			
 			<p id="header-text">flai</p>
 			
@@ -283,15 +241,32 @@
 		</div>
 		
 		
-		<!-- Content -->
+		
 		<div id="content-div">  
-
+		
+			<!-- Map -->
 			<div id="map-divider" style="max-width: 1600px; width: 90%; max-height: 70vh; position: relative; display: inline-block; margin: 0px; padding: 0px; text-align: center;">
 				<img id="map-img" src="icons/WorldMapBlank.png" style="max-width:100%; max-height: 70vh; position: relative; left: 0px; top: 0px; margin: 0; padding: 0;" ></img>
 				<canvas id="route-canvas" style="position: absolute; left: 0px; right: 0px; top: 0px; margin-left: auto;  margin-right: auto; padding: 0;" />
-			</div>
-			
+			</div>	
+
+			<div id="navigation-div" style="margin-top: 64px">
+				<ul id="route-selection-list">
+					<li>
+						<p id="europe14-trip-button">Europe <span style="display: block;">2014</span></p>
+					</li>
+					
+					<li class="selected">
+						<p>Spain <span style="display: block;">2014</span></p>
+					</li>
+					
+					<li>
+						<p>Europe <span style="display: block;">2015</span></p>
+					</li>
+				</ul>
+			</div>	
 		</div>
+	
 		
 		<!-- Some space before footer -->
 		<div style="height: 48px"></div>
