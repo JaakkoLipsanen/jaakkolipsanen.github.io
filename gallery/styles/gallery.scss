@@ -1,13 +1,16 @@
-/* default gallery container */
+/* Okayy... This isn't using SCSS except in couple of parts. I'm probably going to rewrite the gallery so don't refactor this yet */
+
 .gallery-container {
 	overflow-y: hidden; 
-	display: block; 
-	max-width: 1000px; 
-	width: 90%; 
-	max-height: 800px; 
-	min-height: 300px;  
-	height: 75vh; 
+	display: block;
 	margin: auto;
+
+	width: 90%;
+	height: 75vh;
+
+	max-width: 1000px;
+	max-height: 800px; 
+	min-height: 300px;
 }
 
 .gallery-inner-container {
@@ -49,13 +52,14 @@
 	height: 100%; 
 }
 
+$gallery-change-image-button-height: 64px;
 .gallery-change-image-container {
 	position: absolute;
-	top: calc(50% - 32px); /* 32px == half of the gallery-change-image-button height */
+	top: calc(50% - #{$gallery-change-image-button-height} / 2); /* 32px == half of the gallery-change-image-button height */
 }
 
 .gallery-change-image-button {
-	height: 64px; 
+	height: $gallery-change-image-button-height;
 	opacity: 0.45;
 }
 
@@ -73,14 +77,12 @@
 	width: 100%; 
 	height: 100%; 
 	
-	opacity: 0.6; 
-	background-color: rgb(16, 16, 16);  
+	opacity: 0.6;
 	background: radial-gradient(
-		at 50% 
-		0%, 
-		rgba(0,0,0,0.75) 0%, 
-		rgba(0,0,0,0.75) 30%,  
-		rgba(0,0,0,0) 70%);
+					at 50% 0%,
+					rgba(0, 0, 0, 0.75) 0%,
+					rgba(0, 0, 0, 0.75) 30%,
+					rgba(0, 0, 0, 0) 70%);
 }
 
 .gallery-topbar-title {

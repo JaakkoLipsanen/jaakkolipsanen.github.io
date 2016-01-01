@@ -1,42 +1,57 @@
+$light-gray: rgb(211, 211, 211);
+$font-stack: 'Yanone Kaffeesatz', sans-serif;
+
+$header-height: 70px;
+$header-color: rgb(32, 32, 32);
+
+$default-transition: 0.2s ease-in-out;
+
+$body-color: rgb(24, 24, 24); /* todo: cycle and code pages have different body colors. Somehow make this settable? For example define this in page-specific .scss? */
+$default-text-color: rgb(144, 144, 144);
+
 /**** HEADER ****/
 #header-text {
-    color: rgb(211, 211, 211);
+    color: $light-gray;
+    font: 400% $font-stack;
+
     text-align: center;
-    font-size: 400%;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
     margin: auto;
 }
 
 #header-div {
     width: 100%;
-    height: 70px;
-    background: rgb(32, 32, 32);
-    vertical-align: middle; 
+    height: $header-height;
+
+    background: $header-color;
+    vertical-align: middle;
 }
 
+$header-icon-size: 48px;
 .navigation-icon {
     position: absolute;
     right: 8px;
-    height: 48px;
-    top: calc((70px - 48px) / 2);
+    height: $header-icon-size;
 
-    transition: opacity 0.4s ease-in-out;
+    top: calc((#{$header-height - $header-icon-size}) / 2);
+
+    transition: opacity $default-transition;
     opacity: 0.35;
 
     cursor: pointer;
-}
 
-.navigation-icon:hover {
-    opacity: 0.9;
+    &:hover {
+        opacity: 0.9;
+    }
 }
 
 .navigation-icon-text {
     position: absolute;
-    right: calc(8px + 48px + 8px); /* 8px + 48px == github-icon's margin and size. 8px == margin */
-    height: 48px;
-    top: calc((70px - 48px) / 5); /* no clue why / 5 :P */
+    height: $header-icon-size;
 
-    transition: opacity 0.4s ease-in-out;
+    right: calc(8px + #{$header-icon-size} + 8px); /* 8px + 48px == github-icon's margin and size. 8px == margin */
+    top: calc((#{$header-height - $header-icon-size}) / 5); /* no clue why / 5 :P */
+
+    transition: opacity $default-transition;
     opacity: 0;
     color: white;
 
@@ -50,28 +65,33 @@
     float: left;
     display: block;
     width: 100px;
-    transition: background-color 0.3s ease-in-out;
-    background-color: rgb(24, 24, 24);
-}
+    transition: background-color $default-transition;
 
-#navigation-list li .selected {
-    float: left;
-    display: block;
-    width: 100px;
-    background-color: rgb(32, 32, 32);
-    color: white;
-}
+    .selected {
+        background-color: $header-color;
+        color: white;
+    }
 
-#navigation-list li:hover {
-    background-color: rgb(192, 192, 192);
+    :hover:not(.selected) {
+        $navigation-list-hover-over-color: lighten($header-color, 10%);
+        background-color: $navigation-list-hover-over-color;
+    }
+
+    a {
+        font: 250% $font-stack;
+        color: rgb(96, 96, 96);
+
+        text-decoration: none;
+        display: block;
+    }
 }
 
 /* Other */
 #navigation-list {
     list-style-type: none;
+
     text-align: center;
     padding: 0px;
-
     margin-top: 0px;
 }
 
@@ -86,38 +106,24 @@
     margin-right: auto;
 }
 
-#navigation-list li a {
-    font-family: Yanone Kaffeesatz, sans-serif;
-    font-size: 250%;
-    margin: 0px;
-    padding: 0px;
-    text-decoration: none;
-    display: block;
-    color: rgb(96, 96, 96);
-}
 
 /**** CONTENT ****/
 #content-div h1 {
-    font-family: Yanone Kaffeesatz, courier;
-    font-weight: normal;
-    font-size: 2.5em;
+    font: normal 2.5em $font-stack;
 }
 
 #content-div h2 {
-    font-family: Yanone Kaffeesatz, courier;
-    font-weight: normal;
-    font-size: 2em;
-    margin-top: 24px;
-    margin-bottom: 12px;
+    font: normal 2em $font-stack;
 }
 
 /**** MISC ****/
 body {
-    background-color: rgb(24, 24, 24);
-    padding: 0px;
+    background-color: $body-color;
     margin: 0px;
 
-    color: rgb(144, 144, 144);
+    color: $default-text-color;
+
+    padding: 0px 0px 32px; /* 32px empty space in bottom */
 }
 
 html {
@@ -148,57 +154,37 @@ a {
 }
 
 /* The horizontal line which divides groups */
+$page-divider-width: 400px;
 hr {
-    width: 400px;
+    width: $page-divider-width;
     max-width: 80%;
 }
 
 /* CYCLE LINK */
 #cycle-or-code-link {
-    padding: 0px;
-
-    background-color: transparent;
-    color: rgb(144, 144, 144);
     position: absolute;
     left: 0px;
-
     top: 0px;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-bottom: 4px;
-    font-family: Yanone Kaffeesatz, courier;
-    font-weight: normal;
-    font-size: 1.5em;
 
-    text-decoration: none;
+    padding: 0px 8px 4px;
+    font: normal 1.5em $font-stack;
+
+    &:hover {
+        color: white;
+    }
 }
 
-#cycle-or-code-link:hover {
-    background-color: rgb(96, 96, 96);
-    color: rgb(255, 255, 255);
-}
 
 /**** FOOTER ****/
-#email-text {
+$footer-text-color: rgb(180, 180, 180);
+$footer-link-color: desaturate(rgb(128, 128, 216), 10);
+.footer-text {
     font-size: 14px;
-    color: gray;
+    color: $footer-text-color;
     text-align: center;
-    margin: 0px;
-}
+    margin: 4px 0px 0px;
 
-#copyright-text {
-    font-size: 14px;
-    color: rgb(180, 180, 180);
-    text-align: center;
-    margin-top: 4px;
-}
-
-#github-text {
-    font-size: 14px;
-    color: rgb(180, 180, 180);
-    text-align: center;
-}
-
-#github-text a, #email-text a {
-    color: rgb(128, 128, 216);
+    a {
+        color: $footer-link-color;
+    }
 }

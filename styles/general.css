@@ -1,9 +1,9 @@
+/* todo: cycle and code pages have different body colors. Somehow make this settable? For example define this in page-specific .scss? */
 /**** HEADER ****/
 #header-text {
   color: lightgray;
+  font: 400% "Yanone Kaffeesatz", sans-serif;
   text-align: center;
-  font-size: 400%;
-  font-family: 'Yanone Kaffeesatz', sans-serif;
   margin: auto; }
 
 #header-div {
@@ -16,22 +16,21 @@
   position: absolute;
   right: 8px;
   height: 48px;
-  top: calc((70px - 48px) / 2);
-  transition: opacity 0.4s ease-in-out;
+  top: calc((22px) / 2);
+  transition: opacity 0.2s ease-in-out;
   opacity: 0.35;
   cursor: pointer; }
-
-.navigation-icon:hover {
-  opacity: 0.9; }
+  .navigation-icon:hover {
+    opacity: 0.9; }
 
 .navigation-icon-text {
   position: absolute;
+  height: 48px;
   right: calc(8px + 48px + 8px);
   /* 8px + 48px == github-icon's margin and size. 8px == margin */
-  height: 48px;
-  top: calc((70px - 48px) / 5);
+  top: calc((22px) / 5);
   /* no clue why / 5 :P */
-  transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
   opacity: 0;
   color: white;
   cursor: pointer; }
@@ -42,18 +41,17 @@
   float: left;
   display: block;
   width: 100px;
-  transition: background-color 0.3s ease-in-out;
-  background-color: #181818; }
-
-#navigation-list li .selected {
-  float: left;
-  display: block;
-  width: 100px;
-  background-color: #202020;
-  color: white; }
-
-#navigation-list li:hover {
-  background-color: silver; }
+  transition: background-color 0.2s ease-in-out; }
+  #navigation-list li .selected {
+    background-color: #202020;
+    color: white; }
+  #navigation-list li :hover:not(.selected) {
+    background-color: #3a3a3a; }
+  #navigation-list li a {
+    font: 250% "Yanone Kaffeesatz", sans-serif;
+    color: #606060;
+    text-decoration: none;
+    display: block; }
 
 /* Other */
 #navigation-list {
@@ -70,34 +68,20 @@
   margin-left: auto;
   margin-right: auto; }
 
-#navigation-list li a {
-  font-family: Yanone Kaffeesatz, sans-serif;
-  font-size: 250%;
-  margin: 0px;
-  padding: 0px;
-  text-decoration: none;
-  display: block;
-  color: #606060; }
-
 /**** CONTENT ****/
 #content-div h1 {
-  font-family: Yanone Kaffeesatz, courier;
-  font-weight: normal;
-  font-size: 2.5em; }
+  font: normal 2.5em "Yanone Kaffeesatz", sans-serif; }
 
 #content-div h2 {
-  font-family: Yanone Kaffeesatz, courier;
-  font-weight: normal;
-  font-size: 2em;
-  margin-top: 24px;
-  margin-bottom: 12px; }
+  font: normal 2em "Yanone Kaffeesatz", sans-serif; }
 
 /**** MISC ****/
 body {
   background-color: #181818;
-  padding: 0px;
   margin: 0px;
-  color: #909090; }
+  color: #909090;
+  padding: 0px 0px 32px;
+  /* 32px empty space in bottom */ }
 
 html {
   overflow: -moz-scrollbars-vertical;
@@ -127,43 +111,21 @@ hr {
 
 /* CYCLE LINK */
 #cycle-or-code-link {
-  padding: 0px;
-  background-color: transparent;
-  color: #909090;
   position: absolute;
   left: 0px;
   top: 0px;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-bottom: 4px;
-  font-family: Yanone Kaffeesatz, courier;
-  font-weight: normal;
-  font-size: 1.5em;
-  text-decoration: none; }
-
-#cycle-or-code-link:hover {
-  background-color: #606060;
-  color: white; }
+  padding: 0px 8px 4px;
+  font: normal 1.5em "Yanone Kaffeesatz", sans-serif; }
+  #cycle-or-code-link:hover {
+    color: white; }
 
 /**** FOOTER ****/
-#email-text {
-  font-size: 14px;
-  color: gray;
-  text-align: center;
-  margin: 0px; }
-
-#copyright-text {
+.footer-text {
   font-size: 14px;
   color: #b4b4b4;
   text-align: center;
-  margin-top: 4px; }
-
-#github-text {
-  font-size: 14px;
-  color: #b4b4b4;
-  text-align: center; }
-
-#github-text a, #email-text a {
-  color: #8080d8; }
+  margin: 4px 0px 0px; }
+  .footer-text a {
+    color: #8888d0; }
 
 /*# sourceMappingURL=general.css.map */

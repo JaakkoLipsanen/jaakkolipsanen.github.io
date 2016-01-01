@@ -1,10 +1,13 @@
+$background-color: white;
+$header-color: rgb(48, 48, 48);
+
 body {
-	background-color: white;
+	background-color: $background-color;
 	color: black;
 }
 
 #header-div {
- 	background: rgb(48, 48, 48);
+ 	background: $header-color;
 }
  
 .navigation-icon-text {
@@ -12,9 +15,9 @@ body {
 }
  
 #navigation-list li {
-  background-color: white;
+  background-color: $background-color;
 }
 
 #navigation-list li .selected {
-	background-color: rgb(48, 48, 48);
+	background-color: $header-color;
 }
