@@ -1,0 +1,23 @@
+$background-color: white;
+$header-color: rgb(48, 48, 48);
+
+body {
+	background-color: $background-color;
+	color: black;
+}
+
+#header-div {
+ 	background: $header-color;
+}
+ 
+.navigation-icon-text {
+	color: white;
+}
+ 
+#navigation-list li {
+  background-color: $background-color;
+}
+
+#navigation-list li .selected {
+	background-color: $header-color;
+}

@@ -1,0 +1,190 @@
+$light-gray: rgb(211, 211, 211);
+$font-stack: 'Yanone Kaffeesatz', sans-serif;
+
+$header-height: 70px;
+$header-color: rgb(32, 32, 32);
+
+$default-transition: 0.2s ease-in-out;
+
+$body-color: rgb(24, 24, 24); /* todo: cycle and code pages have different body colors. Somehow make this settable? For example define this in page-specific .scss? */
+$default-text-color: rgb(144, 144, 144);
+
+/**** HEADER ****/
+#header-text {
+    color: $light-gray;
+    font: 400% $font-stack;
+
+    text-align: center;
+    margin: auto;
+}
+
+#header-div {
+    width: 100%;
+    height: $header-height;
+
+    background: $header-color;
+    vertical-align: middle;
+}
+
+$header-icon-size: 48px;
+.navigation-icon {
+    position: absolute;
+    right: 8px;
+    height: $header-icon-size;
+
+    top: calc((#{$header-height - $header-icon-size}) / 2);
+
+    transition: opacity $default-transition;
+    opacity: 0.35;
+
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.navigation-icon-text {
+    position: absolute;
+    height: $header-icon-size;
+
+    right: calc(8px + #{$header-icon-size} + 8px); /* 8px + 48px == github-icon's margin and size. 8px == margin */
+    top: calc((#{$header-height - $header-icon-size}) / 5); /* no clue why / 5 :P */
+
+    transition: opacity $default-transition;
+    opacity: 0;
+    color: white;
+
+    cursor: pointer;
+}
+
+/**** NAVIGATION LIST ****/
+
+/* Navigation List LI */
+#navigation-list li {
+    float: left;
+    display: block;
+    width: 100px;
+    transition: background-color $default-transition;
+
+    .selected {
+        background-color: $header-color;
+        color: white;
+    }
+
+    :hover:not(.selected) {
+        $navigation-list-hover-over-color: lighten($header-color, 10%);
+        background-color: $navigation-list-hover-over-color;
+    }
+
+    a {
+        font: 250% $font-stack;
+        color: rgb(96, 96, 96);
+
+        text-decoration: none;
+        display: block;
+    }
+}
+
+/* Other */
+#navigation-list {
+    list-style-type: none;
+
+    text-align: center;
+    padding: 0px;
+    margin-top: 0px;
+}
+
+#navigation-div {
+    text-align: center;
+
+    display: table;
+    width: auto;
+    height: auto;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/**** CONTENT ****/
+#content-div h1 {
+    font: normal 2.5em $font-stack;
+}
+
+#content-div h2 {
+    font: normal 2em $font-stack;
+}
+
+/**** MISC ****/
+body {
+    background-color: $body-color;
+    margin: 0px;
+
+    color: $default-text-color;
+
+    padding: 0px 0px 32px; /* 32px empty space in bottom */
+}
+
+html {
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll;
+}
+
+/**** TEXTS ****/
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+p {
+    font-size: 18px;
+    font-family: Open Sans, sans-serif;
+}
+
+a {
+    font-family: Open Sans, sans-serif;
+}
+
+/* The horizontal line which divides groups */
+$page-divider-width: 400px;
+hr {
+    width: $page-divider-width;
+    max-width: 80%;
+}
+
+/* CYCLE LINK */
+#cycle-or-code-link {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+
+    padding: 0px 8px 4px;
+    font: normal 1.5em $font-stack;
+
+    &:hover {
+        color: white;
+    }
+}
+
+
+/**** FOOTER ****/
+$footer-text-color: rgb(180, 180, 180);
+$footer-link-color: desaturate(rgb(128, 128, 216), 10);
+.footer-text {
+    font-size: 14px;
+    color: $footer-text-color;
+    text-align: center;
+    margin: 4px 0px 0px;
+
+    a {
+        color: $footer-link-color;
+    }
+}
