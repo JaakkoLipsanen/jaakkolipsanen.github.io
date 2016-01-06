@@ -21,6 +21,7 @@
 		<script type="text/javascript" src="scripts/cycleMap.js"></script>
 		<script type="text/javascript" src="../scripts/helpers.js"></script>
 		<script type="text/javascript" src="../scripts/inputState.js"></script>
+		<script type="text/javascript" src="../scripts/external/vue.js"></script>
 		
 		<script>
 		 
@@ -123,22 +124,83 @@
 					paintCanvas();
 				});
 			
-				$("#route-selection-list li").click(function() {
-					var clickedButton = $(this);
-					if(clickedButton.hasClass('selected')) {
-						return;
-					}
-					
-					$("#route-selection-list li").removeClass('selected');
-					clickedButton.addClass('selected');
+
+
+				var routeSelectionBinding = new Vue({
+					el: '#route-selection-list',
+					data: {
+						selectedIndex: 1,
+						items: [
+							{ name: "Northern Europe", year: 2014, text: "Yay my first tour it was nice Sweden-Belgium!",  },
+							{ name: "Spain", year: 2014, text: "Wooo very freezing trip! Also super pretty!" },
+							{ name: "Central Europe", year: 2015, text: "Yay lots of mountains Alps and Pyreenes!" },
+						]}
 				});
+
+				$("#route-selection-list li").click(function() {
+					// find the index of clicked button in the list
+					routeSelectionBinding.selectedIndex = $("li").index($(this));
+				});
+
+				var routeInfoBinding = new Vue({
+					el: "#route-info-container",
+
+					computed: {
+						selectedRoute: function () {
+							return routeSelectionBinding.items[routeSelectionBinding.selectedIndex];
+						}
+					}
+				});
+
+
 			}
-			
+
+			/* cycle map component */
+			Vue.component("cycle-map", {
+				props: {
+					nights: {
+						type: String,
+						required: true,
+					},
+
+					cyclePaths: {
+						type: String,
+						required: true
+					},
+
+					transportPaths: String,
+				},
+
+				template: "<div id='cycle-map-container'></div>",
+				ready: function() {
+
+					// remove Google logo, copyright print etc from Google Maps. Yeah might not be allowed etc but meh.. :/
+					var css = window.document.styleSheets[0];
+					css.insertRule(".gmnoprint a, .gmnoprint span, .gm-style-cc { display: none; }", 0);
+					css.insertRule(".gmnoprint div { background:none !important; } ", 0);
+					css.insertRule("a[href^='http://maps.google.com/maps']{display:none !important} ", 0);
+					css.insertRule("a[href^='https://maps.google.com/maps']{display:none !important}", 0);
+
+					new CycleMap(
+							$("#cycle-map-container").get(0),
+							new MapProperties(MapType.Normal, LabelType.Visible),
+							new Route(this.cyclePaths.split(' '), this.transportPaths.split(' ')),
+							new NightCollection(this.nights))
+					}
+			});
+
 			google.maps.event.addDomListener(window, 'load', initialize);
 		</script>
 		
 		<!-- Style inlined -->
 		<style>
+
+			#cycle-map-container {
+				width: 500px;
+				height: 500px;
+				margin: auto;;
+			}
+
 			#content-div {
 				text-align: center;
 				display: block;
@@ -232,25 +294,26 @@
 		
 			<!-- Map -->
 			<div id="map-divider" style="max-width: 1600px; width: 90%; max-height: 70vh; position: relative; display: inline-block; margin: 0px; padding: 0px; text-align: center;">
-				<img id="map-img" src="icons/WorldMapBlank.png" style="max-width:100%; max-height: 70vh; position: relative; left: 0px; top: 0px; margin: 0; padding: 0;" ></img>
+				<img id="map-img" src="icons/WorldMapBlank.png" style="max-width:100%; max-height: 70vh; position: relative; left: 0px; top: 0px; margin: 0; padding: 0;" >
 				<canvas id="route-canvas" style="position: absolute; left: 0px; right: 0px; top: 0px; margin-left: auto;  margin-right: auto; padding: 0;" />
 			</div>	
 
 			<div id="route-selection-list-container" style="margin-top: 64px">
 				<ul id="route-selection-list">
-					<li>
-						<p id="europe14-trip-button">North Europe <span style="display: block;">2014</span></p>
-					</li>
-					
-					<li class="selected">
-						<p>Spain <span style="display: block;">2014</span></p>
-					</li>
-					
-					<li>
-						<p>Central Europe <span style="display: block;">2015</span></p>
+					<li v-for="(index, item) in items" v-bind:class="{ 'selected': $index == selectedIndex }">
+						<p  id="europe14-trip-button">{{ item.name }} <span style="display: block;">{{ item.year }}</span></p>
 					</li>
 				</ul>
-			</div>	
+			</div>
+
+			<div id="route-info-container">
+				<p>{{selectedRoute.text}}</p>
+
+				<cycle-map
+						nights="data/europe14/nights.gpx"
+						cycle-paths="data/europe14/cycle-sweden-norway.path data/europe14/cycle-denmark-belgium.path"
+						transport-paths="data/europe14/boat-finland-sweden.path data/europe14/boat-norway-denmark.path"></cycle-map>
+			</div>
 		</div>
 	
 		

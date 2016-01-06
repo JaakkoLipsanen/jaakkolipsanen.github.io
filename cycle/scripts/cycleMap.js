@@ -204,7 +204,7 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 		
 			var pathLine = new google.maps.Polyline({
 				path: cyclingPath.Points,
-				strokeColor: "rgb(96, 96, 192)",
+				strokeColor: "rgb(96, 96, 124)",
 				strokeOpacity: 1,
 				strokeWeight: 1.5,
 						
@@ -226,7 +226,7 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 					
 			var pathLine = new google.maps.Polyline({
 				path: transportPath.Points, 
-				strokeColor:"#000000", 
+				strokeColor: "rgba(96, 96, 96, 0.75)",
 				strokeWeight:0.5, 
 				strokeOpacity:0, 
 				icons: [{
@@ -310,50 +310,169 @@ function Style(styleArray) {
 var MapStyles = {
 	Desert: new Style([
 		{
-			"featureType":"water",
-			"stylers": [{"visibility":"on"}, {"color":"#acbcc9"}]
-		},	
-		{
-			"featureType":"landscape",
-			"stylers":[{"color":"#f2e5d4"}]
+			"featureType": "all",
+			"elementType": "labels.text.fill",
+			"stylers": [
+				{
+					"saturation": 36
+				},
+				{
+					"color": "#000000"
+				},
+				{
+					"lightness": 40
+				}
+			]
 		},
 		{
-			"featureType":"road.highway",
-			"elementType":"geometry",
-			"stylers":[{"color":"#c5c6c6"}]
-		},
-		{ 
-			"featureType":"road.arterial",
-			"elementType":"geometry",
-			"stylers":[{"color":"#e4d7c6"}]
-		},
-		{
-			"featureType":"road.local",
-			"elementType":"geometry",
-			"stylers":[{"color":"#fbfaf7"}]
-		},
-		{
-			"featureType":"poi.park",
-			"elementType":"geometry",
-			"stylers":[{"color":"#c5dac6"}]
+			"featureType": "all",
+			"elementType": "labels.text.stroke",
+			"stylers": [
+				{
+					"visibility": "on"
+				},
+				{
+					"color": "#000000"
+				},
+				{
+					"lightness": 16
+				}
+			]
 		},
 		{
-			"featureType":"administrative.province",
-			"stylers":[{"visibility":"off"}],
+			"featureType": "all",
+			"elementType": "labels.icon",
+			"stylers": [
+				{
+					"visibility": "off"
+				}
+			]
 		},
 		{
-			"featureType":"road",
-			"stylers":[{"lightness": 18}]
+			"featureType": "administrative",
+			"elementType": "geometry.fill",
+			"stylers": [
+				{
+					"color": "#000000"
+				},
+				{
+					"lightness": 20
+				}
+			]
 		},
 		{
-			"featureType":"administrative.country",
+			"featureType": "administrative",
 			"elementType": "geometry.stroke",
-			"stylers":[{"visibility":"on"}, {"lightness": 35}],
+			"stylers": [
+				{
+					"color": "#000000"
+				},
+				{
+					"lightness": 17
+				},
+				{
+					"weight": 1.2
+				}
+			]
 		},
 		{
-			// park labels are always off
-			"featureType":"poi.park",
-			"elementType": "labels",
-			"stylers":[{"visibility":"off"}],
-		},]),
+			"featureType": "landscape",
+			"elementType": "geometry",
+			"stylers": [
+				{
+					"color": "#000000"
+				},
+				{
+					"lightness": 20
+				}
+			]
+		},
+		{
+			"featureType": "poi",
+			"elementType": "geometry",
+			"stylers": [
+				{
+					"color": "#000000"
+				},
+				{
+					"lightness": 21
+				}
+			]
+		},
+		{
+			"featureType": "road.highway",
+			"elementType": "geometry.fill",
+			"stylers": [
+				{
+					"color": "#000000"
+				},
+				{
+					"lightness": 17
+				}
+			]
+		},
+		{
+			"featureType": "road.highway",
+			"elementType": "geometry.stroke",
+			"stylers": [
+				{
+					"color": "#000000"
+				},
+				{
+					"lightness": 29
+				},
+				{
+					"weight": 0.2
+				}
+			]
+		},
+		{
+			"featureType": "road.arterial",
+			"elementType": "geometry",
+			"stylers": [
+				{
+					"color": "#000000"
+				},
+				{
+					"lightness": 18
+				}
+			]
+		},
+		{
+			"featureType": "road.local",
+			"elementType": "geometry",
+			"stylers": [
+				{
+					"color": "#000000"
+				},
+				{
+					"lightness": 16
+				}
+			]
+		},
+		{
+			"featureType": "transit",
+			"elementType": "geometry",
+			"stylers": [
+				{
+					"color": "#000000"
+				},
+				{
+					"lightness": 19
+				}
+			]
+		},
+		{
+			"featureType": "water",
+			"elementType": "geometry",
+			"stylers": [
+				{
+					"color": "#000000"
+				},
+				{
+					"lightness": 17
+				}
+			]
+		}
+	]),
 };
