@@ -5,6 +5,15 @@ TODO: Allow custom styling of:
 - The 'transport' route/path
 */
 
+function CreateGoogleIcon(url) {
+	return {
+		url: url,
+		scaledSize: new google.maps.Size(6, 6),
+		origin: new google.maps.Point(0,0),
+		anchor: new google.maps.Point(3,3)
+	};
+}
+
 var MapType = {
 	Normal: 0,
 	Terrain: 1,
@@ -40,7 +49,8 @@ function Path(pathTextFile) {
 	var lines = pathTextFile.split('\n');
 	var pointCount = parseInt(lines[0]);
 	for(var i = 0; i < pointCount; i++) {
-		var point = new google.maps.LatLng(lines[i * 2 + 1], lines[i * 2 + 2]);
+		var lineNumber = i * 2 + 1; // + 1 because first line is amount of points
+		var point = new google.maps.LatLng(lines[lineNumber], lines[lineNumber + 1]);
 		this.Points.push(point); 
 	}					
 }
@@ -73,85 +83,137 @@ function NightCollection(nightsFile) {
 			callback();
 			return;
 		}
-		
-		var onLoaded = function(gpxFile) {
-			var waypoints = gpxFile.getElementsByTagName('wpt');			
-			var names = gpxFile.getElementsByTagName('name');
-	
-			for(var i = 0; i < waypoints.length; i++) {
-				var lat = waypoints[i].getAttribute('lat');
-				var lon = waypoints[i].getAttribute('lon');
-						
-				var location = new google.maps.LatLng(lat, lon);
-				var nightType = names[i].childNodes[0].nodeValue == "hostelli" ? NightType.Hotel : NightType.Tent;
-		
-				this.Nights.push(new Night(location, nightType));
-			}
-			
+
+		function LoadNights(nightsFile, callback) {
+			LoadAsyncXML(nightsFile, function (gpxFile) {
+				var waypoints = gpxFile.getElementsByTagName('wpt');
+				var names = gpxFile.getElementsByTagName('name');
+
+				var nights = [];
+				for (var i = 0; i < waypoints.length; i++) {
+					var lat = waypoints[i].getAttribute('lat');
+					var lon = waypoints[i].getAttribute('lon');
+
+					var location = new google.maps.LatLng(lat, lon);
+					var nightType = (names[i].childNodes[0].nodeValue == "hostelli") ? NightType.Hotel : NightType.Tent;
+
+					nights.push(new Night(location, nightType));
+				}
+
+				callback(nights);
+			});
+		}
+
+		LoadNights(nightsFile, function(nights) {
+			this.Nights = nights;
 			isLoaded = true;
+
 			callback();
-		}.bind(this);
-		
-		LoadAsyncXML(nightsFile, onLoaded); // nightsXml is currently in GPX format
+		}.bind(this));
 	};
 };
 
-function Route(cyclingPaths, transportPaths) {
+function RouteDescription(routeDescriptionFile) {
+	this.CyclingPathFiles = [];
+	this.TransportPathFiles = [];
+	this.NightLocationsFile = "";
+
+	var hasLoaded = false;
+	this.Load = function(callback) {
+		if(hasLoaded) {
+			callback();
+		}
+
+		var routeDescriptionFolder = GetUriDirectory(routeDescriptionFile);
+		var addFolderToPath = function(path) { return routeDescriptionFolder + path;}
+
+		LoadAsyncText(routeDescriptionFile, function(text) {
+			var lines = text.split("\n");
+			this.CyclingPathFiles = lines[0].split(" ").map(addFolderToPath);
+			this.TransportPathFiles = lines[1].split(" ").map(addFolderToPath);
+			this.NightLocationsFile = addFolderToPath(lines[2]);
+
+			hasLoaded = true;
+			callback();
+		}.bind(this));
+
+	}
+}
+
+function Route(routeDescription) {
 	this.CyclingPaths = [];
 	this.TransportPaths = [];
-	
-	var isLoaded = false;
+	this.NightCollection = null;
+
+	var hasLoaded = false;
 	this.Load = function(callback) {
-		if(isLoaded) {
+		if(hasLoaded) {
 			callback();
 			return;
 		}
-		
-		var remainingPathsToLoad = cyclingPaths.length + transportPaths.length;
-		function onPathLoaded() {
-			remainingPathsToLoad--;
-			if(remainingPathsToLoad == 0) {
-				isLoaded = true;
+
+		function LoadPaths(pathFiles, callback) {
+			if(pathFiles.length == 0) {
+				callback([]);
+			}
+
+			var paths = [];
+			var pathCount = pathFiles.length;
+			function OnLoaded(path) {
+				paths.push(new Path(path));
+
+				pathCount--;
+				if(pathCount == 0) {
+					callback(paths);
+				}
+			}
+
+			for(var i = 0; i < pathFiles.length; i++) {
+				LoadAsyncText(pathFiles[i], OnLoaded);
+			}
+		}
+
+		var cyclingPathsLoaded = false;
+		var transportPathsLoaded = false;
+		var nightCollectionLoaded = false;
+
+		var checkIsAllLoaded = function() {
+			if(cyclingPathsLoaded && transportPathsLoaded && nightCollectionLoaded) {
 				callback();
 			}
-		};
-	
-		// load cycling paths
-		for(var i = 0; i < cyclingPaths.length; i++) {
-			var onGPXLoaded = function(gpxFile) {
-				this.CyclingPaths.push(new Path(gpxFile));
-				onPathLoaded();
-			}.bind(this);
-			
-			LoadAsyncText(cyclingPaths[i], onGPXLoaded);
-		}
-		
-		// load transport paths
-		for(var i = 0; i < transportPaths.length; i++) {
-		
-			var onGPXLoaded = function(gpxFile) {
-				this.TransportPaths.push(new Path(gpxFile));
-				onPathLoaded();
-			}.bind(this);
-			
-			LoadAsyncText(transportPaths[i], onGPXLoaded);
-		}	
-	};
+		}.bind(this);
+
+		routeDescription.Load(function() {
+			// load cycling paths
+			LoadPaths(routeDescription.CyclingPathFiles, function(paths) {
+				this.CyclingPaths = paths;
+
+				cyclingPathsLoaded = true;
+				checkIsAllLoaded();
+			}.bind(this));
+
+			// load transport paths
+			LoadPaths(routeDescription.TransportPathFiles, function(paths) {
+				this.TransportPaths = paths;
+
+				transportPathsLoaded = true;
+				checkIsAllLoaded();
+			}.bind(this));
+
+			// load night collection
+			this.NightCollection = new NightCollection(routeDescription.NightLocationsFile);
+			this.NightCollection.Load(function() {
+				nightCollectionLoaded = true;
+				checkIsAllLoaded();
+			}.bind(this))
+
+		}.bind(this));
+	}.bind(this);
 }
 
-function CycleMap(containerElement, mapProperties, route, nightCollection) {
+function CycleMap(containerElement, mapProperties, route) {
 	this.RouteLength = 0;
-	this.NightCount = 0; nightCollection.Nights.length;
-	
-	// 
-	var createIcon = function(url) {
-		return {
-			url: url,
-			scaledSize: new google.maps.Size(14, 14),
-			origin: new google.maps.Point(0,0),
-			anchor: new google.maps.Point(8,8)
-		};
-	}
+	this.NightCount = 0;
 		
 	var googleMapsProperties = {
 		panControl: false,
@@ -166,36 +228,16 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 		center: new google.maps.LatLng(48, 15), // middle of europe
 		styles: (mapProperties.LabelType == LabelType.Visible) ? MapStyles.Desert.NormalStyle :  MapStyles.Desert.NoLabelStyle,
 	};
-	
 	var _googleMap = new google.maps.Map(containerElement, googleMapsProperties);
-	
-	var tentIcon = createIcon("icons/tent.png");
-	var hotelIcon = createIcon("icons/hotel.png");
 	var routeBounds = new google.maps.LatLngBounds();
+
+	var tentIcon = CreateGoogleIcon("icons/tent.png");
+	var hotelIcon = CreateGoogleIcon("icons/hotel.png");
 	
 	var loadCallbacks = [];
-	
-	var routeLoaded = false;
-	var nightsLoaded = false;
-	var checkIsMapLoaded = function() {
-		if(routeLoaded && nightsLoaded) {
-			this.NightCount = nightCollection.Nights.length;
-			
-			for(var i = 0; i < loadCallbacks.length; i++) {
-				loadCallbacks[i]();
-			}
-		}
-	}.bind(this);
-	
-	this.WhenLoaded = function(callback) {
-		if(routeLoaded && nightsLoaded) {
-			callback();
-		}
-		else {
-			loadCallbacks.push(callback);
-		}
-	};
-	
+	var _nightMarkers = [];
+
+	var isLoaded = false;
 	var onRouteLoaded = function () {
 		// cycling paths
 		for(var i = 0; i < route.CyclingPaths.length; i++) {
@@ -217,56 +259,54 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 		// transport paths
 		for(var i = 0; i < route.TransportPaths.length; i++) {
 			var transportPath = route.TransportPaths[i];
-		
+
 			var lineSymbol = {
-				path: 'M 0,-1 0,1', 
-				strokeOpacity: 0.5, 
+				path: 'M 0,-1 0,1',
+				strokeOpacity: 0.5,
 				scale: 2
 			};
-					
+
 			var pathLine = new google.maps.Polyline({
-				path: transportPath.Points, 
+				path: transportPath.Points,
 				strokeColor: "rgba(96, 96, 96, 0.75)",
-				strokeWeight:0.5, 
-				strokeOpacity:0, 
+				strokeWeight: 0.5,
+				strokeOpacity: 0,
 				icons: [{
 					icon: lineSymbol,
 					offset: '0',
 					repeat: '10px'
 				}],
-						
+
 				map: _googleMap
 			});
 		}
-	
-		_googleMap.fitBounds(routeBounds);
-		routeLoaded = true;
-		checkIsMapLoaded();
-	}.bind(this);
-	
-	// load the route asynchronously
-	route.Load(onRouteLoaded);
 
-	var _nightMarkers = [];
-	nightCollection.Load(onNightsLoaded);	
-	function onNightsLoaded() {
 		// nights
-		for(var i = 0; i < nightCollection.Nights.length; i++) {
-			var night = nightCollection.Nights[i];
-		
+		this.NightCount = route.NightCollection.Nights.length;
+		for(var i = 0; i < route.NightCollection.Nights.length; i++) {
+			var night = route.NightCollection.Nights[i];
+
 			var marker = new google.maps.Marker({
 				position: night.Location,
 				icon: (night.NightType == NightType.Tent ? tentIcon : hotelIcon),
 				map : IsTouchDevice() ? _googleMap : null, // if using touch device, then markers should be visible.
 			});
-		
+
 			_nightMarkers.push(marker);
 		}
-		
-		nightsLoaded = true;
-		checkIsMapLoaded();
-	};
 	
+		_googleMap.fitBounds(routeBounds);
+
+		isLoaded = true;
+		for(var i = 0; i < loadCallbacks.length; i++) {
+			loadCallbacks[i]();
+		}
+
+	}.bind(this);
+	
+	// load the route asynchronously
+	route.Load(onRouteLoaded);
+
 	// show night markers when the cursor is over the container element
 	containerElement.onmouseover = function() {
 		for(var i = 0; i < _nightMarkers.length; i++) {
@@ -289,6 +329,15 @@ function CycleMap(containerElement, mapProperties, route, nightCollection) {
 			}, 150);
 		};
 	}
+
+	this.WhenLoaded = function(callback) {
+		if(isLoaded) {
+			callback();
+		}
+		else {
+			loadCallbacks.push(callback);
+		}
+	};
 }
 
 function Style(styleArray) {

@@ -113,3 +113,7 @@ var _isMobile = false;
 function IsMobile() {
 	return _isMobile;
 }
+
+function GetUriDirectory(url) {
+	return url.substring(0, url.lastIndexOf("/") + 1);
+}

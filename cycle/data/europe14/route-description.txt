@@ -1,0 +1,3 @@
+cycle-sweden-norway.path cycle-denmark-belgium.path
+boat-finland-sweden.path boat-norway-denmark.path
+nights.gpx

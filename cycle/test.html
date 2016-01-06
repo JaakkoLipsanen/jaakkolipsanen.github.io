@@ -116,13 +116,13 @@
 				$(window).resize(updateCanvasSize);
 				updateCanvasSize();
 				
-				spain14.Load(function() {
+				/*spain14.Load(function() {
 					paintCanvas();
 				});
 				
 				europe14.Load(function() {
 					paintCanvas();
-				});
+				}); */
 			
 
 
@@ -131,9 +131,9 @@
 					data: {
 						selectedIndex: 1,
 						items: [
-							{ name: "Northern Europe", year: 2014, text: "Yay my first tour it was nice Sweden-Belgium!",  },
-							{ name: "Spain", year: 2014, text: "Wooo very freezing trip! Also super pretty!" },
-							{ name: "Central Europe", year: 2015, text: "Yay lots of mountains Alps and Pyreenes!" },
+							{ name: "Northern Europe", year: 2014, text: "Yay my first tour it was nice Sweden-Belgium!", route: "data/europe14/route-description.txt",  },
+							{ name: "Spain", year: 2014, text: "Wooo very freezing trip! Also super pretty!", route: "data/spain14/route-description.txt" },
+							{ name: "Central Europe", year: 2015, text: "Yay lots of mountains Alps and Pyreenes!", route: "data/europe14/route-description.txt" },
 						]}
 				});
 
@@ -158,20 +158,32 @@
 			/* cycle map component */
 			Vue.component("cycle-map", {
 				props: {
-					nights: {
-						type: String,
-						required: true,
-					},
-
-					cyclePaths: {
-						type: String,
-						required: true
-					},
-
-					transportPaths: String,
+					routePath: String,
 				},
 
-				template: "<div id='cycle-map-container'></div>",
+				data: {
+
+				},
+
+				computed: {
+					length: function () {
+						return "1000km";
+					},
+
+					duration: function() {
+						return "54 days";
+					}
+				},
+
+				template: "<div id='cycle-map-container'>" +
+							"<div style='width: 100%; height: 100%' id='cycle-map' ></div>" +
+							"<p style=' margin-top: 0px; float: left;'>{{ this.length + ', ' + this.duration }}</p>" +
+							"<div style='display: inline; float: right'>" +
+								"<img  style='width: 10px; display: inline' src='icons/tent.png'><p style='display: inline'> camping </p> " +
+								"<img  style='margin-left: 4px; width: 10px; display: inline' src='icons/hotel.png'><p style='display: inline'> hotel</p> " +
+							"</div>" +
+						  "</div>",
+
 				ready: function() {
 
 					// remove Google logo, copyright print etc from Google Maps. Yeah might not be allowed etc but meh.. :/
@@ -181,12 +193,11 @@
 					css.insertRule("a[href^='http://maps.google.com/maps']{display:none !important} ", 0);
 					css.insertRule("a[href^='https://maps.google.com/maps']{display:none !important}", 0);
 
-					new CycleMap(
-							$("#cycle-map-container").get(0),
+					map = new CycleMap(
+							$("#cycle-map").get(0),
 							new MapProperties(MapType.Normal, LabelType.Visible),
-							new Route(this.cyclePaths.split(' '), this.transportPaths.split(' ')),
-							new NightCollection(this.nights))
-					}
+							new Route(new RouteDescription(this.routePath)));
+					},
 			});
 
 			google.maps.event.addDomListener(window, 'load', initialize);
@@ -198,7 +209,7 @@
 			#cycle-map-container {
 				width: 500px;
 				height: 500px;
-				margin: auto;;
+				margin: auto;
 			}
 
 			#content-div {
@@ -307,12 +318,10 @@
 			</div>
 
 			<div id="route-info-container">
-				<p>{{selectedRoute.text}}</p>
+				<p>{{ selectedRoute.text }}</p>
 
-				<cycle-map
-						nights="data/europe14/nights.gpx"
-						cycle-paths="data/europe14/cycle-sweden-norway.path data/europe14/cycle-denmark-belgium.path"
-						transport-paths="data/europe14/boat-finland-sweden.path data/europe14/boat-norway-denmark.path"></cycle-map>
+				<cycle-map route-path="data/spain14/route-description.txt"></cycle-map>
+
 			</div>
 		</div>
 	
