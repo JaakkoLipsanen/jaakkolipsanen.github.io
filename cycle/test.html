@@ -48,9 +48,6 @@
 				});
 				
 				*/
-				
-				var europe14 = new Route(["data/europe14/cycle-sweden-norway.path", "data/europe14/cycle-denmark-belgium.path"], ["data/europe14/boat-finland-sweden.path", "data/europe14/boat-norway-denmark.path"]);
-				var spain14 = new Route([ "data/spain14/cycle-spain.path" ], [ ])
 
 				var paintRoute = function(context, route) {
 					var mapWidth = context.canvas.width;
@@ -97,8 +94,8 @@
 					var context = canvas.getContext('2d');
 					
 					context.beginPath();
-					paintRoute(context, europe14);
-					paintRoute(context, spain14);
+				//	paintRoute(context, europe14);
+				//	paintRoute(context, spain14);
 
 					context.lineWidth = 2;
 					context.strokeStyle = 'rgb(96, 96, 96)'; // "rgb(172, 32, 32)";
@@ -115,16 +112,6 @@
 				
 				$(window).resize(updateCanvasSize);
 				updateCanvasSize();
-				
-				/*spain14.Load(function() {
-					paintCanvas();
-				});
-				
-				europe14.Load(function() {
-					paintCanvas();
-				}); */
-			
-
 
 				var routeSelectionBinding = new Vue({
 					el: '#route-selection-list',
@@ -151,8 +138,6 @@
 						}
 					}
 				});
-
-
 			}
 
 			/* cycle map component */
