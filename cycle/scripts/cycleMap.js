@@ -14,6 +14,9 @@ function CreateGoogleIcon(url) {
 	};
 }
 
+var TentIcon = CreateGoogleIcon("icons/tent.png");
+var HotelIcon = CreateGoogleIcon("icons/hotel.png");
+
 var MapType = {
 	Normal: 0,
 	Terrain: 1,
@@ -211,10 +214,110 @@ function Route(routeDescription) {
 	}.bind(this);
 }
 
-function CycleMap(containerElement, mapProperties, route) {
+function RouteView(route) {
+	this.Bounds = new google.maps.LatLngBounds();
+	this.CyclingPathLines = []; // of type google.maps.Polyline
+	this.TransportPathLines = []; // of type google.maps.Polyline
+	this.RouteLength = 0;
+
+	this.NightMarkers = []; // of type google.maps.Marker
+
+	var hasLoaded = false;
+	this.CreateView = function() {
+		// cycling paths
+		for(var i = 0; i < route.CyclingPaths.length; i++) {
+			var cyclingPath = route.CyclingPaths[i];
+			this.Bounds.union(cyclingPath.getBounds());
+
+			this.CyclingPathLines.push(new google.maps.Polyline({
+				path: cyclingPath.Points,
+				strokeColor: "rgb(96, 96, 124)",
+				strokeOpacity: 1,
+				strokeWeight: 1.5,
+
+				map: null
+			}));
+
+			this.RouteLength += Math.round(google.maps.geometry.spherical.computeLength(cyclingPath.Points) / 1000);
+		}
+
+		// transport paths
+		for(var i = 0; i < route.TransportPaths.length; i++) {
+			var transportPath = route.TransportPaths[i];
+
+			var lineSymbol = {
+				path: 'M 0,-1 0,1',
+				strokeOpacity: 0.5,
+				scale: 2
+			};
+
+			this.TransportPathLines.push(new google.maps.Polyline({
+				path: transportPath.Points,
+				strokeColor: "rgba(96, 96, 96, 0.75)",
+				strokeWeight: 0.5,
+				strokeOpacity: 0,
+				icons: [{
+					icon: lineSymbol,
+					offset: '0',
+					repeat: '10px'
+				}],
+
+				map: null
+			}));
+		}
+
+		// nights
+		this.NightCount = route.NightCollection.Nights.length;
+		for(var i = 0; i < route.NightCollection.Nights.length; i++) {
+			var night = route.NightCollection.Nights[i];
+
+			this.NightMarkers.push(new google.maps.Marker({
+				position: night.Location,
+				icon: (night.NightType == NightType.Tent ? TentIcon : HotelIcon),
+				map : null,
+			}));
+		}
+	}.bind(this)
+
+	this.Load = function(callback) {
+		if(hasLoaded) {
+			callback();
+			return;
+		}
+
+		route.Load(function() {
+			this.CreateView();
+			hasLoaded = true;
+
+			callback();
+		}.bind(this));
+	}.bind(this);
+
+	this.AssignMap = function(gmap, nightMarkersVisible) {
+		"use strict"
+		for(let  pathLine of this.CyclingPathLines) {
+			pathLine.setMap(gmap);
+		}
+
+		for(let pathLine of this.TransportPathLines) {
+			pathLine.setMap(gmap);
+		}
+
+		for(let nightMarker of this.NightMarkers) {
+			nightMarker.setMap(nightMarkersVisible ? gmap : null);
+		}
+
+		if(gmap != null) {
+			gmap.fitBounds(this.Bounds);
+		}
+	}
+}
+
+function CycleMap(containerElement, mapProperties) {
 	this.RouteLength = 0;
 	this.NightCount = 0;
-		
+	this.CurrentRouteView = null;
+
 	var googleMapsProperties = {
 		panControl: false,
 		mapTypeControl: false,
@@ -227,117 +330,48 @@ function CycleMap(containerElement, mapProperties, route) {
 		zoom: 5,
 		center: new google.maps.LatLng(48, 15), // middle of europe
 		styles: (mapProperties.LabelType == LabelType.Visible) ? MapStyles.Desert.NormalStyle :  MapStyles.Desert.NoLabelStyle,
+		backgroundColor: "rgb(43, 43, 43)", // same color as the ocean in the map style
 	};
 	var _googleMap = new google.maps.Map(containerElement, googleMapsProperties);
-	var routeBounds = new google.maps.LatLngBounds();
 
-	var tentIcon = CreateGoogleIcon("icons/tent.png");
-	var hotelIcon = CreateGoogleIcon("icons/hotel.png");
-	
-	var loadCallbacks = [];
-	var _nightMarkers = [];
-
-	var isLoaded = false;
-	var onRouteLoaded = function () {
-		// cycling paths
-		for(var i = 0; i < route.CyclingPaths.length; i++) {
-			var cyclingPath = route.CyclingPaths[i];
-			routeBounds.union(cyclingPath.getBounds());
-		
-			var pathLine = new google.maps.Polyline({
-				path: cyclingPath.Points,
-				strokeColor: "rgb(96, 96, 124)",
-				strokeOpacity: 1,
-				strokeWeight: 1.5,
-						
-				map: _googleMap
-			});
-		
-			this.RouteLength += Math.round(google.maps.geometry.spherical.computeLength(cyclingPath.Points) / 1000);
+	var setNightMarkerVisibility = function(markers, visible) {
+		for(var nightMarker of markers) {
+			nightMarker.setMap(visible ? _googleMap : null);
 		}
-	
-		// transport paths
-		for(var i = 0; i < route.TransportPaths.length; i++) {
-			var transportPath = route.TransportPaths[i];
+	};
 
-			var lineSymbol = {
-				path: 'M 0,-1 0,1',
-				strokeOpacity: 0.5,
-				scale: 2
-			};
+	var isMouseOverMap = false;
+	this.SetRoute = function(routeView, callback) {
+		routeView.Load(function() {
+			if(this.CurrentRouteView != null) {
+				this.CurrentRouteView.AssignMap(null);
+			}
 
-			var pathLine = new google.maps.Polyline({
-				path: transportPath.Points,
-				strokeColor: "rgba(96, 96, 96, 0.75)",
-				strokeWeight: 0.5,
-				strokeOpacity: 0,
-				icons: [{
-					icon: lineSymbol,
-					offset: '0',
-					repeat: '10px'
-				}],
+			routeView.AssignMap(_googleMap, isMouseOverMap);
+			this.CurrentRouteView = routeView;
 
-				map: _googleMap
-			});
-		}
+			if(callback != undefined) {
+				callback();
+			}
 
-		// nights
-		this.NightCount = route.NightCollection.Nights.length;
-		for(var i = 0; i < route.NightCollection.Nights.length; i++) {
-			var night = route.NightCollection.Nights[i];
-
-			var marker = new google.maps.Marker({
-				position: night.Location,
-				icon: (night.NightType == NightType.Tent ? tentIcon : hotelIcon),
-				map : IsTouchDevice() ? _googleMap : null, // if using touch device, then markers should be visible.
-			});
-
-			_nightMarkers.push(marker);
-		}
-	
-		_googleMap.fitBounds(routeBounds);
-
-		isLoaded = true;
-		for(var i = 0; i < loadCallbacks.length; i++) {
-			loadCallbacks[i]();
-		}
-
+		}.bind(this));
 	}.bind(this);
-	
-	// load the route asynchronously
-	route.Load(onRouteLoaded);
 
 	// show night markers when the cursor is over the container element
-	containerElement.onmouseover = function() {
-		for(var i = 0; i < _nightMarkers.length; i++) {
-			_nightMarkers[i].setMap(_googleMap);
-		}
-	};
+	$(containerElement).mouseover(function() {
+		isMouseOverMap = true;
+		if(this.CurrentRouteView == null) return;
+
+		setNightMarkerVisibility(this.CurrentRouteView.NightMarkers, true);
+	}.bind(this));
 	
 	// hide night markers when the cursor is over the container element
-	containerElement.onmouseout = function() {
-		for(var i = 0; i < _nightMarkers.length; i++) {
-			_nightMarkers[i].setMap(null);
-		}
-	};
-	
-	if(mapProperties.AutomaticallyFitOnResize) {
-		// when window is resized, re-center and re-zoom the map
-		window.onresize = function(event) {	
-			setTimeout(function() {
-				_googleMap.fitBounds(routeBounds);
-			}, 150);
-		};
-	}
+	$(containerElement).mouseout(function() {
+		isMouseOverMap = false;
+		if(this.CurrentRouteView == null) return;
 
-	this.WhenLoaded = function(callback) {
-		if(isLoaded) {
-			callback();
-		}
-		else {
-			loadCallbacks.push(callback);
-		}
-	};
+		setNightMarkerVisibility(this.CurrentRouteView.NightMarkers, false);
+	}.bind(this));
 }
 
 function Style(styleArray) {

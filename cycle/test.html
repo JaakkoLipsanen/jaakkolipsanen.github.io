@@ -118,9 +118,9 @@
 					data: {
 						selectedIndex: 1,
 						items: [
-							{ name: "Northern Europe", year: 2014, text: "Yay my first tour it was nice Sweden-Belgium!", route: "data/europe14/route-description.txt",  },
-							{ name: "Spain", year: 2014, text: "Wooo very freezing trip! Also super pretty!", route: "data/spain14/route-description.txt" },
-							{ name: "Central Europe", year: 2015, text: "Yay lots of mountains Alps and Pyreenes!", route: "data/europe14/route-description.txt" },
+							{ name: "Northern Europe", year: 2014, text: "Yay my first tour it was nice Sweden-Belgium!", route: new RouteView(new Route(new RouteDescription("data/europe14/route-description.txt"))) },
+							{ name: "Spain", year: 2014, text: "Wooo very freezing trip! Also super pretty!", route: new RouteView(new Route(new RouteDescription("data/spain14/route-description.txt"))) },
+							{ name: "Central Europe", year: 2015, text: "Yay lots of mountains Alps and Pyreenes!", route: new RouteView(new Route(new RouteDescription("data/europe14/route-description.txt"))) },
 						]}
 				});
 
@@ -143,16 +143,20 @@
 			/* cycle map component */
 			Vue.component("cycle-map", {
 				props: {
-					routePath: String,
+					routeView: Object,
 				},
 
-				data: {
+				map: null,
 
+				watch: {
+					'routeView': function(value, oldValue) {
+						this.map.SetRoute(value);
+					}
 				},
 
 				computed: {
 					length: function () {
-						return "1000km";
+						return this.rout;
 					},
 
 					duration: function() {
@@ -162,7 +166,7 @@
 
 				template: "<div id='cycle-map-container'>" +
 							"<div style='width: 100%; height: 100%' id='cycle-map' ></div>" +
-							"<p style=' margin-top: 0px; float: left;'>{{ this.length + ', ' + this.duration }}</p>" +
+							"<p style=' margin-top: 0px; float: left;'>{{ this.routeView.RouteLength + 'km, ' + this.routeView.NightCount + ' days' }}</p>" +
 							"<div style='display: inline; float: right'>" +
 								"<img  style='width: 10px; display: inline' src='icons/tent.png'><p style='display: inline'> camping </p> " +
 								"<img  style='margin-left: 4px; width: 10px; display: inline' src='icons/hotel.png'><p style='display: inline'> hotel</p> " +
@@ -178,10 +182,11 @@
 					css.insertRule("a[href^='http://maps.google.com/maps']{display:none !important} ", 0);
 					css.insertRule("a[href^='https://maps.google.com/maps']{display:none !important}", 0);
 
-					map = new CycleMap(
+					this.map = new CycleMap(
 							$("#cycle-map").get(0),
-							new MapProperties(MapType.Normal, LabelType.Visible),
-							new Route(new RouteDescription(this.routePath)));
+							new MapProperties(MapType.Normal, LabelType.Visible));
+
+					this.map.SetRoute(this.routeView);
 					},
 			});
 
@@ -305,7 +310,7 @@
 			<div id="route-info-container">
 				<p>{{ selectedRoute.text }}</p>
 
-				<cycle-map route-path="data/spain14/route-description.txt"></cycle-map>
+				<cycle-map :route-view="selectedRoute.route"></cycle-map>
 
 			</div>
 		</div>
