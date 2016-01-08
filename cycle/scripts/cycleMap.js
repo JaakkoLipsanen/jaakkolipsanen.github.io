@@ -332,8 +332,8 @@ function CycleMap(containerElement, mapProperties) {
 		styles: (mapProperties.LabelType == LabelType.Visible) ? MapStyles.Desert.NormalStyle :  MapStyles.Desert.NoLabelStyle,
 		backgroundColor: "rgb(43, 43, 43)", // same color as the ocean in the map style
 	};
-	var _googleMap = new google.maps.Map(containerElement, googleMapsProperties);
 
+	var _googleMap = new google.maps.Map(containerElement, googleMapsProperties);
 	var setNightMarkerVisibility = function(markers, visible) {
 		for(var nightMarker of markers) {
 			nightMarker.setMap(visible ? _googleMap : null);
@@ -353,6 +353,13 @@ function CycleMap(containerElement, mapProperties) {
 			if(callback != undefined) {
 				callback();
 			}
+
+			google.maps.event.addListenerOnce(_googleMap, 'resize', function() {
+				_googleMap.fitBounds(routeView.Bounds);
+			});
+
+			// this is required when either 'display' (none, hidden, visible etc) property or size is changed. it's pretty stupid to call here but at least it works.
+			google.maps.event.trigger(_googleMap, 'resize');
 
 		}.bind(this));
 	}.bind(this);

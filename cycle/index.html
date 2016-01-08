@@ -118,7 +118,7 @@
 				var routeSelectionBinding = new Vue({
 					el: '#route-selection-list',
 					data: {
-						selectedIndex: 1,
+						selectedIndex: -1,
 						items: [
 							{
 								name: "Northern Europe",
@@ -147,12 +147,11 @@
 						changeRoute: function(event) {
 							this.selectedIndex = $("li").index($(event.currentTarget));
 							gallery.AssignSource(this.selectedRoute.gallery);
+
+							$('html, body').animate({
+								scrollTop: $("#route-selection-list").offset().top - 24
+							}, 750);
 						}
-					},
-
-					ready: function() {
-
-						gallery.AssignSource(this.selectedRoute.gallery);
 					},
 
 					computed: {
@@ -161,17 +160,20 @@
 						}
 					}
 				});
+
 				new Vue({
 					el: "#route-info-container",
 
 					computed: {
 						selectedRoute: function () {
 							return routeSelectionBinding.items[routeSelectionBinding.selectedIndex];
+						},
+
+						isVisible: function() {
+							return routeSelectionBinding.selectedIndex >= 0;
 						}
 					}
 				});
-
-
 			}
 
 			/* cycle map component TODO: Modularize and move to own file */
@@ -181,20 +183,9 @@
 				},
 
 				map: null,
-
 				watch: {
 					'routeView': function(value, oldValue) {
 						this.map.SetRoute(value);
-					}
-				},
-
-				computed: {
-					length: function () {
-						return this.rout;
-					},
-
-					duration: function() {
-						return "54 days";
 					}
 				},
 
@@ -220,8 +211,10 @@
 							$("#cycle-map").get(0),
 							new MapProperties(MapType.Normal, LabelType.Visible));
 
-					this.map.SetRoute(this.routeView);
-					},
+					if(this.routeView != null) {
+						this.map.SetRoute(this.routeView);
+					}
+				},
 			});
 
 			google.maps.event.addDomListener(window, 'load', initialize);
@@ -239,6 +232,7 @@
 
 				margin-left: auto;
 				margin-right: auto;
+				display: block;
 			}
 
 			#cycle-map-container {
@@ -352,7 +346,7 @@
 				</ul>
 			</div>
 
-			<div id="route-info-container">
+			<div id="route-info-container" v-show="isVisible"}>
 				<p>{{ selectedRoute.text }}</p>
 
 				<cycle-map :route-view="selectedRoute.route"></cycle-map>
