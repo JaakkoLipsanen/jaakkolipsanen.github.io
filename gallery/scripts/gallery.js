@@ -41,9 +41,15 @@ function Photo(photoName, description) {
 	this.Description = description;
 }
 
-function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFolder) {
+function GallerySource(galleryTitle, galleryFolder) {
+	this.Folder = galleryFolder;
 	this.Photos = LoadGalleryPhotos(galleryFolder + "/gallery-description.txt");
 	this.PhotoCount = this.Photos.length;
+	this.GalleryTitle = galleryTitle;
+}
+
+function Gallery(containerElement, gallerySourceFolder) {
+	this.CurrentSource = null;
 	this.CurrentImageQuality = IsMobile() ? ImageQuality.LowQuality : ImageQuality.HighQuality;
 		
 	var currentImageIndex = 0;
@@ -98,7 +104,7 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 		};
 		
 		var getPhotoSource = function(photoIndex) {
-			return galleryFolder + "/" + ImageQualityToFolder[this.CurrentImageQuality] + "/" + this.Photos[photoIndex].PhotoName
+			return this.CurrentSource.Folder + "/" + ImageQualityToFolder[this.CurrentImageQuality] + "/" + this.CurrentSource.Photos[photoIndex].PhotoName
 		}.bind(this);
 
 		currentImageElementIndex++;
@@ -119,12 +125,12 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 			onImageLoaded();
 		}
 		
-		$(containerElement).find(".gallery-current-description").text(this.Photos[currentImageIndex].Description);
+		$(containerElement).find(".gallery-current-description").text(this.CurrentSource.Photos[currentImageIndex].Description);
 		$(containerElement).find(".gallery-current-image-index").text(currentImageIndex + 1);
 		
 		previousImageIndex = currentImageIndex;
 		
-		if(currentImageIndex < this.PhotoCount - 1) {
+		if(currentImageIndex < this.CurrentSource.PhotoCount - 1) {
 			preloader.PreloadImage(getPhotoSource(currentImageIndex + 1));
 		}
 		
@@ -187,10 +193,7 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 	}.bind(this));
 	
 	onFullScreenChange();
-	updateImage(ImageLoadDirection.Current);
-	
-	$(containerElement).find(".gallery-total-image-count").text(this.PhotoCount); 
-	$(containerElement).find(".gallery-topbar-title").text(galleryTitle);
+
 	$(containerElement).find(".gallery-previous-button").attr("src", gallerySourceFolder + "icons/previous-icon.png");
 	$(containerElement).find(".gallery-next-button").attr("src", gallerySourceFolder + "icons/next-icon.png");
 	
@@ -218,6 +221,17 @@ function Gallery(galleryTitle, containerElement, galleryFolder, gallerySourceFol
 	$(window).resize(function() { 	
 		updateImageStyles();
 	});
+
+	this.AssignSource = function(source) {
+		this.CurrentSource = source;
+		currentImageIndex = 0;
+		previousImageIndex = -1;
+
+		updateImage(ImageLoadDirection.Current);
+		$(containerElement).find(".gallery-topbar-title").text(source.GalleryTitle);
+		$(containerElement).find(".gallery-total-image-count").text(source.PhotoCount);
+
+	}.bind(this);
 }
 
 function LoadGalleryPhotos(galleryDescriptionFilePath) {

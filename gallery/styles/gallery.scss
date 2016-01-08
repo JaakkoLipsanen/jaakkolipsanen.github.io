@@ -100,8 +100,9 @@ $gallery-change-image-button-height: 64px;
 	width: 100%; 
 	height: 30px; 
 	margin: 0px;
-	display: inline-block; 
-	
+	display: inline-block;
+	text-align: left;
+
 	background-color: rgb(16, 16, 16); 
 	opacity: 1; 
 }
@@ -113,7 +114,7 @@ $gallery-change-image-button-height: 64px;
 	height: 30px; 
 	max-width: calc(100% -  64px);
 	margin: 0px 0px 0px 8px; /* left is 8px */
-	
+
 	display: inline-block; 
 	text-align: left;
 

@@ -113,23 +113,55 @@
 				$(window).resize(updateCanvasSize);
 				updateCanvasSize();
 
+				var gallery = new Gallery(document.getElementById("gallery-container"), "../gallery/");
+
 				var routeSelectionBinding = new Vue({
 					el: '#route-selection-list',
 					data: {
 						selectedIndex: 1,
 						items: [
-							{ name: "Northern Europe", year: 2014, text: "Yay my first tour it was nice Sweden-Belgium!", route: new RouteView(new Route(new RouteDescription("data/europe14/route-description.txt"))) },
-							{ name: "Spain", year: 2014, text: "Wooo very freezing trip! Also super pretty!", route: new RouteView(new Route(new RouteDescription("data/spain14/route-description.txt"))) },
-							{ name: "Central Europe", year: 2015, text: "Yay lots of mountains Alps and Pyreenes!", route: new RouteView(new Route(new RouteDescription("data/europe14/route-description.txt"))) },
-						]}
-				});
+							{
+								name: "Northern Europe",
+								year: 2014,
+								text: "Yay my first tour it was nice Sweden-Belgium!",
+								route: new RouteView(new Route(new RouteDescription("data/europe14/route-description.txt"))),
+								gallery: new GallerySource("Europe '14", "data/europe14/photos")
+							},
+							{
+								name: "Spain",
+								year: 2014,
+								text: "Wooo very freezing trip! Also super pretty!",
+								route: new RouteView(new Route(new RouteDescription("data/spain14/route-description.txt"))),
+								gallery: new GallerySource("Spain '14", "data/spain14/photos")
+							},
+							{
+								name: "Central Europe", year: 2014,
+								text: "Yay my first tour it was nice Sweden-Belgium!",
+								route: new RouteView(new Route(new RouteDescription("data/europe14/route-description.txt"))),
+								gallery: new GallerySource("Europe '14", "data/europe14/photos")
+							},
+						]},
 
-				$("#route-selection-list li").click(function() {
-					// find the index of clicked button in the list
-					routeSelectionBinding.selectedIndex = $("li").index($(this));
-				});
+					methods: {
+						// called when route button is clicked
+						changeRoute: function(event) {
+							this.selectedIndex = $("li").index($(event.currentTarget));
+							gallery.AssignSource(this.selectedRoute.gallery);
+						}
+					},
 
-				var routeInfoBinding = new Vue({
+					ready: function() {
+
+						gallery.AssignSource(this.selectedRoute.gallery);
+					},
+
+					computed: {
+						selectedRoute: function () {
+							return this.items[this.selectedIndex];
+						}
+					}
+				});
+				new Vue({
 					el: "#route-info-container",
 
 					computed: {
@@ -138,9 +170,11 @@
 						}
 					}
 				});
+
+
 			}
 
-			/* cycle map component */
+			/* cycle map component TODO: Modularize and move to own file */
 			Vue.component("cycle-map", {
 				props: {
 					routeView: Object,
@@ -195,6 +229,17 @@
 		
 		<!-- Style inlined -->
 		<style>
+
+			#gallery-container {
+				height: 310px;
+			}
+
+			#route-info-container {
+				width: 500px;
+
+				margin-left: auto;
+				margin-right: auto;
+			}
 
 			#cycle-map-container {
 				width: 500px;
@@ -301,7 +346,7 @@
 
 			<div id="route-selection-list-container" style="margin-top: 64px">
 				<ul id="route-selection-list">
-					<li v-for="(index, item) in items" v-bind:class="{ 'selected': $index == selectedIndex }">
+					<li v-for="(index, item) in items" v-bind:class="{ 'selected': $index == selectedIndex }" v-on:click="changeRoute">
 						<p  id="europe14-trip-button">{{ item.name }} <span style="display: block;">{{ item.year }}</span></p>
 					</li>
 				</ul>
@@ -311,7 +356,8 @@
 				<p>{{ selectedRoute.text }}</p>
 
 				<cycle-map :route-view="selectedRoute.route"></cycle-map>
-
+				<div style="height: 96px"></div>
+				<div id="gallery-container"></div>
 			</div>
 		</div>
 	
