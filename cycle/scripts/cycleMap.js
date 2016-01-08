@@ -347,7 +347,7 @@ function CycleMap(containerElement, mapProperties) {
 				this.CurrentRouteView.AssignMap(null);
 			}
 
-			routeView.AssignMap(_googleMap, isMouseOverMap);
+			routeView.AssignMap(_googleMap,  IsTouchDevice() || isMouseOverMap);
 			this.CurrentRouteView = routeView;
 
 			if(callback != undefined) {
