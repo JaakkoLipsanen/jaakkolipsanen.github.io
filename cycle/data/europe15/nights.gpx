@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/0" version="1.0" creator="">
+
+    <!-- Examples of hotel and camping nights 
+    <wpt lat="59.571126" lon="22.694902"><name>hostelli</name></wpt> if hotel icon, name node have to be "hostelli"
+    <wpt lat="59.189880" lon="17.513455"><name>z</name></wpt>  name node can't be empty-->
+
+
+    <wpt lat="38.20399905" lon="-1.16499295">
+        <name>z</name>
+    </wpt>
+    <wpt lat="38.22675329" lon="-1.53485369">
+        <name>z</name>
+    </wpt>
+    <wpt lat="38.17403726" lon="-1.9162238">
+        <name>z</name>
+    </wpt>
+    <wpt lat="38.15080104" lon="-2.34792981">
+        <name>z</name>
+    </wpt>
+    <wpt lat="38.11581675" lon="-2.56839824">
+        <name>z</name>
+    </wpt>
+    <wpt lat="38.21486936" lon="-2.75553694">
+        <name>hostelli</name>
+    </wpt>
+    <wpt lat="38.26425924" lon="-3.10555119">
+        <name>z</name>
+    </wpt>
+    <wpt lat="38.05098281" lon="-3.66747558">
+        <name>z</name>
+    </wpt>
+    <wpt lat="37.9304981" lon="-4.2275087">
+        <name>z</name>
+    </wpt>
+    <wpt lat="37.88720071" lon="-4.78081343">
+        <name>hostelli</name>
+    </wpt>
+    <!-- Cordoba 3 nights -->
+    <wpt lat="37.88720071" lon="-4.78081343">
+        <name>hostelli</name>
+    </wpt>
+    <wpt lat="37.88720071" lon="-4.78081343">
+        <name>hostelli</name>
+    </wpt>
+    <wpt lat="38.03399351" lon="-4.90499239">
+        <name>z</name>
+    </wpt>
+    <wpt lat="38.21190972" lon="-5.46837837">
+        <name>z</name>
+    </wpt>
+    <wpt lat="38.54578198" lon="-6.25364404">
+        <name>z</name>
+    </wpt>
+    <wpt lat="38.87739398" lon="-6.96883412">
+        <name>hostelli</name>
+    </wpt>
+    <!-- Badajoz 2 nights -->
+    <wpt lat="38.87739398" lon="-6.96883412">
+        <name>hostelli</name>
+    </wpt>
+
+    <!-- Portugal -->
+
+    <wpt lat="39.28200592" lon="-7.31281487">
+        <name>z</name>
+    </wpt>
+    <wpt lat="39.45206604" lon="-7.52787527">
+        <name>z</name>
+    </wpt>
+    <wpt lat="39.87505338" lon="-7.48065603">
+        <name>z</name>
+    </wpt>
+    <wpt lat="40.28062112" lon="-7.5254706">
+        <name>z</name>
+    </wpt>
+    <wpt lat="40.31127946" lon="-7.55152481">
+        <name>hostelli</name>
+    </wpt>
+    <wpt lat="40.4090265" lon="-7.65676483">
+        <name>z</name>
+    </wpt>
+    <wpt lat="40.66314763" lon="-7.67608167">
+        <name>z</name>
+    </wpt>
+    <wpt lat="41.09019097" lon="-7.76981486">
+        <name>z</name>
+    </wpt>
+    <wpt lat="41.24003358" lon="-7.85046665">
+        <name>z</name>
+    </wpt>
+    <wpt lat="41.51496571" lon="-8.07130734">
+        <name>z</name>
+    </wpt>
+    <wpt lat="41.76265785" lon="-8.14918116">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.0963742" lon="-8.18531504">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.36977407" lon="-8.20390723">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.60207026" lon="-8.41920379">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.87966364" lon="-8.55001566">
+        <name>hostelli</name>
+    </wpt>
+    <!-- Santiago de Compostela -->
+    <wpt lat="42.87966364" lon="-8.55001566">
+        <name>hostelli</name>
+    </wpt>
+    <!-- Santiago de Compostela -->
+    <wpt lat="42.87966364" lon="-8.55001566">
+        <name>hostelli</name>
+    </wpt>
+    <!-- Santiago de Compostela -->
+    <wpt lat="42.95196154" lon="-7.91220834">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.02530368" lon="-7.3089171">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.08283535" lon="-7.15863094">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.09328139" lon="-6.92328824">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.9507357" lon="-6.67781244">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.95641301" lon="-6.10834897">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.7975386" lon="-5.7202607">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.85451733" lon="-5.3767615">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.80082032" lon="-5.1257709">
+        <name>hostelli</name>
+    </wpt>
+    <!-- Cistierna -->
+    <wpt lat="42.81883663" lon="-4.5340909">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.94085591" lon="-4.05194532">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.05343658" lon="-3.65311168">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.25838624" lon="-2.91891231">
+        <name>hostelli</name>
+    </wpt>
+    <!-- Bilbao -->
+    <wpt lat="43.25838624" lon="-2.91891231">
+        <name>hostelli</name>
+    </wpt>
+    <!-- Bilbao -->
+    <wpt lat="43.25838624" lon="-2.91891231">
+        <name>hostelli</name>
+    </wpt>
+    <!-- Bilbao -->
+    <wpt lat="42.91808445" lon="-2.51895637">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.8807042" lon="-1.82102433">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.68216238" lon="-1.29909707">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.92845941" lon="-1.10087896">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.92845941" lon="-1.10087896">
+        <name>z</name>
+    </wpt>
+    <!-- Teltassa valipaiva -->
+    <wpt lat="43.0012799132487" lon="-0.8426486316459113">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.00146371" lon="-0.71254576">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.16471323" lon="-0.52755389">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.09610792" lon="-0.32496">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.9066422" lon="-0.211308">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.90549772" lon="-0.21109448">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.100196425803006" lon="-0.04762379452586174">
+        <name>hostelli</name>
+    </wpt>
+    <wpt lat="42.89746083" lon="0.37002456">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.80561094" lon="0.52010412">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.77009225" lon="0.60947534">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.76961636" lon="0.69461455">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.86126834" lon="0.75037052">
+        <name>z</name>
+    </wpt>
+    <wpt lat="42.97322008" lon="0.78918577">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.02538638" lon="1.54202835">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.16512867" lon="2.22480489">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.20642541" lon="2.36405595">
+        <name>hostelli</name>
+    </wpt>
+    <!-- Carcassonne -->
+    <wpt lat="43.39537532" lon="3.3235381">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.69934258" lon="3.85323206">
+        <name>z</name>
+    </wpt>
+    <wpt lat="43.95669281" lon="4.32883191">
+        <name>z</name>
+    </wpt>
+    <wpt lat="44.33631751" lon="4.74761047">
+        <name>z</name>
+    </wpt>
+    <wpt lat="44.68795328" lon="5.22627927">
+        <name>z</name>
+    </wpt>
+    <wpt lat="44.79999835" lon="5.58992708">
+        <name>z</name>
+    </wpt>
+    <wpt lat="44.82249434" lon="5.55541261">
+        <name>z</name>
+    </wpt>
+    <wpt lat="44.89815898" lon="5.83253196">
+        <name>z</name>
+    </wpt>
+    <wpt lat="45.07132442" lon="6.01367551">
+        <name>z</name>
+    </wpt>
+    <wpt lat=" 45.23841353" lon="6.31469419">
+        <name>z</name>
+    </wpt>
+    <!-- Teltassa valipaiva -->
+    <wpt lat=" 45.23841353" lon="6.31469419">
+        <name>z</name>
+    </wpt>
+    <wpt lat="45.27066602" lon="6.81268715">
+        <name>z</name>
+    </wpt>
+    <wpt lat="45.0307087" lon="7.65593425">
+        <name>hostelli</name>
+    </wpt>
+    <wpt lat="44.97156773" lon="7.98358224">
+        <name>z</name>
+    </wpt>
+    <wpt lat="45.04946805" lon="8.63772165">
+        <name>z</name>
+    </wpt>
+    <wpt lat="45.26572642" lon="9.71083377">
+        <name>z</name>
+    </wpt>
+    <wpt lat="45.61356437" lon="10.34249975">
+        <name>z</name>
+    </wpt>
+    <!-- Teltassa valipaiva -->
+    <wpt lat="45.61356437" lon="10.34249975">
+        <name>z</name>
+    </wpt>
+
+    <wpt lat="46.46043524" lon="11.27271771">
+        <name>z</name>
+    </wpt>
+    <wpt lat="46.78022612" lon="11.41265231">
+        <name>hostelli</name>
+    </wpt> 
+    <wpt lat="46.87741066" lon="11.38996955">
+        <name>z</name>
+    </wpt>
+    <!-- Teltassa valipaiva -->
+    <wpt lat="46.87741066" lon="11.38996955">
+        <name>z</name>
+    </wpt>
+    <wpt lat="46.82671857" lon="11.18212098">
+        <name>z</name>
+    </wpt>
+    <wpt lat="46.98308208" lon="11.01117174">
+        <name>z</name>
+    </wpt>
+
+    <wpt lat="46.98284625" lon="11.01129716"><name>z</name></wpt>
+    <wpt lat="47.35349943" lon="11.22143098"><name>z</name></wpt>
+    <wpt lat="47.90036796" lon="11.57769927"><name>z</name></wpt>
+    <wpt lat="48.15213913" lon="11.52904249"><name>hostelli</name></wpt> <!-- Munich -->
+    <wpt lat="48.30832680" lon="12.21349495"><name>z</name></wpt>
+    <wpt lat="48.61299584" lon="12.67062198"><name>z</name></wpt>
+    <wpt lat="48.85814537" lon="13.02135988"><name>z</name></wpt>
+    <wpt lat="49.16538563" lon="13.36496444"><name>z</name></wpt>
+    <wpt lat="49.53733639" lon="13.70498676"><name>z</name></wpt>
+    <wpt lat="49.71559537" lon="14.04441191"><name>z</name></wpt>
+    <wpt lat="49.91697019" lon="14.27380642"><name>z</name></wpt>
+    <wpt lat="50.08341006" lon="14.42518313"><name>hostelli</name></wpt>
+    <wpt lat="50.10894556" lon="14.26995898"><name>hostelli</name></wpt>
+</gpx>
