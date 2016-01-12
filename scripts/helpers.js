@@ -66,6 +66,10 @@ function IsFullScreen() {
 	return (document.fullscreenElement && document.fullscreenElement !== null) || document.mozFullScreen || document.webkitIsFullScreen;
 }
 
+function OnFullscreenChange(callback) {
+	$(document).on("fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange", callback);
+}
+
 function addMultiEventListener(events, func) {
 	var arr = events.split(" ");
 	

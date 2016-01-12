@@ -1,3 +1,5 @@
+'use strict'
+
 /*
 TODO: Allow custom styling of:
 - The map itself (currently hardcoded to 'Desert'
@@ -354,14 +356,20 @@ function CycleMap(containerElement, mapProperties) {
 				callback();
 			}
 
-			google.maps.event.addListenerOnce(_googleMap, 'resize', function() {
-				_googleMap.fitBounds(routeView.Bounds);
-			});
-
-			// this is required when either 'display' (none, hidden, visible etc) property or size is changed. it's pretty stupid to call here but at least it works.
-			google.maps.event.trigger(_googleMap, 'resize');
+			this.OnSizeChanged();
 
 		}.bind(this));
+	}.bind(this);
+
+	// this is required when either 'display' (none, hidden, visible etc) property or size is changed. it's pretty stupid to call here but at least it works.
+	this.OnSizeChanged = function() {
+		if(this.CurrentRouteView != null) {
+			google.maps.event.addListenerOnce(_googleMap, 'resize', function() {
+				_googleMap.fitBounds(this.CurrentRouteView.Bounds);
+			}.bind(this));
+
+			google.maps.event.trigger(_googleMap, 'resize');
+		}
 	}.bind(this);
 
 	// show night markers when the cursor is over the container element
@@ -379,6 +387,18 @@ function CycleMap(containerElement, mapProperties) {
 
 		setNightMarkerVisibility(this.CurrentRouteView.NightMarkers, false);
 	}.bind(this));
+
+	var streetViewChangedListeners = [];
+	google.maps.event.addListener(_googleMap.getStreetView(), 'visible_changed', function(){
+		var isVisible = this.getVisible();
+		for(let listener of streetViewChangedListeners) {
+			listener(isVisible);
+		}
+	});
+
+	this.OnStreetviewVisibileChanged = function(callback) {
+		streetViewChangedListeners.push(callback);
+	};
 }
 
 function Style(styleArray) {
