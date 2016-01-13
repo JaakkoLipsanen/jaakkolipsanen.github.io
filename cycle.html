@@ -25,90 +25,70 @@
 		
 		<script>
 		 
-			function initialize() {	
+			function initialize() {
+				/* TOP MAP STUFF */
+				{
+					var paintRoute = function (context, route) {
+						var mapWidth = context.canvas.width;
+						var mapHeight = context.canvas.height;
+						var lonToX = function (longitude) {
 
-				/*
-				 var map = new CycleMap(
-					document.getElementById("map-div"), 
-					new MapProperties(MapType.Terrain, LabelType.Hidden), 
-					new Route(["data/europe14/cycle-sweden-norway.path", "data/europe14/cycle-denmark-belgium.path"], ["data/europe14/boat-finland-sweden.path", "data/europe14/boat-norway-denmark.path"]),
-					new NightCollection("data/europe14/nights.gpx"));
-						
-				var gallery = new Gallery("Europe '14", document.getElementById("gallery"), "data/europe14/photos", "../gallery/");
-					
-				map.WhenLoaded(function() {
-					document.getElementById("tripKm").innerHTML = map.RouteLength + "km";
-					document.getElementById("tripNights").innerHTML = map.NightCount + " days";
-				});
-				
-				$(".navigation-icon").hover(function(event) {
-					$(event.target).siblings(".navigation-icon-text").css("opacity", "0.35");
-				}, function(event) {
-					$(event.target).siblings(".navigation-icon-text").css("opacity", "0.0");
-				});
-				
-				*/
-
-				var paintRoute = function(context, route) {
-					var mapWidth = context.canvas.width;
-					var mapHeight = context.canvas.height;
-					var lonToX = function(longitude) {
-
-						// häx!! for some reason, longitude > 0 works pretty much perfectly, but with negative values it doesn't work properly (some values are correct, some are bit wrong)
-						if(longitude > 0)
-							return mapWidth / 2 + (longitude / 180 * (mapWidth / 2)) * 0.946;
-						else {
-							return mapWidth / 2 + (longitude / 187.480162 * (mapWidth / 2));
+							// häx!! for some reason, longitude > 0 works pretty much perfectly, but with negative values it doesn't work properly (some values are correct, some are bit wrong)
+							if (longitude > 0)
+								return mapWidth / 2 + (longitude / 180 * (mapWidth / 2)) * 0.946;
+							else {
+								return mapWidth / 2 + (longitude / 187.480162 * (mapWidth / 2));
+							}
 						}
-					}
-					
-					var latToY = function(latitude) {
-						var latRad = latitude * Math.PI / 180;
-						var mercN = Math.log(Math.tan((Math.PI / 4) + (latRad / 2)));
-						return mapHeight * 0.65131894484 - (mapWidth * mercN / (2*Math.PI)) * 0.935;
-					}
-					
-					for(var i = 0; i < route.CyclingPaths.length; i++) {
-						var startPoint = route.CyclingPaths[i].Points[0];
-						context.moveTo(lonToX(startPoint.lng()), latToY(startPoint.lat()));
-						
-						for(var j = 1; j < route.CyclingPaths[i].Points.length; j += 25) {
-							var point = route.CyclingPaths[i].Points[j];
-							context.lineTo(lonToX(point.lng()), latToY(point.lat()));
-						}
-					}
-					
-					for(var i = 0; i < route.TransportPaths.length; i++) {
-						var startPoint = route.TransportPaths[i].Points[0];
-						context.moveTo(lonToX(startPoint.lng()), latToY(startPoint.lat()));
-						
-						for(var j = 1; j < route.TransportPaths[i].Points.length; j++) {
-							var point = route.TransportPaths[i].Points[j];
-							context.lineTo(lonToX(point.lng()), latToY(point.lat()));
-						}
-					}
-				};
-				
-				var canvas = document.getElementById("route-canvas");
-				var paintCanvas = function() {
-					var context = canvas.getContext('2d');
-					
-					context.beginPath();
-				//	paintRoute(context, europe14);
-				//	paintRoute(context, spain14);
 
-					context.lineWidth = 2;
-					context.strokeStyle = 'rgb(96, 96, 96)'; // "rgb(172, 32, 32)";
-					context.stroke();
+						var latToY = function (latitude) {
+							var latRad = latitude * Math.PI / 180;
+							var mercN = Math.log(Math.tan((Math.PI / 4) + (latRad / 2)));
+							return mapHeight * 0.65131894484 - (mapWidth * mercN / (2 * Math.PI)) * 0.935;
+						}
 
-				};		
-				
-				var updateCanvasSize = function() {
-					canvas.width = $("#map-img").width();
-					canvas.height = $("#map-img").height();
-					
-					paintCanvas();
-				};
+						for (var i = 0; i < route.CyclingPaths.length; i++) {
+							var startPoint = route.CyclingPaths[i].Points[0];
+							context.moveTo(lonToX(startPoint.lng()), latToY(startPoint.lat()));
+
+							for (var j = 1; j < route.CyclingPaths[i].Points.length; j += 25) {
+								var point = route.CyclingPaths[i].Points[j];
+								context.lineTo(lonToX(point.lng()), latToY(point.lat()));
+							}
+						}
+
+						for (var i = 0; i < route.TransportPaths.length; i++) {
+							var startPoint = route.TransportPaths[i].Points[0];
+							context.moveTo(lonToX(startPoint.lng()), latToY(startPoint.lat()));
+
+							for (var j = 1; j < route.TransportPaths[i].Points.length; j++) {
+								var point = route.TransportPaths[i].Points[j];
+								context.lineTo(lonToX(point.lng()), latToY(point.lat()));
+							}
+						}
+					};
+
+					var canvas = document.getElementById("route-canvas");
+					var paintCanvas = function () {
+						var context = canvas.getContext('2d');
+
+						context.beginPath();
+						//	paintRoute(context, europe14);
+						//	paintRoute(context, spain14);
+
+						context.lineWidth = 2;
+						context.strokeStyle = 'rgb(96, 96, 96)'; // "rgb(172, 32, 32)";
+						context.stroke();
+
+					};
+
+					var updateCanvasSize = function () {
+						canvas.width = $("#map-img").width();
+						canvas.height = $("#map-img").height();
+
+						paintCanvas();
+					};
+				}
 				
 				$(window).resize(updateCanvasSize);
 				updateCanvasSize();
