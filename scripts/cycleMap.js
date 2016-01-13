@@ -16,8 +16,8 @@ function CreateGoogleIcon(url) {
 	};
 }
 
-var TentIcon = CreateGoogleIcon("icons/tent.png");
-var HotelIcon = CreateGoogleIcon("icons/hotel.png");
+var TentIcon = CreateGoogleIcon("icons/cycle/tent.png");
+var HotelIcon = CreateGoogleIcon("icons/cycle/hotel.png");
 
 var MapType = {
 	Normal: 0,

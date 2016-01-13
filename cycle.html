@@ -10,18 +10,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta charset="UTF-8">
 		
-		<link rel="stylesheet" type="text/css" href="../styles/general.css" />
+		<link rel="stylesheet" type="text/css" href="styles/general.css" />
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans%7CYanone+Kaffeesatz' rel='stylesheet' type='text/css' />
 		
 		
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=geometry&sensor=true&region=ES"></script>
 		
-		<script type="text/javascript" src="../gallery/scripts/gallery.js"></script>
+		<script type="text/javascript" src="scripts/gallery.js"></script>
 		<script type="text/javascript" src="scripts/cycleMap.js"></script>
-		<script type="text/javascript" src="../scripts/helpers.js"></script>
-		<script type="text/javascript" src="../scripts/inputState.js"></script>
-		<script type="text/javascript" src="../scripts/external/vue.js"></script>
+		<script type="text/javascript" src="scripts/misc/helpers.js"></script>
+		<script type="text/javascript" src="scripts/misc/inputState.js"></script>
+		<script type="text/javascript" src="scripts/external/vue.js"></script>
 		
 		<script>
 		 
@@ -93,7 +93,7 @@
 				$(window).resize(updateCanvasSize);
 				updateCanvasSize();
 
-				var gallery = new Gallery(document.getElementById("gallery-container"), "../gallery/");
+				var gallery = new Gallery(document.getElementById("gallery-container"), "scripts/");
 
 				var routeSelectionBinding = new Vue({
 					el: '#route-selection-list',
@@ -104,21 +104,21 @@
 								name: "Northern Europe",
 								year: 2014,
 								text: "Yay my first tour it was nice Sweden-Belgium!",
-								route: new RouteView(new Route(new RouteDescription("data/europe14/route-description.txt"))),
-								gallery: new GallerySource("Europe '14", "data/europe14/photos")
+								route: new RouteView(new Route(new RouteDescription("data/cycle/europe14/route-description.txt"))),
+								gallery: new GallerySource("Europe '14", "data/cycle/europe14/photos")
 							},
 							{
 								name: "Spain",
 								year: 2014,
 								text: "Wooo very freezing trip! Also super pretty!",
-								route: new RouteView(new Route(new RouteDescription("data/spain14/route-description.txt"))),
-								gallery: new GallerySource("Spain '14", "data/spain14/photos")
+								route: new RouteView(new Route(new RouteDescription("data/cycle/spain14/route-description.txt"))),
+								gallery: new GallerySource("Spain '14", "data/cycle/spain14/photos")
 							},
 							{
 								name: "Central Europe", year: 2015,
 								text: "Woo Alps and Pyreenes!",
-								route: new RouteView(new Route(new RouteDescription("data/europe15/route-description.txt"))),
-								gallery: new GallerySource("Europe '15", "data/europe15/photos")
+								route: new RouteView(new Route(new RouteDescription("data/cycle/europe15/route-description.txt"))),
+								gallery: new GallerySource("Europe '15", "data/cycle/europe15/photos")
 							},
 						]},
 
@@ -172,14 +172,14 @@
 
 				template: "<div id='cycle-map-container'>" +
 							"<div style='position: relative; z-index: 10000;'>" +
-								"<img class='resize-button fullscreen-button' src='../gallery/icons/gallery-expand.png'  v-on:click='enterFullscreen'  />" +
+								"<img class='resize-button fullscreen-button' src='icons/expand.png'  v-on:click='enterFullscreen'  />" +
 							"</div>" +
 
 							"<div style='width: 100%; height: 100%' id='cycle-map' ></div>" +
 							"<p style=' margin-top: 0px; float: left;'>{{ this.routeView.RouteLength + 'km, ' + this.routeView.NightCount + ' days' }}</p>" +
 							"<div style='display: inline; float: right'>" +
-								"<img  style='width: 10px; display: inline' src='icons/tent.png'><p style='display: inline'> camping </p> " +
-								"<img  style='margin-left: 4px; width: 10px; display: inline' src='icons/hotel.png'><p style='display: inline'> hotel</p> " +
+								"<img style='width: 10px; display: inline' src='icons/cycle/tent.png'><p style='display: inline'> camping </p> " +
+								"<img style='margin-left: 4px; width: 10px; display: inline' src='icons/cycle/hotel.png'><p style='display: inline'> hotel</p> " +
 							"</div>" +
 
 						  "</div>",
@@ -204,7 +204,7 @@
 					OnFullscreenChange(function() {
 						this.isMapFullscreen = !this.isMapFullscreen
 						$("#cycle-map-container").toggleClass('fullscreen', this.isMapFullscreen);
-						$("#cycle-map-container .fullscreen-button").attr('src', this.isMapFullscreen ? src='../gallery/icons/gallery-reduce.png' : src='../gallery/icons/gallery-expand.png')
+						$("#cycle-map-container .fullscreen-button").attr('src', this.isMapFullscreen ? 'icons/reduce.png' : 'icons/expand.png')
 
 						this.map.OnSizeChanged();
 
@@ -358,7 +358,7 @@
 			<!-- left side "code" icon -->
 			<a href="/code"> 
 				<p class="navigation-icon-text" style="right: auto; left: calc(8px + 48px + 8px)">code</p>
-				<img class="navigation-icon" src="icons/CodeIcon.png" style="right: auto; left: calc(8px)" /> 
+				<img class="navigation-icon" src="icons/CodeIcon.png" style="right: auto; left: calc(8px)" />
 			</a>
 			
 		</div>
@@ -369,7 +369,7 @@
 		
 			<!-- Map -->
 			<div id="map-divider" style="max-width: 1600px; width: 90%; max-height: 70vh; position: relative; display: inline-block; margin: 0px; padding: 0px; text-align: center;">
-				<img id="map-img" src="icons/WorldMapBlank.png" style="max-width:100%; max-height: 70vh; position: relative; left: 0px; top: 0px; margin: 0; padding: 0;" >
+				<img id="map-img" src="icons/cycle/WorldMapBlank.png" style="max-width:100%; max-height: 70vh; position: relative; left: 0px; top: 0px; margin: 0; padding: 0;" >
 				<canvas id="route-canvas" style="position: absolute; left: 0px; right: 0px; top: 0px; margin-left: auto;  margin-right: auto; padding: 0;" />
 			</div>	
 

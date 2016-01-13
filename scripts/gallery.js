@@ -61,7 +61,7 @@ function Gallery(containerElement, gallerySourceFolder) {
 	$(containerElement).append(LoadTextFile(gallerySourceFolder + "gallery.html"));
 	
 	if($("#gallery-style").exists() == false) {
-		$("body").append("<link rel='stylesheet' type='text/css' href='" + gallerySourceFolder + "styles/gallery.css' />");
+		$("body").append("<link rel='stylesheet' type='text/css' href='styles/gallery.css' />");
 	}
 
 	var updateImageStyles = function() {
@@ -154,14 +154,14 @@ function Gallery(containerElement, gallerySourceFolder) {
 	
 	var onFullScreenChange = function() {
 		if(IsFullScreen()) {
-			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", gallerySourceFolder + "icons/gallery-reduce.png");
+			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", gallerySourceFolder + "../icons/reduce.png");
 			containerElement.style.maxWidth = "100%";
 			containerElement.style.maxHeight = "100%";
 			containerElement.style.width = "100%";
 			containerElement.style.height = "100%";
 		}
 		else {
-			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", gallerySourceFolder + "icons/gallery-expand.png");
+			$(containerElement).find(".gallery-toggle-fullscreen").attr("src", gallerySourceFolder + "../icons/expand.png");
 			containerElement.style.maxWidth = containerStyleDefaultValues.maxWidth;
 			containerElement.style.maxHeight= containerStyleDefaultValues.maxHeight;
 			containerElement.style.width = containerStyleDefaultValues.width;
@@ -194,8 +194,8 @@ function Gallery(containerElement, gallerySourceFolder) {
 	
 	onFullScreenChange();
 
-	$(containerElement).find(".gallery-previous-button").attr("src", gallerySourceFolder + "icons/previous-icon.png");
-	$(containerElement).find(".gallery-next-button").attr("src", gallerySourceFolder + "icons/next-icon.png");
+	$(containerElement).find(".gallery-previous-button").attr("src", gallerySourceFolder + "../icons/gallery/previous-icon.png");
+	$(containerElement).find(".gallery-next-button").attr("src", gallerySourceFolder + "../icons/gallery/next-icon.png");
 	
 	$(containerElement).find(".gallery-toggle-quality").text(ImageQualityToText[this.CurrentImageQuality]);
 	$(containerElement).find(".gallery-toggle-quality").click(function() {
