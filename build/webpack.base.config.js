@@ -1,3 +1,4 @@
+var webpack = require("webpack");
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -5,7 +6,7 @@ module.exports = {
     publicPath: 'dist/',
     filename: 'build.js'
   },
-  
+
   module: {
     loaders: [
       {
@@ -28,15 +29,22 @@ module.exports = {
           // fallback to file-loader with this naming scheme
           name: '[name].[ext]?[hash]'
         }
-      }
-    ]
-  },
+      }]
+	},
+
+  plugins: [
+	  new webpack.ProvidePlugin({
+		  $: "jquery",
+		  jQuery: "jquery",
+		  "window.jQuery": "jquery"
+	})
+],
   // vue-loader config:
   // lint all JavaScript inside *.vue files with ESLint
   // make sure to adjust your .eslintrc
   vue: {
     loaders: {
-      js: 'babel!eslint'
+      js: 'babel!eslint',
     }
   }
 };
