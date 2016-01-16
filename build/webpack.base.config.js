@@ -15,10 +15,10 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel!eslint',
+        loader: 'babel?presets[]=es2015,presets[]=stage-0,cacheDirectory=true',
         // make sure to exclude 3rd party code in node_modules
-        exclude: /node_modules/
-      },
+        exclude: /node_modules/,
+	  },
       {
         // edit this for additional asset file types
         test: /\.(png|jpg|gif)$/,

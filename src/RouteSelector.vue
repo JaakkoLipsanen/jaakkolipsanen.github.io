@@ -9,33 +9,15 @@
 </template>
 
 <script>
-// import CycleMap and Gallery
 
 export default {
+	props: {
+		items: Array
+	},
+
 	data() {
 		return {
-			selectedIndex: -1,
-			items: [
-				{
-					name: "Northern Europe",
-					year: 2014,
-					text: "Yay my first tour it was nice Sweden-Belgium!"
-			//	route: new RouteView(new Route(new RouteDescription("data/cycle/europe14/route-description.txt")))
-				// gallery: new GallerySource("Europe '14", "data/cycle/europe14/photos")
-				},
-				{
-					name: "Spain",
-					year: 2014,
-					text: "Wooo very freezing trip! Also super pretty!"
-			//	route: new RouteView(new Route(new RouteDescription("data/cycle/spain14/route-description.txt")))
-				// gallery: new GallerySource("Spain '14", "data/cycle/spain14/photos")
-				},
-				{
-					name: "Central Europe", year: 2015,
-					text: "Woo Alps and Pyreenes!"
-			//	route: new RouteView(new Route(new RouteDescription("data/cycle/europe15/route-description.txt")))
-				// gallery: new GallerySource("Europe '15", "data/cycle/europe15/photos")
-				}]
+			selectedIndex: -1
 		};
 	},
 
@@ -43,8 +25,6 @@ export default {
 		// called when route button is clicked
 		changeRoute: function(event) {
 			this.selectedIndex = $("li").index($(event.currentTarget));
-			// gallery.AssignSource(this.selectedRoute.gallery);
-
 			this.$dispatch("selected-changed", this.items[this.selectedIndex]);
 
 			// todo: make the animation length depend on scrolling distance

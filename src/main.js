@@ -17,9 +17,3 @@ var app = new Vue({
 		currentView: "cycle-page"
 	}
 });
-
-/*
-setTimeout(function() {
-	app.currentView = 'code-page'
-}, 2000)
-*/
