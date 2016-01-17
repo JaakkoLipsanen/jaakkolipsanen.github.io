@@ -1,7 +1,7 @@
 <template>
 	<div id="gallery-container" class="nano">
 		<div class="nano-content">
-			<div class="imageBlock"  v-for="item in gallery.CurrentSource.Photos" style="background-image: url({{ '../' + gallery.CurrentSource.Folder + '720p/' + item.PhotoName}})">
+			<div class="imageBlock"  v-for="item in gallery.CurrentSource.Photos" style="background-image: url({{ '../' + gallery.CurrentSource.Folder + 'thumbnails/' + item.PhotoName}})">
 				<div class="overlay-image">
 				</div>
 
@@ -20,8 +20,7 @@ export default {
 		"route": function(value, oldValue) {
 			this.gallery.SetSource(value);
 
-			console.log("x");
-			$(".nano").nanoScroller();
+			$(".nano").nanoScroller({ scroll: "top" });
 		}
 	},
 	data() {
