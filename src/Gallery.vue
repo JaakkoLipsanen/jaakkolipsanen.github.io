@@ -1,7 +1,7 @@
 <template>
 	<div id="gallery-container" class="nano">
 		<div class="nano-content">
-			<div class="imageBlock"  v-for="item in gallery.CurrentSource.Photos" background-color="hsl({{ n * 30}}, 50%, 50%)" style="background-image: url({{ '../' + gallery.CurrentSource.Folder + '720p/' + item.PhotoName}})">
+			<div class="imageBlock"  v-for="item in gallery.CurrentSource.Photos" style="background-image: url({{ '../' + gallery.CurrentSource.Folder + '720p/' + item.PhotoName}})">
 				<div class="overlay-image">
 				</div>
 
@@ -44,9 +44,9 @@ export default {
 };
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 	$gallery-size: 500px;
-	$background-color: rgb(44, 44, 44);
+	$background-color: rgb(36, 36, 36);
 	$image-size: 25%;
 
 	.thumbnail-image {
@@ -66,11 +66,7 @@ export default {
 
 		overflow-y: auto;
 		overflow-x: hidden;
-
 	}
-
-
-	#gallery-container::-webkit-scrollbar { width: 0 !important }
 
 	.imageBlock {
 		text-align: left;
@@ -78,7 +74,7 @@ export default {
 		height: calc(#{$image-size} - 2px);
 		margin: -1px 1px;
 
-		background-color: rgb(192, 64, 64);
+		background-color: rgb(64, 64, 64);
 		display: inline-block;
 
 		 background-size: cover;
@@ -98,9 +94,10 @@ export default {
 			opacity: 0;
 		}
 	}
+</style>
 
-
-
+/* NANO SCROLLER */
+<style>
 	/** initial setup **/
 	.nano {
 		position : relative;

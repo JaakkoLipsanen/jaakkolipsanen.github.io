@@ -32,6 +32,7 @@ module.exports = {
       }]
 	},
 
+	// plugins removed. Atm loading jquery in <script> tag in spm.html because of nanoscroller. consider other things in future
 /*  plugins: [
 	  new webpack.ProvidePlugin({
 		  $: "jquery",
