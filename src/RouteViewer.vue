@@ -2,11 +2,13 @@
 	<div id="routeviewer-container" v-show="selectedItem != null">
 		<p>{{ selectedItem.text }}</p>
 		<cycle-map :route="selectedItem"></cycle-map>
+		<gallery :route="selectedItem" style="margin-top: 64px"></gallery>
 	</div>
 </template>
 
 <script>
 import CycleMap from "./CycleMap.vue";
+import Gallery from "./Gallery.vue";
 
 export default {
 	data() {
@@ -16,7 +18,8 @@ export default {
 	},
 
 	components: {
-		"cycle-map": CycleMap
+		"cycle-map": CycleMap,
+		"gallery": Gallery
 	},
 
 	events: {

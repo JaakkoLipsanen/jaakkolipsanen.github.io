@@ -12,7 +12,7 @@
 			<img style='width: 10px; display: inline' src='../assets/icons/tent.png'><p style='display: inline'> camping </p>
 			<img style='margin-left: 4px; width: 10px; display: inline' src='../assets/icons/hotel.png'><p style='display: inline'> hotel</p>
 		</div>
-	</div>,
+	</div>
 </template>
 
 <script>
@@ -81,10 +81,11 @@ export default {
 };
 </script>
 
-<style lang=sass>
+<style lang="sass" scoped>
+	$map-size: 500px;
 	#cycle-map-container {
-		width: 500px;
-		height: 500px;
+		width: $map-size;
+		height: $map-size;
 		margin: auto;
 
 		color: white;
@@ -109,6 +110,9 @@ export default {
 		height: 100% !important;
 	}
 
+</style>
+
+<style lang="sass">
 	// remove Google logo, copyright print etc from Google Maps. Not allowed but.. blargh
 	.gmnoprint a, .gmnoprint span, .gm-style-cc { display: none; }
 	.gmnoprint div { background:none !important; }

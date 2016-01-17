@@ -32,13 +32,13 @@ module.exports = {
       }]
 	},
 
-  plugins: [
+/*  plugins: [
 	  new webpack.ProvidePlugin({
 		  $: "jquery",
 		  jQuery: "jquery",
 		  "window.jQuery": "jquery"
 	})
-],
+],*/
   // vue-loader config:
   // lint all JavaScript inside *.vue files with ESLint
   // make sure to adjust your .eslintrc

@@ -20,21 +20,21 @@ const data = {
 			name: "Northern Europe",
 			year: 2014,
 			text: "Yay my first tour it was nice Sweden-Belgium!",
-			route: "data/cycle/europe14/route-description.txt"
-			// gallery: new GallerySource("Europe '14", "data/cycle/europe14/photos")
+			route: "data/cycle/europe14/route-description.txt",
+			gallery: "data/cycle/europe14/photos"
 		},
 		{
 			name: "Spain",
 			year: 2014,
 			text: "Wooo very freezing trip! Also super pretty!",
-			route: "data/cycle/spain14/route-description.txt"
-			// gallery: new GallerySource("Spain '14", "data/cycle/spain14/photos")
+			route: "data/cycle/spain14/route-description.txt",
+			gallery: "data/cycle/spain14/photos"
 		},
 		{
 			name: "Central Europe", year: 2015,
 			text: "Woo Alps and Pyreenes!",
-			route: "data/cycle/europe15/route-description.txt"
-			// gallery: new GallerySource("Europe '15", "data/cycle/europe15/photos")
+			route: "data/cycle/europe15/route-description.txt",
+			gallery: "data/cycle/europe15/photos"
 		}]
 };
 

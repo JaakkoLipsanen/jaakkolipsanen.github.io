@@ -1,6 +1,6 @@
 <template>
 	<div id="navbar-container">
-		<p id="header-text">{{ title }}</p>
+		<p id="navbar-header-text">{{ title }}</p>
 	</div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
 		height: 48px;
 	}
 
-	#header-text {
+	#navbar-header-text {
 		color: $light-gray;
 		font: 400% $font-stack;
 
