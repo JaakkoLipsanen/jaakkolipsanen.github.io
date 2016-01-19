@@ -3,8 +3,11 @@
 		<div class='gallery-background'></div>
 
 		<div id="image-container" >
-			<img id="image" src="{{ currentImagePath }}">
-			<p id="description-text">hello</p>
+			<div id="image-cc">
+				<img id="image" src="{{ photoImagePath }}">
+				<p id="description-text">{{ currentPhoto.Description }}</p>
+
+			</div>
 		</div>
 	</div>
 </template>
@@ -20,6 +23,27 @@ export default {
 		};
 	},
 
+	ready: function() {
+		$("#image").load(function() {
+			$("#image-cc").width("100%");
+			$("#image-cc").height("100%");
+			$("#image-cc").width(this.clientWidth);
+			$("#image-cc").height(this.clientHeight);
+
+			console.log(this.clientWidth + " " + this.clientHeight);
+		});
+
+		$(window).resize(function() {
+			console.log("pre: " + $("#image").outerWidth());
+			$("#image-cc").width("100%");
+			$("#image-cc").height("100%");
+
+			console.log("post: " + $("#image").outerWidth());
+			$("#image-cc").width($("#image").outerWidth());
+			$("#image-cc").height($("#image").outerHeight());
+		});
+	},
+
 	methods: {
 		"closeImage": function() {
 			$("#image-viewer-container").hide();
@@ -27,7 +51,7 @@ export default {
 	},
 
 	computed: {
-		currentImagePath: function() {
+		photoImagePath: function() {
 			if(this.gallerySource == null || this.currentPhoto == null) {
 				return "";
 			}
@@ -65,6 +89,18 @@ export default {
 		cursor: pointer;
 	}
 
+	#image-cc {
+		width: 100%;
+		height: 100%;
+
+		margin: auto;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
 	#image {
 		position: absolute;
 		top: 0;
@@ -73,8 +109,8 @@ export default {
 		right: 0;
 		margin: auto;
 
-		max-width: 80%;
-		max-height: 85%;
+		max-width: 100%;
+		max-height: 100%;
 	}
 
 	#image-container {
@@ -85,16 +121,27 @@ export default {
 		bottom: 0;
 		top: 0;
 
-		width: 100%;
-		height: 100%;
+		/* using calc because need to have fixed space for text etc */
+		width: 85%;
+		height: calc(95% - 64px);
 
 		margin: auto;
 		cursor: pointer;
 	}
 
 	#description-text {
-		color: white;
 		float: left;
-		margin-top: 0px;
+		margin-top: -32px;
+
+		/* clip and add ellipsis (...) if the text overflow */
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 100%;
+		overflow: hidden;
+		text-align: left;
+	}
+
+	#exif-button {
+		margin-bottom: -32px;
 	}
 </style>
