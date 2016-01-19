@@ -20,4 +20,4 @@ var app = new Vue({
 	}
 });
 
-// setTimeout(() => { app.currentView = "code-page" }, 10000);
+// setTimeout(() => { app.currentView = "code-page" }, 3000);

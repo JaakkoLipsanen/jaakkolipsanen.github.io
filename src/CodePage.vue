@@ -1,8 +1,6 @@
 <template>
-	<a  v-on:click="changePage">cycle</a>
+	<a v-on:click="changePage">cycle</a>
 	<div id="about-me-container">
-		<h1 style="text-align: center; padding: 0px; margin-bottom: 0px;">Welcome</h1>
-		<hr />
 
 		<p>My name is Jaakko Lipsanen. I am an 20-year-old game developer from Helsinki, Finland. Most of my completed projects can be found on this site.</p>
 		<p>I have programmed and developed games for three years. During that time, I have released several games for Windows Phone with over 1,000,000 downloads.</p>
@@ -14,13 +12,20 @@
 		<div style="margin: 36px;"></div>
 	</div>
 
+	<footer-bar></footer-bar>
 </template>
 
 <script>
+import Footer from "./Footer.vue";
+
 export default {
 	data() {
 		return {
 		};
+	},
+
+	components: {
+		"footer-bar": Footer
 	},
 
 	ready: function() {
@@ -46,7 +51,7 @@ export default {
 
 	.black-navbar-header-text {
 		transition: color 0.7s ease-in-out;
-		color: rgb(64, 64, 64) !important;
+		color: rgb(48, 48, 48) !important;
 	}
 
 	.show {
@@ -59,7 +64,7 @@ export default {
 		width: 90%;
 		max-width: 600px;
 		display: block;
-		margin: auto;
+		margin: 32px auto;
 		overflow: auto;
 		opacity: 0;
 		transition: opacity 5s ease-in-out;
@@ -71,5 +76,14 @@ export default {
 		h2 {
 			font: normal 2em "Yanone Kaffeesatz", sans-serif;
 		}
+	}
+
+	hr {
+		border-color: inherit !important;
+		width: 500px;
+	}
+
+	about-me-container > p {
+		color: black;
 	}
 </style>

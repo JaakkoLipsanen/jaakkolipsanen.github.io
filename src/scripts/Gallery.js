@@ -1,9 +1,9 @@
 import { LoadTextAsync, GetUriDirectory } from "./FileHelper.js"
 
 export const PhotoType = {
-	Thumbnail : 0,
-	Mid : 1,
-	Fullsize: 2
+	Thumbnail : "thumbnails",
+	Mid : "1080p",
+	Fullsize: "fullsize"
 };
 
 export class Photo {
@@ -19,7 +19,12 @@ export class GallerySource {
 		this.Photos = photos;
 	}
 
-	GetPhotoSource(photo, photoType) {
+	get PhotoCount() {
+		return this.Photos.length;
+	}
+
+	GetPath(photo, photoType) {
+		return this.Folder + photoType + "/" + photo.PhotoName;
 	}
 
 	static async FromFile(galleryFolder) {
@@ -71,6 +76,20 @@ export class Gallery {
 		console.log("SET " + routeItem.gallerySource.Photos.length);
 		this.CurrentSource = routeItem.gallerySource;
 	}
+
+	get PhotoCount() {
+		if(this.CurrentSource == null) {
+			return 0;
+		}
+
+		return this.CurrentSource.PhotoCount;
+	}
+
+
+	GetNext(photo) {
+
+	}
+
 
 	async PreloadGalleries(routes) {
 		for(let routeItem of routes) {

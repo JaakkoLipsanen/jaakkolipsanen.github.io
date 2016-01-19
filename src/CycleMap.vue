@@ -1,7 +1,7 @@
 <template>
 	<div id="cycle-map-container">
 		<div style='position: relative; z-index: 10000;'>
-			<img class='resize-button fullscreen-button' src='../assets/icons/expand.png'  v-on:click='enterFullscreen'  />
+			<img class='resize-button fullscreen-button' src='../assets/icons/expand.png'  v-on:click='enterFullscreen'>
 		</div>
 
 		<div style='width: 100%; height: 100%' id='cycle-map' ></div>

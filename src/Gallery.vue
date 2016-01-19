@@ -1,16 +1,20 @@
 <template>
-	<div id="gallery-container" class="nano">
-		<div class="nano-content">
-			<div class="imageBlock"  v-for="item in gallery.CurrentSource.Photos" style="background-image: url({{ '../' + gallery.CurrentSource.Folder + 'thumbnails/' + item.PhotoName}})">
-				<div class="overlay-image">
+	<div>
+		<div id="gallery-container" class="nano">
+			<div class="nano-content">
+				<div class="imageBlock" v-for="photo in gallery.CurrentSource.Photos" style="background-image: url({{ '../' + gallery.CurrentSource.Folder + 'thumbnails/' + photo.PhotoName}})" v-on:click="photoClicked(photo)">
+					<div class="overlay-image"></div>
 				</div>
-
 			</div>
 		</div>
+
+		<image-viewer style="display: none"></image-viewer>
+	</div>
 </template>
 
 <script>
 import { Gallery } from "./scripts/Gallery.js";
+import ImageViewer from "./ImageViewer.vue";
 
 export default {
 	props: {
@@ -29,15 +33,25 @@ export default {
 		};
 	},
 
+	components: {
+		"image-viewer": ImageViewer
+	},
+
 	ready: function() {
-		$(".hello");
 		$.getScript("https://rawgit.com/kontera-technologies/nanoScrollerJS/master/bin/javascripts/jquery.nanoscroller.js", (data, textStatus, jqxhr) => {
 			$(".nano").nanoScroller();
 		});
 	},
+
 	events: {
 		"routes-loaded": function(routes) {
 			this.gallery.PreloadGalleries(routes);
+		}
+	},
+
+	methods: {
+		"photoClicked": function(photo) {
+			this.$broadcast("photo-selected", this.gallery.CurrentSource, photo);
 		}
 	}
 };
