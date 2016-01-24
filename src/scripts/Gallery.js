@@ -85,12 +85,6 @@ export class Gallery {
 		return this.CurrentSource.PhotoCount;
 	}
 
-
-	GetNext(photo) {
-
-	}
-
-
 	async PreloadGalleries(routes) {
 		for(let routeItem of routes) {
 			if(routeItem.gallerySource == null) {

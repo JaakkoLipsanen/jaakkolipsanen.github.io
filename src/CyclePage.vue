@@ -63,6 +63,7 @@ export default {
 
 <style lang="sass">
 	$default-text-color: rgb(144, 144, 144);
+	$default-link-color: desaturate(rgb(144, 144, 255), 5);
 	$default-font-size: 18px;
 
 	#content-div {
@@ -79,6 +80,11 @@ export default {
 
 	p {
 		color: $default-text-color;
+		font-size: $default-font-size;
+	}
+
+	a {
+		color: $default-link-color;
 		font-size: $default-font-size;
 	}
 </style>

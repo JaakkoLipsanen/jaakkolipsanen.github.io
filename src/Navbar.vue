@@ -15,8 +15,6 @@ export default {
 </script>
 
 <style lang="sass">
-	@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-
 	$font-stack: 'Yanone Kaffeesatz', 'Segoe UI';
 	$light-gray: rgb(211, 211, 211);
 

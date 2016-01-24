@@ -323,8 +323,8 @@ function CreateGoogleIcon(url) {
 	};
 }
 
-const TentIcon = CreateGoogleIcon("icons/cycle/tent.png");
-const HotelIcon = CreateGoogleIcon("icons/cycle/hotel.png");
+const TentIcon = CreateGoogleIcon("assets/icons/tent.png");
+const HotelIcon = CreateGoogleIcon("assets/icons/hotel.png");
 
 class Style {
 	constructor(styleArray) {

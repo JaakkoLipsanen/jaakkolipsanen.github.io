@@ -1,6 +1,6 @@
 <template>
 	<div id="cycle-map-container">
-		<div style='position: relative; z-index: 10000;'>
+		<div style='position: relative; z-index: 1;'>
 			<img class='resize-button fullscreen-button' src='../assets/icons/expand.png'  v-on:click='enterFullscreen'>
 		</div>
 
@@ -116,6 +116,6 @@ export default {
 	// remove Google logo, copyright print etc from Google Maps. Not allowed but.. blargh
 	.gmnoprint a, .gmnoprint span, .gm-style-cc { display: none; }
 	.gmnoprint div { background:none !important; }
-	a[href^='http://maps.google.com/maps']{display:none !important}
-	a[href^='https://maps.google.com/maps']{display:none !important}
+	#cycle-map-container a[href^='http://maps.google.com/maps']{display:none !important}
+	#cycle-map-container a[href^='https://maps.google.com/maps']{display:none !important}
 </style>

@@ -37,7 +37,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-	@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 	$font-stack: Open Sans;
     $list-padding: 3px;
     $list-height: 40px;

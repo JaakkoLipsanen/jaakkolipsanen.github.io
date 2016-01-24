@@ -27,6 +27,7 @@ export default {
 	    margin: 4px 0px 0px;
 
 	    a {
+		    font-size: 14px;
 	        color: $footer-link-color;
 	    }
 	}

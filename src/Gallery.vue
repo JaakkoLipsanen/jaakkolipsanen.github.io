@@ -38,9 +38,7 @@ export default {
 	},
 
 	ready: function() {
-		$.getScript("https://rawgit.com/kontera-technologies/nanoScrollerJS/master/bin/javascripts/jquery.nanoscroller.js", (data, textStatus, jqxhr) => {
-			$(".nano").nanoScroller();
-		});
+
 	},
 
 	events: {
