@@ -9,8 +9,8 @@
 		<!-- Bottom text -->
 		<p style=' margin-top: 0px; float: left;'>{{ this.map.RouteLength + 'km, ' + this.map.NightCount +  ' days' }}</p>
 		<div style='display: inline; float: right'>
-			<img style='width: 10px; display: inline' src='../assets/icons/tent.png'><p style='display: inline'> camping </p>
-			<img style='margin-left: 4px; width: 10px; display: inline' src='../assets/icons/hotel.png'><p style='display: inline'> hotel</p>
+			<img style='width: 10px; display: inline' src='../assets/icons/tent.png'><p style='display: inline; margin-left: 4px;'>camping </p>
+			<img style='margin-left: 4px; width: 10px; display: inline' src='../assets/icons/hotel.png'><p style='display: inline; margin-left: 4px;'>hotel</p>
 		</div>
 	</div>
 </template>
