@@ -100,7 +100,7 @@ export default {
 				return "";
 			}
 
-			return this.gallerySource.GetPath(this.currentPhoto, PhotoType.Fullsize);
+			return this.gallerySource.GetPath(this.currentPhoto, PhotoType.Mid);
 		}
 	},
 
