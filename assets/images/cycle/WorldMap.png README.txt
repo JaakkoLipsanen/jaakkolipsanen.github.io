@@ -1,0 +1,2 @@
+So, the WorldMap.png is "compressed" with pngquant. Unfortunately, for some reason it changes the colors. WorldMap-fullsize.png displays "40, 37, 20" tjsp color on the ground, 
+where as the compressed version displays grayscale color (32, 32, 32 I think?)
