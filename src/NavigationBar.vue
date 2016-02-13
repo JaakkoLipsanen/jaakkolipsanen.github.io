@@ -1,55 +1,36 @@
 <template>
-	<div id="navbar-container">
-		<p id="navbar-header-text">{{ title }}</p>
-		<!--
-		<div id="route-selection-list-container">
-			<ul id="route-selection-list">
-				<li v-for="(index, item) in items" v-bind:class="{ 'selected': $index == selectedIndex }" v-on:click="itemClicked">
-					<p class="europe14-trip-button">{{ item }}</p>
-				</li>
-			</ul>
-		</div>
-	-->
+	<div id="route-selection-list-container">
+		<ul id="route-selection-list">
+			<li v-for="(index, item) in items" v-bind:class="{ 'selected': $index == selectedIndex }" v-on:click="itemClicked">
+				<p class="europe14-trip-button">{{ item }}</p>
+			</li>
+		</ul>
 	</div>
 </template>
 
 <script>
+
 export default {
 	data() {
 		return {
-			title: "flai",
-
+			selectedIndex: -1,
 			items: [
-				"blog",
-				"routes",
-				"photos",
+				"BLOG",
+				"ROUTES",
+				"PHOTOS",
 				"",
-				"coding"
+				"CODING"
 			]
 		};
+	},
+
+	methods: {
+		itemClicked: function(event) {
+
+		}
 	}
 };
 </script>
-
-<style lang="sass">
-	$font-stack: 'Yanone Kaffeesatz', 'Segoe UI';
-	$light-gray: rgb(211, 211, 211);
-
-	#navbar-container {
-		width: 100%;
-		height: 72px;
-
-	}
-
-	#navbar-header-text {
-		color: $light-gray;
-		font: 400% $font-stack;
-
-		text-align: center;
-		margin: auto;
-	}
-</style>
-
 
 <style lang="sass" scoped>
 	$font-stack: Open Sans;
@@ -61,9 +42,9 @@ export default {
 	#route-selection-list-container {
 		width: 510px;
 		margin-left: auto;
-		margin-right: 300px;
+		margin-right: 0;
 
-		margin-top: -32px;
+		margin-top: -80px;
 	}
 
     #route-selection-list {
@@ -78,7 +59,6 @@ export default {
         height: $list-height;
 
         border-radius: $list-border-radius;
-		float: right;
     }
 
     #route-selection-list li {
@@ -92,6 +72,7 @@ export default {
         display: table;
 
 		margin: 0px 14px;
+        background-color: rgb(24, 24, 24); /* the site background color */
         transition: background-color 0.3s ease-in-out;
 	}
 
@@ -100,7 +81,6 @@ export default {
 
 		font-size: 1.5em;
 		font-family: $font-stack;
-		font-weight: normal;
 		color: rgb(128, 128, 128);
 	}
 

@@ -283,7 +283,7 @@ export class CycleMap {
 	}
 
 	async SetRoute(routeItem) {
-		const routeView = routeItem.routeView || (routeItem.routeView = new RouteView(await Route.FromFile(routeItem.route)));
+		const routeView = routeItem.routeView || (routeItem.routeView = new RouteView(await Route.FromFile(routeItem.routePath)));
 
 		if(this.CurrentRouteView != null) {
 			this.CurrentRouteView.AssignMap(null);

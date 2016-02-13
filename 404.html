@@ -2,71 +2,30 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		
+
 		<title>flai</title>
 		<meta name="description" content="The personal website of Jaakko Lipsanen">
-		<meta name="author" content="Jaakko Lipsanen">		
+		<meta name="author" content="Jaakko Lipsanen">
 		<meta name="keywords" content="gamedev, game, xna, unity, finland, developer, c#, c++, javascript, html5">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		
-		<link rel="stylesheet" type="text/css" href="/styles/general.css" />
+
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans%7CYanone+Kaffeesatz' rel='stylesheet' type='text/css' />
-		
-		
-		<!-- Style inlined -->
+
+		<!-- TODO: jquery shouldn't be loaded probably. It already works without this since I use the webpack jquery plugin -->
+		<!-- I should probably load nanoscroll (and maybe even google maps) in the script where I use it -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<script type="text/javascript" src="src/scripts/nanoscroller.js"></script>
+		<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=geometry&region=ES"></script>
+
 		<style>
-			#content-div {
-				text-align: center;
-				width: 90%;
-				max-width: 600px;
-				display: block;
-				margin: auto;
-				overflow: auto;
-			}
-			
-			.navigation-link {
-				color: rgb(128, 128, 216);
-				text-decoration: none;
-				font-size: 48px;
-				margin: 32px;
-			}
-			
+			body { margin: 0; background-color: rgb(24, 24, 24); font-family: "Open Sans"; transition: background-color 0.7s ease-in-out;  }
+			html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
 		</style>
-  </head>
+	</head>
 	<body>
-	
-		<!-- Top Header -->
-		<div id="header-div" >
-			<p id="header-text">flai</p>
-		</div>		
-		
-		<!-- Content -->
-		<div id="content-div">  
-			<h1 style="text-align: center; padding: 0px; margin-bottom: 0px;">Oops!</h1>
-			<h2 style="text-align: center; margin: 0px">This site doesn't exist!</h2>
-			
-			<div style="margin-top: 24px;" >
-				<a class="navigation-link" href="/code">code</a>
-				<a class="navigation-link" href="/cycle">cycle</a>
-			</div>
-			
-			<!-- some space after the text before footer -->
-			<div style="margin: 36px;"></div>
-		</div>
-		
-		<div>
-			
-		
-		</div>
-		
-		
-		<!-- FOOTER -->
-		<div>
-			<hr />
-			<p id="email-text"><a href="mailto:jaakko.lipsanen@outlook.com">jaakko.lipsanen@outlook.com</a></p> 
-			<p id="copyright-text">&copy; Jaakko Lipsanen. All Rights Reserved</p> 
-			<p id="github-text">Hosted on <a href="http://github.io">github.io</a> </p>
-		</div>
-		
+		<navbar></navbar>
+		<component :is='currentView'></component>
+
+		<script src="dist/build.js"></script>
 	</body>
 </html>

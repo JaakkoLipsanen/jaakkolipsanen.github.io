@@ -21,26 +21,31 @@ import { ExitFullScreen, EnterFullScreen, OnFullscreenChange } from "./scripts/M
 
 export default {
 	props: {
-		route: Object // route is the *item* of the route (so it contains 'text', description, route file path etc)
+		routePath: String
 	},
 	watch: {
-		"route": function(value, oldValue) {
-			this.map.SetRoute(value);
+		"route-path": function(value, oldValue) {
+			if(!(value in this.routes)) {
+				this.routes[value] = { routePath: value };
+			}
+
+			this.map.SetRoute(this.routes[value]);
 		}
 	},
 
 	data() {
 		return {
 			map: null,
-			isMapFullscreen: false
+			isMapFullscreen: false,
+			routes: {}
 		};
 	},
 
 	ready: function() {
 		this.map = new CycleMap($("#cycle-map").get(0));
-
-		if(this.routeView != null) {
-			this.map.SetRoute(this.routeView);
+		if(this.routePath != null) {
+			this.routes[this.routePath] = { routePath: this.routePath };
+			this.map.SetRoute(this.routes[this.routePath]);
 		}
 
 		OnFullscreenChange(() => {
@@ -82,7 +87,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-	$map-size: 500px;
+	$map-size: 100%;
 	#cycle-map-container {
 		width: $map-size;
 		height: $map-size;
