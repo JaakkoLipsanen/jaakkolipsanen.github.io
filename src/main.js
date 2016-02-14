@@ -10,7 +10,7 @@ import BlogPage from "./BlogPage.vue";
 /* eslint-disable no-unused-vars */
 const pagePath = window.location.pathname.split("/").filter(Boolean); // filter(Boolean) removes empty entries
 
-const componentMap = new Map([["404.html", "blog-page"], ["cycle4", "cycle-page"], ["code32", "code-page"]]);
+const componentMap = new Map([["404.html", "blog-page"], ["blog", "blog-page"], ["cycle4", "cycle-page"], ["code32", "code-page"]]);
 console.log(componentMap.has(pagePath[0]) ? componentMap.get(pagePath[0]) : "cycle-page");
 var app = new Vue({
 	el: "body",
@@ -22,7 +22,7 @@ var app = new Vue({
 	},
 
 	data: {
-		currentView: componentMap.has(pagePath[0]) ? componentMap.get(pagePath[0]) : "cycle-page"
+		currentView: componentMap.has(pagePath[0]) ? componentMap.get(pagePath[0]) : "blog-page"
 	}
 });
 
