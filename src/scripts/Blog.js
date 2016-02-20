@@ -33,6 +33,7 @@ export class BlogPost{
 		this.ContentBlocks = contentBlocks;
 
 		this.Directory = directory;
+		this.MainImageSource = contentBlocks.filter(x => x instanceof ImageBlock)[0].Source;
 	}
 
 	static async FromFile(postFolder) {

@@ -33,7 +33,7 @@ export default {
 
 <style lang="sass">
 	$font-stack: 'Yanone Kaffeesatz', 'Segoe UI';
-	$light-gray: rgb(211, 211, 211);
+	$light-gray: rgb(232, 232, 232); /* was 211, 211, 211 */
 
 	#navbar-container {
 		width: 100%;
@@ -47,6 +47,10 @@ export default {
 
 		text-align: center;
 		margin: auto;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		right: 50%;
 	}
 </style>
 
