@@ -12,17 +12,38 @@ export class TextBlock {
 	}
 
 	get Type() {
-		return BlockType.Text;
+		return "Text";
+	}
+}
+
+export class HeaderBlock {
+	constructor(title) {
+		this.Title = title;
+	}
+
+	get Type() {
+		return "Header";
 	}
 }
 
 export class ImageBlock {
-	constructor(source) {
+	constructor(source, isFullWidth) {
 		this.Source = source.trim();
+		this.IsFullWidth = isFullWidth;
 	}
 
 	get Type() {
-		return BlockType.Image;
+		return "Image";
+	}
+
+	static Parse(str) {
+		const parameters = str.split(' ');
+		Assert(parameters.length > 0);
+
+		const source = parameters[0];
+		const isFullWidth = parameters.indexOf("fullwidth") >= 0;
+		console.log(parameters)
+		return new ImageBlock(source, isFullWidth);
 	}
 }
 
@@ -49,7 +70,7 @@ export class BlogPost{
 				}
 
 				function ParseProperty(text) {
-					const propertyValue = text.substr(text.indexOf(":") + 1);
+					const propertyValue = text.substr(text.indexOf(":") + 1).trim();
 					return propertyValue;
 				}
 
@@ -69,7 +90,11 @@ export class BlogPost{
 							contentBlocks.push(new TextBlock(ParseProperty(lines[i])));
 							break;
 						case "image":
-							contentBlocks.push(new ImageBlock(ParseProperty(lines[i])));
+							contentBlocks.push(ImageBlock.Parse(ParseProperty(lines[i])));
+							break;
+
+						case "header":
+							contentBlocks.push(new HeaderBlock(ParseProperty(lines[i])));
 							break;
 
 						default:
