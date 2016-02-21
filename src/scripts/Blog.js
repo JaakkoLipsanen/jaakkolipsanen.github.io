@@ -48,8 +48,9 @@ export class ImageBlock {
 }
 
 export class BlogPost{
-	constructor(title, dateRange, contentBlocks, directory) {
+	constructor(title, trip, dateRange, contentBlocks, directory) {
 		this.Title = title;
+		this.Trip = trip; // trip == "Europe '15'". "Spain '14'" etc
 		this.DateRange = dateRange;
 		this.ContentBlocks = contentBlocks;
 
@@ -76,10 +77,12 @@ export class BlogPost{
 
 				Assert(lines.length > 0, "Blog post doesn't have content");
 				Assert(ReadProperty(lines[0]) == "title", "Blog post .txt doesn't start with 'title'"); // 'title' property must be on the first line
+				Assert(ReadProperty(lines[1]) == "trip", "Blog post .txt doesn't have 'trip' tag (or not in the second line)");
 				let title = ParseProperty(lines[0]);
+				let trip = ParseProperty(lines[1]);
 
 				let contentBlocks = [];
-				for(let i = 1; i < lines.length; i++) {
+				for(let i = 2; i < lines.length; i++) {
 					if(IsEmptyOrWhitespace(lines[i])) { // skip empty lines
 						continue;
 					}
@@ -102,7 +105,7 @@ export class BlogPost{
 					}
 				}
 
-				resolve(new BlogPost(title, "", contentBlocks, postFolder));
+				resolve(new BlogPost(title, trip, "", contentBlocks, postFolder));
 			}
 			catch(err) { reject(err); }
 		});

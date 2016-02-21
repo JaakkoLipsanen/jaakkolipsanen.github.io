@@ -1,13 +1,17 @@
 <template>
 	<div id="post-container">
 		<div id="main-image-container" >
-			<div class="main-img" style="background-image: url({{ blogPost.Directory + blogPost.MainImageSource }}); width: 100%; height: 100vh; background-size: cover; background-position: center;">
-			</div>
-		<!--	<img id="main-img" src="{{ blogPost.Directory + blogPost.MainImageSource }}" style="filter: grayscale(0%);"></img> -->
-			<div style="position: absolute; top: 0; height: 100%; width: 100%; background-color: rgba(0, 0, 0, 0.18);
-				 box-shadow: inset 0 0 25vw 3.5vw rgb(0, 0, 0);" ></div>
+			<div class="main-image" style="background-image: url({{ blogPost.Directory + blogPost.MainImageSource }});"></div>
 
-	 		<p style="position: absolute; font-size: 64px; color: rgb(249, 249, 249); font-weight: 800; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0;">{{ blogPost.Title.toUpperCase() }}</p>
+			<!-- Vignette -->
+			<div style="position: absolute; top: 0; height: 100%; width: 100%;
+				background-color: rgba(0, 0, 0, 0.18); box-shadow: inset 0 0 25vw 3.5vw rgb(0, 0, 0);" ></div>
+
+			<p class="main-image-title" style="">  {{ blogPost.Title.toUpperCase() }}</p>
+			<div class="main-image-info-container">
+				<h3 >{{ blogPost.Trip }}</h3>
+				<h3>Day 1-4</h3>
+			</div>
 		</div>
 
 		<div id="content-container">
@@ -64,17 +68,56 @@ export default {
 	color: rgb(211, 211, 211);
 	font-size: 18px;
 	text-align: center;
-
-
-
-	#main-img {
-		width: 100%;
-	}
 }
 
 #main-image-container {
 	 box-shadow: inset 0 0 10em #666;
 	 position: relative;
+
+	 /* main-image is 100% the height of the viewport/window */
+	 .main-image {
+		  width: 100%;
+		  height: 100vh;
+		  background-size: cover;
+		  background-position: center;
+	 }
+
+	 .main-image-title {
+		 position: absolute;
+		 margin: 0;
+		 left: 50%;
+		 top: 50%;
+		 transform: translate(-50%, -50%);
+		 width: 95%;
+
+		 font-weight: 800;
+		 font-size: 8vw;
+		 color: rgb(249, 249, 249);
+
+		 @media all and (min-width: 1066px) and (max-width: 1920px) {
+			 font-size: 64px;
+		 }
+
+		 @media all and (min-width: 1921px) {
+			font-size: 96px;
+		}
+	 }
+
+	 .main-image-info-container {
+		 position: absolute;
+		 left: 50%;
+		 top: 90%;
+		 transform: translate(-50%, -50%);
+		 margin: 0;
+
+		 h3 {
+			 font-weight: 700;
+			 font-size: 24px;
+			 margin: -2px;
+			 color: rgb(242, 242, 242);
+		 }
+	 }
+
 }
 
 .content-block {

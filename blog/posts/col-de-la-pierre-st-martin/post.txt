@@ -1,10 +1,11 @@
 title: Col de la Pierre St Martin
+trip: Europe '15
 
 header: Col de la Croix de Fer
 text: After reaching Col de Soudet, a super tought climb by the way, I continued cycling to Col de la Pierre St Martin which was a few kilometers further up the road.
 text: On the summit of Soudet there was barely any snow and weather was pretty normal, but soon the ground was covered in snow and a thick fog surrounded me.
 
-image: img1.jpg fullwidth
+image: img1.jpg
 image: img2.jpg
 
 text: It looked almost surreal :) You couldn't see where the ground ended and the sky started because it was all so white! It was also pretty funny to cycle in shorts and t-shirt while being surrounded by so much snow and whiteness!
