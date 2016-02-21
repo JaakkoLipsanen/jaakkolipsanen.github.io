@@ -24,11 +24,12 @@ export default {
 		routePath: String
 	},
 	watch: {
-		"route-path": function(value, oldValue) {
+		"routePath": function(value, oldValue) {
 			if(!(value in this.routes)) {
 				this.routes[value] = { routePath: value };
 			}
 
+			console.log("XXX " + this.routePath);
 			this.map.SetRoute(this.routes[value]);
 		}
 	},
@@ -87,7 +88,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-	$map-size: 100%;
+	$map-size: 500px;
 	#cycle-map-container {
 		width: $map-size;
 		height: $map-size;

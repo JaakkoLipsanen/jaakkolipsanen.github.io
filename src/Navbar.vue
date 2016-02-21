@@ -38,7 +38,7 @@ export default {
 	#navbar-container {
 		width: 100%;
 		height: 72px;
-
+		top: 0;
 	}
 
 	#navbar-header-text {

@@ -5,7 +5,7 @@
 
 			<!-- Vignette -->
 			<div style="position: absolute; top: 0; height: 100%; width: 100%;
-				background-color: rgba(0, 0, 0, 0.18); box-shadow: inset 0 0 25vw 3.5vw rgb(0, 0, 0);" ></div>
+				background-color: rgba(0, 0, 0, 0.3); box-shadow: inset 0 0 25vw 2vw rgb(0, 0, 0);" ></div>
 
 			<p class="main-image-title" style="">  {{ blogPost.Title.toUpperCase() }}</p>
 			<div class="main-image-info-container">

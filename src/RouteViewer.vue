@@ -1,7 +1,7 @@
 <template>
 	<div id="routeviewer-container" v-show="selectedItem != null">
 		<p>{{ selectedItem.text }}</p>
-		<cycle-map :route="selectedItem"></cycle-map>
+		<cycle-map :route-path="selectedItem.route"></cycle-map>
 		<gallery :route="selectedItem" style="margin-top: 64px"></gallery>
 	</div>
 </template>
@@ -25,6 +25,7 @@ export default {
 	events: {
 		"selected-route-changed": function(selectedItem) {
 			this.selectedItem = selectedItem;
+			console.log("CHANGED");
 		}
 	}
 };
