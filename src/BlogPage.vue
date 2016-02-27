@@ -176,4 +176,17 @@ export default {
 	}
 }
 
+@media all and (max-width: 422px) {
+	.content-block {
+    	.image-block {
+    		width: 100% !important;
+		}
+	}
+
+	.image-group {
+		width: 100% !important;
+	}
+
+}
+
 </style>
