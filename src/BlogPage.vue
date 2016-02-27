@@ -5,7 +5,7 @@
 
 			<!-- Vignette -->
 			<div style="position: absolute; top: 0; height: 100%; width: 100%;
-				background-color: rgba(0, 0, 0, 0.3); box-shadow: inset 0 0 25vw 2vw rgb(0, 0, 0);" ></div>
+				background-color: rgba(0, 0, 0, 0.3); box-shadow: inset 0 0 25vw rgb(0, 0, 0);" ></div>
 
 			<p class="main-image-title" style="">  {{ blogPost.Title.toUpperCase() }}</p>
 			<div class="main-image-info-container">
@@ -19,9 +19,27 @@
 
 				<p v-if="block.Type == 'Text'" class="text-block">{{ block.Text }}</p>
 				<h1 v-if="block.Type == 'Header'" class="header-block"> {{ block.Title }} </h1>
-				<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" v-else
-					style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 40em rgba(0, 0, 0, 0.35);">
+				<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
+					<!-- style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.35);"> -->
+					<img src="{{ blogPost.Directory + block.Source }}" style="width: 100%;">
 				</div>
+			</div>
+
+			<div class="image-group">
+				<div class="group-image portrait"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img4.jpg"></div>
+				<div class="group-image"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img3.jpg"></div>
+					<div class="group-image portrait"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img4.jpg"></div>
+					<div class="group-image"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img3.jpg"></div>
+			</div>
+
+			<div class="image-group">
+				<div class="group-image"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img1.jpg"></div>
+			</div>
+
+			<div class="image-group">
+				<div class="group-image portrait"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img4.jpg"></div>
+				<div class="group-image"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img3.jpg"></div>
+				<div class="group-image"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img2.jpg"></div>
 			</div>
 		</div>
 	</div>
@@ -63,6 +81,24 @@ export default {
 
 <style lang="sass" id="style-sheet" disabled=false>
 
+.image-group {
+	display: flex;
+	width: 70%;
+	margin: 0 auto;
+}
+
+.group-image {
+	flex: 1 1 100%;
+	margin: 0px 3px;
+}
+
+.group-image.portrait {
+	flex: 1 1 56.25%; /* so where does this come from? I'm not sure, but I think it's because 1 / 0.5625 == 1.7777 (same as 16:9 aspect ratio) and (4/3)^2 == 16/9 */
+}
+
+.group-image {
+	width: 100%;
+}
 
 #post-container {
 	color: rgb(211, 211, 211);
@@ -107,6 +143,7 @@ export default {
 		 position: absolute;
 		 left: 50%;
 		 top: 90%;
+		 font-family: "Open Sans";
 		 transform: translate(-50%, -50%);
 		 margin: 0;
 
@@ -124,7 +161,7 @@ export default {
 	margin: 32px auto;
 
 	.image-block {
-		width: 80%;
+		width: 70%;
 
 		&.fullwidth-img {
 			width: 100% !important;

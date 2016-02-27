@@ -5,3 +5,6 @@ mieti kans viel et haluutko et blogi on reissu spesifinen vai kaikkien v‰linen..
 
 
 https://le-grimpeur.exposure.co/hannibal-500 t‰‰ on hyv‰ blogi-formaatti
+
+
+Okei, kun downsizaat kuvia niin sun pit‰‰ sharpenaa. T‰s ohje https://even.li/imagemagick-sharp-web-sized-photographs/ . Antti saa teh‰ t‰n raspille siin uppi vaihees
