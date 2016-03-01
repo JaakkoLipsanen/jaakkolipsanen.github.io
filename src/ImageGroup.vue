@@ -62,7 +62,7 @@ export default {
 					currentImage += createGroup(this.groupImages, currentImage, this.groupImages[currentImage].IsPortrait ? 2 : 1);
 				}
 				else {
-					currentImage += createGroup(this.groupImages, currentImage, Math.min(MaxImagesPerRow, imagesRemaining));
+					currentImage += createGroup(this.groupImages, currentImage, Math.min(MaxImagesPerRow, imagesRemaining - 2));
 				}
 			}
 
@@ -75,12 +75,13 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
+.image-group-container {
+	margin: auto;
+}
 
 .image-group {
 	display: flex;
-	width: 70%;
-	margin: 0 auto;
 }
 
 .group-image {
@@ -88,8 +89,8 @@ export default {
 	margin: 0px 3px;
 }
 
-.group-image {
-	width: 100%;
-}
+.group-image img {
 
+		width: 100%;
+}
 </style>

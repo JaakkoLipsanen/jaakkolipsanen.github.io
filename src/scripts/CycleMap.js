@@ -232,7 +232,12 @@ export class CycleMap {
 		let googleMapsProperties = {
 			panControl: false,
 			mapTypeControl: false,
-			zoomControl: false,
+			zoomControl: true,
+
+			scrollwheel: false,
+			navigationControl: true,
+			scaleControl: false,
+			draggable: true,
 
 			streetViewControl: true,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -240,8 +245,10 @@ export class CycleMap {
 			// default values: if there is no route then these must be set
 			zoom: 5,
 			center: new google.maps.LatLng(48, 15), // middle of europe
-			styles: MapStyles.Desert.NormalStyle,
-			backgroundColor: "rgb(43, 43, 43)" // same color as the ocean in the map style
+			styles: MapStyles.Light.NormalStyle,
+			backgroundColor: "rgb(43, 43, 43)", // same color as the ocean in the map style
+
+
 		};
 
 		this._googleMap = new google.maps.Map(container, googleMapsProperties);
@@ -345,7 +352,23 @@ class Style {
 
 // !! "elementType: labels" must be LAST ONE !!!
 const MapStyles = {
-	Desert: new Style([
+	Light: new Style([
+		{"featureType":"administrative","stylers":[{"visibility":"off"}]},
+		{"featureType":"administrative.locality","stylers":[{"visibility":"on"}]},
+		{"featureType":"administrative.province", "elementType": "geometry", "stylers":[{"visibility":"on"}]},
+		{"featureType":"administrative.country", "elementType": "geometry", "stylers":[{"visibility":"on"}]},
+
+		{"featureType":"poi","stylers":[{"visibility":"simplified"}]},
+		{"featureType":"road","stylers":[{"visibility":"simplified"}]},
+		{"featureType":"water","stylers":[{"visibility":"simplified"}]},
+		{"featureType":"transit","stylers":[{"visibility":"simplified"}]},
+		{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},
+		{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},
+		{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},
+		{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},
+		{"stylers":[{"saturation":-77}]},{"featureType":"road"}]),
+
+	Dark: new Style([
 		{
 			"featureType": "all",
 			"elementType": "labels.text.fill",
@@ -436,6 +459,15 @@ const MapStyles = {
 				}
 			]
 		},
+		{
+		   "featureType": "poi.park",
+		   "elementType": "geometry.fill",
+		   "stylers": [
+				   {
+					   "color": "#373737"
+				   }
+		   		]
+		   },
 		{
 			"featureType": "road.highway",
 			"elementType": "geometry.fill",

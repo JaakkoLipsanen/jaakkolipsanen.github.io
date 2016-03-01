@@ -1,6 +1,6 @@
-title: Col de la Croix de Fer
+title: Col de la Pierre St Martin
 trip: Testing Trip
-date-range: 1-4
+date-range: 5-7
 main-image: img1.jpg
 
 header: Col de la Croix de Fer
@@ -21,4 +21,4 @@ text: I met a German couple at the top who were cycling from southern Spain to G
 
 text: So I started the loong descent down which was, like descents always are, super fun!
 
-image-group: img1.jpg?1920x1080 img2.jpg?1920x1080 img3.jpg?1080x1920 img1.jpg?1920x1080 img2.jpg?1920x1080 img3.jpg?1080x1920 img5.jpg?1920x1080 img4.jpg?1920x1080 img2.jpg?1920x1080 img3.jpg?1080x1920
+image-group: img1.jpg?1920x1442 img2.jpg?1920x1442 img3.jpg?1920x1442 img1.jpg?1920x1442 img2.jpg?1920x1442 img3.jpg?1920x1442 img5.jpg?1920x1440 img4.jpg?1920x2560 img2.jpg?1920x1442 img3.jpg?1920x1442

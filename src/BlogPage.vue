@@ -1,7 +1,7 @@
 <template>
 	<div id="post-container">
 		<div id="main-image-container" >
-			<div class="main-image" style="background-image: url({{ blogPost.MainImageSource }});"></div>
+			<div class="main-image" style="background-image: url({{ blogPost.MainImage.FullPath }});"></div>
 
 			<!-- Vignette -->
 			<div style="position: absolute; top: 0; height: 100%; width: 100%;
@@ -10,8 +10,13 @@
 			<p class="main-image-title" style="">  {{ blogPost.Title.toUpperCase() }}</p>
 			<div class="main-image-info-container">
 				<h3 >{{ blogPost.Trip }}</h3>
-				<h3>Day 1-4</h3>
+				<h3>Day {{ blogPost.DateRange }}</h3>
 			</div>
+		</div>
+
+		<div class="navigation-controls" v-on="scroll:onScrolled">
+			<a v-if="blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="float:left; margin-left: 20px;"> {{ '< Day ' + blog.GetPreviousPostInfo(this.blogPost).DateRange }}</a>
+			<a v-if="blog.GetNextPostInfo(blogPost) != null" v-on:click="nextPostClicked" style="float:right; margin-right: 20px"> {{ 'Day ' + blog.GetNextPostInfo(blogPost).DateRange + ' >' }}</a>
 		</div>
 
 		<div id="content-container">
@@ -19,7 +24,7 @@
 
 				<p v-if="block.Type == 'Text'" class="text-block">{{ block.Text }}</p>
 				<h1 v-if="block.Type == 'Header'" class="header-block"> {{ block.Title }} </h1>
-				<image-group v-if="block.Type == 'ImageGroup'" :group-images="block.Images"></image-group>
+				<image-group v-if="block.Type == 'ImageGroup'" class="image-group-block" :group-images="block.Images"></image-group>
 				<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
 					<!-- style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.35);"> -->
 					<img src="{{ block.Image.FullPath }}" style="width: 100%;">
@@ -27,13 +32,15 @@
 			</div>
 		</div>
 
+		<cycle-map style="width: 70%; height: 60vh"></cycle-map>
+
 	</div>
 </template>
 
 <script>
-import Gallery from "./Gallery.vue";
 import ImageGroup from "./ImageGroup.vue";
-import { BlogList, BlogImage } from "./scripts/Blog.js";
+import CycleMap from "./CycleMap.vue";
+import { BlogList, BlogPost, BlogImage } from "./scripts/Blog.js";
 
 export default {
 	data() {
@@ -44,54 +51,87 @@ export default {
 	},
 
 	components: {
-		"gallery": Gallery,
 		"image-group": ImageGroup,
+		"cycle-map": CycleMap
 	},
 
 	ready: function() {
 		let data = this;
 		BlogList.FromFile("../blog/blog-posts.txt").then(async blog => {
-			console.log(blog.Posts[0]);
+			data.blog = blog;
+			data.blogPost = await blog.GetBlogPostByIndex(0);
 
-			const post = await blog.GetBlogPostByName(blog.Posts[0]);
-			data.blogPost = post;
-			console.log(post.ContentBlocks[0]);
+			console.log(data.blog.GetNext(data.blogPost).DateRange);
 		});
 
 		$(window).on('resize', () => {
 			console.log($("#main-img").height());
 			$("#main-image-container").height($("#main-img").height());
 		});
+
+		$(window).scroll(() => {
+			const scrollAmount = $(window).scrollTop();
+			console.log("xxx" + scrollAmount);
+			if(scrollAmount > $(window).height() - 10) {
+				$(".navigation-controls").addClass("fixed-to-top");
+			}
+			else {
+				$(".navigation-controls").removeClass("fixed-to-top");
+			}
+		});
+	},
+
+	methods: {
+		previousPostClicked: async function() {
+			$('html, body').animate({
+          		scrollTop: 0
+        	}, 800, "swing", async () => {
+				this.blogPost = await this.blog.GetBlogPostByPostInfo(this.blog.GetPreviousPostInfo(this.blogPost));
+			});
+		},
+
+		nextPostClicked: function() {
+			$('html, body').animate({
+          		scrollTop: 0
+        	}, 800, "swing", async () => {
+				this.blogPost = await this.blog.GetBlogPostByPostInfo(this.blog.GetNextPostInfo(this.blogPost));
+			});
+		},
+
+		onScrolled: function() {
+			console.log("scroll!");
+		}
 	}
 };
 </script>
 
 <style lang="sass" id="style-sheet" disabled=false>
 
-.image-group {
-	display: flex;
+.image-group-block {
 	width: 70%;
-	margin: 0 auto;
 }
 
-.group-image img {
+.navigation-controls {
+	position: relative;
 	width: 100%;
+	a {
+		font-size: 20px;
+		font-weight: 700;
+	}
 }
 
-.group-image {
-	flex: 1 1 100%;
-	margin: 0px 3px;
+.navigation-controls.fixed-to-top {
+	position: fixed;
+	top: 10px;
 }
-
-.group-image.portrait {
-	flex: 1 1 56.25%; /* so where does this come from? I'm not sure, but I think it's because 1 / 0.5625 == 1.7777 (same as 16:9 aspect ratio) and (4/3)^2 == 16/9 */
-}
-
 
 #post-container {
-	color: rgb(211, 211, 211);
+	color: rgb(200, 200, 200);
 	font-size: 18px;
 	text-align: center;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 #main-image-container {
@@ -139,7 +179,7 @@ export default {
 			 font-weight: 700;
 			 font-size: 24px;
 			 margin: -2px;
-			 color: rgb(242, 242, 242);
+			 color: rgb(225, 225, 225);
 		 }
 	 }
 
@@ -161,6 +201,11 @@ export default {
 		max-width: 800px;
 		margin: 16px auto;
 		color: rgb(180, 180, 180);
+	}
+
+	.header-block {
+		width: 90%;
+		margin: auto;
 	}
 }
 
