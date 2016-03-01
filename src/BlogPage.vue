@@ -7,16 +7,16 @@
 			<div style="position: absolute; top: 0px; height: 100%; width: 100%;
 				background-color: rgba(0, 0, 0, 0.3); box-shadow: inset 0 0 25vw rgb(0, 0, 0);" ></div>
 
-			<p class="main-image-title" style="">  {{ blogPost.Title.toUpperCase() }}</p>
+			<p class="main-image-title">  {{ blogPost.Title.toUpperCase() }}</p>
 			<div class="main-image-info-container">
 				<h3>{{ blogPost.Trip }}</h3>
 				<h3>Day {{ blogPost.DateRange }}</h3>
 			</div>
 		</div>
 
-		<div class="navigation-controls" v-on="scroll:onScrolled">
-			<a v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="float:left; margin-left: 20px;"> {{ '< Day ' + blog.GetPreviousPostInfo(this.blogPost).DateRange }}</a>
-			<a v-if="blog != null && blog.GetNextPostInfo(blogPost) != null" v-on:click="nextPostClicked" style="float:right; margin-right: 20px"> {{ 'Day ' + blog.GetNextPostInfo(blogPost).DateRange + ' >' }}</a>
+		<div class="navigation-controls">
+			<a v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="float: left; margin-left: 20px;"> {{ '&lt; Day ' + blog.GetPreviousPostInfo(this.blogPost).DateRange }}</a>
+			<a v-if="blog != null && blog.GetNextPostInfo(blogPost) != null" v-on:click="nextPostClicked" style="float: right; margin-right: 20px"> {{ 'Day ' + blog.GetNextPostInfo(blogPost).DateRange + ' &gt;' }}</a>
 		</div>
 
 		<div id="content-container">
