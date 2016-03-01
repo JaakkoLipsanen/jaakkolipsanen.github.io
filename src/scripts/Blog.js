@@ -1,10 +1,26 @@
 import { LoadTextAsync, GetUriDirectory } from "./FileHelper.js";
 import { Assert, IsEmptyOrWhitespace } from "./MiscHelper.js";
 
-export const BlockType = {
-	Text: 0,
-	Image: 1,
-};
+export class BlogImage {
+	constructor(folder, name, width, height) {
+		this.Folder = folder;
+		this.Name = name;
+		this.Width = width;
+		this.Height = height;
+	}
+
+	get AspectRatio() {
+		return this.Width / this.Height;
+	}
+
+	get FullPath() {
+		return this.Folder + "/" + this.Name;
+	}
+
+	get IsPortrait() {
+		return this.AspectRatio < 1;
+	}
+}
 
 export class TextBlock {
 	constructor(text) {
@@ -27,8 +43,8 @@ export class HeaderBlock {
 }
 
 export class ImageBlock {
-	constructor(source, isFullWidth) {
-		this.Source = source.trim();
+	constructor(image, isFullWidth) {
+		this.Image = image;
 		this.IsFullWidth = isFullWidth;
 	}
 
@@ -36,26 +52,50 @@ export class ImageBlock {
 		return "Image";
 	}
 
-	static Parse(str) {
+	static Parse(folder, str) {
 		const parameters = str.split(' ');
 		Assert(parameters.length > 0);
 
 		const source = parameters[0];
 		const isFullWidth = parameters.indexOf("fullwidth") >= 0;
-		console.log(parameters)
-		return new ImageBlock(source, isFullWidth);
+		return new ImageBlock(new BlogImage(folder, source, 0, 0), isFullWidth);
+	}
+}
+
+export class ImageGroupBlock {
+	constructor(images) {
+		this.Images = images;
+	}
+
+	get Type() {
+		return "ImageGroup";
+	}
+
+	static Parse(folder, str) {
+		const params = str.split(' ');
+
+		const images = [];
+		for(let i = 0; i < params.length; i++) {
+			const imgParams = params[i].split("?");
+			Assert(imgParams.length >= 2);
+			const resolutionStr = imgParams[1].split("x"); // "3452x2441" for example
+
+			images.push(new BlogImage(folder, imgParams[0], parseInt(resolutionStr[0]), parseInt(resolutionStr[1])));
+		}
+
+		return new ImageGroupBlock(images);
 	}
 }
 
 export class BlogPost{
-	constructor(title, trip, dateRange, contentBlocks, directory) {
+	constructor(title, trip, dateRange, mainImageSource, contentBlocks, directory) {
 		this.Title = title;
 		this.Trip = trip; // trip == "Europe '15'". "Spain '14'" etc
 		this.DateRange = dateRange;
 		this.ContentBlocks = contentBlocks;
 
 		this.Directory = directory;
-		this.MainImageSource = contentBlocks.filter(x => x instanceof ImageBlock)[0].Source;
+		this.MainImageSource = directory + mainImageSource;
 	}
 
 	static async FromFile(postFolder) {
@@ -78,11 +118,13 @@ export class BlogPost{
 				Assert(lines.length > 0, "Blog post doesn't have content");
 				Assert(ReadProperty(lines[0]) == "title", "Blog post .txt doesn't start with 'title'"); // 'title' property must be on the first line
 				Assert(ReadProperty(lines[1]) == "trip", "Blog post .txt doesn't have 'trip' tag (or not in the second line)");
-				let title = ParseProperty(lines[0]);
-				let trip = ParseProperty(lines[1]);
+				Assert(ReadProperty(lines[2]) == "main-image", "Blog post .txt doesn't have 'main-image' tag (or not in the third line)");
+				const title = ParseProperty(lines[0]);
+				const trip = ParseProperty(lines[1]);
+				const mainImage = (ReadProperty(lines[2]) == "main-image") ? ParseProperty(lines[2]) : "";
 
 				let contentBlocks = [];
-				for(let i = 2; i < lines.length; i++) {
+				for(let i = (ReadProperty(lines[2]) == "main-image") ? 3 : 2; i < lines.length; i++) {
 					if(IsEmptyOrWhitespace(lines[i])) { // skip empty lines
 						continue;
 					}
@@ -93,7 +135,11 @@ export class BlogPost{
 							contentBlocks.push(new TextBlock(ParseProperty(lines[i])));
 							break;
 						case "image":
-							contentBlocks.push(ImageBlock.Parse(ParseProperty(lines[i])));
+							contentBlocks.push(ImageBlock.Parse(postFolder, ParseProperty(lines[i])));
+							break;
+
+						case "image-group":
+							contentBlocks.push(ImageGroupBlock.Parse(postFolder, ParseProperty(lines[i])));
 							break;
 
 						case "header":
@@ -105,7 +151,7 @@ export class BlogPost{
 					}
 				}
 
-				resolve(new BlogPost(title, trip, "", contentBlocks, postFolder));
+				resolve(new BlogPost(title, trip, "", mainImage, contentBlocks, postFolder));
 			}
 			catch(err) { reject(err); }
 		});

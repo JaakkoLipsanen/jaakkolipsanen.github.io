@@ -1,11 +1,12 @@
 title: Col de la Pierre St Martin
 trip: Europe '15
+main-image: img1.jpg
 
 header: Col de la Croix de Fer
 text: After reaching Col de Soudet, a super tought climb by the way, I continued cycling to Col de la Pierre St Martin which was a few kilometers further up the road.
 text: On the summit of Soudet there was barely any snow and weather was pretty normal, but soon the ground was covered in snow and a thick fog surrounded me.
 
-image: img1.jpg
+image: img6.jpg fullwidth
 image: img2.jpg
 
 text: It looked almost surreal :) You couldn't see where the ground ended and the sky started because it was all so white! It was also pretty funny to cycle in shorts and t-shirt while being surrounded by so much snow and whiteness!
@@ -16,6 +17,8 @@ image: img4.jpg
 header: The roof of Portugal
 text: I was feeling pretty proud when I reached the top! It was definitely one of coolest places that I had ever visited.
 
-text: I met a German couple at the top who were cycling from southern Spain to Germany with a tandem bike. They had decided to spend the night in the summit. There was this empty cottage which was apparently open, so they had decided to sleep in there for the night. I had basically ran out of food and water at that so while they asked if I wanted to share the cottage with them for the night, I had to decline. 
+text: I met a German couple at the top who were cycling from southern Spain to Germany with a tandem bike. They had decided to spend the night in the summit. There was this empty cottage which was apparently open, so they had decided to sleep in there for the night. I had basically ran out of food and water at that so while they asked if I wanted to share the cottage with them for the night, I had to decline.
 
 text: So I started the loong descent down which was, like descents always are, super fun!
+
+image-group: img1.jpg?1920x1442 img2.jpg?1920x1442 img3.jpg?1920x1442 img1.jpg?1920x1442 img2.jpg?1920x1442 img3.jpg?1920x1442 img5.jpg?1920x1440 img4.jpg?1920x2560 img2.jpg?1920x1442 img3.jpg?1920x1442

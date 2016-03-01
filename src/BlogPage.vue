@@ -1,7 +1,7 @@
 <template>
 	<div id="post-container">
 		<div id="main-image-container" >
-			<div class="main-image" style="background-image: url({{ blogPost.Directory + blogPost.MainImageSource }});"></div>
+			<div class="main-image" style="background-image: url({{ blogPost.MainImageSource }});"></div>
 
 			<!-- Vignette -->
 			<div style="position: absolute; top: 0; height: 100%; width: 100%;
@@ -19,35 +19,21 @@
 
 				<p v-if="block.Type == 'Text'" class="text-block">{{ block.Text }}</p>
 				<h1 v-if="block.Type == 'Header'" class="header-block"> {{ block.Title }} </h1>
+				<image-group v-if="block.Type == 'ImageGroup'" :group-images="block.Images"></image-group>
 				<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
 					<!-- style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.35);"> -->
-					<img src="{{ blogPost.Directory + block.Source }}" style="width: 100%;">
+					<img src="{{ block.Image.FullPath }}" style="width: 100%;">
 				</div>
 			</div>
-
-			<div class="image-group">
-				<div class="group-image portrait"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img4.jpg"></div>
-				<div class="group-image"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img3.jpg"></div>
-					<div class="group-image portrait"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img4.jpg"></div>
-					<div class="group-image"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img3.jpg"></div>
-			</div>
-
-			<div class="image-group">
-				<div class="group-image"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img1.jpg"></div>
-			</div>
-
-			<div class="image-group">
-				<div class="group-image portrait"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img4.jpg"></div>
-				<div class="group-image"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img3.jpg"></div>
-				<div class="group-image"> <img class="group-image" src="../blog//posts/col-de-la-pierre-st-martin/img2.jpg"></div>
-			</div>
 		</div>
+
 	</div>
 </template>
 
 <script>
 import Gallery from "./Gallery.vue";
-import { BlogList } from "./scripts/Blog.js";
+import ImageGroup from "./ImageGroup.vue";
+import { BlogList, BlogImage } from "./scripts/Blog.js";
 
 export default {
 	data() {
@@ -58,7 +44,8 @@ export default {
 	},
 
 	components: {
-		"gallery": Gallery
+		"gallery": Gallery,
+		"image-group": ImageGroup,
 	},
 
 	ready: function() {
@@ -87,6 +74,10 @@ export default {
 	margin: 0 auto;
 }
 
+.group-image img {
+	width: 100%;
+}
+
 .group-image {
 	flex: 1 1 100%;
 	margin: 0px 3px;
@@ -96,9 +87,6 @@ export default {
 	flex: 1 1 56.25%; /* so where does this come from? I'm not sure, but I think it's because 1 / 0.5625 == 1.7777 (same as 16:9 aspect ratio) and (4/3)^2 == 16/9 */
 }
 
-.group-image {
-	width: 100%;
-}
 
 #post-container {
 	color: rgb(211, 211, 211);
