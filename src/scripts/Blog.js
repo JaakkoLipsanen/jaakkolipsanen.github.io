@@ -198,7 +198,6 @@ export class BlogList {
 		}
 
 		const index = this.GetIndexByPost(post);
-		console.log(index + " " + (this.PostInfos.length - 1));
 		if(index == this.PostInfos.length - 1) {
 			return null;
 		}

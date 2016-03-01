@@ -29,7 +29,6 @@ export default {
 				this.routes[value] = { routePath: value };
 			}
 
-			console.log("XXX " + this.routePath);
 			this.map.SetRoute(this.routes[value]);
 		}
 	},

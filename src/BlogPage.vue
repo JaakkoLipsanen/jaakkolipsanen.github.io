@@ -63,13 +63,11 @@ export default {
 		});
 
 		$(window).on('resize', () => {
-			console.log($("#main-img").height());
 			$("#main-image-container").height($("#main-img").height());
 		});
 
 		$(window).scroll(() => {
 			const scrollAmount = $(window).scrollTop();
-			console.log("xxx" + scrollAmount);
 			if(scrollAmount > $(window).height() - 10) {
 				$(".navigation-controls").addClass("fixed-to-top");
 			}
@@ -95,10 +93,6 @@ export default {
 				this.blogPost = await this.blog.GetBlogPostByPostInfo(this.blog.GetNextPostInfo(this.blogPost));
 			});
 		},
-
-		onScrolled: function() {
-			console.log("scroll!");
-		}
 	}
 };
 </script>
