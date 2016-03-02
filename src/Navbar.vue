@@ -1,15 +1,6 @@
 <template>
 	<div id="navbar-container">
 		<p id="navbar-header-text">{{ title }}</p>
-		<!--
-		<div id="route-selection-list-container">
-			<ul id="route-selection-list">
-				<li v-for="(index, item) in items" v-bind:class="{ 'selected': $index == selectedIndex }" v-on:click="itemClicked">
-					<p class="europe14-trip-button">{{ item }}</p>
-				</li>
-			</ul>
-		</div>
-	-->
 	</div>
 </template>
 
@@ -39,6 +30,8 @@ export default {
 		width: 100%;
 		height: 72px;
 		top: 0;
+		position: fixed;
+		z-index: 10;
 	}
 
 	#navbar-header-text {

@@ -14,7 +14,13 @@
 			</div>
 		</div>
 
-		<div class="navigation-controls">
+		<div class="nav-cont" style="position: fixed; height: 72px; top: 0px; z-index: 1">
+			<h1 style="position: absolute; top: -10px; left: 4px; font-family: Yanone Kaffeesatz; display: inline">USA16</h1>
+			<p style="position: absolute; top: 6px; left: 96px; color: rgb(230, 230, 230); font-weight: 600;  display: inline">Previous</p>
+			<p style="position: absolute; top: 6px; left: 180px; color: rgb(230, 230, 230); font-weight: 600; display: inline">Next</p>
+		</div>
+
+		<div v-if="false" class="navigation-controls">
 			<a v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="float: left; margin-left: 20px;"> {{ '&lt; Day ' + blog.GetPreviousPostInfo(this.blogPost).DateRange }}</a>
 			<a v-if="blog != null && blog.GetNextPostInfo(blogPost) != null" v-on:click="nextPostClicked" style="float: right; margin-right: 20px"> {{ 'Day ' + blog.GetNextPostInfo(blogPost).DateRange + ' &gt;' }}</a>
 		</div>
@@ -67,6 +73,7 @@ export default {
 		});
 
 		$(window).scroll(() => {
+			$(".nav-cont").addClass("has-scrolled");
 			const scrollAmount = $(window).scrollTop();
 			if(scrollAmount > $(window).height() - 10) {
 				$(".navigation-controls").addClass("fixed-to-top");
@@ -98,6 +105,17 @@ export default {
 </script>
 
 <style lang="sass" id="style-sheet" disabled=false>
+
+.nav-cont {
+	opacity: 0;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	transition: opacity 1s ease-in-out;
+}
+
+.nav-cont.has-scrolled {
+	opacity: 1;
+}
 
 .route-map {
 	width: 70% !important;
