@@ -15,8 +15,8 @@
 		</div>
 
 		<div class="nav-cont" style="position: fixed; height: 48px; top: 0px;">
-			<h1 style="position: absolute; top: -20px; left: 50%; font-family: Yanone Kaffeesatz;" v-on:click="blogListClicked">USA16</h1>
-			<p v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="position: absolute; top: -6px; left: 32px; color: rgb(210, 210, 210); font-weight: 700;  display: block"> {{ '&lt; Day ' + blog.GetPreviousPostInfo(this.blogPost).DateRange + ': ' +  blog.GetPreviousPostInfo(this.blogPost).Title }}</p>
+			<h1 style="position: absolute; top: -20px; left: 50%; font-family: Yanone Kaffeesatz;" v-on:click="blogListClicked">EUROPE14</h1>
+			<p v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="position: absolute; font-family: Yanone Kaffeesatz; top: -6px; left: 32px; color: rgb(210, 210, 210); font-weight: 700;  display: block"> {{ '&lt; Day ' + blog.GetPreviousPostInfo(this.blogPost).DateRange + ': ' +  blog.GetPreviousPostInfo(this.blogPost).Title }}</p>
 			<p v-if="blog != null && blog.GetNextPostInfo(blogPost) != null" v-on:click="nextPostClicked" style="position: absolute; top: -6px; right: 32px; color: rgb(210, 210, 210); font-weight: 700; display: block"> {{ 'Day ' + blog.GetNextPostInfo(blogPost).DateRange + ': ' +  blog.GetNextPostInfo(this.blogPost).Title + ' &gt;' }}</p>
 		</div>
 
@@ -145,6 +145,7 @@ export default {
 	color: rgb(200, 200, 200);
 	font-size: 18px;
 	text-align: center;
+		font-family: "Yanone Kaffeesatz";
 
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -187,7 +188,6 @@ export default {
 		 position: absolute;
 		 left: 50%;
 		 top: 90%;
-		 font-family: "Open Sans";
 		 transform: translate(-50%, -50%);
 		 margin: 0;
 
@@ -217,6 +217,7 @@ export default {
 		max-width: 800px;
 		margin: 16px auto;
 		color: rgb(180, 180, 180);
+		font-size: 22px;
 	}
 
 	.header-block {
