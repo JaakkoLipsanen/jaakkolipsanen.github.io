@@ -32,7 +32,7 @@
 			</div>
 		</div>
 
-		<cycle-map style="width: 70%; height: 60vh"></cycle-map>
+		<cycle-map class="route-map"></cycle-map>
 
 	</div>
 </template>
@@ -99,8 +99,9 @@ export default {
 
 <style lang="sass" id="style-sheet" disabled=false>
 
-.image-group-block {
-	width: 70%;
+.route-map {
+	width: 70% !important;
+	height: 60vh !important;
 }
 
 .navigation-controls {
@@ -114,7 +115,9 @@ export default {
 
 .navigation-controls.fixed-to-top {
 	position: fixed;
-	top: 10px;
+	top: 0px;
+	padding-top: 6px;
+	padding-bottom: 4px
 }
 
 #post-container {
@@ -189,29 +192,65 @@ export default {
 	}
 
 	.text-block {
-		width: 90%;
+		width: 70%;
 		max-width: 800px;
 		margin: 16px auto;
 		color: rgb(180, 180, 180);
 	}
 
 	.header-block {
-		width: 90%;
+		width: 70%;
+		margin: auto;
+	}
+
+	.image-group-block {
+		width: 70%;
 		margin: auto;
 	}
 }
 
-@media all and (max-width: 422px) {
+@media all and (max-width: 602px) {
 	.content-block {
     	.image-block {
     		width: 100% !important;
+			max-width: 422px!important;
+		}
+
+		.image-group-block {
+			width: 100% !important;
+			max-width: 422px!important;
 		}
 	}
 
-	.image-group {
+	.route-map {
 		width: 100% !important;
+		max-width: 422px!important;
 	}
 
+
+}
+
+@media all and (max-width: 943px) {
+	.navigation-controls.fixed-to-top {
+		background-color: rgba(0, 0, 0, 0.75);
+	}
+
+	.content-block {
+    	.image-block {
+    		width: 100% !important;
+			max-width: 660px!important;
+		}
+
+		.image-group-block {
+			width: 100% !important;
+			max-width: 660px!important;
+		}
+	}
+
+	.route-map {
+		width: 100% !important;
+		max-width: 660px!important;
+	}
 }
 
 </style>
