@@ -30,8 +30,8 @@ export default {
 		width: 100%;
 		height: 72px;
 		top: 0;
-		position: fixed;
 		z-index: 10;
+		pointer-events: none;
 	}
 
 	#navbar-header-text {

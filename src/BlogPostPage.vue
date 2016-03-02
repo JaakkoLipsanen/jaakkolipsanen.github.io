@@ -14,14 +14,14 @@
 			</div>
 		</div>
 
-		<div class="nav-cont" style="position: fixed; height: 72px; top: 0px; z-index: 1">
-			<h1 style="position: absolute; top: -10px; left: 4px; font-family: Yanone Kaffeesatz; display: inline">USA16</h1>
-			<p style="position: absolute; top: 6px; left: 96px; color: rgb(230, 230, 230); font-weight: 600;  display: inline">Previous</p>
-			<p style="position: absolute; top: 6px; left: 180px; color: rgb(230, 230, 230); font-weight: 600; display: inline">Next</p>
+		<div class="nav-cont" style="position: fixed; height: 48px; top: 0px;">
+			<h1 style="position: absolute; top: -20px; left: 50%; font-family: Yanone Kaffeesatz;" v-on:click="blogListClicked">USA16</h1>
+			<p v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="position: absolute; top: -6px; left: 32px; color: rgb(210, 210, 210); font-weight: 700;  display: block"> {{ '&lt; Day ' + blog.GetPreviousPostInfo(this.blogPost).DateRange + ': ' +  blog.GetPreviousPostInfo(this.blogPost).Title }}</p>
+			<p v-if="blog != null && blog.GetNextPostInfo(blogPost) != null" v-on:click="nextPostClicked" style="position: absolute; top: -6px; right: 32px; color: rgb(210, 210, 210); font-weight: 700; display: block"> {{ 'Day ' + blog.GetNextPostInfo(blogPost).DateRange + ': ' +  blog.GetNextPostInfo(this.blogPost).Title + ' &gt;' }}</p>
 		</div>
 
 		<div v-if="false" class="navigation-controls">
-			<a v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="float: left; margin-left: 20px;"> {{ '&lt; Day ' + blog.GetPreviousPostInfo(this.blogPost).DateRange }}</a>
+			<a v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="float: left; margin-left: 20px;"> {{ '&lt; Day ' + blog.GetPreviousPostInfo(this.blogPost).DateRange + ': ' +  blog.GetPreviousPostInfo(this.blogPost).Title  }}</a>
 			<a v-if="blog != null && blog.GetNextPostInfo(blogPost) != null" v-on:click="nextPostClicked" style="float: right; margin-right: 20px"> {{ 'Day ' + blog.GetNextPostInfo(blogPost).DateRange + ' &gt;' }}</a>
 		</div>
 
@@ -72,14 +72,13 @@ export default {
 			$("#main-image-container").height($("#main-img").height());
 		});
 
-		$(window).scroll(() => {
-			$(".nav-cont").addClass("has-scrolled");
+		$(window).scroll(() => {;
 			const scrollAmount = $(window).scrollTop();
-			if(scrollAmount > $(window).height() - 10) {
-				$(".navigation-controls").addClass("fixed-to-top");
+			if(scrollAmount < 64) {
+				$(".nav-cont").removeClass("has-scrolled");
 			}
 			else {
-				$(".navigation-controls").removeClass("fixed-to-top");
+				$(".nav-cont").addClass("has-scrolled");
 			}
 		});
 	},
@@ -100,6 +99,10 @@ export default {
 				this.blogPost = await this.blog.GetBlogPostByPostInfo(this.blog.GetNextPostInfo(this.blogPost));
 			});
 		},
+
+		blogListClicked: function() {
+			this.$dispatch("change-page", "blog-list-page");
+		}
 	}
 };
 </script>
@@ -109,8 +112,8 @@ export default {
 .nav-cont {
 	opacity: 0;
 	width: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	transition: opacity 1s ease-in-out;
+	background-color: rgba(0, 0, 0, 0.3);
+	transition: opacity 0.5s ease-in-out;
 }
 
 .nav-cont.has-scrolled {
