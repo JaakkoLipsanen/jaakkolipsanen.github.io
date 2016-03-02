@@ -20,7 +20,7 @@
 		</div>
 
 		<div id="content-container">
-			<div class="content-block" v-for="block in blogPost.ContentBlocks" style="background-image: url({{ '../' + gallery.CurrentSource.Folder + 'thumbnails/' + photo.PhotoName}})" v-on:click="photoClicked(photo)">
+			<div class="content-block" v-for="block in blogPost.ContentBlocks" v-on:click="photoClicked(photo)">
 
 				<p v-if="block.Type == 'Text'" class="text-block">{{ block.Text }}</p>
 				<h1 v-if="block.Type == 'Header'" class="header-block"> {{ block.Title }} </h1>
