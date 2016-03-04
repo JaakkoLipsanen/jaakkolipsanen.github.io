@@ -123,6 +123,7 @@ export default {
 	p, h1 {
 		color: rgb(205, 205, 205);
 		cursor: pointer;
+		transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 
 		&:hover {
 			color: white !important;
