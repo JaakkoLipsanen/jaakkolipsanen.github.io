@@ -1,26 +1,6 @@
 import { LoadTextAsync, GetUriDirectory } from "./FileHelper.js";
-import { Assert, IsEmptyOrWhitespace } from "./MiscHelper.js";
-
-export class BlogImage {
-	constructor(folder, name, width = -1, height = -1) {
-		this.Folder = folder;
-		this.Name = name;
-		this.Width = width;
-		this.Height = height;
-	}
-
-	get AspectRatio() {
-		return this.Width / this.Height;
-	}
-
-	get FullPath() {
-		return this.Folder + "/" + this.Name;
-	}
-
-	get IsPortrait() {
-		return this.AspectRatio < 1;
-	}
-}
+import { Assert, IsEmptyOrWhitespace, IsTouchDevice } from "./MiscHelper.js";
+import { Photo } from "./Photo.js";
 
 export class TextBlock {
 	constructor(text) {
@@ -58,7 +38,7 @@ export class ImageBlock {
 
 		const source = parameters[0];
 		const isFullWidth = parameters.indexOf("fullwidth") >= 0;
-		return new ImageBlock(new BlogImage(folder, source), isFullWidth);
+		return new ImageBlock(new Photo(folder, source), isFullWidth);
 	}
 }
 
@@ -80,7 +60,7 @@ export class ImageGroupBlock {
 			Assert(imgParams.length >= 2);
 			const resolutionStr = imgParams[1].split("x"); // "3452x2441" for example
 
-			images.push(new BlogImage(folder, imgParams[0], parseInt(resolutionStr[0]), parseInt(resolutionStr[1])));
+			images.push(new Photo(folder, imgParams[0], parseInt(resolutionStr[0]), parseInt(resolutionStr[1])));
 		}
 
 		return new ImageGroupBlock(images);
@@ -95,6 +75,14 @@ export class BlogPost{
 		this.DateRange = dateRange;
 		this.MainImage= mainImage;
 		this.ContentBlocks = contentBlocks;
+	}
+
+	get DisplayString() {
+		if(IsTouchDevice()) {
+			return "Day " + this.DateRange;
+		}
+
+		return "Day " + this.DateRange + ": " + this.Title;
 	}
 
 	static async FromFile(name, postFolder) {
@@ -122,7 +110,7 @@ export class BlogPost{
 				const title = ParseProperty(lines[0]);
 				const trip = ParseProperty(lines[1]);
 				const dateRange = ParseProperty(lines[2]);
-				const mainImage = new BlogImage(postFolder, ParseProperty(lines[3]));
+				const mainImage = new Photo(postFolder, ParseProperty(lines[3]));
 
 				let contentBlocks = [];
 				for(let i = 4; i < lines.length; i++) {
@@ -160,11 +148,26 @@ export class BlogPost{
 }
 
 class BlogPostInfo {
-	constructor(name, title, dateRange, trip) {
+	constructor(name, title, dateRange, trip, mainImage, directory) {
 		this.Name = name;
 		this.Title = title;
 		this.DateRange = dateRange;
 		this.Trip = trip;
+		this.MainImage = mainImage;
+
+		this._directory = directory;
+	}
+
+	get DisplayString() {
+		if(IsTouchDevice()) {
+			return "Day " + this.DateRange;
+		}
+
+		return "Day " + this.DateRange + ": " + this.Title;
+	}
+
+	get Directory() {
+		return this._directory + "/posts/" + this.Name + "/";
 	}
 }
 
@@ -215,16 +218,27 @@ export class BlogList {
 		return -1;
 	}
 
+	async GetBlogPostByName(name) {
+		const blog = this;
+		return new Promise(async (resolve, reject) => {
+			try {
+				const postPath = blog.Directory + "/posts/" + name + "/";
+				if(!blog._blogPosts.has(postPath)) {
+					blog._blogPosts.set(postPath, await BlogPost.FromFile(name, postPath));
+				}
+
+				resolve(blog._blogPosts.get(postPath));
+			}
+			catch(err) { reject(err); }
+		});
+	}
+
 	async GetBlogPostByPostInfo(postInfo) {
 		const blog = this;
 		return new Promise(async (resolve, reject) => {
 			try {
-				const postPath = blog.Directory + "/posts/" + postInfo.Name + "/";
-				if(!blog._blogPosts.has(postPath)) {
-					blog._blogPosts.set(postPath, await BlogPost.FromFile(postInfo.Name, postPath));
-				}
-
-				resolve(blog._blogPosts.get(postPath));
+				const post = await blog.GetBlogPostByName(postInfo.Name);
+				resolve(post);
 			}
 			catch(err) { reject(err); }
 		});
@@ -235,7 +249,7 @@ export class BlogList {
 		const blog = this;
 		return new Promise(async (resolve, reject) => {
 			try {
-				const post = await blog.GetBlogPostByPostInfo(blog.PostInfos[index]);
+				const post = await blog.GetBlogPostByName(blog.PostInfos[index].Name);
 				resolve(post);
 			}
 			catch(err) { reject(err); }
@@ -258,11 +272,12 @@ export class BlogList {
 					const trip = parameters[1];
 					const title = parameters[2];
 					const dateRange = parameters[3];
+					const mainImage = parameters[4];
 
-					blogPosts.push(new BlogPostInfo(name, title, dateRange, trip));
+					blogPosts.push(new BlogPostInfo(name, title, dateRange, trip, mainImage, directory));
 				}
 
-				resolve(new BlogList(blogPosts, GetUriDirectory(blogPostListPath)));
+				resolve(new BlogList(blogPosts, directory));
 			}
 			catch(err) { reject(err); }
 		});

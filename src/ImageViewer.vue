@@ -4,12 +4,12 @@
 
 		<div id="image-container" >
 			<div id="image-cc">
-				<img id="image" src="{{ photoImagePath }}">
+				<img id="image" src="{{ currentPhoto.FullPath }}">
 				<p id="description-text">{{ currentPhoto.Description }}</p>
 
 				<div id="exif-div">
 					<p>{{ "Shutter Speed: " + currentPhotoExif.ShutterSpeed + "s" }}</p>
-					<p>{{ "Focal Length: " + currentPhotoExif.FocalLength + "mm" }}</p>
+					<p v-if="currentPhotoExif.FocalLength35mmEquivalent != undefined">{{ "Focal Length (35mm equiv): " + currentPhotoExif.FocalLength35mmEquivalent + "mm" }}</p>
 					<p>{{ "Aperture: " + currentPhotoExif.Aperture }}</p>
 					<p>{{ "ISO: " + currentPhotoExif.ISO }}</p>
 
@@ -28,7 +28,6 @@ export default {
 	data() {
 		return {
 			currentPhoto: null,
-			gallerySource: null,
 			currentPhotoExif: null
 		};
 	},
@@ -55,6 +54,7 @@ export default {
 			};
 
 			EXIF.getData(this, function() {
+				const exposureTime =  parseFloat(EXIF.getTag(this, "ExposureTime"));
 				self.currentPhotoExif = {
 					Manufacturer: EXIF.getTag(this, "Make"),
 					Model: EXIF.getTag(this, "Model"),
@@ -63,11 +63,11 @@ export default {
 					FlashStatus: EXIF.getTag(this, "FlashStatus"),
 
 					ExposureTime: EXIF.getTag(this, "ExposureTime"),
-					FValue: EXIF.getTag(this, "FNumber"),
+					Aperture: "f/" + EXIF.getTag(this, "FNumber"),
 					ISO: EXIF.getTag(this, "ISOSpeedRatings"),
-					ShutterSpeed: "1/" + Math.round(Math.pow(2, parseFloat(EXIF.getTag(this, "ShutterSpeedValue")))),
-					Aperture: "f/" + Math.round(Math.pow(Math.sqrt(2), parseFloat(EXIF.getTag(this, "ApertureValue"))) * 10) / 10,
+					ShutterSpeed: ((exposureTime >= 1) ? Math.round(exposureTime) : ("1/" + Math.round(1 / exposureTime))),
 					FocalLength: EXIF.getTag(this, "FocalLength"),
+					FocalLength35mmEquivalent: EXIF.getTag(this, "FocalLengthIn35mmFilm"),
 					WhiteBalance: EXIF.getTag(this, "WhiteBalance"),
 					BrightnessValue: EXIF.getTag(this, "BrightnessValue"),
 					ExposureBias: EXIF.getTag(this, "ExposureBias"),
@@ -91,33 +91,24 @@ export default {
 	methods: {
 		"closeImage": function() {
 			$("#image-viewer-container").hide();
-		}
-	},
-
-	computed: {
-		photoImagePath: function() {
-			if(this.gallerySource == null || this.currentPhoto == null) {
-				return "";
-			}
-
-			return this.gallerySource.GetPath(this.currentPhoto, PhotoType.Mid);
+			$("html").css("overflow", "auto");
 		}
 	},
 
 	events: {
-		"photo-selected": function(gallerySource, photo) {
-			this.gallerySource = gallerySource;
+		"show-photo": function(photo) {
 			this.currentPhoto = photo;
 			$("#image-viewer-container").show();
+			$("html").css("overflow", "hidden");
 		}
 	}
 };
 </script>
 
 <style lang="sass" scoped>
-	$exif-div-width: 200px;
+	$exif-div-width: 180px;
 	$exif-div-height: 108px;
-	$exif-text-size: 14px;
+	$exif-text-size: 16px;
 
 	#image-viewer-container {
 		transition: opacity 0.3s ease-in-out;
@@ -131,8 +122,8 @@ export default {
 		width: 100%;
 		height: 100%;
 
-		background-color: black;
-		opacity: 0.7;
+		background-color: rgb(24, 24, 24);
+		opacity: 1;
 
 		cursor: pointer;
 	}
@@ -170,12 +161,24 @@ export default {
 		top: 0;
 
 		/* using calc because need to have fixed space for text etc */
-		max-width: calc(87.5% - #{$exif-div-width});
-		height: calc(95% - 64px);
+		max-width: calc(80.5% - #{$exif-div-width});
+		height: calc(100%);
 
 		margin: auto;
 		cursor: pointer;
 	}
+
+
+	@media all and (max-width: 1279px) {
+   	 	#image-container {
+			max-width: 85% !important;
+		}
+
+		#exif-div {
+			display: none !important;
+		}
+    }
+
 
 	#description-text {
 		float: left;

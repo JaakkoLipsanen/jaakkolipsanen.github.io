@@ -1,9 +1,14 @@
 <template>
 	<div class="blog-list-page-container">
-		<div class="blog-post-block" v-for="post in blog.PostInfos"  v-on:click="photoClicked(photo)">
-			<a v-on:click="postClicked(post)">{{ 'Day ' + post.DateRange + ': ' + post.Title }} </a>
-
+		<div class="blog-post-block" v-for="post in blog.PostInfos.reverse()">
+			<div class="blog-post-block-background" style="background-image: url({{ post.Directory + post.MainImage  }});" v-on:click="postClicked(post)">
+				<div class="post-block-container">
+					<h1 style="top: 50%; position: relative; transform: translateY(-50%); color: rgb(190, 190, 190); font-family: 'Yanone Kaffeesatz'; font-size: 3em; margin: 0">{{ post.Title }}</h1>
+					<h3 style="top: 47%; position: relative; transform: translateY(-50%); color: rgb(190, 190, 190); font-family: 'Yanone Kaffeesatz'; font-size: 1.75em; margin: 0"> {{ 'Day ' + post.DateRange }} </h3>
+				</div>
+			</div>
 		</div>
+
 	</div>
 </template>
 
@@ -32,18 +37,63 @@ export default {
 	methods: {
 		postClicked: function(post) {
 			console.log(post.Title);
-			this.$dispatch("change-page", "blog-post-page");
+			this.$root.changePage("blog-post-page", { postName: post.Name });
+		//	this.$dispatch("change-page", "blog-post-page");
 		}
 	}
 };
 </script>
 
 <style lang="sass" id="style-sheet" disabled=false>
+
+.post-block-container {
+		position: relative; width: 100%; height: 100%;  background-color: rgba(0, 0, 0, 0.4); transition: background-color 0.2s ease-in-out;
+
+		h1, h3 {
+			 transition: color 0.2s ease-in-out;
+		}
+}
+
+.blog-post-block:hover > div > div {
+	background-color: rgba(0, 0, 0, 0.1) !important;
+
+	h1 {
+		color: white !important;
+	}
+
+	h3 {
+		color: white !important;
+	}
+}
+
+.blog-post-block-background {
+	flex: 1 1 50%; width: 450px; height: 450px; max-width: 100%; max-height: 100%; background-position: center; background-size: cover;
+}
+
 .blog-list-page-container {
+	margin: auto;
 	margin-top: 256px;
+	width: 90%;
+	display: flex;
+
+	flex-flow: row wrap;
+	align-content: space-around;
+	justify-content: center;
+   -webkit-align-items: center;
+}
+
+@media all and (max-width: 526.5px) {
+	.blog-list-page-container {
+		width: 100% !important;
+	}
+
+	.blog-post-block {
+		width: 100% !important;
+	}
 }
 
 .blog-post-block {
 	text-align: center;
+	cursor: pointer;
 }
 </style>

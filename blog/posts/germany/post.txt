@@ -1,4 +1,4 @@
-title: Germany!
+title: Above and Beyond
 trip: Testing Trip
 date-range: 8-11
 main-image: img1.jpg

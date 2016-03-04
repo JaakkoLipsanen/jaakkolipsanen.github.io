@@ -42,8 +42,7 @@ export default {
 		margin: auto;
 		position: absolute;
 		top: 0;
-		left: 50%;
-		right: 50%;
+		left: calc(50% - 22.5px);
 	}
 </style>
 

@@ -4,6 +4,7 @@ import CyclePage from "./CyclePage.vue";
 import CodePage from "./CodePage.vue";
 import BlogPostPage from "./BlogPostPage.vue";
 import BlogListPage from "./BlogListPage.vue";
+import { mapify } from "es6-mapify";
 
 // Vue.config.debug = true;
 
@@ -23,11 +24,19 @@ var app = new Vue({
 	},
 
 	data: {
-		currentView: componentMap.has(pagePath[0]) ? componentMap.get(pagePath[0]) : "blog-list-page"
+		currentView: componentMap.has(pagePath[0]) ? componentMap.get(pagePath[0]) : "blog-list-page",
+		pageParameters: new Map()
 	},
 
-	events: {
-		"change-page": function(pageName) {
+	methods: {
+		changePage: function(pageName, parameters) {
+			$(window).scrollTop(0); // scroll to top
+
+			if(parameters === undefined || parameters === null) {
+				parameters = { };
+			}
+			this.pageParameters = mapify(parameters);
+			console.log(this.pageParameters);
 			this.currentView = pageName;
 		}
 	}

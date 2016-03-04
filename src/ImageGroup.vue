@@ -14,16 +14,12 @@ export default {
 		}
 	},
 
-	data() {
-		return {
-		};
-	},
-
 	ready: function() {
 		const MaxImagesPerRow = IsTouchDevice() ? 2 : 4;
 		const BaseAspectRatio = 4 / 3;
 		const groupContainer = $(".image-group-container");
 
+		const parent = this.$parent;
 		const createGroup = (allImages, firstImageIndex, imageCount) => {
 			Assert(firstImageIndex + imageCount <= allImages.length, "Error creating imagegroup: index out of bounds");
 
@@ -37,6 +33,10 @@ export default {
 
 				imageElement.appendTo(imageContainer);
 				imageContainer.appendTo(container);
+
+				imageContainer.click(function() {
+					parent.imageClicked(image);
+				});
 			}
 
 			return imageCount;
@@ -87,6 +87,7 @@ export default {
 .group-image {
 	flex: 1 1 100%;
 	margin: 0px 3px;
+	cursor: pointer;
 }
 
 .group-image img {
