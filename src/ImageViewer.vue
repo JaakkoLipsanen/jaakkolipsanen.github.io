@@ -12,6 +12,7 @@
 					<p v-if="currentPhotoExif.FocalLength35mmEquivalent != undefined">{{ "Focal Length (35mm equiv): " + currentPhotoExif.FocalLength35mmEquivalent + "mm" }}</p>
 					<p>{{ "Aperture: " + currentPhotoExif.Aperture }}</p>
 					<p>{{ "ISO: " + currentPhotoExif.ISO }}</p>
+					<p>{{ "Date: " + currentPhotoExif.DateTime }}</p>
 
 					<a v-show="currentPhotoExif.GpsLocation != 'unknown, unknown'" v-bind:href="'https://www.google.com/maps/place/' + currentPhotoExif.GpsLocation.replace(' ', '') + '/@' + currentPhotoExif.GpsLocation.replace(' ', '') + ',12z'" target="_blank">{{ "Location: " + currentPhotoExif.GpsLocation }}</a>
 				</div>
@@ -55,11 +56,12 @@ export default {
 
 			EXIF.getData(this, function() {
 				const exposureTime =  parseFloat(EXIF.getTag(this, "ExposureTime"));
+				const date =  EXIF.getTag(this, "DateTimeOriginal").split(' ')[0];
 				self.currentPhotoExif = {
 					Manufacturer: EXIF.getTag(this, "Make"),
 					Model: EXIF.getTag(this, "Model"),
 
-					DateTime: EXIF.getTag(this, "DateTimeOriginal"),
+					DateTime: date.split(":")[2] + "/" + date.split(":")[1] + "/" + date.split(":")[0],
 					FlashStatus: EXIF.getTag(this, "FlashStatus"),
 
 					ExposureTime: EXIF.getTag(this, "ExposureTime"),
