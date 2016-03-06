@@ -1,4 +1,4 @@
-title: Col de la Pierre St Martin
+title: Col de la Croix de Fer
 trip: Testing Trip
 date-range: 5-7
 main-image: img1.jpg
