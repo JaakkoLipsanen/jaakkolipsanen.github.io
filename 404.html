@@ -17,7 +17,7 @@
 		<!-- TODO: jquery shouldn't be loaded probably. It already works without this since I use the webpack jquery plugin -->
 		<!-- I should probably load nanoscroll (and maybe even google maps) in the script where I use it -->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-		<script type="text/javascript" src="src/scripts/nanoscroller.js"></script>
+		<script type="text/javascript" src="/src/scripts/nanoscroller.js"></script>
 		<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=geometry&region=ES"></script>
 
 		<style>
@@ -29,6 +29,6 @@
 		<component :is='currentView'></component>
 		<navbar></navbar>
 
-		<script src="dist/build.js"></script>
+		<script src="/dist/build.js"></script>
 	</body>
 </html>
