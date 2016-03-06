@@ -29,16 +29,14 @@ export default {
 
 	ready: function() {
 		let data = this;
-		BlogList.FromFile("../blog/blog-posts.txt").then(async blog => {
+		BlogList.FromFile("./" + this.$root.CurrentState().TourName + "/blog/posts.txt").then(async blog => {
 			data.blog = blog;
 		});
 	},
 
 	methods: {
 		postClicked: function(post) {
-			console.log(post.Title);
-			this.$root.changePage("blog-post-page", { postName: post.Name });
-		//	this.$dispatch("change-page", "blog-post-page");
+			this.$root.ChangePage("blog-post-page", this.$root.CurrentUrl + "/" + post.Name, { TourName: this.$root.CurrentState().TourName, PostName: post.Name });
 		}
 	}
 };

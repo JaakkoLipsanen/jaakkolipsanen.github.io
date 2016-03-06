@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="nav-cont" style="position: fixed; height: 48px; top: 0px;">
-			<h1 style="position: absolute; top: 4px; left: calc(50% - 55px); font-family: Yanone Kaffeesatz; margin: auto" v-on:click="blogListClicked">EUROPE14</h1>
+			<h1 style="position: absolute; top: 4px; left: calc(50% - 55px); font-family: Yanone Kaffeesatz; margin: auto" v-on:click="blogListClicked">{{ currentTour }}</h1>
 			<p v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="font-size: 22px; margin: auto; position: absolute; top: 12px; left: 32px;  font-weight: 700;  display: block"> {{ '&lt; ' + blog.GetPreviousPostInfo(blogPost).DisplayString }}</p>
 			<p v-if="blog != null && blog.GetNextPostInfo(blogPost) != null" v-on:click="nextPostClicked" style="font-size: 22px; margin: auto; position: absolute; top: 12px; right: 32px; font-weight: 700; display: block"> {{  blog.GetNextPostInfo(blogPost).DisplayString + ' &gt;' }}</p>
 		</div>
@@ -27,7 +27,7 @@
 				<image-group v-if="block.Type == 'ImageGroup'" class="image-group-block" :group-images="block.Images"></image-group>
 				<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
 					<!-- style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.35);"> -->
-					<img src="{{ block.Image.FullPath }}" style="width: 100%;" v-on:click="imageClicked(block.Image)">
+					<img v-bind:class="block.Image.FileName.replace('.jpg', '')" photo="{{ block.Image }}" src="{{ block.Image.FullPath }}" style="width: 100%;" v-on:click="imageClicked(block.Image)">
 				</div>
 			</div>
 		</div>
@@ -43,12 +43,14 @@ import ImageGroup from "./ImageGroup.vue";
 import CycleMap from "./CycleMap.vue";
 import ImageViewer from "./ImageViewer.vue";
 import { BlogList, BlogPost } from "./scripts/Blog.js";
+import Vue from "vue";
 
 export default {
 	data() {
 		return {
 			blog: null,
 			blogPost: null,
+			currentTour: "temp"
 		};
 	},
 
@@ -59,16 +61,12 @@ export default {
 	},
 
 	ready: function() {
-		let data = this;
-		BlogList.FromFile("../blog/blog-posts.txt").then(async blog => {
-			data.blog = blog;
+		this.currentTour = this.$root.CurrentState().TourName.toUpperCase();
 
-			if(data.$root.pageParameters.has("postName")) {
-				data.blogPost = await blog.GetBlogPostByName(data.$root.pageParameters.get("postName"));
-			}
-			else {
-				data.blogPost = await blog.GetBlogPostByIndex(2);
-			}
+		let data = this;
+		BlogList.FromFile("/cycle/" + this.$root.CurrentState().TourName + "/blog/posts.txt").then(async blog => {
+			data.blog = blog;
+			data.blogPost = await blog.GetBlogPostByName(data.$root.CurrentState().PostName);
 		});
 
 		$(window).on('resize', () => {
@@ -84,34 +82,49 @@ export default {
 				$(".nav-cont").addClass("has-scrolled");
 			}
 		});
-
 	},
 
 	methods: {
-		previousPostClicked: async function() {
-			$('html, body').animate({
+		previousPostClicked: function() {
+			$('body').animate({
           		scrollTop: 0
-        	}, 800, "swing", async () => {
+        	}, Math.min($(window).scrollTop(), 800), "swing", async () => {
 				this.blogPost = await this.blog.GetBlogPostByPostInfo(this.blog.GetPreviousPostInfo(this.blogPost));
+				this.$root.ChangeURL("/cycle/" + this.$root.CurrentState().TourName + "/" + this.blogPost.Name, { TourName: this.$root.CurrentState().TourName, PostName: this.blogPost.Name });
 			});
 		},
 
 		nextPostClicked: function() {
-			$('html, body').animate({
+			$('body').animate({
           		scrollTop: 0
-        	}, 800, "swing", async () => {
+        	}, Math.min($(window).scrollTop(), 800), "swing", async () => {
 				this.blogPost = await this.blog.GetBlogPostByPostInfo(this.blog.GetNextPostInfo(this.blogPost));
+				this.$root.ChangeURL("/cycle/" + this.$root.CurrentState().TourName + "/" + this.blogPost.Name, { TourName: this.$root.CurrentState().TourName, PostName: this.blogPost.Name });
 			});
 		},
 
 		blogListClicked: function() {
-			this.$root.changePage("blog-list-page");
+			this.$root.ChangePage("cycle-tour-page", "/cycle/" + this.$root.CurrentState().TourName, { TourName: this.$root.CurrentState().TourName });
 		},
 
 		imageClicked: function(photo) {
 			this.$broadcast("show-photo", photo);
 		}
+	},
+
+	events: {
+		"StateUpdated": function() {
+			this.currentTour = this.$root.CurrentState().TourName.toUpperCase();
+
+			let data = this;
+			BlogList.FromFile("./" + "/blog/posts.txt").then(async blog => {
+				data.blog = blog;
+				data.blogPost = await blog.GetBlogPostByName(data.$root.CurrentState().PostName);
+			});
+		}
 	}
+
+
 };
 </script>
 
