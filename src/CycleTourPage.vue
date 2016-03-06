@@ -29,7 +29,7 @@ export default {
 
 	ready: function() {
 		let data = this;
-		BlogList.FromFile("./" + this.$root.CurrentState().TourName + "/blog/posts.txt").then(async blog => {
+		BlogList.FromFile("/cycle/" + this.$root.CurrentState().TourName + "/blog/posts.txt").then(async blog => {
 			data.blog = blog;
 		});
 	},
