@@ -4,7 +4,7 @@
 
 		<div id="image-container" >
 			<div id="image-cc">
-				<img id="image" src="{{ currentPhoto.FullPath }}">
+				<img id="image" src="{{ currentPhoto.FullPath('orig') }}">
 				<p id="description-text">{{ currentPhoto.Description }}</p>
 
 				<div id="exif-div">

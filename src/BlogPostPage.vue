@@ -1,7 +1,7 @@
 <template>
 	<div id="post-container">
 		<div id="main-image-container">
-			<div class="main-image" style="background-image: url({{ blogPost.MainImage.FullPath }})"></div>
+			<div class="main-image" style="background-image: url({{ blogPost.MainImage.FullPath('1080p') }})"></div>
 
 			<!-- Vignette -->
 			<div style="position: absolute; top: 0px; height: 100%; width: 100%;
@@ -27,7 +27,7 @@
 				<image-group v-if="block.Type == 'ImageGroup'" class="image-group-block" :group-images="block.Images"></image-group>
 				<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
 					<!-- style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.35);"> -->
-					<img v-bind:class="block.Image.FileName.replace('.jpg', '')" photo="{{ block.Image }}" src="{{ block.Image.FullPath }}" style="width: 100%;" v-on:click="imageClicked(block.Image)">
+					<img v-bind:class="block.Image.FileName.replace('.jpg', '')" photo="{{ block.Image }}" src="{{ block.Image.FullPath('1080p') }}" style="width: 100%;" v-on:click="imageClicked(block.Image)">
 				</div>
 			</div>
 		</div>

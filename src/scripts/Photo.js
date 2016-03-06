@@ -1,3 +1,8 @@
+export const PhotoQuality = {
+	Original: "orig",
+	FullHD: "1080p",
+}
+
 export class Photo {
 	constructor(folder, fileName, width = -1, height = -1) {
 		this.Folder = folder;
@@ -10,8 +15,8 @@ export class Photo {
 		return this.Width / this.Height;
 	}
 
-	get FullPath() {
-		return this.Folder + "/" + this.FileName;
+	FullPath(photoQuality = PhotoQuality.FullHD) {
+		return this.Folder + "/" + photoQuality + "/" + this.FileName;
 	}
 
 	get IsPortrait() {

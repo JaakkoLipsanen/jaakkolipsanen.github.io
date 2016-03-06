@@ -1,7 +1,7 @@
 title: Col de la Pierre St Martin
 trip: Testing Trip
 date-range: 1-4
-main-image: img1.jpg
+main-image: img2.jpg
 
 header: Col de la Croix de Fer
 text: After reaching Col de Soudet, a super tought climb by the way, I continued cycling to Col de la Pierre St Martin which was a few kilometers further up the road.

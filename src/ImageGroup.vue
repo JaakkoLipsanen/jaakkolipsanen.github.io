@@ -5,6 +5,7 @@
 
 <script>
 import { Assert, IsTouchDevice, GetRandomInt } from "./scripts/MiscHelper.js";
+import { Photo, PhotoQuality } from "./scripts/Photo.js";
 
 export default {
 	props: {
@@ -29,7 +30,7 @@ export default {
 
 				// the flex value is calculated by "imageAspectRatio / BaseAspectRatio". BaseAR is 4/3, so for 3:4 images for example value is 3/4 / (4/3) * 100 = 56.25
 				const imageContainer = $(document.createElement("div")).addClass("group-image").css("flex", "1 1 " + (image.AspectRatio / BaseAspectRatio * 100) + "%");
-				const imageElement = $(document.createElement("img")).attr("src", image.FullPath);
+				const imageElement = $(document.createElement("img")).attr("src", image.FullPath(PhotoQuality.FullHD));
 
 				imageElement.appendTo(imageContainer);
 				imageContainer.appendTo(container);
