@@ -1,0 +1,17 @@
+title: Col de la Croix de Fer
+trip: Testing Trip
+date-range: 5-7
+main-image: img1.jpg
+
+header: Alkufiilikset
+text: Reissu alkoi oikein mukavasti. Laskeuduin joskus illalla Alicanteen ja sitten nukuin, tai ainakin koitin nukkua, lentokentän penkeillä muutaman tunnin ennen aamunsarastusta. Juuri kun olin lähdössä pyöräilemään aamulla hoksasin että kypärä unohtui kotiin. Hetken mietin, että miten ihmeessä onnistuin tässä ja lähdin sitten matkaan.
+
+image: img2.jpg
+
+text: Ekat päivät sujuivat ihan kivasti, varsinkin kun pääsin kaupungeistä vähän syrjäisemmälle seudulle. Aika lyhyitä päiviä tuli kuitenkin pyöräiltyä kun olen niin laiska. Noin viikko reissun alun jälkeen alkoi vähän vuoristoisempi alue missä oli ihan sairaan kivoja pikkuteitä. Mä olen itse sitä mieltä, että mitä pienempi tie, sitä siistimpi se on :) Sitten jos vielä on vähän vuoria taustalla niin olen erittäin tyytyväinen! 
+
+image: img3.jpg
+image: img4.jpg
+
+
+image-group: img1.jpg?1920x1442 img2.jpg?1920x1442 img3.jpg?1920x1442 img1.jpg?1920x1442 img2.jpg?1920x1442 img3.jpg?1920x1442 img5.jpg?1920x1440 img4.jpg?1920x2560 img2.jpg?1920x1442 img3.jpg?1920x1442

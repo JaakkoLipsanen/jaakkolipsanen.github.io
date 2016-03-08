@@ -2,3 +2,4 @@
 col-de-la-croix-de-fer|Testing Trip|Col de la Croix de Fer|1-4|img1.jpg
 col-de-la-pierre-st-martin|Testing Tripoy|Col de la Pierre St Martin|5-7|img2.jpg
 germany|Testing Tripsad|Above and Beyond|8-11|img1.jpg
+alku-fiilikset|Alku Fiiliksiä|Alku fiilikset|1-10|img1.jpg
