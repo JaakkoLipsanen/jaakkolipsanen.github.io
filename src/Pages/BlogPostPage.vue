@@ -13,7 +13,7 @@
 			</div>
 		</div>
 
-		<div class="nav-cont" style="position: fixed; height: 48px; top: 0px;">
+		<div class="nav-cont" style="position: fixed; height: 48px; top: calc(100% - 48px);">
 			<h1 style="position: absolute; top: 4px; left: calc(50% - 55px); font-family: Yanone Kaffeesatz; margin: auto" v-on:click="blogListClicked">{{ currentTour }}</h1>
 			<p v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="font-size: 22px; margin: auto; position: absolute; top: 12px; left: 32px;  font-weight: 700;  display: block"> {{ '&lt; ' + blog.GetPreviousPostInfo(blogPost).DisplayString }}</p>
 			<p v-if="blog != null && blog.GetNextPostInfo(blogPost) != null" v-on:click="nextPostClicked" style="font-size: 22px; margin: auto; position: absolute; top: 12px; right: 32px; font-weight: 700; display: block"> {{  blog.GetNextPostInfo(blogPost).DisplayString + ' &gt;' }}</p>
@@ -39,10 +39,10 @@
 </template>
 
 <script>
-import ImageGroup from "./ImageGroup.vue";
-import CycleMap from "./CycleMap.vue";
-import ImageViewer from "./ImageViewer.vue";
-import { BlogList, BlogPost } from "./scripts/Blog.js";
+import ImageGroup from "../Components/ImageGroup.vue";
+import CycleMap from "../Components/CycleMap.vue";
+import ImageViewer from "../Components/ImageViewer.vue";
+import { BlogList, BlogPost } from "../scripts/Blog.js";
 import Vue from "vue";
 
 export default {
@@ -75,7 +75,7 @@ export default {
 
 		$(window).scroll(() => {;
 			const scrollAmount = $(window).scrollTop();
-			if(scrollAmount < 64) {
+			if(scrollAmount < 48) {
 				$(".nav-cont").removeClass("has-scrolled");
 			}
 			else {
@@ -90,7 +90,7 @@ export default {
           		scrollTop: 0
         	}, Math.min($(window).scrollTop(), 800), "swing", async () => {
 				this.blogPost = await this.blog.GetBlogPostByPostInfo(this.blog.GetPreviousPostInfo(this.blogPost));
-				this.$root.ChangeURL("/cycle/" + this.$root.CurrentState().TourName + "/" + this.blogPost.Name, { TourName: this.$root.CurrentState().TourName, PostName: this.blogPost.Name });
+				this.$root.ChangeURL("/cycle/trips/" + this.$root.CurrentState().TourName + "/" + this.blogPost.Name, { TourName: this.$root.CurrentState().TourName, PostName: this.blogPost.Name });
 			});
 		},
 
@@ -99,12 +99,12 @@ export default {
           		scrollTop: 0
         	}, Math.min($(window).scrollTop(), 800), "swing", async () => {
 				this.blogPost = await this.blog.GetBlogPostByPostInfo(this.blog.GetNextPostInfo(this.blogPost));
-				this.$root.ChangeURL("/cycle/" + this.$root.CurrentState().TourName + "/" + this.blogPost.Name, { TourName: this.$root.CurrentState().TourName, PostName: this.blogPost.Name });
+				this.$root.ChangeURL("/cycle/trips/" + this.$root.CurrentState().TourName + "/" + this.blogPost.Name, { TourName: this.$root.CurrentState().TourName, PostName: this.blogPost.Name });
 			});
 		},
 
 		blogListClicked: function() {
-			this.$root.ChangePage("cycle-tour-page", "/cycle/" + this.$root.CurrentState().TourName, { TourName: this.$root.CurrentState().TourName });
+			this.$root.ChangePage("cycle-tour-page", "/cycle/trips/" + this.$root.CurrentState().TourName, { TourName: this.$root.CurrentState().TourName });
 		},
 
 		imageClicked: function(photo) {
@@ -117,14 +117,12 @@ export default {
 			this.currentTour = this.$root.CurrentState().TourName.toUpperCase();
 
 			let data = this;
-			BlogList.FromFile("./" + "/blog/posts.txt").then(async blog => {
+			BlogList.FromFile("/cycle/" + this.$root.CurrentState().TourName + "/blog/posts.txt").then(async blog => {
 				data.blog = blog;
 				data.blogPost = await blog.GetBlogPostByName(data.$root.CurrentState().PostName);
 			});
 		}
 	}
-
-
 };
 </script>
 
@@ -132,6 +130,7 @@ export default {
 
 .nav-cont {
 	width: 100%;
+	z-index: 1;
 
 	p, h1 {
 		color: rgb(205, 205, 205);
@@ -167,8 +166,8 @@ export default {
 }
 
 .route-map {
-	width: 70% !important;
-	height: 80vh !important;
+	width: 60% !important;
+	height: 75vh !important;
 }
 
 #post-container {
@@ -228,14 +227,13 @@ export default {
 			 color: rgb(225, 225, 225);
 		 }
 	 }
-
 }
 
 .content-block {
 	margin: 32px auto;
 
 	.image-block {
-		width: 70%;
+		width: 60%;
 		cursor: pointer;
 
 		&.fullwidth-img {
@@ -244,7 +242,7 @@ export default {
 	}
 
 	.text-block {
-		width: 70%;
+		width: 60%;
 		max-width: 800px;
 		margin: 16px auto;
 		color: rgb(180, 180, 180);
@@ -254,13 +252,13 @@ export default {
 	}
 
 	.header-block {
-		width: 70%;
+		width: 60%;
 		margin: auto;
 		font-size: 2.5em;
 	}
 
 	.image-group-block {
-		width: 70%;
+		width: 60%;
 		margin: auto;
 	}
 }

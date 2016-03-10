@@ -1,11 +1,19 @@
 import Vue from "vue";
-import Navbar from "./Navbar.vue";
-import CodePage from "./CodePage.vue";
-import CyclePage from "./CyclePage.vue";
-import CycleTourPage from "./CycleTourPage.vue";
-import BlogPostPage from "./BlogPostPage.vue";
+import Navbar from "./Components/Navbar.vue";
+
+import CodePage from "./Pages/CodePage.vue";
+import CodeProjectsPage from "./Pages/CodeProjectsPage.vue";
+import CodeCvPage from "./Pages/CodeCvPage.vue";
+
+import CyclePage from "./Pages/CyclePage.vue";
+import CycleTripsPage from "./Pages/CycleTripsPage.vue";
+import CycleBlogPage from "./Pages/CycleBlogPage.vue"
+import CycleTourPage from "./Pages/CycleTourPage.vue";
+import BlogPostPage from "./Pages/BlogPostPage.vue";
+
 import { mapify } from "es6-mapify";
 
+const ConstantURL = undefined; // (window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
 // Vue.config.debug = true;
 
 /* eslint-disable no-new */
@@ -14,10 +22,15 @@ var app = new Vue({
 	el: "body",
 	components: {
 		"navbar": Navbar,
-		"cycle-page": CyclePage,
+
 		"code-page": CodePage,
+		"code-projects-page": CodeProjectsPage,
+		"code-cv-page": CodeCvPage,
+
 		"cycle-page": CyclePage,
+		"cycle-trips-page": CycleTripsPage,
 		"cycle-tour-page": CycleTourPage,
+		"cycle-blog-page": CycleBlogPage,
 		"blog-post-page": BlogPostPage,
 	},
 
@@ -32,7 +45,7 @@ var app = new Vue({
 	},
 
 	ready: function() {
-		this.ConstructPageFromUrl(window.location.pathname);
+		this.ConstructPageFromUrl( window.location.pathname);
 	},
 
 	methods: {
@@ -46,10 +59,10 @@ var app = new Vue({
 			parameters.url = url;
 		//	this.pageParameters = mapify(parameters);
 			if(saveToHistory) {
-				window.history.pushState(parameters, "", url);
+				window.history.pushState(parameters, "", ConstantURL || url);
 			}
 			else {
-				window.history.replaceState(parameters, "", url);
+				window.history.replaceState(parameters, "", ConstantURL || url);
 			}
 
 			if(this.currentView == pageName) {
@@ -57,6 +70,7 @@ var app = new Vue({
 			}
 			else {
 				this.currentView = pageName;
+				this.$broadcast("PageChanged", pageName);
 			}
 		},
 
@@ -66,7 +80,7 @@ var app = new Vue({
 
 		ChangeURL: function(url, parameters) {
 			parameters.url = url;
-			window.history.pushState(parameters, "", url);
+			window.history.pushState(parameters, "", ConstantURL || url);
 		},
 
 		PopState: function() {
@@ -75,24 +89,40 @@ var app = new Vue({
 
 		ConstructPageFromUrl: function(url) {
 			const path = url.split("/").filter(Boolean);
-			console.log(url);
+
 			if(path[0] == "cycle") {
 				if(path.length == 1) {
 					this.ChangePage("cycle-page", url, { }, false);
 				}
-				else if(path.length == 2) {
-					this.ChangePage("cycle-tour-page", url, { TourName: path[1] }, false );
+				else if(path[1] == "blog") {
+					this.ChangePage("cycle-blog-page", url, { }, false );
 				}
-				else if(path.length == 3) {
-					this.ChangePage("blog-post-page", url, { TourName: path[1], PostName: path[2] }, false );
-				}
-				else if(path.length == 4) {
-					this.ChangePage("blog-post-page", url, { TourName: path[1], PostName: path[2], HighlightedImage: path[3] }, false );
+				else if(path[1] == "trips") {
+					if(path.length == 2) {
+						this.ChangePage("cycle-trips-page", url, { }, false );
+					}
+					else if(path.length == 3) {
+						this.ChangePage("cycle-tour-page", url, { TourName: path[2] }, false );
+					}
+					else if(path.length == 4) {
+						this.ChangePage("blog-post-page", url, { TourName: path[2], PostName: path[3] }, false );
+					}
 				}
 			}
 			else if(path[0] == "404.html") {
 				// this is default atm
 				this.ChangePage("cycle-page", "/cycle", { }, true);
+			}
+			else if(path[0] == "code") {
+				if(path.length == 1) {
+					this.ChangePage("code-page", url, { }, false);
+				}
+				else if(path[1] == "cv") {
+					this.ChangePage("code-cv-page", url, { }, false);
+				}
+				else if(path[1] == "projects") {
+					this.ChangePage("code-projects-page", url, { }, false);
+				}
 			}
 		}
 	}

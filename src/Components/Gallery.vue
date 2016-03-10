@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { Gallery } from "./scripts/Gallery.js";
+import { Gallery } from "../scripts/Gallery.js";
 import ImageViewer from "./ImageViewer.vue";
 
 export default {

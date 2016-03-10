@@ -22,8 +22,7 @@
 </template>
 
 <script>
-import { PhotoType } from "./scripts/Gallery.js";
-import { EXIF } from "./scripts/exif.js";
+import { EXIF } from "../scripts/exif.js";
 
 export default {
 	data() {
@@ -55,8 +54,8 @@ export default {
 			};
 
 			EXIF.getData(this, function() {
-				const exposureTime =  parseFloat(EXIF.getTag(this, "ExposureTime"));
-				const date =  EXIF.getTag(this, "DateTimeOriginal").split(' ')[0];
+				const exposureTime = parseFloat(EXIF.getTag(this, "ExposureTime"));
+				const date = EXIF.getTag(this, "DateTimeOriginal").split(" ")[0];
 				self.currentPhotoExif = {
 					Manufacturer: EXIF.getTag(this, "Make"),
 					Model: EXIF.getTag(this, "Model"),
@@ -115,6 +114,8 @@ export default {
 	#image-viewer-container {
 		transition: opacity 0.3s ease-in-out;
 		opacity: 1;
+		position: absolute;
+		z-index: 1000;
 	}
 
 	.gallery-background {
@@ -127,7 +128,7 @@ export default {
 		background-color: rgb(24, 24, 24);
 		opacity: 1;
 
-		cursor: pointer;
+		cursor: pointer
 	}
 
 	#image-cc {

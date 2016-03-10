@@ -18,9 +18,9 @@
 </template>
 
 <script>
-import ImageGroup from "./ImageGroup.vue";
-import CycleMap from "./CycleMap.vue";
-import { BlogList, BlogPost, BlogImage } from "./scripts/Blog.js";
+import ImageGroup from "../Components/ImageGroup.vue";
+import CycleMap from "../Components/CycleMap.vue";
+import { BlogList, BlogPost, BlogImage } from "../scripts/Blog.js";
 
 export default {
 	data() {

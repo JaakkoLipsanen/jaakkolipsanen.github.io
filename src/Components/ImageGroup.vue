@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import { Assert, IsTouchDevice, GetRandomInt } from "./scripts/MiscHelper.js";
-import { Photo, PhotoQuality } from "./scripts/Photo.js";
+import { Assert, IsTouchDevice, GetRandomInt } from "../scripts/MiscHelper.js";
+import { PhotoQuality } from "../scripts/Photo.js";
 
 export default {
 	props: {

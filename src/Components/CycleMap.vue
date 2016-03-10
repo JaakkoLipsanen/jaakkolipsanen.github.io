@@ -1,7 +1,7 @@
 <template>
 	<div id="cycle-map-container">
 		<div style='position: relative; z-index: 1;'>
-			<img class='resize-button fullscreen-button' src='../assets/icons/expand.png'  v-on:click='enterFullscreen'>
+			<img class='resize-button fullscreen-button' src='/assets/icons/expand.png'  v-on:click='enterFullscreen'>
 		</div>
 
 		<div style='width: 100%; height: 100%' id='cycle-map' ></div>
@@ -9,15 +9,15 @@
 		<!-- Bottom text -->
 		<p style=' margin-top: 0px; float: left;'>{{ this.map.RouteLength + 'km, ' + this.map.NightCount +  ' days' }}</p>
 		<div style='display: inline; float: right'>
-			<img style='width: 10px; display: inline' src='../assets/icons/tent.png'><p style='display: inline; margin-left: 4px;'>camping </p>
-			<img style='margin-left: 4px; width: 10px; display: inline' src='../assets/icons/hotel.png'><p style='display: inline; margin-left: 4px;'>hotel</p>
+			<img style='width: 10px; display: inline' src='/assets/icons/tent.png'><p style='display: inline; margin-left: 4px;'>camping </p>
+			<img style='margin-left: 4px; width: 10px; display: inline' src='/assets/icons/hotel.png'><p style='display: inline; margin-left: 4px;'>hotel</p>
 		</div>
 	</div>
 </template>
 
 <script>
-import { CycleMap } from "./scripts/CycleMap.js";
-import { ExitFullScreen, EnterFullScreen, OnFullscreenChange } from "./scripts/MiscHelper.js";
+import { CycleMap } from "../scripts/CycleMap.js";
+import { ExitFullScreen, EnterFullScreen, OnFullscreenChange } from "../scripts/MiscHelper.js";
 
 export default {
 	props: {
@@ -51,7 +51,7 @@ export default {
 		OnFullscreenChange(() => {
 			this.isMapFullscreen = !this.isMapFullscreen;
 			$("#cycle-map-container").toggleClass("fullscreen", this.isMapFullscreen);
-			$("#cycle-map-container .fullscreen-button").attr("src", this.isMapFullscreen ? "../assets/icons/reduce.png" : "../assets/icons/expand.png");
+			$("#cycle-map-container .fullscreen-button").attr("src", this.isMapFullscreen ? "/assets/icons/reduce.png" : "/assets/icons/expand.png");
 
 			this.map.OnSizeChanged();
 		});

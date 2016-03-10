@@ -12,7 +12,7 @@ image: img2.jpg
 text: It looked almost surreal :) You couldn't see where the ground ended and the sky started because it was all so white! It was also pretty funny to cycle in shorts and t-shirt while being surrounded by so much snow and whiteness!
 
 image: img3.jpg
-image: img4.jpg
+image: img1.jpg
 
 header: The roof of Portugal
 text: I was feeling pretty proud when I reached the top! It was definitely one of coolest places that I had ever visited.

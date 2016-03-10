@@ -1,5 +1,4 @@
 <template>
-	<a v-on:click="changePage">cycle</a>
 	<div id="about-me-container">
 
 		<p>My name is Jaakko Lipsanen. I am an 20-year-old game developer from Helsinki, Finland. Most of my completed projects can be found on this site.</p>
@@ -8,15 +7,13 @@
 		<p>I have developed my games mainly using C# and <a href="http://en.wikipedia.org/wiki/Microsoft_XNA">XNA</a>, but recently I have switched to using <a href="https://unity3d.com/">Unity</a>. I have also made some projects using C++ and OpenGL/SFML.</p>
 		<p>I graduated from high school in the spring of 2014 and I am planning to begin studying Computer Science at the University of Helsinki in the fall of 2016.</p>
 
-		<!-- some space after the text before footer -->
-		<div style="margin: 36px;"></div>
 	</div>
 
 	<footer-bar></footer-bar>
 </template>
 
 <script>
-import Footer from "./Footer.vue";
+import Footer from "../Components/Footer.vue";
 
 export default {
 	data() {
@@ -32,27 +29,11 @@ export default {
 		$("body").addClass("white-bg");
 		$("#navbar-header-text").addClass("black-navbar-header-text");
 		$("#about-me-container").addClass("show");
-
-		console.log("ÄÄÄ");
 	},
-
-	methods: {
-		changePage: function() {
-			this.$parent.currentView = "cycle-page";
-		}
-	}
 };
 </script>
 
 <style lang="sass" id="style-sheet" disabled=false>
-	.white-bg {
-		background-color: rgb(255, 255, 255);
-	}
-
-	.black-navbar-header-text {
-		transition: color 0.7s ease-in-out;
-		color: rgb(48, 48, 48) !important;
-	}
 
 	.show {
 	transition: opacity 15s ease-in-out;
@@ -64,7 +45,7 @@ export default {
 		width: 90%;
 		max-width: 600px;
 		display: block;
-		margin: 32px auto;
+		margin: 96px auto 0 auto;
 		overflow: auto;
 		opacity: 0;
 		transition: opacity 5s ease-in-out;
@@ -83,7 +64,8 @@ export default {
 		width: 500px;
 	}
 
-	about-me-container > p {
-		color: black;
+	p {
+		color: rgb(180, 180, 180);
 	}
+
 </style>
