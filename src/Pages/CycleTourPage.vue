@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<cycle-map :route-path="CycleRoutePath" class="tour-map" style="padding-top: 128px; width: 70%; height: calc(100vh - 192px); min-height: 256px"></cycle-map>
+		<div style="height: 96px"></div>
+		<cycle-map :route-path="CycleRoutePath" class="tour-map" style=" width: 70%; height: calc(100vh - 148px); min-height: 256px"></cycle-map>
 		<p style="font-size: 24px; color: white; margin: auto; margin-top: 64px; text-align: center;">blogi</p>
 
 		<div class="blog-list-page-container">
@@ -83,6 +84,7 @@ export default {
 .blog-list-page-container {
 	margin: auto;
 	margin-top: 8px;
+	margin-bottom: 32px;
 	width: 90%;
 	display: flex;
 

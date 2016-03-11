@@ -1,7 +1,7 @@
 <template>
-	<div id="map-divider" style="max-width: 1600px; width: 90%; max-height: 70vh; position: relative; display: inline-block; margin: 0px; padding: 0px; text-align: center;">
-		<img id="map-img" src="/assets/images/cycle/WorldMap.png" style="max-width:100%; max-height: 70vh; position: relative; left: 0px; top: 0px; margin: 0; padding: 0;">
-		<canvas id="route-canvas" style="position: absolute; left: 0px; right: 0px; top: 0px; margin-left: auto;  margin-right: auto; padding: 0;"></canvas>
+	<div id="map-divider" >
+		<img id="map-img" src="/assets/images/cycle/WorldMap.png">
+		<canvas id="route-canvas"></canvas>
 	</div>
 </template>
 
@@ -15,8 +15,6 @@ export default {
 	},
 
 	ready: async function() {
-
-
 		const europe14 = await Route.FromFile("/cycle/europe14/route/route-description.txt"); // (["data/europe14/cycle-sweden-norway.path", "data/europe14/cycle-denmark-belgium.path"], ["data/europe14/boat-finland-sweden.path", "data/europe14/boat-norway-denmark.path"]);
 		const spain14 =  await Route.FromFile("/cycle/spain14/route/route-description.txt");
 		const europe15 =  await Route.FromFile("/cycle/europe15/route/route-description.txt");
@@ -40,7 +38,7 @@ export default {
 			for (let i = 0; i < route.CyclingPaths.length; i++) {
 				const startPoint = route.CyclingPaths[i].Points[0];
 				context.moveTo(lonToX(startPoint.lng()), latToY(startPoint.lat()));
-				for (let j = 1; j < route.CyclingPaths[i].Points.length; j += 50) {
+				for (let j = 1; j < route.CyclingPaths[i].Points.length; j += 160) {
 					const point = route.CyclingPaths[i].Points[j];
 					context.lineTo(lonToX(point.lng()), latToY(point.lat()));
 				}
@@ -63,15 +61,21 @@ export default {
 			paintRoute(context, europe14);
 			paintRoute(context, spain14);
 			paintRoute(context, europe15);
-			context.lineWidth = 1;
-			context.strokeStyle = 'rgb(96, 96, 96)'; // "rgb(172, 32, 32)";
+
+			const lineWidth = (window.innerWidth > 900 && window.innerHeight > 600) ? 2 : 1;
+			context.lineWidth = lineWidth;
+			context.strokeStyle =  "rgb(96, 96, 124)"; // 'rgb(96, 96, 96)'; //
 			context.stroke();
 		};
 
 		const updateCanvasSize = function () {
-			canvas.width = $("#map-img").width();
-			canvas.height = $("#map-img").height();
-			paintCanvas();
+
+			// offserParent returns null if the element is hidden/display=none
+			if(canvas.offsetParent != null) {
+				canvas.width = $("#map-img").width();
+				canvas.height = $("#map-img").height();
+				paintCanvas();
+			}
 		};
 
 		updateCanvasSize();
@@ -85,9 +89,19 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+
+	#map-divider {
+		position: relative;
+		display: inline-block;
+		margin: 0px;
+		padding: 0px;
+		text-align: center;
+	}
+
 	#map-img {
-		max-width:100%;
-		max-height: 70vh;
+		max-width: 100%;
+		max-height: calc(100vh - 160px);
+
 		position: relative;
 		left: 0px;
 		top: 0px;

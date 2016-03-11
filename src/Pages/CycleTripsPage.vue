@@ -1,9 +1,12 @@
 <template>
 	<div class="tour-list-container">
-		<world-map style="height: 60vh" id="world-map"></world-map>
+		<world-map class="world-map"></world-map>
 		<div></div>
-		<div class="tour-block" v-for="tour in items">
-			<p v-on:click="tourClicked(tour)"> {{ tour.toUpperCase() }} </p>
+
+		<div class="tour-block-list-container">
+			<div class="tour-block" v-for="tour in items">
+				<p v-on:click="tourClicked(tour)"> {{ tour.toUpperCase() }} </p>
+			</div>
 		</div>
 	</div>
 </template>
@@ -32,7 +35,6 @@ export default {
 		tourClicked: function(tour) {
 			console.log(tour);
 			this.$root.ChangePage("cycle-tour-page", "/cycle/trips/" + tour, { TourName: tour });
-		//	this.$dispatch("change-page", "blog-post-page");
 		}
 	}
 };
@@ -41,9 +43,22 @@ export default {
 <style lang="sass" id="style-sheet" disabled=false>
 $default-link-color: desaturate(rgb(144, 144, 255), 5);
 
-#world-map {
-	width: 100%;
-	height: 70vh;
+@media all and (max-width: 720px), all and (max-height: 413px)  {
+	.world-map {
+		display: none !important;
+	}
+
+	.tour-block {
+		display: block !important;
+		height: auto !important;
+	}
+
+	.tour-list-container {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 0; right: 0;
+	}
 }
 
 .tour-list-container {
@@ -61,6 +76,7 @@ $default-link-color: desaturate(rgb(144, 144, 255), 5);
 	.tour-block {
 		display: inline-block;
 		margin: auto 16px;
+		height: 64px;
 	}
 }
 

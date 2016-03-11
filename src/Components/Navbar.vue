@@ -82,13 +82,13 @@ export default {
 		},
 
 		ToggleHamburgerMenu: function() {
-			this.isHamburgerMenuOpen = !this.isHamburgerMenuOpen;
-			$(".hamburger-menu").toggle();
+			this.SetHamburgerMenuVisibility(!this.isHamburgerMenuOpen);
 		},
 
 		SetHamburgerMenuVisibility: function(visible) {
 			this.isHamburgerMenuOpen = visible;
 			$(".hamburger-menu").toggle(visible);
+			$(".hamburger-menu-button").css("position", visible ? "fixed" : "absolute");
 		}
 	},
 
@@ -121,6 +121,8 @@ export default {
 					this.selectedSubIndex = 1;
 				}
 			}
+
+			this.SetHamburgerMenuVisibility(false);
 		}
 	}
 };
@@ -157,6 +159,7 @@ export default {
 		right: 0;
 		top: 0;
 		z-index: 1000;
+		display: none;
 
 		p {
 			display: block; color: white; margin-right: 8px;
@@ -213,20 +216,6 @@ export default {
 	  cursor: pointer;
 	}
 
-	$hamburger-menu-button-color: rgb(215, 215, 215);
-	.hamburger-menu-button:before {
-	  content: "";
-	  position: absolute;
-	  right: 0;
-	  top: 0.25em;
-	  width: 32px;
-	  height: 0.3em;
-	  background: $hamburger-menu-button-color;
-	  box-shadow:
-	    0 0.7em 0 0 $hamburger-menu-button-color,
-	    0 1.4em 0 0 $hamburger-menu-button-color;
-	}
-
 	.navbar-links {
 		position: absolute; top: 0px; height: 48px;  right: 0px; margin-right: 12px;
 
@@ -271,7 +260,6 @@ export default {
 		 display: inline-block;
 	}
 
-
 	$font-stack: 'Yanone Kaffeesatz', 'Segoe UI';
 	$light-gray: rgb(232, 232, 232); /* was 211, 211, 211 */
 
@@ -280,6 +268,7 @@ export default {
 		height: 72px;
 		top: 0;
 		z-index: 100;
+		position: absolute;
 	}
 
 	#navbar-header-text {
