@@ -45,7 +45,7 @@ var app = new Vue({
 	},
 
 	ready: function() {
-		this.ConstructPageFromUrl("/cycle/trips"); // window.location.pathname);
+		this.ConstructPageFromUrl(window.location.pathname);
 	},
 
 	methods: {
