@@ -7,8 +7,8 @@
 		<div style='width: 100%; height: 100%' id='cycle-map' ></div>
 
 		<!-- Bottom text -->
-		<p style=' margin-top: 0px; float: left;'>{{ this.map.RouteLength + 'km, ' + this.map.NightCount +  ' days' }}</p>
-		<div style='display: inline; float: right'>
+		<p style=' margin-top: 0px; margin-left: 1px; float: left;'>{{ this.map.RouteLength + 'km, ' + this.map.NightCount +  ' days' }}</p>
+		<div style='display: inline; float: right; margin-right: 1px'>
 			<img style='width: 10px; display: inline' src='/assets/icons/tent.png'><p style='display: inline; margin-left: 4px;'>camping </p>
 			<img style='margin-left: 4px; width: 10px; display: inline' src='/assets/icons/hotel.png'><p style='display: inline; margin-left: 4px;'>hotel</p>
 		</div>
@@ -16,12 +16,16 @@
 </template>
 
 <script>
-import { CycleMap } from "../scripts/CycleMap.js";
+import { CycleMap, MapStyle } from "../scripts/CycleMap.js";
 import { ExitFullScreen, EnterFullScreen, OnFullscreenChange } from "../scripts/MiscHelper.js";
 
 export default {
 	props: {
-		routePath: String
+		routePath: String,
+		theme: {
+			type: String,
+			default: "dark"
+		}
 	},
 	watch: {
 		"routePath": function(value, oldValue) {
@@ -42,7 +46,7 @@ export default {
 	},
 
 	ready: function() {
-		this.map = new CycleMap($("#cycle-map").get(0));
+		this.map = new CycleMap($("#cycle-map").get(0), this.theme);
 		if(this.routePath != null) {
 			this.routes[this.routePath] = { routePath: this.routePath };
 			this.map.SetRoute(this.routes[this.routePath]);

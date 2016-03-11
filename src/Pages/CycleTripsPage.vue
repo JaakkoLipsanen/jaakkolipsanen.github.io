@@ -1,6 +1,7 @@
 <template>
 	<div class="tour-list-container">
-		<world-map id="world-map"></world-map>
+		<world-map style="height: 60vh" id="world-map"></world-map>
+		<div></div>
 		<div class="tour-block" v-for="tour in items">
 			<p v-on:click="tourClicked(tour)"> {{ tour.toUpperCase() }} </p>
 		</div>
@@ -55,6 +56,11 @@ $default-link-color: desaturate(rgb(144, 144, 255), 5);
 		font-size: 32px;
 		font-weight: 800;
 		cursor: pointer;
+	}
+
+	.tour-block {
+		display: inline-block;
+		margin: auto 16px;
 	}
 }
 

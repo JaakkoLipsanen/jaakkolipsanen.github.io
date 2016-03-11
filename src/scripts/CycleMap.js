@@ -167,7 +167,7 @@ class RouteView {
 	}
 }
 
-class Route {
+export class Route {
 	constructor(cyclingPaths, transportPaths, nightCollection) {
 		this.CyclingPaths = cyclingPaths;
 		this.TransportPaths = transportPaths;
@@ -197,8 +197,15 @@ class Route {
 				const cyclingPathFiles = lines[0].split(" ").map(addFolderToPathFunc);
 				const cyclingPaths = await LoadPaths(cyclingPathFiles);
 
-				const transportPathFiles = lines[1].split(" ").map(addFolderToPathFunc);
-				const transportPaths = await LoadPaths(transportPathFiles);
+				let transportPaths = [];
+				console.log(lines[1].length);
+				if(lines[1].length >= 5) {
+					const transportPathFiles = lines[1].split(" ").map(addFolderToPathFunc);
+					transportPaths = await LoadPaths(transportPathFiles);
+				}
+
+
+				console.log(transportPaths);
 
 				const nightLocationsFile = addFolderToPathFunc(lines[2]);
 				const nightCollection = await NightCollection.FromFile(nightLocationsFile);
@@ -210,14 +217,19 @@ class Route {
 	}
 }
 
+export const MapStyle = {
+	Dark: "dark",
+	Light: "light"
+}
+
 export class CycleMap {
-	constructor(container) {
+	constructor(container, mapStyle = MapStyle.Dark) {
 		this.CurrentRouteView = null;
 		this._isMouseOverMap = false;
 		this._googleMap = null;
 		this._isMouseOverMap = false;
 
-		this._initializeMap(container);
+		this._initializeMap(container, mapStyle);
 	}
 
 	get RouteLength() {
@@ -228,7 +240,7 @@ export class CycleMap {
 		return this.CurrentRouteView.NightCount;
 	}
 
-	_initializeMap(container) {
+	_initializeMap(container, mapStyle) {
 		let googleMapsProperties = {
 			panControl: false,
 			mapTypeControl: false,
@@ -245,10 +257,8 @@ export class CycleMap {
 			// default values: if there is no route then these must be set
 			zoom: 5,
 			center: new google.maps.LatLng(48, 15), // middle of europe
-			styles: MapStyles.Light.NormalStyle,
+			styles: (mapStyle == MapStyle.Dark) ? MapStyles.Dark.NormalStyle : MapStyles.Light.NormalStyle,
 			backgroundColor: "rgb(43, 43, 43)", // same color as the ocean in the map style
-
-
 		};
 
 		this._googleMap = new google.maps.Map(container, googleMapsProperties);
@@ -287,6 +297,9 @@ export class CycleMap {
 			setNightMarkerVisibility(this.CurrentRouteView.NightMarkers, false);
 		});
 
+		$(window).resize(() => {
+			this.OnSizeChanged();
+		});
 	}
 
 	async SetRoute(routeItem) {
@@ -330,8 +343,8 @@ function CreateGoogleIcon(url) {
 	};
 }
 
-const TentIcon = CreateGoogleIcon("assets/icons/tent.png");
-const HotelIcon = CreateGoogleIcon("assets/icons/hotel.png");
+const TentIcon = CreateGoogleIcon("/assets/icons/tent.png");
+const HotelIcon = CreateGoogleIcon("/assets/icons/hotel.png");
 
 class Style {
 	constructor(styleArray) {

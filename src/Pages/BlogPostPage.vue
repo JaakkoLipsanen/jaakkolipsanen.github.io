@@ -32,7 +32,7 @@
 			</div>
 		</div>
 
-		<cycle-map class="route-map"></cycle-map>
+		<cycle-map class="route-map" theme="light"></cycle-map>
 		<image-viewer style="display: none"></image-viewer>
 
 	</div>

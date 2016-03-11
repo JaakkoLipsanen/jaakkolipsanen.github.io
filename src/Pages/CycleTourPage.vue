@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<cycle-map style="padding-top: 128px; width: 70%; height: 500px"></cycle-map>
+		<cycle-map :route-path="CycleRoutePath" class="tour-map" style="padding-top: 128px; width: 70%; height: calc(100vh - 192px); min-height: 256px"></cycle-map>
 		<p style="font-size: 24px; color: white; margin: auto; margin-top: 64px; text-align: center;">blogi</p>
 
 		<div class="blog-list-page-container">
@@ -38,6 +38,12 @@ export default {
 		BlogList.FromFile("/cycle/" + this.$root.CurrentState().TourName + "/blog/posts.txt").then(async blog => {
 			data.blog = blog;
 		});
+	},
+
+	computed: {
+		CycleRoutePath: function() {
+			return "/cycle/" + this.$root.CurrentState().TourName + "/route/route-description.txt";
+		}
 	},
 
 	methods: {
@@ -92,6 +98,10 @@ export default {
 	}
 
 	.blog-post-block {
+		width: 100% !important;
+	}
+
+	.tour-map {
 		width: 100% !important;
 	}
 }

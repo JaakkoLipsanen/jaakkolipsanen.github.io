@@ -1,13 +1,22 @@
 <template>
 	<div id="navbar-container">
 		<p id="navbar-header-text">{{ title }}</p>
-		<div class="navbar-links" style="">
+
+		<div class="navbar-links">
 			<p  v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex }" v-for="(index, item) in items[selectedMainIndex].items">{{ item.toUpperCase() }} </p>
 
 			<div class="header-divider"></div>
 			<p style="width: 100px" v-on:click="mainLinkClicked" id="main-link"> {{ items[items.length - 1 - selectedMainIndex].main.toUpperCase() }} </p>
 		</div>
 
+
+		<div class="hamburger-menu">
+			<p  v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex }" v-for="(index, item) in items[selectedMainIndex].items">{{ item.toUpperCase() }} </p>
+
+			<div class="horizontal-divider"></div>
+			<p style="width: 100px" v-on:click="mainLinkClicked" id="main-link"> {{ items[items.length - 1 - selectedMainIndex].main.toUpperCase() }} </p>
+		</div>
+		<img class="hamburger-menu-button" src="/assets/icons/HamburgerMenuBlack.svg" v-on:click="ToggleHamburgerMenu" style="width: 40px; color: white;">
 	</div>
 </template>
 
@@ -19,18 +28,26 @@ export default {
 
 			items: [
 				{ main: "coding", items: ["about", "projects", "cv"] },
-				{ main: "cycling", items: ["about", "blog", "trips"] }
+				{ main: "cycling", items: ["blog", "trips"] }
 			],
 
 			selectedMainIndex: 1,
-			selectedSubIndex: 0
+			selectedSubIndex: 0,
+
+			isHamburgerMenuOpen: false,
 		};
+	},
+
+	ready: function() {
+		$(window).resize(() => {
+			this.SetHamburgerMenuVisibility(false);
+		});
 	},
 
 	methods: {
 		mainLinkClicked: function() {
 			if(this.selectedMainIndex === 0) {
-				this.$root.ChangePage("cycle-page", "/cycle", { });
+				this.$root.ChangePage("cycle-blog-page", "/cycle", { });
 				this.selectedMainIndex = 1;
 			}
 			else {
@@ -39,6 +56,7 @@ export default {
 			}
 
 			this.selectedSubIndex = 0;
+			this.SetHamburgerMenuVisibility(false);
 		},
 
 		subLinkClicked: function(item, index) {
@@ -52,22 +70,33 @@ export default {
 				}
 			}
 			else {
-				if(index === 0) { // "about"
-					this.$root.ChangePage("cycle-page", "/cycle", { });
+				if(index === 0) { // "blog"
+					this.$root.ChangePage("cycle-blog-page", "/cycle", { });
 				}
 				else {
 					this.$root.ChangePage("cycle-" + item + "-page", "/cycle/" + item, { });
 				}
 			}
+
+			this.SetHamburgerMenuVisibility(false);
+		},
+
+		ToggleHamburgerMenu: function() {
+			this.isHamburgerMenuOpen = !this.isHamburgerMenuOpen;
+			$(".hamburger-menu").toggle();
+		},
+
+		SetHamburgerMenuVisibility: function(visible) {
+			this.isHamburgerMenuOpen = visible;
+			$(".hamburger-menu").toggle(visible);
 		}
 	},
 
 	events: {
 		PageChanged: function(page) {
-			console.log("xxxx");
 			const parts = page.split("-");
 			parts.pop(); // remove last value from 'parts' (it is always 'page')
-			
+
 			if(parts[0] == "code") {
 				this.selectedMainIndex = 0;
 				if(parts.length == 1) {
@@ -83,13 +112,13 @@ export default {
 			else if(parts[0] == "cycle") {
 				this.selectedMainIndex = 1;
 				if(parts.length == 1) {
-					this.selectedSubIndex = 0;
+					return;
 				}
 				else if(parts[1] == "blog") {
-					this.selectedSubIndex = 1;
+					this.selectedSubIndex = 0;
 				}
 				else {
-					this.selectedSubIndex = 2;
+					this.selectedSubIndex = 1;
 				}
 			}
 		}
@@ -98,6 +127,105 @@ export default {
 </script>
 
 <style lang="sass">
+
+	@media all and (max-width: 943px) {
+		.hamburger-menu, .hamburger-menu-button {
+			visibility: visible !important;
+		}
+
+		.navbar-links {
+			visibility: hidden !important;
+		}
+	}
+
+	@media all and (min-width: 944px) {
+		.hamburger-menu, .hamburger-menu-button {
+			visibility: hidden  !important;
+		}
+
+		.navbar-links {
+			visibility: visible  !important;
+		}
+	}
+
+	.hamburger-menu {
+		width: 200px;
+		background-color: rgb(40, 40, 40);
+		height: 100vh;
+
+		position: fixed;
+		right: 0;
+		top: 0;
+		z-index: 1000;
+
+		p {
+			display: block; color: white; margin-right: 8px;
+			font-size: 22px;
+			font-weight: 800;
+			font-family: "Open Sans";
+			color: rgb(255, 255, 255);
+			opacity: 0.6;
+
+			cursor: pointer;
+			transition: opacity 0.15s ease-in-out;
+			margin-left: 8px;
+
+			&:hover {
+				color: white;
+				opacity: 1;
+			}
+
+			&.selected {
+				color: white;
+				opacity: 1;
+			}
+		}
+
+		p:last-child {
+			color: white;
+			opacity: 0.35;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+
+		$horizontal-divider-margin: 8px;
+		.horizontal-divider {
+		     border-top:1px solid hsl(0, 0, 60);
+		     border-bottom:1px solid hsl(0, 0, 60);
+		     width: calc(100% - #{$horizontal-divider-margin} * 2);
+			 margin: auto $horizontal-divider-margin auto $horizontal-divider-margin;
+			 display: inline-block;
+			 box-sizing: border-box;
+		}
+	}
+
+	.hamburger-menu-button {
+	  position: fixed;
+	  float: right;
+	  top: 0;
+	  right: 0;
+	  margin-right: 8px;
+	  margin-top: 6px;
+	  z-index: 1001;
+
+	  cursor: pointer;
+	}
+
+	$hamburger-menu-button-color: rgb(215, 215, 215);
+	.hamburger-menu-button:before {
+	  content: "";
+	  position: absolute;
+	  right: 0;
+	  top: 0.25em;
+	  width: 32px;
+	  height: 0.3em;
+	  background: $hamburger-menu-button-color;
+	  box-shadow:
+	    0 0.7em 0 0 $hamburger-menu-button-color,
+	    0 1.4em 0 0 $hamburger-menu-button-color;
+	}
 
 	.navbar-links {
 		position: absolute; top: 0px; height: 48px;  right: 0px; margin-right: 12px;
@@ -127,7 +255,7 @@ export default {
 		p:last-child {
 			margin-left: 8px;
 			color: white;
-			opacity: 0.45;
+			opacity: 0.35;
 
 			&:hover {
 				opacity: 1;

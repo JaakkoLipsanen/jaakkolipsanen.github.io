@@ -13,7 +13,7 @@ import BlogPostPage from "./Pages/BlogPostPage.vue";
 
 import { mapify } from "es6-mapify";
 
-const ConstantURL = undefined; // (window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
+const ConstantURL = (window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
 // Vue.config.debug = true;
 
 /* eslint-disable no-new */
@@ -45,7 +45,7 @@ var app = new Vue({
 	},
 
 	ready: function() {
-		this.ConstructPageFromUrl( window.location.pathname);
+		this.ConstructPageFromUrl("/cycle/trips"); // window.location.pathname);
 	},
 
 	methods: {
@@ -92,10 +92,7 @@ var app = new Vue({
 
 			if(path[0] == "cycle") {
 				if(path.length == 1) {
-					this.ChangePage("cycle-page", url, { }, false);
-				}
-				else if(path[1] == "blog") {
-					this.ChangePage("cycle-blog-page", url, { }, false );
+					this.ChangePage("cycle-blog-page", url, { }, false);
 				}
 				else if(path[1] == "trips") {
 					if(path.length == 2) {
@@ -111,7 +108,7 @@ var app = new Vue({
 			}
 			else if(path[0] == "404.html") {
 				// this is default atm
-				this.ChangePage("cycle-page", "/cycle", { }, true);
+				this.ChangePage("cycle-blog-page", "/cycle", { }, true);
 			}
 			else if(path[0] == "code") {
 				if(path.length == 1) {
