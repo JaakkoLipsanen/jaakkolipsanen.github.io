@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="nav-cont" style="position: fixed; height: 48px; top: calc(100% - 48px);">
-			<h1 style="position: absolute; top: 4px; left: 50%; transform: translateX(-50%); font-family: Yanone Kaffeesatz; margin: auto; font-size: 1.5em" v-on:click="blogListClicked">{{ blogPost.Trip }}</h1>
+			<h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: Yanone Kaffeesatz; margin: auto; font-size: 1.5em" v-on:click="blogListClicked">{{ blogPost.Trip }}</h1>
 			<p v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="font-size: 22px; margin: auto; position: absolute; top: 12px; left: 32px;  font-weight: 700;  display: block"> {{ '&lt; ' + blog.GetPreviousPostInfo(blogPost).DisplayString }}</p>
 			<p v-if="blog != null && blog.GetNextPostInfo(blogPost) != null" v-on:click="nextPostClicked" style="font-size: 22px; margin: auto; position: absolute; top: 12px; right: 32px; font-weight: 700; display: block"> {{  blog.GetNextPostInfo(blogPost).DisplayString + ' &gt;' }}</p>
 		</div>
@@ -50,7 +50,6 @@ export default {
 		return {
 			blog: null,
 			blogPost: null,
-			currentTour: "temp"
 		};
 	},
 
@@ -64,7 +63,7 @@ export default {
 		let data = this;
 		BlogSource.FromFile("/cycle/blog/posts.txt").then(async blog => {
 			const tour = data.$root.CurrentState().TourName;
-			data.blog = blog.CreateQuery((post) => (tour === undefined) || post.Trip.replace(" ", "").toLowerCase() === tour.toLowerCase());
+			data.blog = blog.CreateQuery((post) => (tour === undefined) || post.TripUrlString === tour.toLowerCase());
 			data.blogPost = await data.blog.GetBlogPostByName(data.$root.CurrentState().PostName);
 		});
 
@@ -89,7 +88,7 @@ export default {
           		scrollTop: 0
         	}, Math.min($(window).scrollTop(), 800), "swing", async () => {
 				this.blogPost = await this.blog.GetBlogPostByPostInfo(this.blog.GetPreviousPostInfo(this.blogPost));
-				this.$root.ChangeURL("/cycle/trips/" + this.$root.CurrentState().TourName + "/" + this.blogPost.Name, { TourName: this.$root.CurrentState().TourName, PostName: this.blogPost.Name });
+				this.$root.ChangeURL("/cycle/blog/" + this.blogPost.Name, { TourName: this.$root.CurrentState().TourName, PostName: this.blogPost.Name });
 			});
 		},
 
@@ -98,12 +97,12 @@ export default {
           		scrollTop: 0
         	}, Math.min($(window).scrollTop(), 800), "swing", async () => {
 				this.blogPost = await this.blog.GetBlogPostByPostInfo(this.blog.GetNextPostInfo(this.blogPost));
-				this.$root.ChangeURL("/cycle/trips/" + this.$root.CurrentState().TourName + "/" + this.blogPost.Name, { TourName: this.$root.CurrentState().TourName, PostName: this.blogPost.Name });
+				this.$root.ChangeURL("/cycle/blog/" + this.blogPost.Name, { TourName: this.$root.CurrentState().TourName, PostName: this.blogPost.Name });
 			});
 		},
 
 		blogListClicked: function() {
-			this.$root.ChangePage("cycle-tour-page", "/cycle/trips/" + this.$root.CurrentState().TourName, { TourName: this.$root.CurrentState().TourName });
+			this.$root.ChangePage("cycle-tour-page", "/cycle/trips/" + this.blogPost.TripUrlString, { TourName:this.blogPost.TripUrlString });
 		},
 
 		imageClicked: function(photo) {
@@ -113,12 +112,11 @@ export default {
 
 	events: {
 		"StateUpdated": function() {
-			this.currentTour = this.$root.CurrentState().TourName.toUpperCase();
-
 			let data = this;
 			BlogSource.FromFile("/cycle/blog/posts.txt").then(async blog => {
+				const tour = data.$root.CurrentState().TourName;
 				data.blog = blog.CreateQuery((post) => (tour === undefined) || post.Trip.replace(" ", "").toLowerCase() === tour.toLowerCase());
-				data.blogPost = await blog.GetBlogPostByName(data.$root.CurrentState().PostName);
+				data.blogPost = await data.blog.GetBlogPostByName(data.$root.CurrentState().PostName);
 			});
 		}
 	}
@@ -216,7 +214,7 @@ export default {
 	 .main-image-info-container {
 		 position: absolute;
 		 left: 50%;
-		 top: calc(100% - 60px);
+		 top: calc(100% - 54px);
 		 transform: translate(-50%, -50%);
 		 margin: 0;
 

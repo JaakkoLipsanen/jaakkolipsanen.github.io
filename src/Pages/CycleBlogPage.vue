@@ -41,7 +41,7 @@ export default {
 
 	methods: {
 		postClicked: function(post) {
-			this.$root.ChangePage("blog-post-page", "/cycle/blog/posts/" + post.Name, { TourName: this.$root.CurrentState().TourName, PostName: post.Name });
+			this.$root.ChangePage("blog-post-page", "/cycle/blog/" + post.Name, { TourName: this.$root.CurrentState().TourName, PostName: post.Name });
 		}
 	}
 };

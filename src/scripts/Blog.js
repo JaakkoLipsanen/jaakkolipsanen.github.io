@@ -77,6 +77,10 @@ export class BlogPost{
 		this.ContentBlocks = contentBlocks;
 	}
 
+	get TripUrlString() {
+		return this.Trip.replace(" ", "").toLowerCase()
+	}
+
 	get DisplayString() {
 		if(IsTouchDevice()) {
 			return "Day " + this.DateRange;
@@ -156,6 +160,10 @@ class BlogPostInfo {
 		this.MainImage = mainImage;
 
 		this._directory = directory;
+	}
+
+	get TripUrlString() {
+		return this.Trip.replace(" ", "").toLowerCase()
 	}
 
 	get DisplayString() {

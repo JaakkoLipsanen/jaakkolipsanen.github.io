@@ -3,7 +3,7 @@
 		<div style="height: 96px"></div>
 		<cycle-map :route-path="CycleRoutePath" class="tour-map" style=" width: 70%; height: calc(100vh - 148px); min-height: 256px"></cycle-map>
 		<div style="height: 64px"></div>
-		
+
 		<div class="blog-list-page-container">
 			<div class="blog-post-block" v-for="post in blog.PostInfos.reverse()">
 				<div class="blog-post-block-background" style="background-image: url({{ post.Directory + '1080p/' + post.MainImage  }});" v-on:click="postClicked(post)">
@@ -36,8 +36,8 @@ export default {
 	ready: function() {
 		const data = this;
 		BlogSource.FromFile("/cycle/blog/posts.txt").then(blog => {
-			console.log(data.CurrentTour.toLowerCase());
-			data.blog = blog.CreateQuery(post => post.Trip.replace(" ", "").toLowerCase() === data.CurrentTour.toLowerCase());
+			console.log(blog.PostInfos);
+			data.blog = blog.CreateQuery(post => post.TripUrlString === data.CurrentTour.toLowerCase());
 		});
 	},
 
@@ -53,7 +53,7 @@ export default {
 
 	methods: {
 		postClicked: function(post) {
-			this.$root.ChangePage("blog-post-page", this.$root.CurrentUrl + "/" + post.Name, { TourName: this.CurrentTour, PostName: post.Name });
+			this.$root.ChangePage("blog-post-page", "/cycle/blog/" + post.Name, { TourName: this.CurrentTour, PostName: post.Name });
 		}
 	}
 };

@@ -12,7 +12,7 @@ import BlogPostPage from "./Pages/BlogPostPage.vue";
 
 import { mapify } from "es6-mapify";
 
-const ConstantURL = (window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
+const ConstantURL = undefined; // (window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
 // Vue.config.debug = true;
 
 /* eslint-disable no-new */
@@ -99,9 +99,9 @@ var app = new Vue({
 					else if(path.length == 3) {
 						this.ChangePage("cycle-tour-page", url, { TourName: path[2] }, false );
 					}
-					else if(path.length == 4) {
-						this.ChangePage("blog-post-page", url, { TourName: path[2], PostName: path[3] }, false );
-					}
+				}
+				else if(path[1] == "blog" && path.length == 3) {
+					this.ChangePage("blog-post-page", url, { TourName: undefined, PostName: path[2] }, false );
 				}
 			}
 			else if(path[0] == "404.html") {
