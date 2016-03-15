@@ -5,7 +5,6 @@ import CodePage from "./Pages/CodePage.vue";
 import CodeProjectsPage from "./Pages/CodeProjectsPage.vue";
 import CodeCvPage from "./Pages/CodeCvPage.vue";
 
-import CyclePage from "./Pages/CyclePage.vue";
 import CycleTripsPage from "./Pages/CycleTripsPage.vue";
 import CycleBlogPage from "./Pages/CycleBlogPage.vue"
 import CycleTourPage from "./Pages/CycleTourPage.vue";
@@ -27,7 +26,6 @@ var app = new Vue({
 		"code-projects-page": CodeProjectsPage,
 		"code-cv-page": CodeCvPage,
 
-		"cycle-page": CyclePage,
 		"cycle-trips-page": CycleTripsPage,
 		"cycle-tour-page": CycleTourPage,
 		"cycle-blog-page": CycleBlogPage,

@@ -171,16 +171,12 @@ class BlogPostInfo {
 	}
 }
 
-export class BlogList {
-	constructor(posts, directory) {
-		this.PostInfos = posts;
-		this.Directory = directory;
+export class BlogQuery {
+	constructor(blogSource, queryFunction) {
+		this.PostInfos = blogSource.PostInfos.filter(queryFunction);
+		this.Directory = blogSource.Directory;
 		this._blogPosts = new Map();
 	}
-
-/*	GetIndex(post) {
-		return this.Posts.indexOf(post);
-	} */
 
 	GetPreviousPostInfo(post) {
 		if(post == undefined) {
@@ -255,10 +251,19 @@ export class BlogList {
 			catch(err) { reject(err); }
 		});
 	}
+}
 
+export class BlogSource {
+	constructor(posts, directory) {
+		this.PostInfos = posts;
+		this.Directory = directory;
+	}
 
+	CreateQuery(queryFunction = () => true) {
+		return new BlogQuery(this, queryFunction);
+	}
 
-	static async FromFile(blogPostListPath) {
+	static async FromFile(blogPostListPath, ) {
 		return new Promise(async (resolve, reject) => {
 			try {
 				const text = await LoadTextAsync(blogPostListPath);
@@ -277,7 +282,7 @@ export class BlogList {
 					blogPosts.push(new BlogPostInfo(name, title, dateRange, trip, mainImage, directory));
 				}
 
-				resolve(new BlogList(blogPosts, directory));
+				resolve(new BlogSource(blogPosts, directory));
 			}
 			catch(err) { reject(err); }
 		});

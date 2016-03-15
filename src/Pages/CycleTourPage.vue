@@ -2,8 +2,8 @@
 	<div>
 		<div style="height: 96px"></div>
 		<cycle-map :route-path="CycleRoutePath" class="tour-map" style=" width: 70%; height: calc(100vh - 148px); min-height: 256px"></cycle-map>
-		<p style="font-size: 24px; color: white; margin: auto; margin-top: 64px; text-align: center;">blogi</p>
-
+		<div style="height: 64px"></div>
+		
 		<div class="blog-list-page-container">
 			<div class="blog-post-block" v-for="post in blog.PostInfos.reverse()">
 				<div class="blog-post-block-background" style="background-image: url({{ post.Directory + '1080p/' + post.MainImage  }});" v-on:click="postClicked(post)">
@@ -19,43 +19,47 @@
 </template>
 
 <script>
-import ImageGroup from "../Components/ImageGroup.vue";
 import CycleMap from "../Components/CycleMap.vue";
-import { BlogList, BlogPost, BlogImage } from "../scripts/Blog.js";
+import { BlogSource } from "../scripts/Blog.js";
 
 export default {
 	data() {
 		return {
-			blog: null,
+			blog: null
 		};
 	},
 
 	components: {
-		"cycle-map": CycleMap,
+		"cycle-map": CycleMap
 	},
 
 	ready: function() {
-		let data = this;
-		BlogList.FromFile("/cycle/" + this.$root.CurrentState().TourName + "/blog/posts.txt").then(async blog => {
-			data.blog = blog;
+		const data = this;
+		BlogSource.FromFile("/cycle/blog/posts.txt").then(blog => {
+			console.log(data.CurrentTour.toLowerCase());
+			data.blog = blog.CreateQuery(post => post.Trip.replace(" ", "").toLowerCase() === data.CurrentTour.toLowerCase());
 		});
 	},
 
 	computed: {
 		CycleRoutePath: function() {
-			return "/cycle/" + this.$root.CurrentState().TourName + "/route/route-description.txt";
+			return "/cycle/routes/" + this.CurrentTour + "/route-description.txt";
+		},
+
+		CurrentTour: function() {
+			return this.$root.CurrentState().TourName;
 		}
 	},
 
 	methods: {
 		postClicked: function(post) {
-			this.$root.ChangePage("blog-post-page", this.$root.CurrentUrl + "/" + post.Name, { TourName: this.$root.CurrentState().TourName, PostName: post.Name });
+			this.$root.ChangePage("blog-post-page", this.$root.CurrentUrl + "/" + post.Name, { TourName: this.CurrentTour, PostName: post.Name });
 		}
 	}
 };
 </script>
 
-<style lang="sass" id="style-sheet" disabled=false>
+<style lang="sass" id="style-sheet" scoped>
 
 .post-block-container {
 		position: relative; width: 100%; height: 100%;  background-color: rgba(0, 0, 0, 0.4); transition: background-color 0.2s ease-in-out;

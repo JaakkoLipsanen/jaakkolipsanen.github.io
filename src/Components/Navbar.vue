@@ -34,7 +34,7 @@ export default {
 			selectedMainIndex: 1,
 			selectedSubIndex: 0,
 
-			isHamburgerMenuOpen: false,
+			isHamburgerMenuOpen: false
 		};
 	},
 
@@ -97,24 +97,24 @@ export default {
 			const parts = page.split("-");
 			parts.pop(); // remove last value from 'parts' (it is always 'page')
 
-			if(parts[0] == "code") {
+			if(parts[0] === "code") {
 				this.selectedMainIndex = 0;
-				if(parts.length == 1) {
+				if(parts.length === 1) {
 					this.selectedSubIndex = 0;
 				}
-				else if(parts[1] == "projects") {
+				else if(parts[1] === "projects") {
 					this.selectedSubIndex = 1;
 				}
-				else if(parts[1] == "cv") {
+				else if(parts[1] === "cv") {
 					this.selectedSubIndex = 2;
 				}
 			}
-			else if(parts[0] == "cycle") {
+			else if(parts[0] === "cycle") {
 				this.selectedMainIndex = 1;
-				if(parts.length == 1) {
+				if(parts.length === 1) {
 					return;
 				}
-				else if(parts[1] == "blog") {
+				else if(parts[1] === "blog") {
 					this.selectedSubIndex = 0;
 				}
 				else {

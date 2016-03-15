@@ -1,5 +1,5 @@
 title: Above and Beyond
-trip: Testing Trip
+trip: Europe 2015
 date-range: 8-11
 main-image: img1.jpg
 

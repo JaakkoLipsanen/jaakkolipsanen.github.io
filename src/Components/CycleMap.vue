@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { CycleMap, MapStyle } from "../scripts/CycleMap.js";
+import { CycleMap } from "../scripts/CycleMap.js";
 import { ExitFullScreen, EnterFullScreen, OnFullscreenChange } from "../scripts/MiscHelper.js";
 
 export default {

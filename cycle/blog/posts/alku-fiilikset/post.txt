@@ -1,5 +1,5 @@
-title: Col de la Croix de Fer
-trip: Testing Trip
+title: Alkufiilikset
+trip: Europe 2015
 date-range: 5-7
 main-image: img1.jpg
 

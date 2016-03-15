@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gpx xmlns="http://www.topografix.com/GPX/1/0" version="1.0" creator="">
 	
-	<wpt lat="59.571126" lon="22.694902"><name>hostelli</name></wpt>
-	
     <wpt lat="59.189880" lon="17.513455"><name>z</name></wpt>
 	<wpt lat="59.374147" lon="16.845839"><name>z</name></wpt>
 	<wpt lat="59.336999" lon="15.877570"><name>z</name></wpt>

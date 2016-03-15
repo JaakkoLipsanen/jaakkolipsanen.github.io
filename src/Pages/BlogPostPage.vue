@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="nav-cont" style="position: fixed; height: 48px; top: calc(100% - 48px);">
-			<h1 style="position: absolute; top: 4px; left: calc(50% - 55px); font-family: Yanone Kaffeesatz; margin: auto" v-on:click="blogListClicked">{{ currentTour }}</h1>
+			<h1 style="position: absolute; top: 4px; left: 50%; transform: translateX(-50%); font-family: Yanone Kaffeesatz; margin: auto; font-size: 1.5em" v-on:click="blogListClicked">{{ blogPost.Trip }}</h1>
 			<p v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="font-size: 22px; margin: auto; position: absolute; top: 12px; left: 32px;  font-weight: 700;  display: block"> {{ '&lt; ' + blog.GetPreviousPostInfo(blogPost).DisplayString }}</p>
 			<p v-if="blog != null && blog.GetNextPostInfo(blogPost) != null" v-on:click="nextPostClicked" style="font-size: 22px; margin: auto; position: absolute; top: 12px; right: 32px; font-weight: 700; display: block"> {{  blog.GetNextPostInfo(blogPost).DisplayString + ' &gt;' }}</p>
 		</div>
@@ -42,7 +42,7 @@
 import ImageGroup from "../Components/ImageGroup.vue";
 import CycleMap from "../Components/CycleMap.vue";
 import ImageViewer from "../Components/ImageViewer.vue";
-import { BlogList, BlogPost } from "../scripts/Blog.js";
+import { BlogSource, BlogPost, BlogQuery } from "../scripts/Blog.js";
 import Vue from "vue";
 
 export default {
@@ -61,12 +61,12 @@ export default {
 	},
 
 	ready: function() {
-		this.currentTour = this.$root.CurrentState().TourName.toUpperCase();
-
 		let data = this;
-		BlogList.FromFile("/cycle/" + this.$root.CurrentState().TourName + "/blog/posts.txt").then(async blog => {
-			data.blog = blog;
-			data.blogPost = await blog.GetBlogPostByName(data.$root.CurrentState().PostName);
+		BlogSource.FromFile("/cycle/blog/posts.txt").then(async blog => {
+			const tour = data.$root.CurrentState().TourName;
+			data.blog = blog.CreateQuery((post) => (tour === undefined) || post.Trip.replace(" ", "").toLowerCase() === tour.toLowerCase());
+			data.blogPost = await data.blog.GetBlogPostByName(data.$root.CurrentState().PostName);
+			console.log("le: " + data.blog.PostInfos.length + ", " + tour);
 		});
 
 		$(window).on('resize', () => {
@@ -117,7 +117,7 @@ export default {
 			this.currentTour = this.$root.CurrentState().TourName.toUpperCase();
 
 			let data = this;
-			BlogList.FromFile("/cycle/" + this.$root.CurrentState().TourName + "/blog/posts.txt").then(async blog => {
+			BlogList.FromFile("/cycle/blog/posts.txt").then(async blog => {
 				data.blog = blog;
 				data.blogPost = await blog.GetBlogPostByName(data.$root.CurrentState().PostName);
 			});
@@ -148,7 +148,7 @@ export default {
 	}
 
 	h1 {
-		visibility: hidden;
+		visibility: visible;
 	}
 }
 
@@ -168,6 +168,7 @@ export default {
 .route-map {
 	width: 60% !important;
 	height: 75vh !important;
+	margin-bottom: 72px !important;
 }
 
 #post-container {
@@ -216,7 +217,7 @@ export default {
 	 .main-image-info-container {
 		 position: absolute;
 		 left: 50%;
-		 top: 90%;
+		 top: calc(100% - 60px);
 		 transform: translate(-50%, -50%);
 		 margin: 0;
 
@@ -224,7 +225,7 @@ export default {
 			 font-weight: 700;
 			 font-size: 24px;
 			 margin: -2px;
-			 color: rgb(225, 225, 225);
+			 color: rgb(205, 205, 205);
 		 }
 	 }
 }
@@ -281,10 +282,13 @@ export default {
 		max-width: 422px!important;
 	}
 
-
+	.text-block {
+		width: 95% !important;
+		max-width: 422px!important;
+	}
 }
 
-@media all and (max-width: 943px) {
+@media all and (max-width: 1100px) {
 	.navigation-controls.fixed-to-top {
 		background-color: rgba(0, 0, 0, 0.75);
 	}
@@ -303,6 +307,11 @@ export default {
 
 	.route-map {
 		width: 100% !important;
+		max-width: 660px!important;
+	}
+
+	.text-block {
+		width: 95% !important;
 		max-width: 660px!important;
 	}
 }

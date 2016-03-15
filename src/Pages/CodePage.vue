@@ -29,7 +29,7 @@ export default {
 		$("body").addClass("white-bg");
 		$("#navbar-header-text").addClass("black-navbar-header-text");
 		$("#about-me-container").addClass("show");
-	},
+	}
 };
 </script>
 

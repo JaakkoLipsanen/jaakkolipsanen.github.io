@@ -17,9 +17,9 @@ export default {
 	data() {
 		return {
 			items: [
-				"europe15",
-				"spain14",
-				"europe14"
+				"europe2015",
+				"spain2014",
+				"europe2014"
 			]
 		};
 	},
@@ -33,7 +33,6 @@ export default {
 
 	methods: {
 		tourClicked: function(tour) {
-			console.log(tour);
 			this.$root.ChangePage("cycle-tour-page", "/cycle/trips/" + tour, { TourName: tour });
 		}
 	}

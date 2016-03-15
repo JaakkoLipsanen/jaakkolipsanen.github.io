@@ -3,6 +3,7 @@
 		<div class='gallery-background'></div>
 
 		<div id="image-container" >
+			<h3 style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%)">loading image..</h3>
 			<div id="image-cc">
 				<img id="image" src="{{ currentPhoto.FullPath('orig') }}">
 				<p id="description-text">{{ currentPhoto.Description }}</p>
@@ -14,7 +15,7 @@
 					<p>{{ "ISO: " + currentPhotoExif.ISO }}</p>
 					<p>{{ "Date: " + currentPhotoExif.DateTime }}</p>
 
-					<a v-show="currentPhotoExif.GpsLocation != 'unknown, unknown'" v-bind:href="'https://www.google.com/maps/place/' + currentPhotoExif.GpsLocation.replace(' ', '') + '/@' + currentPhotoExif.GpsLocation.replace(' ', '') + ',12z'" target="_blank">{{ "Location: " + currentPhotoExif.GpsLocation }}</a>
+					<a class="image-location-link" v-show="currentPhotoExif.GpsLocation != 'unknown, unknown'" v-bind:href="'https://www.google.com/maps/place/' + currentPhotoExif.GpsLocation.replace(' ', '') + '/@' + currentPhotoExif.GpsLocation.replace(' ', '') + ',12z'" target="_blank">{{ "Location: " + currentPhotoExif.GpsLocation }}</a>
 				</div>
 			</div>
 		</div>
@@ -55,12 +56,13 @@ export default {
 
 			EXIF.getData(this, function() {
 				const exposureTime = parseFloat(EXIF.getTag(this, "ExposureTime"));
-				const date = EXIF.getTag(this, "DateTimeOriginal").split(" ")[0];
+				const dateTime = EXIF.getTag(this, "DateTimeOriginal");
+				const date = (dateTime === undefined) ? "" : dateTime.split(" ")[0];
 				self.currentPhotoExif = {
 					Manufacturer: EXIF.getTag(this, "Make"),
 					Model: EXIF.getTag(this, "Model"),
 
-					DateTime: date.split(":")[2] + "/" + date.split(":")[1] + "/" + date.split(":")[0],
+					DateTime: date.split(":").length >= 2 ? (date.split(":")[2] + "/" + date.split(":")[1] + "/" + date.split(":")[0]) : "unknown",
 					FlashStatus: EXIF.getTag(this, "FlashStatus"),
 
 					ExposureTime: EXIF.getTag(this, "ExposureTime"),
@@ -90,9 +92,17 @@ export default {
 	},
 
 	methods: {
-		"closeImage": function() {
+		"closeImage": function(e) {
+			// if clicked element is link then don't close image
+			if(e.srcElement.tagName.toLowerCase() === "a") {
+				return;
+			}
+
 			$("#image-viewer-container").hide();
 			$("html").css("overflow", "auto");
+
+			this.currentPhoto = null;
+			this.currentPhotoExif = null;
 		}
 	},
 
