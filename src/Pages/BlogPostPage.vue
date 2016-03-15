@@ -116,7 +116,7 @@ export default {
 			this.currentTour = this.$root.CurrentState().TourName.toUpperCase();
 
 			let data = this;
-			BlogList.FromFile("/cycle/blog/posts.txt").then(async blog => {
+			BlogSource.FromFile("/cycle/blog/posts.txt").then(async blog => {
 				data.blog = blog.CreateQuery((post) => (tour === undefined) || post.Trip.replace(" ", "").toLowerCase() === tour.toLowerCase());
 				data.blogPost = await blog.GetBlogPostByName(data.$root.CurrentState().PostName);
 			});
