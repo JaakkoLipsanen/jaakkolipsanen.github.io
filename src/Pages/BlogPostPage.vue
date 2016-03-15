@@ -66,7 +66,6 @@ export default {
 			const tour = data.$root.CurrentState().TourName;
 			data.blog = blog.CreateQuery((post) => (tour === undefined) || post.Trip.replace(" ", "").toLowerCase() === tour.toLowerCase());
 			data.blogPost = await data.blog.GetBlogPostByName(data.$root.CurrentState().PostName);
-			console.log("le: " + data.blog.PostInfos.length + ", " + tour);
 		});
 
 		$(window).on('resize', () => {
@@ -118,7 +117,7 @@ export default {
 
 			let data = this;
 			BlogList.FromFile("/cycle/blog/posts.txt").then(async blog => {
-				data.blog = blog;
+				data.blog = blog.CreateQuery((post) => (tour === undefined) || post.Trip.replace(" ", "").toLowerCase() === tour.toLowerCase());
 				data.blogPost = await blog.GetBlogPostByName(data.$root.CurrentState().PostName);
 			});
 		}
