@@ -85,7 +85,7 @@ class NightCollection {
 }
 
 class RouteView {
-	constructor(route) {
+	constructor(route, useBigIcons) {
 		this.CyclingPathLines = []; // of type google.maps.Polyline
 		this.TransportPathLines = []; // of type google.maps.Polyline
 		this.NightMarkers = []; // of type google.maps.Marker
@@ -93,10 +93,10 @@ class RouteView {
 		this.Bounds = new google.maps.LatLngBounds();
 		this.RouteLength = 0;
 
-		this._initialize(route);
+		this._initialize(route, useBigIcons);
 	}
 
-	_initialize(route) {
+	_initialize(route, useBigIcons) {
 		// cycling paths
 		for(let cyclingPath of route.CyclingPaths) {
 			this.Bounds.union(cyclingPath.GetBounds());
@@ -142,7 +142,7 @@ class RouteView {
 
 			this.NightMarkers.push(new google.maps.Marker({
 				position: night.Location,
-				icon: (night.NightType == Night.Type.Tent ? TentIcon : HotelIcon),
+				icon: (night.NightType == Night.Type.Tent ? (useBigIcons ? TentIconBig : TentIcon) : (useBigIcons ? HotelIconBig : HotelIcon)),
 				map : null,
 			}));
 		}
@@ -228,8 +228,9 @@ export class CycleMap {
 		this._isMouseOverMap = false;
 		this._googleMap = null;
 		this._isMouseOverMap = false;
+		this._mapStyle = mapStyle;
 
-		this._initializeMap(container, mapStyle);
+		this._initializeMap(container);
 	}
 
 	get RouteLength() {
@@ -240,7 +241,11 @@ export class CycleMap {
 		return this.CurrentRouteView.NightCount;
 	}
 
-	_initializeMap(container, mapStyle) {
+	get CurrentMapStyle() {
+		return (this._mapStyle == MapStyle.Dark) ? MapStyles.Dark : MapStyles.Light;
+	}
+
+	_initializeMap(container) {
 		let googleMapsProperties = {
 			panControl: false,
 			mapTypeControl: false,
@@ -257,7 +262,7 @@ export class CycleMap {
 			// default values: if there is no route then these must be set
 			zoom: 5,
 			center: new google.maps.LatLng(48, 15), // middle of europe
-			styles: (mapStyle == MapStyle.Dark) ? MapStyles.Dark.NormalStyle : MapStyles.Light.NormalStyle,
+			styles: this.CurrentMapStyle.NormalStyle,
 			backgroundColor: "rgb(43, 43, 43)", // same color as the ocean in the map style
 		};
 
@@ -303,7 +308,7 @@ export class CycleMap {
 	}
 
 	async SetRoute(routeItem) {
-		const routeView = routeItem.routeView || (routeItem.routeView = new RouteView(await Route.FromFile(routeItem.routePath)));
+		const routeView = routeItem.routeView || (routeItem.routeView = new RouteView(await Route.FromFile(routeItem.routePath), this.CurrentMapStyle.UseBigIcons));
 
 		if(this.CurrentRouteView != null) {
 			this.CurrentRouteView.AssignMap(null);
@@ -334,21 +339,25 @@ export class CycleMap {
 }
 
 
-function CreateGoogleIcon(url) {
+function CreateGoogleIcon(url, size = 6) {
 	return {
 		url: url,
-		scaledSize: new google.maps.Size(6, 6),
+		scaledSize: new google.maps.Size(size, size),
 		origin: new google.maps.Point(0,0),
-		anchor: new google.maps.Point(3,3)
+		anchor: new google.maps.Point(size / 2, size / 2)
 	};
 }
 
 const TentIcon = CreateGoogleIcon("/assets/icons/tent.png");
 const HotelIcon = CreateGoogleIcon("/assets/icons/hotel.png");
 
+const TentIconBig = CreateGoogleIcon("/assets/icons/tent_outlined.png", 8);
+const HotelIconBig = CreateGoogleIcon("/assets/icons/hotel_outlined.png", 8);
+
 class Style {
-	constructor(styleArray) {
+	constructor(styleArray, bigIcons = false) {
 		this.NormalStyle = styleArray;
+		this.UseBigIcons = bigIcons;
 
 		this.NoLabelStyle = [];
 		for(let i = 0; i < styleArray.length - 1; i++) {
@@ -378,10 +387,23 @@ const MapStyles = {
 		{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},
 		{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},
 		{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}, { "lightness": "40" }]}, // "color": "#FF7F50"}]},
-		{"featureType":"road.arterial","elementType":"geometry","stylers":[{"visibility":"on"}, { "lightness": "-5" }]}, // "color": "#FF7F50"}]},
+		{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"visibility":"on"}, { "lightness": "25" }]}, // "color": "#FF7F50"}]},
+		{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"visibility":"on"}, { "lightness": "-3" }]}, // "color": "#FF7F50"}]},
 		{"featureType":"road.local","elementType":"geometry","stylers":[{"visibility":"on"}, { "lightness": "-5" }]}, // "color": "#FF7F50"}]},
 		{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},
-		{"stylers":[{"saturation":-77}]},{"featureType":"road"}]),
+		{"stylers":[{"saturation":-77}]},{"featureType":"road"},
+		{
+			"featureType": "road",
+			"elementType": "labels.icon",
+			"stylers": [
+				{
+					"visibility": "off"
+				},
+			]
+		},
+
+		], true),
+
 
 	Dark: new Style([
 

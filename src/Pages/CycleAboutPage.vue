@@ -5,6 +5,7 @@
 		<p class="introduction-text">You can find my previous trips by going to the 'trips' section!</p>
 		<cycle-map :route-path="CycleRoutePath" theme="light" class="tour-map" style=" width: 70%; height: calc(100vh - 208px); min-height: 256px"></cycle-map>
 
+		<p style="text-align: center; font-size: 22px; margin: auto; margin-top: 64px; height: 16px; margin-bottom: -14px">blog</p>
 		<div v-if="blog.PostInfos.length > 0" class="blog-list-page-container">
 			<div class="blog-post-block" v-for="post in blog.PostInfos">
 				<div class="blog-post-block-background" style="background-image: url({{ post.Directory + '1080p/' + post.MainImage  }});" v-on:click="postClicked(post)">
@@ -74,9 +75,6 @@ export default {
 
 	h1, h3 {
 		 transition: color 0.2s ease-in-out;
-
-		 text-overflow: ellipsis;
-		 overflow: hidden;
 	}
 }
 
@@ -93,20 +91,14 @@ export default {
 }
 
 .blog-post-block-background {
-	flex: 1 1 50%; width: 450px; height: 450px; max-width: 100%; max-height: 100%; background-position: center; background-size: cover;
+	width: 100%; height: 100%; max-width: 100%; max-height: 100%; background-position: center; background-size: cover;
 }
 
 .blog-list-page-container {
 	margin: auto;
-	margin-top: 64px;
+	margin-top: 8px;
 	margin-bottom: 32px;
 	width: 90%;
-	display: flex;
-
-	flex-flow: row wrap;
-	align-content: space-around;
-	justify-content: center;
-   -webkit-align-items: center;
 }
 
 @media all and (max-width: 526.5px) {
@@ -126,5 +118,11 @@ export default {
 .blog-post-block {
 	text-align: center;
 	cursor: pointer;
+	margin: 64px auto;
+	width: 800px; height: 600px;
+	max-width: 100%;
+	max-height: 90vh;
+
+	transition: height 999999s;
 }
 </style>
