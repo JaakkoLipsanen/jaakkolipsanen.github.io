@@ -1,6 +1,6 @@
-title: Alkufiilikset
-trip: Europe 2015
-date-range: 5-7
+title: Sweden-Belgium Tour 2014
+trip: Europe 2014
+date-range: 1-32
 main-image: img1.jpg
 
 header: Alkufiilikset

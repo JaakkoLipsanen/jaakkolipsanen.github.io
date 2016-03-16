@@ -1,0 +1,17 @@
+title: Goodbye!
+trip: USA 2016
+date-range: 1-17
+main-image: img1.jpg
+
+header: Alkufiilikset
+text: Reissu alkoi oikein mukavasti. Laskeuduin joskus illalla Alicanteen ja sitten nukuin, tai ainakin koitin nukkua, lentokentän penkeillä muutaman tunnin ennen aamunsarastusta. Juuri kun olin lähdössä pyöräilemään aamulla hoksasin että kypärä unohtui kotiin. Hetken mietin, että miten ihmeessä onnistuin tässä ja lähdin sitten matkaan.
+
+image: img2.jpg
+
+text: Ekat päivät sujuivat ihan kivasti, varsinkin kun pääsin kaupungeistä vähän syrjäisemmälle seudulle. Aika lyhyitä päiviä tuli kuitenkin pyöräiltyä kun teki mieli nukkua puoleenpäivään. Muutamaa päivää myöhemmin alkoi sellainen tosi kiva vuoristoinen seutu, missä
+
+image: img3.jpg
+image: img1.jpg
+
+
+image-group: img1.jpg?1920x1442 img2.jpg?1920x1442 img3.jpg?1920x1442 img1.jpg?1920x1442 img2.jpg?1920x1442 img3.jpg?1920x1442 img5.jpg?1920x1440 img4.jpg?1920x2560 img2.jpg?1920x1442 img3.jpg?1920x1442

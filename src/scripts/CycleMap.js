@@ -377,11 +377,17 @@ const MapStyles = {
 		{"featureType":"transit","stylers":[{"visibility":"simplified"}]},
 		{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},
 		{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},
-		{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},
+		{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}, { "lightness": "40" }]}, // "color": "#FF7F50"}]},
+		{"featureType":"road.arterial","elementType":"geometry","stylers":[{"visibility":"on"}, { "lightness": "-5" }]}, // "color": "#FF7F50"}]},
+		{"featureType":"road.local","elementType":"geometry","stylers":[{"visibility":"on"}, { "lightness": "-5" }]}, // "color": "#FF7F50"}]},
 		{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},
 		{"stylers":[{"saturation":-77}]},{"featureType":"road"}]),
 
 	Dark: new Style([
+
+		{"featureType":"administrative.province", "elementType": "geometry", "stylers":[{"visibility":"on"}]},
+		{"featureType":"administrative.country", "elementType": "geometry", "stylers":[{"visibility":"on"}]},
+
 		{
 			"featureType": "all",
 			"elementType": "labels.text.fill",
@@ -417,8 +423,21 @@ const MapStyles = {
 			"elementType": "labels.icon",
 			"stylers": [
 				{
-					"visibility": "off"
+					"visibility": "on"
+				},
+				{
+					"color": "#333333"
 				}
+			]
+		},
+
+		{
+			"featureType": "road",
+			"elementType": "labels.icon",
+			"stylers": [
+				{
+					"visibility": "off"
+				},
 			]
 		},
 		{
@@ -477,7 +496,7 @@ const MapStyles = {
 		   "elementType": "geometry.fill",
 		   "stylers": [
 				   {
-					   "color": "#373737"
+					   "color": "#383838"
 				   }
 		   		]
 		   },

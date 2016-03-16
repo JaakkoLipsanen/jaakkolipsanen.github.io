@@ -28,7 +28,7 @@ export default {
 
 			items: [
 				{ main: "coding", items: ["about", "projects", "cv"] },
-				{ main: "cycling", items: ["blog", "trips"] }
+				{ main: "cycling", items: ["about", "blog", "trips"] }
 			],
 
 			selectedMainIndex: 1,
@@ -47,7 +47,7 @@ export default {
 	methods: {
 		mainLinkClicked: function() {
 			if(this.selectedMainIndex === 0) {
-				this.$root.ChangePage("cycle-blog-page", "/cycle", { });
+				this.$root.ChangePage("cycle-about-page", "/cycle", { });
 				this.selectedMainIndex = 1;
 			}
 			else {
@@ -70,8 +70,8 @@ export default {
 				}
 			}
 			else {
-				if(index === 0) { // "blog"
-					this.$root.ChangePage("cycle-blog-page", "/cycle", { });
+				if(index === 0) { // "about"
+					this.$root.ChangePage("cycle-about-page", "/cycle", { });
 				}
 				else {
 					this.$root.ChangePage("cycle-" + item + "-page", "/cycle/" + item, { });
@@ -111,15 +111,23 @@ export default {
 			}
 			else if(parts[0] === "cycle") {
 				this.selectedMainIndex = 1;
+				console.log(parts);
 				if(parts.length === 1) {
 					return;
 				}
-				else if(parts[1] === "blog") {
+				else if(parts[1] === "about") {
 					this.selectedSubIndex = 0;
 				}
-				else {
+				else if(parts[1] === "blog") {
 					this.selectedSubIndex = 1;
 				}
+				else if(parts[1] === "trips" || parts[1] === "tour") {
+					this.selectedSubIndex = 2;
+				}
+			}
+			else if(parts[0] === "blog") { // "blog-post-page"
+				this.selectedMainIndex = 1;
+				this.selectedSubIndex = 1;
 			}
 
 			this.SetHamburgerMenuVisibility(false);

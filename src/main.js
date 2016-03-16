@@ -5,6 +5,7 @@ import CodePage from "./Pages/CodePage.vue";
 import CodeProjectsPage from "./Pages/CodeProjectsPage.vue";
 import CodeCvPage from "./Pages/CodeCvPage.vue";
 
+import CycleAboutPage from "./Pages/CycleAboutPage.vue";
 import CycleTripsPage from "./Pages/CycleTripsPage.vue";
 import CycleBlogPage from "./Pages/CycleBlogPage.vue"
 import CycleTourPage from "./Pages/CycleTourPage.vue";
@@ -12,7 +13,7 @@ import BlogPostPage from "./Pages/BlogPostPage.vue";
 
 import { mapify } from "es6-mapify";
 
-const ConstantURL = undefined; // (window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
+const ConstantURL = (window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
 // Vue.config.debug = true;
 
 /* eslint-disable no-new */
@@ -26,6 +27,7 @@ var app = new Vue({
 		"code-projects-page": CodeProjectsPage,
 		"code-cv-page": CodeCvPage,
 
+		"cycle-about-page": CycleAboutPage,
 		"cycle-trips-page": CycleTripsPage,
 		"cycle-tour-page": CycleTourPage,
 		"cycle-blog-page": CycleBlogPage,
@@ -90,7 +92,7 @@ var app = new Vue({
 
 			if(path[0] == "cycle") {
 				if(path.length == 1) {
-					this.ChangePage("cycle-blog-page", url, { }, false);
+					this.ChangePage("cycle-about-page", url, { }, false);
 				}
 				else if(path[1] == "trips") {
 					if(path.length == 2) {
@@ -100,13 +102,18 @@ var app = new Vue({
 						this.ChangePage("cycle-tour-page", url, { TourName: path[2] }, false );
 					}
 				}
-				else if(path[1] == "blog" && path.length == 3) {
-					this.ChangePage("blog-post-page", url, { TourName: undefined, PostName: path[2] }, false );
+				else if(path[1] == "blog") {
+					if(path.length == 2) {
+						this.ChangePage("cycle-blog-page", url, { }, false);
+					}
+					else if(path.length == 3) {
+						this.ChangePage("blog-post-page", url, { TourName: undefined, PostName: path[2] }, false );
+					}
 				}
 			}
 			else if(path[0] == "404.html") {
 				// this is default atm
-				this.ChangePage("cycle-blog-page", "/cycle", { }, true);
+				this.ChangePage("cycle-about-page", "/cycle", { }, true);
 			}
 			else if(path[0] == "code") {
 				if(path.length == 1) {
