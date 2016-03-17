@@ -191,7 +191,7 @@ export class Route {
 	}
 
 
-	static async FromFileV2(filePath) {
+	static async FromFile(filePath) {
 		return new Promise(async (resolve, reject) => {
 			try {
 				const text = await LoadTextAsync(filePath);
@@ -234,48 +234,6 @@ export class Route {
 				}
 
 				resolve(new Route(data));
-			}
-			catch(err) { reject(err); }
-		});
-	}
-
-	static async FromFile(filePath) {
-		return new Promise(async (resolve, reject) => {
-			try {
-				const text = await LoadTextAsync(filePath);
-				const lines = text.split('\n');
-
-				const LoadPaths = async (pathFiles) => {
-					return new Promise(async function(resolve, reject) {
-						try {
-							var paths = await WaitAll(pathFiles, async (path) => await Path.FromTextFile(path));
-							resolve(paths);
-						}
-						catch(err) { reject(err); }
-					});
-				};
-
-				var routeDescriptionFolder = GetUriDirectory(filePath);
-				const addFolderToPathFunc = function(path) { return routeDescriptionFolder + path;}
-
-				// TODO: atm everything is loaded sequentally !! Bad !!
-				const cyclingPathFiles = lines[0].split(" ").map(addFolderToPathFunc);
-				const cyclingPaths = await LoadPaths(cyclingPathFiles);
-
-				let transportPaths = [];
-				console.log(lines[1].length);
-				if(lines[1].length >= 5) {
-					const transportPathFiles = lines[1].split(" ").map(addFolderToPathFunc);
-					transportPaths = await LoadPaths(transportPathFiles);
-				}
-
-
-				console.log(transportPaths);
-
-				const nightLocationsFile = addFolderToPathFunc(lines[2]);
-				const nightCollection = await NightCollection.FromFile(nightLocationsFile);
-
-				resolve(new Route(cyclingPaths, transportPaths, nightCollection));
 			}
 			catch(err) { reject(err); }
 		});
@@ -373,7 +331,7 @@ export class CycleMap {
 	}
 
 	async SetRoute(routeItem) {
-		const routeView = routeItem.routeView || (routeItem.routeView = new RouteView(await Route.FromFileV2(routeItem.routePath), this.CurrentMapStyle.UseBigIcons));
+		const routeView = routeItem.routeView || (routeItem.routeView = new RouteView(await Route.FromFile(routeItem.routePath), this.CurrentMapStyle.UseBigIcons));
 
 		if(this.CurrentRouteView != null) {
 			this.CurrentRouteView.AssignMap(null);
