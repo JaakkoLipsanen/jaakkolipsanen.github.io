@@ -45,7 +45,7 @@ export default {
 
 	computed: {
 		CycleRoutePath: function() {
-			return "/cycle/routes/spain2014/route-description.txt";
+			return "/cycle/routes/europe2014/route-description.txt";
 		},
 
 		CPostInfos: function() {

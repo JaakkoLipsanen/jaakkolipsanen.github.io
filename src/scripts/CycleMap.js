@@ -3,7 +3,7 @@
 
 import { LoadTextAsync, LoadXmlAsync, GetUriDirectory } from "./FileHelper.js";
 import { WaitAll } from "./AsyncHelper.js";
-import { IsTouchDevice } from "./MiscHelper.js";
+import { IsTouchDevice, Assert } from "./MiscHelper.js";
 
 class Path {
 	constructor(points) {
@@ -54,36 +54,6 @@ class Night {
 	}
 }
 
-class NightCollection {
-	constructor(nights) {
-		this.Nights = nights;
-	}
-
-	static async FromFile(filePath) {
-		return new Promise(async (resolve, reject) => {
-			try {
-				const gpx = await LoadXmlAsync(filePath);
-				const waypoints = gpx.getElementsByTagName('wpt');
-				const names = gpx.getElementsByTagName('name');
-
-				let nights = [];
-				for (let i = 0; i < waypoints.length; i++) {
-					const lat = waypoints[i].getAttribute('lat');
-					const lon = waypoints[i].getAttribute('lon');
-
-					const location = new google.maps.LatLng(lat, lon);
-					const nightType = (names[i].childNodes[0].nodeValue == "hostelli") ? Night.Type.Hotel : Night.Type.Tent;
-
-					nights.push(new Night(location, nightType));
-				}
-
-				resolve(new NightCollection(nights));
-			}
-			catch(err) { reject(err); }
-		});
-	}
-}
-
 class RouteView {
 	constructor(route, useBigIcons) {
 		this.CyclingPathLines = []; // of type google.maps.Polyline
@@ -97,8 +67,11 @@ class RouteView {
 	}
 
 	_initialize(route, useBigIcons) {
+
+		const routeData = route.CalculateRoute();
+
 		// cycling paths
-		for(let cyclingPath of route.CyclingPaths) {
+		for(let cyclingPath of routeData.CyclingPaths) {
 			this.Bounds.union(cyclingPath.GetBounds());
 
 			this.CyclingPathLines.push(new google.maps.Polyline({
@@ -114,7 +87,7 @@ class RouteView {
 		}
 
 		// transport paths
-		for(let transportPath of route.TransportPaths) {
+		for(let transportPath of routeData.TransportPaths) {
 			const lineSymbol = {
 				path: 'M 0,-1 0,1',
 				strokeOpacity: 0.5,
@@ -137,8 +110,8 @@ class RouteView {
 		}
 
 		// nights
-		this.NightCount = route.NightCollection.Nights.length;
-		for(let night of route.NightCollection.Nights) {
+		this.NightCount = routeData.Nights.length;
+		for(let night of routeData.Nights) {
 
 			this.NightMarkers.push(new google.maps.Marker({
 				position: night.Location,
@@ -168,10 +141,105 @@ class RouteView {
 }
 
 export class Route {
-	constructor(cyclingPaths, transportPaths, nightCollection) {
-		this.CyclingPaths = cyclingPaths;
-		this.TransportPaths = transportPaths;
-		this.NightCollection = nightCollection;
+	constructor(data) {
+		this._data = data;
+	}
+
+	CalculateRoute() {
+		const cyclePaths = [];
+		const transportPaths = [];
+		const nights = [];
+
+		let currentPathType = "cycle"; // cycle is default/initial path type
+		let currentPath = [];
+		for(let i = 0; i < this._data.length; i++) {
+			const element = this._data[i];
+			if(element.type === "night") {
+				nights.push(element.night);
+			}
+			else if(element.type === "path-type-change") {
+				if(element.pathType === currentPathType) {
+					console.log("CycleMap route: path-type-change on route is the same type as before");
+					continue;
+				}
+
+				if(currentPath.length == 0) {
+					currentPathType = element.pathType;
+					continue;
+				}
+
+				let destination = (currentPathType === "cycle") ? cyclePaths : transportPaths;
+				destination.push(new Path(currentPath));
+				currentPathType = element.pathType;
+
+				// new array for the new path
+				currentPath = [];
+			}
+			else if(element.type === "coordinate") {
+				if(element.location === undefined || element.location === null || element.location.lat === undefined || element.location.lng === undefined)
+					console.log("asFASLFASFA");
+
+				currentPath.push(element.location);
+			}
+		}
+
+		// flush the last path into the paths
+		if(currentPath.length > 0) {
+			let destination = (currentPathType === "cycle") ? cyclePaths : transportPaths;
+			destination.push(new Path(currentPath));
+		}
+
+		console.log(cyclePaths);
+		return { CyclingPaths: cyclePaths, TransportPaths: transportPaths, Nights: nights };
+	}
+
+
+	static async FromFileV2(filePath) {
+		return new Promise(async (resolve, reject) => {
+			try {
+				const text = await LoadTextAsync(filePath);
+				const lines = text.split('\n');
+
+				// lines[0] is a comment. ignore it
+				// the lines can contain either night ("n" + 't' or 'h' (tent or hotel)), coordinate (lat, lon eg "36.114,-115.17) or change in route type (eg "type transport" or "type cycle". default is cycle at the start)
+
+				let data = [];
+				let day = 1;
+				let lastLocation = undefined;
+				for(let i = 1; i < lines.length; i++) {
+					const line = lines[i];
+					if(line.trim().length == 0) {
+						continue;
+					}
+
+					const parts = line.trim().split(" ");
+					Assert(parts.length > 0);
+
+					if(parts[0] == "n") { // night
+						let nightType = (parts[1] === "h") ? Night.Type.Hotel : Night.Type.Tent;;
+
+						Assert(lastLocation != undefined, "Error loading cycle route: 'lastLocation' is null. There is a night before the first coordinate");
+						data.push({ type: "night", day: day, night: new Night(lastLocation, nightType) });
+						day++;
+					}
+					else if(parts[0] == "t") { // "type". switches between cycle path and transport path. "t" == transport, "c" == cycle
+						data.push({ type: "path-type-change", pathType: (parts[1] === "t") ? "transport" : "cycle"});
+					}
+					else if(parts.length == 2) { // if not "n" or "t", then it coordinate
+						const point = new google.maps.LatLng(parts[0], parts[1]);
+						data.push({ type: "coordinate", location: new google.maps.LatLng(parts[0], parts[1])});
+
+						lastLocation = point;
+					}
+					else {
+						console.log("ERROR: unknown line in cycle map route: '" + line + "'");
+					}
+				}
+
+				resolve(new Route(data));
+			}
+			catch(err) { reject(err); }
+		});
 	}
 
 	static async FromFile(filePath) {
@@ -308,7 +376,7 @@ export class CycleMap {
 	}
 
 	async SetRoute(routeItem) {
-		const routeView = routeItem.routeView || (routeItem.routeView = new RouteView(await Route.FromFile(routeItem.routePath), this.CurrentMapStyle.UseBigIcons));
+		const routeView = routeItem.routeView || (routeItem.routeView = new RouteView(await Route.FromFileV2(routeItem.routePath), this.CurrentMapStyle.UseBigIcons));
 
 		if(this.CurrentRouteView != null) {
 			this.CurrentRouteView.AssignMap(null);

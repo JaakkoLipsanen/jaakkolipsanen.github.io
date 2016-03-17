@@ -286,7 +286,10 @@
     <wpt lat="45.61356437" lon="10.34249975">
         <name>z</name>
     </wpt>
-
+	
+	<wpt lat="46.05208072" lon="10.79208861">
+        <name>z</name>
+    </wpt>
     <wpt lat="46.46043524" lon="11.27271771">
         <name>z</name>
     </wpt>
@@ -307,9 +310,14 @@
         <name>z</name>
     </wpt>
 
-    <wpt lat="46.98284625" lon="11.01129716"><name>z</name></wpt>
+    <wpt lat="46.98308208" lon="11.01117174">
+        <name>z</name>
+    </wpt>
+	
     <wpt lat="47.35349943" lon="11.22143098"><name>z</name></wpt>
     <wpt lat="47.90036796" lon="11.57769927"><name>z</name></wpt>
+    <wpt lat="47.90036796" lon="11.57769927"><name>z</name></wpt>
+    <wpt lat="48.15213913" lon="11.52904249"><name>hostelli</name></wpt> <!-- Munich -->
     <wpt lat="48.15213913" lon="11.52904249"><name>hostelli</name></wpt> <!-- Munich -->
     <wpt lat="48.30832680" lon="12.21349495"><name>z</name></wpt>
     <wpt lat="48.61299584" lon="12.67062198"><name>z</name></wpt>
@@ -319,5 +327,4 @@
     <wpt lat="49.71559537" lon="14.04441191"><name>z</name></wpt>
     <wpt lat="49.91697019" lon="14.27380642"><name>z</name></wpt>
     <wpt lat="50.08341006" lon="14.42518313"><name>hostelli</name></wpt>
-    <wpt lat="50.10894556" lon="14.26995898"><name>hostelli</name></wpt>
 </gpx>

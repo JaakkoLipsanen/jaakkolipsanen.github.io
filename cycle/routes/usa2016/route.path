@@ -1,9 +1,0 @@
-// okay... the lines can contain either day ("d" + number, eg "d37"), coordinate (lat, lon eg "36.114,-115.17) or change in route type (eg "type transport" or "type cycle". default is cycle at the start)
-
-d1
-36.114,-115.17
-36.15 -115.2
-d2
-d3
-36.2,-115.3
-d4
