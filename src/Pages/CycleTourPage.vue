@@ -42,7 +42,7 @@ export default {
 
 	computed: {
 		CycleRoutePath: function() {
-			return "/cycle/routes/" + this.CurrentTour + "/route-description.txt";
+			return "/cycle/routes/" + this.CurrentTour + "/route.txt";
 		},
 
 		CurrentTour: function() {

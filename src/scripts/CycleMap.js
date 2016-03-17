@@ -176,9 +176,6 @@ export class Route {
 				currentPath = [];
 			}
 			else if(element.type === "coordinate") {
-				if(element.location === undefined || element.location === null || element.location.lat === undefined || element.location.lng === undefined)
-					console.log("asFASLFASFA");
-
 				currentPath.push(element.location);
 			}
 		}
