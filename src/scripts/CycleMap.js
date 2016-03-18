@@ -55,7 +55,7 @@ class Night {
 }
 
 class RouteView {
-	constructor(route, useBigIcons) {
+	constructor(route, useBigIcons, dayRange) {
 		this.CyclingPathLines = []; // of type google.maps.Polyline
 		this.TransportPathLines = []; // of type google.maps.Polyline
 		this.NightMarkers = []; // of type google.maps.Marker
@@ -63,12 +63,21 @@ class RouteView {
 		this.Bounds = new google.maps.LatLngBounds();
 		this.RouteLength = 0;
 
-		this._initialize(route, useBigIcons);
+		this._initialize(route, useBigIcons, dayRange);
 	}
 
-	_initialize(route, useBigIcons) {
+	_initialize(route, useBigIcons, dayRange) {
+		let routeData = null;
+		if(dayRange === undefined) {
+			routeData = route.CalculateRoute();
+		}
+		else {
+			// dayRange variable contains the date range in a string ("33-39" for example)
+			const dayStart = parseInt(dayRange.split("-")[0]);
+			const dayEnd = parseInt(dayRange.split("-")[1]);
 
-		const routeData = route.CalculateRoute();
+			routeData = route.CalculateRangedRoute(dayStart, dayEnd);
+		}
 
 		// cycling paths
 		for(let cyclingPath of routeData.CyclingPaths) {
@@ -190,6 +199,73 @@ export class Route {
 		return { CyclingPaths: cyclePaths, TransportPaths: transportPaths, Nights: nights };
 	}
 
+	CalculateRangedRoute(dayFirst, dayLast) {
+		const cyclePaths = [];
+		const transportPaths = [];
+		const nights = [];
+
+		let currentPathType = "cycle"; // cycle is default/initial path type
+		let currentPath = [];
+
+		let currentDay = 1;
+		let startIndex = 0;
+		for(; startIndex < this._data.length; startIndex++) {
+			if(dayFirst <= currentDay) {
+				break;
+			}
+
+			const element = this._data[startIndex];
+			if(element.type === "night") {
+				currentDay++;
+			}
+			else if(element.type == "path-type-change") {
+				currentPathType = element.pathType;
+			}
+		}
+
+		for(let i = startIndex; i < this._data.length; i++) {
+			const element = this._data[i];
+			if(element.type === "night") {
+				nights.push(element.night);
+
+				if(currentDay >= dayLast){
+					break;
+				}
+
+				currentDay++;
+			}
+			else if(element.type === "path-type-change") {
+				if(element.pathType === currentPathType) {
+					console.log("CycleMap route: path-type-change on route is the same type as before");
+					continue;
+				}
+
+				if(currentPath.length == 0) {
+					currentPathType = element.pathType;
+					continue;
+				}
+
+				let destination = (currentPathType === "cycle") ? cyclePaths : transportPaths;
+				destination.push(new Path(currentPath));
+				currentPathType = element.pathType;
+
+				// new array for the new path
+				currentPath = [];
+			}
+			else if(element.type === "coordinate") {
+				currentPath.push(element.location);
+			}
+		}
+
+		// flush the last path into the paths
+		if(currentPath.length > 0) {
+			let destination = (currentPathType === "cycle") ? cyclePaths : transportPaths;
+			destination.push(new Path(currentPath));
+		}
+
+		console.log(cyclePaths);
+		return { CyclingPaths: cyclePaths, TransportPaths: transportPaths, Nights: nights };
+	}
 
 	static async FromFile(filePath) {
 		return new Promise(async (resolve, reject) => {
@@ -330,8 +406,8 @@ export class CycleMap {
 		});
 	}
 
-	async SetRoute(routeItem) {
-		const routeView = routeItem.routeView || (routeItem.routeView = new RouteView(await Route.FromFile(routeItem.routePath), this.CurrentMapStyle.UseBigIcons));
+	async SetRoute(routeItem, dayRange) {
+		const routeView = routeItem.routeView || (routeItem.routeView = new RouteView(await Route.FromFile(routeItem.routePath), this.CurrentMapStyle.UseBigIcons, dayRange));
 
 		if(this.CurrentRouteView != null) {
 			this.CurrentRouteView.AssignMap(null);
@@ -402,10 +478,10 @@ const MapStyles = {
 		{"featureType":"administrative.locality","stylers":[{"visibility":"on"}]},
 		{"featureType":"administrative.province", "elementType": "geometry", "stylers":[{"visibility":"on"}]},
 		{"featureType":"administrative.country", "elementType": "geometry", "stylers":[{"visibility":"on"}]},
+		{"featureType":"administrative.country", "elementType": "geometry.stroke", "stylers":[{"lightness": "20"}]},
 
 		{"featureType":"poi","stylers":[{"visibility":"simplified"}]},
 		{"featureType":"road","stylers":[{"visibility":"simplified"}]},
-		{"featureType":"water","stylers":[{"visibility":"simplified"}]},
 		{"featureType":"transit","stylers":[{"visibility":"simplified"}]},
 		{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},
 		{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},
@@ -424,6 +500,8 @@ const MapStyles = {
 				},
 			]
 		},
+		{"featureType":"water", "elementType": "geometry.fill", "stylers":[{"visibility":"on"}, { "lightness": -6}]},
+		{"featureType":"water", "elementType": "labels", "stylers":[{"visibility":"off"}]},
 
 		], true),
 
@@ -505,7 +583,7 @@ const MapStyles = {
 					"color": "#000000"
 				},
 				{
-					"lightness": 17
+					"lightness": 26
 				},
 				{
 					"weight": 1.2
@@ -541,8 +619,8 @@ const MapStyles = {
 		   "elementType": "geometry.fill",
 		   "stylers": [
 				   {
-					   "color": "#383838"
-				   }
+					   "color": "#363636"
+				   },
 		   		]
 		   },
 		{
@@ -553,7 +631,7 @@ const MapStyles = {
 					"color": "#000000"
 				},
 				{
-					"lightness": 17
+					"lightness": 20
 				}
 			]
 		},
@@ -565,7 +643,7 @@ const MapStyles = {
 					"color": "#000000"
 				},
 				{
-					"lightness": 29
+					"lightness": 25
 				},
 				{
 					"weight": 0.2
@@ -580,7 +658,7 @@ const MapStyles = {
 					"color": "#000000"
 				},
 				{
-					"lightness": 18
+					"lightness": 22
 				}
 			]
 		},
@@ -592,7 +670,7 @@ const MapStyles = {
 					"color": "#000000"
 				},
 				{
-					"lightness": 16
+					"lightness": 26
 				}
 			]
 		},

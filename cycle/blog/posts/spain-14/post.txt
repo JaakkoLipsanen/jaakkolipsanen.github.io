@@ -1,6 +1,6 @@
 title: Spain Winter 2014
 trip: Spain 2014
-date-range: 1-17
+date-range: 3-8
 main-image: img2.jpg
 
 header: Alkufiilikset

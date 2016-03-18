@@ -68,11 +68,11 @@ export class ImageGroupBlock {
 }
 
 export class BlogPost{
-	constructor(name, title, trip, dateRange, mainImage, contentBlocks) {
+	constructor(name, title, trip, dayRange, mainImage, contentBlocks) {
 		this.Name = name;
 		this.Title = title;
 		this.Trip = trip; // trip == "Europe '15'". "Spain '14'" etc
-		this.DateRange = dateRange;
+		this.DayRange = dayRange;
 		this.MainImage= mainImage;
 		this.ContentBlocks = contentBlocks;
 	}
@@ -83,10 +83,10 @@ export class BlogPost{
 
 	get DisplayString() {
 		if(IsTouchDevice()) {
-			return "Day " + this.DateRange;
+			return "Day " + this.DayRange;
 		}
 
-		return "Day " + this.DateRange + ": " + this.Title;
+		return "Day " + this.DayRange + ": " + this.Title;
 	}
 
 	static async FromFile(name, postFolder) {
@@ -113,7 +113,7 @@ export class BlogPost{
 				Assert(ReadProperty(lines[3]) == "main-image", "Blog post .txt doesn't have 'main-image' tag (or not in the fourth line)");
 				const title = ParseProperty(lines[0]);
 				const trip = ParseProperty(lines[1]);
-				const dateRange = ParseProperty(lines[2]);
+				const dayRange = ParseProperty(lines[2]);
 				const mainImage = new Photo(postFolder, ParseProperty(lines[3]));
 
 				let contentBlocks = [];
@@ -144,7 +144,7 @@ export class BlogPost{
 					}
 				}
 
-				resolve(new BlogPost(name, title, trip, dateRange, mainImage, contentBlocks));
+				resolve(new BlogPost(name, title, trip, dayRange, mainImage, contentBlocks));
 			}
 			catch(err) { reject(err); }
 		});
@@ -152,10 +152,10 @@ export class BlogPost{
 }
 
 class BlogPostInfo {
-	constructor(name, title, dateRange, trip, mainImage, directory) {
+	constructor(name, title, dayRange, trip, mainImage, directory) {
 		this.Name = name;
 		this.Title = title;
-		this.DateRange = dateRange;
+		this.DayRange = dayRange;
 		this.Trip = trip;
 		this.MainImage = mainImage;
 
@@ -168,10 +168,10 @@ class BlogPostInfo {
 
 	get DisplayString() {
 		if(IsTouchDevice()) {
-			return "Day " + this.DateRange;
+			return "Day " + this.DayRange;
 		}
 
-		return "Day " + this.DateRange + ": " + this.Title;
+		return "Day " + this.DayRange + ": " + this.Title;
 	}
 
 	get Directory() {
@@ -284,10 +284,10 @@ export class BlogSource {
 					const name = parameters[0];
 					const trip = parameters[1];
 					const title = parameters[2];
-					const dateRange = parameters[3];
+					const dayRange = parameters[3];
 					const mainImage = parameters[4];
 
-					blogPosts.push(new BlogPostInfo(name, title, dateRange, trip, mainImage, directory));
+					blogPosts.push(new BlogPostInfo(name, title, dayRange, trip, mainImage, directory));
 				}
 
 				resolve(new BlogSource(blogPosts, directory));

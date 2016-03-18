@@ -24,13 +24,21 @@ export default {
 		const createGroup = (allImages, firstImageIndex, imageCount) => {
 			Assert(firstImageIndex + imageCount <= allImages.length, "Error creating imagegroup: index out of bounds");
 
+			let imageQuality;
+			if(IsTouchDevice()) {
+				imageQuality = (imageCount == 1) ? PhotoQuality.SD : PhotoQuality.LD;
+			}
+			else {
+				imageQuality = (imageCount == 1) ? PhotoQuality.FullHD : ((imageCount == 2) ? PhotoQuality.HD : PhotoQuality.SD);
+			}
+
 			const container = $(document.createElement("div")).addClass("image-group").appendTo(groupContainer);
 			for(let i = firstImageIndex; i < firstImageIndex + imageCount; i++) {
 				const image = this.groupImages[i];
 
 				// the flex value is calculated by "imageAspectRatio / BaseAspectRatio". BaseAR is 4/3, so for 3:4 images for example value is 3/4 / (4/3) * 100 = 56.25
 				const imageContainer = $(document.createElement("div")).addClass("group-image").css("flex", "1 1 " + (image.AspectRatio / BaseAspectRatio * 100) + "%");
-				const imageElement = $(document.createElement("img")).attr("src", image.FullPath(PhotoQuality.FullHD));
+				const imageElement = $(document.createElement("img")).attr("src", image.FullPath(imageQuality));
 
 				imageElement.appendTo(imageContainer);
 				imageContainer.appendTo(container);

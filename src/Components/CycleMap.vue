@@ -22,6 +22,7 @@ import { ExitFullScreen, EnterFullScreen, OnFullscreenChange } from "../scripts/
 export default {
 	props: {
 		routePath: String,
+		dayRange: String, // "1-5" or "33-39" for example
 		theme: {
 			type: String,
 			default: "dark"
@@ -49,7 +50,7 @@ export default {
 		this.map = new CycleMap($("#cycle-map").get(0), this.theme);
 		if(this.routePath != null) {
 			this.routes[this.routePath] = { routePath: this.routePath };
-			this.map.SetRoute(this.routes[this.routePath]);
+			this.map.SetRoute(this.routes[this.routePath], this.dayRange);
 		}
 
 		OnFullscreenChange(() => {

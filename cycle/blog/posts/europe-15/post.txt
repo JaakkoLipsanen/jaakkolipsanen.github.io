@@ -1,6 +1,6 @@
 title: Central Europe 2015
 trip: Europe 2015
-date-range: 1-107
+date-range: 1-6
 main-image: img4.jpg
 
 header: Alkufiilikset
