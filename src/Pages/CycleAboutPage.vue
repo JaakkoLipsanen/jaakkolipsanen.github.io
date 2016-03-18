@@ -3,7 +3,7 @@
 		<div style="height: 64px"></div>
 		<p class="introduction-text">Hey! I'm currently cycling in the Western USA for about four months! Below is the map where I've been cycling and blog posts!</p>
 		<p class="introduction-text">You can find my previous trips by going to the 'trips' section!</p>
-		<cycle-map :route-path="CycleRoutePath" theme="light" class="tour-map" style=" width: 70%; height: calc(100vh - 208px); min-height: 256px"></cycle-map>
+		<cycle-map :route-path="CycleRoutePath" theme="light" class="tour-map"></cycle-map>
 
 		<p style="text-align: center; font-size: 22px; margin: auto; margin-top: 64px; height: 16px; margin-bottom: -14px">blog</p>
 		<div v-if="blog.PostInfos.length > 0" class="blog-list-page-container">
@@ -63,6 +63,12 @@ export default {
 
 <style lang="sass" id="style-sheet" scoped>
 
+.tour-map {
+	width: 70% !important;
+	height: calc(100vh - 208px) !important;
+	min-height: 256px;
+
+}
 .introduction-text {
 	width: 90%;
 	margin: 16px auto;
@@ -98,10 +104,16 @@ export default {
 	margin: auto;
 	margin-top: 8px;
 	margin-bottom: 32px;
-	width: 90%;
+	width: 100%;
 }
 
-@media all and (max-width: 526.5px) {
+@media all and (max-width: 1142px) and (min-width: 818px) {
+	.tour-map {
+		width: 800px !important;
+	}
+}
+
+@media all and (max-width: 817px) {
 	.blog-list-page-container {
 		width: 100% !important;
 	}

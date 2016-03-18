@@ -77,7 +77,7 @@ export default {
 	margin: auto;
 	margin-top: 8px;
 	margin-bottom: 32px;
-	width: 90%;
+	width: 100%;
 }
 
 @media all and (max-width: 526.5px) {
