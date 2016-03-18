@@ -47,10 +47,6 @@ export default {
 		CycleRoutePath: function() {
 			return "/cycle/routes/europe2014/route.txt";
 		},
-
-		CPostInfos: function() {
-			return blog.PostInfos;
-		}
 	},
 
 	methods: {

@@ -15,9 +15,9 @@ export default {
 	},
 
 	ready: async function() {
-		const europe14 = await Route.FromFile("/cycle/routes/europe2014/route-description.txt");
-		const spain14 =  await Route.FromFile("/cycle/routes/spain2014/route-description.txt");
-		const europe15 =  await Route.FromFile("/cycle/routes/europe2015/route-description.txt");
+		const europe14 = (await Route.FromFile("/cycle/routes/europe2014/route.txt")).CalculateRoute();
+		const spain14 =  (await Route.FromFile("/cycle/routes/spain2014/route.txt")).CalculateRoute();
+		const europe15 =  (await Route.FromFile("/cycle/routes/europe2015/route.txt")).CalculateRoute();
 
 		const paintRoute = function (context, route) {
 			var mapWidth = context.canvas.width;
