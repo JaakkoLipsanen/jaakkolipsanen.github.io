@@ -8,7 +8,7 @@
 		<p style="text-align: center; font-size: 22px; margin: auto; margin-top: 64px; height: 16px; margin-bottom: -14px">blog</p>
 		<div v-if="blog.PostInfos.length > 0" class="blog-list-page-container">
 			<div class="blog-post-block" v-for="post in blog.PostInfos">
-				<div class="blog-post-block-background" style="background-image: url({{ post.Directory + '1080p/' + post.MainImage  }});" v-on:click="postClicked(post)">
+				<div class="blog-post-block-background" style="background-image: url({{ post.Directory + '720p/' + post.MainImage  }});" v-on:click="postClicked(post)">
 					<div class="post-block-container">
 						<h1 style="top: 50%; position: relative; transform: translateY(-50%); color: rgb(190, 190, 190); font-family: 'Yanone Kaffeesatz'; font-size: 3em; margin: 0">{{ post.Title }}</h1>
 						<h3 style="top: 47%; position: relative; transform: translateY(-50%); color: rgb(190, 190, 190); font-family: 'Yanone Kaffeesatz'; font-size: 1.75em; margin: 0"> {{ 'Day ' + post.DayRange }} </h3>
