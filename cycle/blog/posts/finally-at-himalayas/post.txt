@@ -1,0 +1,17 @@
+title: Wohoo finally in Himalayas!
+trip: USA 2016
+date-range: 256-356
+main-image: img67.jpg
+
+header: Tää on joku random otsikko
+text: Reissu alkoi oikein mukavasti. Laskeuduin joskus illalla Alicanteen ja sitten nukuin, tai ainakin koitin nukkua, lentokentän penkeillä muutaman tunnin ennen aamunsarastusta. Juuri kun olin lähdössä pyöräilemään aamulla hoksasin että kypärä unohtui kotiin. Hetken mietin, että miten ihmeessä onnistuin tässä ja lähdin sitten matkaan.Reissu alkoi oikein mukavasti. Laskeuduin joskus illalla Alicanteen ja sitten nukuin, tai ainakin koitin nukkua, lentokentän penkeillä muutaman tunnin ennen aamunsarastusta. Juuri kun olin lähdössä pyöräilemään aamulla hoksasin että kypärä unohtui kotiin. Hetken mietin, että miten ihmeessä onnistuin tässä ja lähdin sitten matkaan.Reissu alkoi oikein mukavasti. Laskeuduin joskus illalla Alicanteen ja sitten nukuin, tai ainakin koitin nukkua, lentokentän penkeillä muutaman tunnin ennen aamunsarastusta. Juuri kun olin lähdössä pyöräilemään aamulla hoksasin että kypärä unohtui kotiin. Hetken mietin, että miten ihmeessä onnistuin tässä ja lähdin sitten matkaan.
+
+image: img52.jpg
+
+text: Ekat päivät sujuivat ihan kivasti, varsinkin kun pääsin kaupungeistä vähän syrjäisemmälle seudulle. Aika lyhyitä päiviä tuli kuitenkin pyöräiltyä kun teki mieli nukkua puoleenpäivään. Muutamaa päivää myöhemmin alkoi sellainen tosi kiva vuoristoinen seutu, missä
+
+image: img53.jpg
+image: img63.jpg
+image: img67.jpg
+
+image-group: img52.jpg img53.jpg  img63.jpg img67.jpg img112.jpg img112.jpg
