@@ -1,7 +1,1 @@
 // file format: name|trip|title|date-range|main-image
-europe-14|Europe 2014|Sweden-Belgium Tour 2014|1-32|img1.jpg
-spain-14|Spain 2014|Spain Winter 2014|1-17|img2.jpg
-europe-15|Europe 2015|Central Europe 2015|1-35|img4.jpg
-usa-16|USA 2016|Western USA 2016|1-107|img3.jpg
-usa-16-goodbye|USA 2016|Goodbye!|108-110|img1.jpg
-finally-in-himalayas|USA 2016|Wohoo finally in Himalayas!|256-356|img67.jpg

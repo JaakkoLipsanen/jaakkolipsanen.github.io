@@ -1,9 +1,0 @@
-title: Wohoo finally in Himalayas!
-trip: USA 2016
-date-range: 256-356
-main-image: img67.jpg
-
-header: Tää on joku random otsikko
-text: Reissu alkoi oikein mukavasti. Laskeuduin joskus illalla Alicanteen ja sitten nukuin, tai ainakin koitin nukkua, lentokentän penkeillä muutaman tunnin ennen aamunsarastusta. 
-
-image: img67.jpg
