@@ -1,5 +1,6 @@
 title: Gear for USA 2016 Tour
 trip: USA 2016
+date-range: 0-0
 main-image: img1.jpg
 
 header: Clothes
