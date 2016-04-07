@@ -1,0 +1,105 @@
+title: Gear for USA 2016 Tour
+trip: USA 2016
+main-image: img1.jpg
+
+header: Clothes
+text: 1x T-shirt, merino | 132 grams(Icebreaker Cool-Lite Sphere Short Sleeve Crewe)
+text: 1x T-shirt, synthetic | 151 grams(For cycling, pretty old. Cheap one from Wiggle)
+text: 2x Cycling bibs | 190 grams(Padded cycling shorts. Wiggle dhb Aeron Pro)
+text: 1x Atlethic shorts | 158 grams(Will use these over cycling bibs. Some old ones)
+text: 1x Long johns | 138 grams(Thin. Icebreaker Anatomica Leggings w Fly)
+text: 1x Thin base layer/long shirt | 154 grams(Devold Breeze)
+text: 1x Thin fleece | 240 grams(Helly Hansen Fleece)
+text: 1x Rain shell | 328 grams(Marmot Nano AS, hard shell)
+text: 1x Pants | 320 grams(Arc'teryx Gamma LT.  For hiking, casual use and cycling in cold)
+text: 1x Boxers | 56 grams(For casual use and hiking, Icebreaker Anatomica Boxers)
+text: 2x Thin socks | 30 grams(1x Devold Energy Low Socks, 1x synthetic cheap)
+text: 1x Mid-weight socks | 50 grams(Cheap merino/poly ones)
+text: 1x Thin waterproof socks | 97 grams(Sealskinz Thin Mid-length)
+text: 2x Buff | 45 grams (1x merino, 1x poly)
+text: 1x Waterproof-ish gloves | 70 grams(Grippy. Not 100% waterproof but good enough. Cheap ones)
+text: 1x Adventure Hat | 86 grams(For hot, desert enviroment.)
+text: 1x Cycling sandals | 925 grams(Shimano SD-66 SPD sandals)
+text: 1x Running shoes | 544 grams(For hiking and casual use. Nike)
+text: 1x Mesh bag | 22 grams(For dirty clothes or socks + underwear)
+text: 1x Padded cycling gloves | 33 grams(Fingerless. Rannekipujen vuoksi)
+
+header: Sleeping
+text: 1x Tent | 1200 grams(REI Quarter Dome 1)
+text: 1x Sleeping Bag | 1422 grams(Joutsen Tunturisusi 1500 (down))
+text: 1x Sleeping Mat | 340 grams(Therm-a-Rest Xlite Regular)
+text: 1x Sleeping Bag Liner | 219 grams(Silk?)
+text: 1x Dry Bag | 105 grams(Either for tent or sleeping bag. Ortlieb PS10 22L)
+header: Cooking
+text: 1x Stove + pot + pan | 351 grams(Trangia Mini)
+text: 1x Mug | 40 grams(Light-my-fire collapsible plastic mug)
+text: 1x Spork | 8 grams(Plastic)
+text: 1x Small kitchen knife | 18 grams
+text: 1x Small metal spoon | 13 grams(For yoghurt etc)
+text: 1x Fuel Container | 45 grams(Empty Motonet Mineral Spirits bottle)
+text: 1x 10L Water Bladder | 160 grams(Ortlieb Water Bag 10L)
+text: 1x 4L Water Bladder | 120 grams(Ortlieb Water Bag 10L)
+text: 2x Water bottles (1L) | 106 grams(In the bike)
+text: 2x Bag Closer | 7 grams(For closing rice, pasta etc bags)
+text: 1x Small Salt Can | 73 grams
+text: 1x Lighter | 15 grams(Small)
+text: 1x Dishwashing Sponge | 14 grams
+text: 1x Bear Canister | 1160 grams(Bear Vault BV500)
+header: Bags
+text: 2x Panniers | 840 grams(Ortlieb Back Roller Plus, will use in front)
+text: 1x Handlebar bag | 645 grams(Ortlieb Ultimate6 Pro)
+text: 1x Day hike backpack | 103 grams(Ticket-to-the-moon mini backpack. Folds into super small)
+header: Repair stuff
+text: 1x Bike Multitool | 166 grams(Topeak Hexus II 16)
+text: 1x Leatherman | 194 grams(Leatherman Wingman)
+text: 1x Chain Lube | 66 grams(Dry Lube)
+text: 1x Spare Tire | 288 grams(700x28 Schwalbe Durano)
+text: 2x Spare Tube | 161 grams( )
+text: 1x Tape | 0 grams
+text: 1x Tool Bag | 340 grams(Cassete Tool, Screws, Patch Kit, Bolts, Grease, Chain Quick Links, Brake Cable, Tire Levers etc)
+text: 1x Cassette Tool | 0 grams(Next Best Thing 2, 34 grams.)
+text: 4x Spare Spokes | 8 grams
+text: 1x Bike Pump | 186 grams
+text: 1x Spare Strap | 27 grams(If any of the straps on the racks breaks)
+header: Electronics and Entertainment
+text: 1x Phone | 143 grams(Moto G 2013, for maps, gps logging and entertainment)
+text: 1x Kindle | 214 grams(Kindle Paperwhite 2015)
+text: 2x Battery Bank | 405 grams(Anker 20100mAh, EC Technology 22400mAh)
+text: 2x Bike Lamp | 18 grams(Super small, one white, one red)
+text: 1x Headlamp | 100 grams(Black Diamond Revolt)
+text: 1x Camera | 318 grams(Panasonic DMC-GM1)
+text: 2x Spare Camera Batteries | 30 grams(x2, unofficial)
+text: 1x Camera Charger (usb) | 40 grams(unofficial)
+text: 1x Tripod | 46 grams(Gorillapod Original (small))
+text: 4x Micro-usb cables | 14 grams(Different lengths. 57gr total, 14.25gr avg)
+text: 2x Spare coin-batteries | 2 grams(For small bike lamps)
+text: 1x ND filter for Camera | 8 grams(ND 1000)
+text: 1x Ear Buds | 13 grams(Music)
+header: Hygiene and Medication
+text: 3x Microfiber Towels | 30 grams(1x general use, 1x dish washing, 1x bike chain)
+text: 1x Tweezers | 7 grams
+text: 1x Nail Scissors | 10 grams
+text: 1x Soap | 282 grams(Dr. Bronners)
+text: 1x Chamois Cream | 282 grams(Udderly Smooth)
+text: 1x Sunscreen | 161 grams(For sun and face after showers)
+text: 1x Towel | 80 grams(Small)
+text: 1x Teethbrush and paste | 45 grams(TODO: get a small bag for this)
+text: 1x Medication | 122 grams(Pain killers, Imodium, Probiotics, Vitamins, Magnesium, Duact, Water Purifier tablets, ideaaliside jne)
+text: 1x Wrist Brace | 51 grams(Futuro Rannetuki)
+text: 1x Ear Plugs | 10 grams
+text: 1x Shaving Razor | 40 grams
+header: Bike Gear
+text: 1x Rear Rack | 739 grams(Topeak Super Tourist DX)
+text: 1x Front Rack | 1382 grams(Surly Nice Front Rack)
+text: 2x Bottle Holders | 70 grams(?? 70gr each)
+text: 1x Bike Pump Holder | 50 grams(50gr is estimate, not measured)
+header: Other
+text: 1x Small trowel | 51 grams(For digging holes)
+text: 1x Helmet | 322 grams
+text: 1x Lock + small cable | 837 grams(Kryptonite Evolution Lite 6 + Kryptonite Seat Cable)
+text: 1x Ikea Bag | 120 grams(As a cabin bag when flying and bag for stove fuel, shoes and trowel)
+text: 1x Spare Key to Lock | 0 grams
+text: 2x ID Papers | 10 grams(Print of passport, visa and insurance card)
+text: 1x Wallet | 112 grams(With debit cards, insurance card, lock key)
+
+header: TOTAL WEIGHT: 20.42KG + BIKE + ME!
