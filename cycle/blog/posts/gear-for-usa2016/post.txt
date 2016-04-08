@@ -4,6 +4,7 @@ date-range: 0-0
 main-image: img1.jpg
 
 header: Clothes
+
 text: 1x T-shirt, merino | 132 grams (Icebreaker Cool-Lite Sphere Short Sleeve Crewe)
 text: 1x T-shirt, synthetic | 151 grams (For cycling, pretty old. Cheap one from Wiggle)
 text: 2x Cycling bibs | 190 grams (Padded cycling shorts. Wiggle dhb Aeron Pro)
@@ -56,7 +57,7 @@ text: 1x Leatherman | 194 grams (Leatherman Wingman)
 text: 1x Chain Lube | 66 grams (Dry Lube)
 text: 1x Spare Tire | 288 grams (700x28 Schwalbe Durano)
 text: 2x Spare Tube | 161 grams ( )
-text: 1x Tape | 0 grams
+text: 1x Tape | 14 grams (some tape wrapped around pencil)
 text: 1x Tool Bag | 340 grams (Cassete Tool, Screws, Patch Kit, Bolts, Grease, Chain Quick Links, Brake Cable, Tire Levers etc)
 text: 1x Cassette Tool | 0 grams (Next Best Thing 2, 34 grams.)
 text: 4x Spare Spokes | 8 grams
@@ -104,3 +105,5 @@ text: 2x ID Papers | 10 grams (Print of passport, visa and insurance card)
 text: 1x Wallet | 112 grams (With debit cards, insurance card, lock key)
 
 header: TOTAL WEIGHT: 20.42KG + BIKE + ME!
+
+text: PS. This post was generated from a lighterpack.com list, so the format isn't very nice :)

@@ -9,7 +9,7 @@
 
 			<p class="main-image-title">  {{ blogPost.Title.toUpperCase() }}</p>
 			<div class="main-image-info-container">
-				<h3>Day {{ blogPost.DayRange }}</h3>
+				<h3 v-if="DayRange != '0-0'" >Day {{ blogPost.DayRange }}</h3>
 			</div>
 		</div>
 
@@ -32,8 +32,10 @@
 			</div>
 		</div>
 
-		<cycle-map v-if="CycleRoutePath != undefined" class="route-map" theme="light" :route-path="CycleRoutePath" :day-range="DayRange"></cycle-map>
+		<cycle-map v-if="CycleRoutePath != undefined && DayRange != '0-0'" class="route-map" theme="light" :route-path="CycleRoutePath" :day-range="DayRange"></cycle-map>
 		<image-viewer style="display: none"></image-viewer>
+		
+		<div style="height: 72px"></div>
 
 	</div>
 </template>
@@ -183,7 +185,6 @@ export default {
 .route-map {
 	width: 60% !important;
 	height: 75vh !important;
-	margin-bottom: 72px !important;
 }
 
 #post-container {
@@ -265,12 +266,15 @@ export default {
 
 		font-size: 22px;
 		font-family: "Lato";
+		text-align: left;
 	}
 
 	.header-block {
 		width: 60%;
+		max-width: 800px;
 		margin: auto;
 		font-size: 2.5em;
+		text-align: left;
 	}
 
 	.image-group-block {
