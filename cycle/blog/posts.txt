@@ -1,2 +1,3 @@
 // file format: name|trip|title|date-range|main-image
 gear-for-usa2016|USA 2016|Gear for USA 2016 Tour|0-0|img1.jpg
+Sol-1|USA 2016|Sol 1|1-1|1060315.jpeg
