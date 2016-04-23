@@ -18,7 +18,7 @@ export default {
 	ready: function() {
 		const MaxImagesPerRow = IsTouchDevice() ? 2 : 2; // TODO: ANTTI MUUTA TÄTÄ JOS TÄÄ UPDATE KUSEE
 		const BaseAspectRatio = 4 / 3;
-		const groupContainer = $(".image-group-container");
+		const groupContainer = $(".image-group-container").last();
 
 		const parent = this.$parent;
 		const createGroup = (allImages, firstImageIndex, imageCount) => {
