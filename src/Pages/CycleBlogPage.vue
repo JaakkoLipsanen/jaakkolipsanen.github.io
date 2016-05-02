@@ -3,7 +3,7 @@
 
 		<div style="margin-top: 164px"> </div>
 		<div class="blog-list-page-container">
-			<div class="blog-post-block" v-for="post in blog.PostInfos.reverse()">
+			<div class="blog-post-block" v-for="post in blog.PostInfos">
 				<div class="blog-post-block-background" style="background-image: url({{ post.Directory + '720p/' + post.MainImage  }});" v-on:click="postClicked(post)">
 					<div class="post-block-container">
 						<h1 style="top: 50%; position: relative; transform: translateY(-50%); color: rgb(190, 190, 190); font-family: 'Yanone Kaffeesatz'; font-size: 3em; margin: 0">{{ post.Title }}</h1>
@@ -36,6 +36,7 @@ export default {
 		const data = this;
 		BlogSource.FromFile("/cycle/blog/posts.txt").then(blog => {
 			data.blog = blog.CreateQuery();
+			data.blog.PostInfos.reverse();
 		});
 	},
 
