@@ -9,11 +9,12 @@ export const PhotoQuality = {
 };
 
 export class Photo {
-	constructor(folder, fileName, width = -1, height = -1) {
+	constructor(folder, fileName, text = "", width = -1, height = -1) {
 		this.Folder = folder;
 		this.FileName = fileName;
 		this.Width = width;
 		this.Height = height;
+		this.Text = text;
 	}
 
 	get AspectRatio() {

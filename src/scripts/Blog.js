@@ -33,12 +33,16 @@ export class ImageBlock {
 	}
 
 	static Parse(folder, str) {
-		const parameters = str.split(' ');
+		const parameters = str.split('|');
 		Assert(parameters.length > 0);
 
 		const source = parameters[0];
-		const isFullWidth = parameters.indexOf("fullwidth") >= 0;
-		return new ImageBlock(new Photo(folder, source), isFullWidth);
+		const isFullWidth = false;
+		var photoText = "";
+		if (parameters.length > 1) {
+			photoText = parameters[1];
+		}
+		return new ImageBlock(new Photo(folder, source, photoText), isFullWidth);
 	}
 }
 
@@ -60,7 +64,7 @@ export class ImageGroupBlock {
 			Assert(imgParams.length >= 2);
 			const resolutionStr = imgParams[1].split("x"); // "3452x2441" for example
 
-			images.push(new Photo(folder, imgParams[0], parseInt(resolutionStr[0]), parseInt(resolutionStr[1])));
+			images.push(new Photo(folder, imgParams[0], "", parseInt(resolutionStr[0]), parseInt(resolutionStr[1])));
 		}
 
 		return new ImageGroupBlock(images);
