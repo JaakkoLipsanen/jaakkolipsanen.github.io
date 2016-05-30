@@ -1,7 +1,7 @@
 title: Observations and Hidden Canyons
 trip: USA 2016
 date-range: 28-28
-main-image: 1070541.jpg|
+main-image: 1070541.jpg
 
 text: My plan for the second day in Zion was to wake up really early, take the first shuttle in to the valley (cars aren't allowed in the road leading to the valley, everyone must use one of the free buses) and start my hike before the crowds arrive. Yeah right. I woke up to my alarm around 6.30, shut it off and slept until 10am :)
 header: Observation Point
