@@ -1,0 +1,16 @@
+title: Hell's Backbone
+trip: USA 2016
+date-range: 33-36
+main-image: 1080426.jpg
+
+text: After Bryce Canyon I began heading towards west. I didn't really have any other option than follow a relatively big highway at first, but after a day of cycling I decided to deviate from the main road to this "scenic backway" called Hell's Backbone. The story behind the road was actually mildly interesting: it was built in the 1930's to link the towns of Escalante and Boulder before the current main road was built. The unemployment rates were huge in the 30's so the goverment hired young people for 1$ a day (plus food and bed) to build and maintain roads in the middle of nowhere :P
+image-group: 1080299.jpg?1920x2557 1080305.jpg?1920x1442
+image: 1080319.jpg|Sunset + smoke from a forest fire + downhill = epic :P
+image: 1080327.jpg|
+image: 1080343.jpg|Fossilized logs in the Petrified Forest State Park.
+image-group: 1080349.jpg?1920x1442 1080373.jpg?1920x2557 1080392.jpg?1920x2557 1080384.jpg?1920x1442
+image: 1080404.jpg|Hell's Backbone Bridge
+image-group: 1080426.jpg?1920x1442 1080433.jpg?1920x2557 1080450.jpg?1920x1442
+text: The Hell's Backbone ended near the town of Boulder. I was initially planning to head north to the Capitol Reef National Park via this ~2850m high mountain pass, but after a kilometer or so I noticed this huge storm ahead and turned back. A couple drivers warned me once I got back to the town that it was actually raining snow and hail and that the road was covered in ice! So, instead I decided to skip the Capitol Reef and head to the only other road away from Boulder. I knew that the road, the Burr Trail, had long sections with clay/sand surface that could get very muddy when wet and after a few kilometers of cycling that road, the storm (luckily just rain) hit and I decided to once again turn back :P I went to a café for a few hours. In the evening the storm had calmed and I decided to head north to the snowy mountains :)
+image: 1080467.jpg|Results from the snowstorm just few kilometers from Boulder
+image: 1080471.jpg|View back on where I came from.
