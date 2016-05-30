@@ -1,7 +1,7 @@
 title: Coral Pink Sand Dunes
 trip: USA 2016
 date-range: 28-31
-main-image: 1070879(0).jpg
+main-image: 1070879.jpg
 
 text: After Zion I decided to visit the Coral Pink Sand Dunes State Park. I was a bit disappointed to find out that the sand wasn't actually pink. That would've been cool :P Anyways, the park was really pretty and I wandered there for a couple of hours on the dunes :)
 image-group: 1070714.jpg?1920x1442 1070715.jpg?1920x1442
@@ -10,7 +10,7 @@ image: 1070732.jpg|And tadaa! The dunes!
 image-group: 1070741.jpg?1920x1442 1070746.jpg?1920x1442
 image: 1070752.jpg|It was very windy and the grains of sand were flying off from top of the dunes :)
 image-group: 1070748.jpg?1920x1442 1070766.jpg?1920x1442 1070783.jpg?1920x2557 1070802.jpg?1920x2557 1070856.jpg?1920x2557 1070858.jpg?1920x1442
-image: 1070879(0).jpg|Last peek on the park before leaving
+image: 1070879.jpg|Last peek on the park before leaving
 text: Next I headed towards the town of Kanab. There is this super surreal place on the Utah-Arizona border called the Wave. Unfortunately, the access to there is restricted and you must obtain a permit to visit it. Every morning at 8.30am there is a lottery in Kanab in which the 10 people who get the permit for the next day are selected. So I went to the lottery in the morning and there were probably over 100 people in there! Blahh.. Didn't get a permit :(
 text: So instead I went on to my next destination, Bryce Canyon National Park. I had a few different route options and decided to go with the one that went all the way to Bryce on small forest roads :)
 image: 1070898.jpg|The moon! It thought it looked a bit strange since I could see the part that was in shadow. Can you always see it? I don't know..
