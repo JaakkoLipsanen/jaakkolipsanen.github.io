@@ -12,4 +12,4 @@ Angel-has-Landed|USA 2016|Angel has Landed|27-27|1070479.jpg
 Observations-and-Hidden-Canyons|USA 2016|Observations and Hidden Canyons|28-28|1070541.jpg
 Coral-Pink-Sand-Dunes|USA 2016|Coral Pink Sand Dunes|28-31|1070879.jpg
 Bryce-Canyon|USA 2016|Bryce Canyon|32-32|1080213.jpg
-Hell's-Backbone|USA 2016|Hell's Backbone|33-36|1080426.jpg
+Hells-Backbone|USA 2016|Hell's Backbone|33-36|1080426.jpg
