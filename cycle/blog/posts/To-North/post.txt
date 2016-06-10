@@ -1,0 +1,13 @@
+title: To North
+trip: USA 2016
+date-range: 44-45
+main-image: 1090384.jpg
+
+text: My next destination, where I intended to rest for a few days, was Moab. From Monument Valley it's basically straight to north a couple hundred kilometers. So I started heading that way. I had planned to go basically only on the main roads, but in Monticello I went to a library (libraries are pretty great, I should go to them more often when I need to plan my route) and with a computer I found this really interesting looking tiny road called Lathrock Basin. It was supposedly a pretty rough Jeep trail near the Canyonlands National Park and it sounded way more interesting than the big main road, so I decided to go that way :)
+image: 1090301.jpg|The Valley of the Gods in the morning.
+image-group: 1090302.jpg?1920x1080 1090309.jpg?1920x2557 1090311.jpg?1920x1442 1090317.jpg?1920x2557 1090326.jpg?1920x1080 1090338.jpg?1920x1080
+image: 1090352.jpg|On the road leading to the Lathrock Basin. The Lathrock Basin road starts around 8km before the road goes into the Needles district of the Canyonlands. In hindsight, I probably should've taken food for one more day and went there for a day.
+image: 1090358.jpg|Petroglyphs in Newspaper Rock.
+image-group: 1090369.jpg?1920x1080 1090374.jpg?1920x1080
+image: 1090384.jpg|The road was absolutely stunning during sunset.
+image-group: 1090388.jpg?1920x1080 1090392.jpg?1920x1442 1090395.jpg?1920x1080 1090399.jpg?1920x1080
