@@ -26,3 +26,4 @@ Passes|USA 2016|Passes|59-63|1100284.jpg
 Mt.-Evans|USA 2016|Mt. Evans|64-65|1100345.jpg
 Peak-to-Peak-and-Rocky-Mountains|USA 2016|Peak to Peak and Rocky Mountains|66-69|1100518.jpg
 The-Great-Plains|USA 2016|The Great Plains|70-75|1100823.jpg
+Yellowstone|USA 2016|Yellowstone|76-78|1110066.jpg
