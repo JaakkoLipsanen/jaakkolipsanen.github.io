@@ -29,3 +29,4 @@ The-Great-Plains|USA 2016|The Great Plains|70-75|1100823.jpg
 Yellowstone|USA 2016|Yellowstone|76-78|1110066.jpg
 GDMBR-Montana|USA 2016|GDMBR Montana|79-90|1110321.jpg
 Going-to-the-Sun|USA 2016|Going-to-the-Sun|91-91|1110518.jpg
+Path-to-Pacific|USA 2016|Path to Pacific|92-102|1110888.jpg

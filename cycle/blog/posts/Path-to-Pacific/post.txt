@@ -1,0 +1,41 @@
+title: Path to Pacific
+trip: USA 2016
+date-range: 92-102
+main-image: 1110888.jpg
+
+text: After the Going-to-the-Sun Road, it was time to start heading to the Pacific Coast. I decided to first follow the Inner North Fork Road, which follows the western border of Glacier National Park. The road was closed for cars because apparently there has been some road damage, so I didn't see anyone for hours on the road. Which was nice, but I was kinda scared of bears!
+image: 1110635.jpg|Roadblock! Besides this, the road had been in pretty decent condition so I wondered why the road was closed.
+image: 1110637.jpg|Oh..
+image: 1110638.jpg|Yeah that explains the closure.
+image-group: 1110639.jpg?1920x1440 1110640.jpg?1920x1440
+image: 1110643.jpg|Back on open roads!
+image: 1110657.jpg|About 10km from the Canadian border. The road continues all the way to Canada, but the border crossing there is closed.
+image-group: 1110660.jpg?1920x1440 1110665.jpg?1920x1084
+image: 1110683.jpg|There was like 20 butterflies within couple meters at one point :P
+image: 1110687.jpg|How many deers can you count :P ? There was couple more just outside the photo.
+text: Once I reaches Eureka, MT I started following a long distance route called Northern Tier that goes from the coast of Washington to the Atlantic Coast in Maine. So no more remote forest roads.
+image-group: 1110694.jpg?1920x1440 1110696.jpg?1920x1084 1110699.jpg?1920x1084
+image: 1110703.jpg|Pretty cool idea!
+image: 1110708.jpg|Front porch of zero uno zero, a robot art  gallery that was unfortunately closed :(
+image-group: 1110709.jpg?1920x1440 1110707.jpg?1920x1440
+image: 1110730.jpg|Kootenai Falls
+image-group: 1110742.jpg?1920x1084 1110759.jpg?1920x1440
+image: 1110783.jpg|Railroad soon after crossing to Idaho.
+text: After I reached Washington, I decided to head south off from the Northern Tier route and to a big town called Spokane to buy a new saddle. My butt had been hurting quite a lot, especially on longer days, so I figured that maybe it's a time to buy a nice leather saddle. When I got to the bike shop, I was trying to decide whether I want a Brooks B17, probably the most popular leather saddle, or the Brooks C17, a natural rubber saddle which had some advantages like waterproofness, no break-in time and lighter weight. In the end I didn't actually buy either because I mentiones that my chain had been slipping lately, and they told me what I already kinda knew, which is that my whole drivetrain is worn out and should be replaced. It was already pretty late and they didn't have time to do it that day but they were selling the parts pretty cheaply, so I borrowed couple tools and replaced it myself. And I finished like just before they closed and hadn't really decided that which saddle I want, so didn't end up buying either!
+image-group: 1110800.jpg?1920x1084 1110803.jpg?1920x1084 1110810.jpg?1920x2560
+image: 1110830.jpg|Endless roads
+image: 1110838.jpg|The area around Coulee Dam was really, really dry. Reminded me of Utah, even though it was less than 100km from Canadian border!
+image: 1110843.jpg|Coulee Dam
+image: 1110847.jpg|Some rainy days.. Biking mountain passes sucks, because you always get really wet from sweat and rain and it's cold and plaaahh!
+image: 1110853.jpg|Road to Washington Pass
+image-group: 1110854.jpg?1920x1440 1110861.jpg?1920x2560 1110879.jpg?1920x2560 1110888.jpg?1920x1084
+image: 1110893.jpg|:
+image: 1110921.jpg|
+image: 1110937.jpg|A fitting welcome sign
+image: 1110951.jpg|Cascade Trail, a nice bike/pedestrian trail going from Concrete to Sedro-Woolley
+image-group: 1110948.jpg?1920x1440 1110960.jpg?1920x1440
+image: 1110972.jpg|Abandoned bus near Burlington.
+image: 1110974.jpg|
+image: 1110983.jpg|Pacific Ocean.. Kind of. Not very impressive first sight, but this is not really "open sea". The water is in Strait of Juan de Fuca so it's basically surrounded by big islands.
+image: 1110988.jpg|
+text: After reaching the ocean, I decided to take a ferry to the San Juan Islands...
