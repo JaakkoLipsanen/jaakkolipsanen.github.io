@@ -1,0 +1,36 @@
+title: Orcas Island and Hurricane Ridge
+trip: USA 2016
+date-range: 103-107
+main-image: 1120216.jpg
+
+text: So after reaching Anacortes, the western endpoint of the Northern Tier right on the Washington Coast, I decided to go to the San Juan Islands, which is a group of islands just off the shore inside the Strait of Juan de Fuca. There is a ferry that goes to four of the main islands and I decided to first head to the Orcas Island, mostly because I knew that there is a big mountain and didn't really know anything about the other islands.
+text: I was planning to take an afternoon ferry to Orcas, then bike to the top of the mountain and watch sunset and camp there. But nope, I didn't check the schedule and missed the afternoon ferry (even though I was camping like 14km away..) so I took the eveninh ferry. I biked for maybe about 20km in the dark and camped a bit before the road started to climb up the mountain. In the morning I left most of my bags to where I camped and started heading up the (really steep) road to the summit.
+image-group: 1110994.jpg?1920x1084 1120004.jpg?1920x2560
+image: 1120010.jpg|Cascade Falls
+image: 1120016.jpg|
+image: 1120025.jpg|View of the Strait of Juan de Fuca from top of the ~700m high Mt. Constitution.
+image-group: 1120033.jpg?1920x1084 1120041.jpg?1920x1084
+image: 1120052.jpg|Pretty cool looking island group. Lots of sailboats!
+image-group: 1120053.jpg?1920x1084 1120067.jpg?1920x2560
+image: 1120080.jpg|Interesting looking trees in Obstruction Pass State Park.
+text: So after making my way up the mountain and visiting a nearby Obstruction Pass State Park, I started to make my way back to the other end of the island where the ferry leaves. I was planning to go to the San Juan Island and camp near a lighthouse, but once again NOPE! The last ferry of the say to San Juan Island had left like 10 minutes before I arrived. There were some ferries going to the other islands, but they were going to leave after sunset. So I decided to take a ferry back to Anacortes and continue south.
+image: 1120089.jpg|
+image: 1120093.jpg|Deception Pass bridge.
+image: 1120106.jpg|Mt. Baker in Canada in the distance.
+image: 1120128.jpg|Mt. Rainer. Really impressive mountains!
+image: 1120136.jpg|Hiking trail in Ebey's Landing.
+image: 1120141.jpg|Beach in Ebey's Landing.
+text: Next I took a ferry to the Olympic Peninsula and started making my way to the Hurricane Ridge road in Olympic National Park. There is a nice bike/walking path going through the northern peninsula called Olympic Discovery Trail so I followed that for most of the way.
+image: 1120148.jpg|ODT.
+image-group: 1120156.jpg?1920x2560 1120149.jpg?1920x1084
+image: 1120163.jpg|Near Port Angeles.
+text: The Hurricane Ridge road is a ~27km long road that goes from Port Angeles at sea level to deep in to the Olympic National Park, rising about 1650m/5000ft. I decided to camp around third of the way up in a campground at Heart O' Hills.
+image: 1120165.jpg|Hurricane Ridge road.
+image: 1120166.jpg|Heart O' Hills trail.
+image-group: 1120169.jpg?1920x1440 1120173.jpg?1920x2560 1120174.jpg?1920x2560 1120177.jpg?1920x2560 1120180.jpg?1920x2560 1120182.jpg?1920x2560 1120185.jpg?1920x2560
+image: 1120195.jpg|Above the clouds. Making my way up the road.
+image: 1120198.jpg|From the top of the road a trail started that lead to top of the Hurricane Hill, where you had great view in every direction! Port Angeles and Strait of Juan de Fuca visible.
+image: 1120200.jpg|
+image: 1120205.jpg|The trail to Hurricane Hill from the top.
+image-group: 1120209.jpg?1920x1440 1120214.jpg?1920x2560 1120216.jpg?1920x1084
+text: I felt that the mountains in the Olympic National Park were a bit underwhelming. Not as spiky and gigantic as in say, Glacier National Park. Speaking of glaciers, I'm pretty sure that there are more glaciers in the Olympic NP than in Glacier NP which is kinda interesting :P
