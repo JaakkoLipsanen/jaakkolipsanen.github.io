@@ -1,0 +1,23 @@
+title: Third Beach and Hoh Rainforest
+trip: USA 2016
+date-range: 108-110
+main-image: 1120354.jpg
+
+text: After the Hurricane Ridge and the mountains of Olympic National Park, it was time to head to the two other areas of the park; the coast and the rainforest.
+image: 1120221.jpg|Olympic Adventure Trail, a short hiking/biking trail that passes a narrow section of the road near [a big lake in Olympic Peninsula which name I don't remember because I'm writing this from California :P]
+image: 1120224.jpg|Lots of people were jumping from the cliffs to the water.
+image: 1120225.jpg|Narrow trail.. "Please don't fall into the water...!"
+image: 1120226.jpg|
+text: So, as I was looking at the map of the park, I found that there were some beaches that were accessible only by hiking couple of miles and where camping was "kinda okay" (should've gotten a free permit but meh) so I decided to head there. The beaches were named very originally "First Beach",  "Second Beach" and "Third Beach". Third Beach was the most remote with a longest hike (~2km each way), so I headed there. As I arrived to the trailhead, I hid my bike in the bushes, got my backpack, stuffed some clothes and food in there and grabbed my tent and sleeping bag and started hiking. I just missed the sunset which was disappointing, but it was still pretty cool!
+image: 1120269.jpg|Third Beach in the evening.
+image: 1120300.jpg|Camping spot. There were maybe 5 other tents on the ~1.5km long beach.
+image: 1120293.jpg|Foggy morning. It really was one of the coolest sights I've ever seen!
+image-group: 1120319.jpg?1920x1084 1120335.jpg?1920x1440 1120346.jpg?1920x1084
+image: 1120354.jpg|Fog + sun shafts = amazing!
+image: 1120372.jpg|
+image: 1120378.jpg|Hikers. You can hike like +100km (at least) section of the coast that is totally remote. I'd love to do the hike someday!
+text: After the night and morning on the beach, it was time to head to the Hoh Rainforest.
+image: 1120401.jpg|Some big trees on the way to Hoh!
+image-group: 1120406.jpg?1920x2560 1120410.jpg?1920x1440 1120412.jpg?1920x2560 1120416.jpg?1920x2560 1120418.jpg?1920x2560 1120428.jpg?1920x1440 1120434.jpg?1920x1440 1120439.jpg?1920x1440 1120440.jpg?1920x2560 1120446.jpg?1920x2560 1120453.jpg?1920x2560 1120469.jpg?1920x2560
+image: 1120472.jpg|Some elk near Hoh
+image: 1120475.jpg|The road leading away from Hoh
