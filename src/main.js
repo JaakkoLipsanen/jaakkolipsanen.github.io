@@ -10,6 +10,7 @@ import CycleTripsPage from "./Pages/CycleTripsPage.vue";
 import CycleBlogPage from "./Pages/CycleBlogPage.vue"
 import CycleTourPage from "./Pages/CycleTourPage.vue";
 import BlogPostPage from "./Pages/BlogPostPage.vue";
+import BlogArchivePage from "./Pages/BlogArchivePage.vue";
 
 import { mapify } from "es6-mapify";
 
@@ -32,6 +33,7 @@ var app = new Vue({
 		"cycle-tour-page": CycleTourPage,
 		"cycle-blog-page": CycleBlogPage,
 		"blog-post-page": BlogPostPage,
+		"blog-archive-page": BlogArchivePage,
 	},
 
 	data: {
@@ -113,7 +115,7 @@ var app = new Vue({
 			}
 			else if(path[0] == "404.html") {
 				// this is default atm
-				this.ChangePage("cycle-about-page", "/cycle", { }, true);
+				this.ChangePage("blog-archive-page", "/cycle", { }, true);
 			}
 			else if(path[0] == "code") {
 				if(path.length == 1) {

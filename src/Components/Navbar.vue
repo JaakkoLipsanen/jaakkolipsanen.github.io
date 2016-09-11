@@ -232,26 +232,26 @@ export default {
 			font-size: 22px;
 			font-weight: 800;
 			font-family: "Open Sans";
-			color: rgb(255, 255, 255);
-			opacity: 0.6;
+			color: rgb(8, 8, 8);
+			opacity: 0.8;
 
 			cursor: pointer;
 			transition: opacity 0.15s ease-in-out;
 
 			&:hover {
-				color: white;
+				color: rgb(0, 0, 0);;
 				opacity: 1;
 			}
 
 			&.selected {
-				color: white;
+				color: rgb(32, 32, 32);
 				opacity: 1;
 			}
 		}
 
 		p:last-child {
 			margin-left: 8px;
-			color: white;
+			color: rgb(8, 8, 8);;
 			opacity: 0.35;
 
 			&:hover {
@@ -269,7 +269,7 @@ export default {
 	}
 
 	$font-stack: 'Yanone Kaffeesatz', 'Segoe UI';
-	$light-gray: rgb(232, 232, 232); /* was 211, 211, 211 */
+	$title-color: rgb(32, 32, 32); /* was 211, 211, 211 */
 
 	#navbar-container {
 		width: 100%;
@@ -280,7 +280,7 @@ export default {
 	}
 
 	#navbar-header-text {
-		color: $light-gray;
+		color: $title-color;
 		font: 400% $font-stack;
 
 		text-align: center;
