@@ -1,6 +1,6 @@
 <template>
 	<div class="blog-list-page-container">
-		<blog-post class="blog-post-block" v-for="blogPostInfo in blog.PostInfos" :post-info="blogPostInfo" :blog-source="blog" >
+		<blog-post class="blog-post-block" v-for="(index, blogPostInfo) in blog.PostInfos" :post-info="blogPostInfo" :blog-source="blog" :load-style="getLoadStyleByIndex(index)">
 		<!--	<p class="blog-post-title"> {{ post.Title }}</p>
 			<p class="blog-post-trip"> {{ post.Trip }}</p> -->
 		</div>
@@ -31,15 +31,28 @@ export default {
 		});
 	},
 
+	methods: {
+		getLoadStyleByIndex: function(index) {
+		/*	if(index == 0) { return 0; }
+			else if(index < 3) { return 1; } */
+
+			return 2;
+		},
+	},
+
+	events: {
+		'opening-post': function(element) {
+			this.$broadcast('close-blog');
+		}
+	}
 };
 </script>
 
 <style lang="sass" id="style-sheet" disabled=false>
 	.blog-list-page-container {
 		margin-top: 128px;
+		margin-bottom: 64px;
 	}
 
-	body {
-		background-color: rgb(248, 248, 248) !important;
-	}
+
 </style>
