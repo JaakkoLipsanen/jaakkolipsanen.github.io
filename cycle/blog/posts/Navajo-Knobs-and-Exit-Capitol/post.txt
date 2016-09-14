@@ -1,32 +1,32 @@
 title: Navajo Knobs and Exit Capitol
 trip: USA 2016
 date-range: 38-40
-main-image: 1080722.jpg
+main-image: 1080722.jpg?1920x1080
 
 text: The next morning after arriving to Capitol Reef I did a 60km round-trip to buy some food for the next few days (thankfully I could leave my bags and tent behind so the trip didn't take that long). In the afternoon I decided to hike the Navajo Knobs trail, which was a 16km round-trip hike.
-image: 1080644.jpg|
-image: 1080645.jpg|In the town where I went to buy groceries there was this sheriff's car which was pretty funny :)
-image: 1080722.jpg|There was an amazing 360-degree view of the park on top of the Navajo Knobs!
-image: 1080674.jpg|Henry Mountains to the southeast
-image: 1080703.jpg|View on the direction of the scenic drive where I entered the park
+image: 1080644.jpg?1920x1442|
+image: 1080645.jpg?1920x1442|In the town where I went to buy groceries there was this sheriff's car which was pretty funny :)
+image: 1080722.jpg?1920x1080|There was an amazing 360-degree view of the park on top of the Navajo Knobs!
+image: 1080674.jpg?1920x1080|Henry Mountains to the southeast
+image: 1080703.jpg?1920x2557|View on the direction of the scenic drive where I entered the park
 image-group: 1080695.jpg?1920x2557 1080743.jpg?1920x2557
-image: 1080746.jpg|The trail to Navajo Knobs went back and forth on these kinds of ridges most of the time.
+image: 1080746.jpg?1920x1080|The trail to Navajo Knobs went back and forth on these kinds of ridges most of the time.
 image-group: 1080766.jpg?1920x1442 1080770.jpg?1920x1442
 text: After the hike I exited the park and headed south to the small Notom-Bullfrog road. The road links the Capitol Reef park and the town of Bullfrog on the shore of Lake Powell. It was about 110km long with around half of unpaved and of course I had headwind for the whole road :( ! The road paralleled along the remote, southern region of the Capitol Reef and crossed into the park for a while. Somehow I managed to take way less water than I needed and had tto start rationing it, but luckily I met some bikers who had a support car with their gear and food etc so I got some water from them :)
-image: 1080803.jpg|The (rebuilt?) house of the first family who settled in the Capitol Reef area in the late 1800's.
-image: 1080818.jpg|
-image: 1080824.jpg|The Notom-Bullfrog road was located in kinda of a valley surrounded by these "walls".
-image: 1080828.jpg|
-image: 1080837.jpg|Some sandier sections..
+image: 1080803.jpg?1920x2557|The (rebuilt?) house of the first family who settled in the Capitol Reef area in the late 1800's.
+image: 1080818.jpg?1920x1080|
+image: 1080824.jpg?1920x1080|The Notom-Bullfrog road was located in kinda of a valley surrounded by these "walls".
+image: 1080828.jpg?1920x2557|
+image: 1080837.jpg?1920x3412|Some sandier sections..
 image-group: 1080834.jpg?1920x1442 1080854.jpg?1920x1080
 text: In the latter half of the road there was a rough side road that led to an overlook of the southern Capitol Reef. It was getting pretty late so I figured that I'll bike to the overlook and camp there. The overlook was really beautiful in the sunset and I found out that there were some hiking trails starting from the overlook, so next morning I decided to hike to the Brimhall Bridge.
-image: 1080876.jpg|View on the valley below from the overlook
-image: 1080888.jpg|
-image: 1080890.jpg|In the morning my hike to the Brimhall Bridge ended here. The puddle was really deep, I figured that at least to my belly and I wasn't really ready to start swimming :) But I kind of like the idea of canyoneering where you combine hiking, climbing and swimming!
-image: 1080894.jpg|Streaked wall on the trail.
-image: 1080905.jpg|There was some climbing involved on the hike! Someone had piled these rocks to get over the cliff.
+image: 1080876.jpg?1920x1442|View on the valley below from the overlook
+image: 1080888.jpg?1920x1442|
+image: 1080890.jpg?1920x2557|In the morning my hike to the Brimhall Bridge ended here. The puddle was really deep, I figured that at least to my belly and I wasn't really ready to start swimming :) But I kind of like the idea of canyoneering where you combine hiking, climbing and swimming!
+image: 1080894.jpg?1920x2557|Streaked wall on the trail.
+image: 1080905.jpg?1920x2557|There was some climbing involved on the hike! Someone had piled these rocks to get over the cliff.
 image-group: 1080908.jpg?1920x2557 1080923.jpg?1920x2557 1080920.jpg?1920x1080
-image: 1080926.jpg|Back on the road!
-image: 1080949.jpg|The (artificial) Lake Powell!
-image: 1080948.jpg|
+image: 1080926.jpg?1920x2557|Back on the road!
+image: 1080949.jpg?1920x1080|The (artificial) Lake Powell!
+image: 1080948.jpg?1920x2557|
 text: I arrived to Lake Powell around 5pm and found out that A: the last ferry across the lake leaves at 3pm and that B: the only shop, a small corner store, closes at 4.30pm......... I had basically no food and I was really hungry, so I ended up going to this really fancy restaurant. It was a bit expensive but the food was great!

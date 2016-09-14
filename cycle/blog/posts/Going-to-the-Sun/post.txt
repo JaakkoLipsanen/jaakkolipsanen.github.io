@@ -1,41 +1,41 @@
 title: Going-to-the-Sun
 trip: USA 2016
 date-range: 91-91
-main-image: 1110518.jpg
+main-image: 1110518.jpg?1920x1080
 
 text: Glacier National Park was one of the places that I was really excited about for before I left on this trip. I wasn't quite sure if I'd actually have enough time to come this far north. I was thinking about going just to Yellowstone and then heading toward San Fransisco, but since I spent so little time in Colorado, it turned out that I'll have plenty of time to visit Glacier!
 text: The only road that crosses the park is the Going-to-the-Sun road. Before I left on this trip I had read that it's one of the prettiest and most scenic roads in the USA. One guy who I talked with while hiking in Capitol Reef also spoke with high words about it so I was definitely intrigued and waiting to see it myself!
 text: The road is pretty long and crosses the mountains of the park. Approaching from the west, it first goes along the coast of Lake MacDonald and some rivers for 30km, then ascends to the Logan's Pass during the next ~20km and then descends down on the east side until St. Mary.
 text: I approached the park from the west and decided to camp out on the beginning of the Going-to-the-Sun road at the Apgar campground for two nights. Bicycles aren't allowed on most parts of the road on the west side between 11am and 4pm, so I had to bike the first 50km to the Logan's Pass before 11am. I started biking pretty late, maybe around 8am and arrived to the top around 11:15am. A bit late since I was taking so many photos!
-image: 1110345.jpg|The visitor center for the Canadian province of Alberta in West Glacier. Kinda funny :P
-image: 1110350.jpg|Lake MacDonald
+image: 1110345.jpg?1920x2557|The visitor center for the Canadian province of Alberta in West Glacier. Kinda funny :P
+image: 1110350.jpg?1920x1080|Lake MacDonald
 image-group: 1110354.jpg?1920x1080 1110360.jpg?1920x1080
-image: 1110378.jpg|So beautiful :)
+image: 1110378.jpg?1920x1442|So beautiful :)
 image-group: 1110383.jpg?1920x2557 1110395.jpg?1920x2557
-image: 1110407.jpg|The road up
+image: 1110407.jpg?1920x1442|The road up
 image-group: 1110408.jpg?1920x1080 1110415.jpg?1920x2557 1110418.jpg?1920x1442
-image: 1110425.jpg|The road back on where I came from
+image: 1110425.jpg?1920x1442|The road back on where I came from
 text: At the top I decided to do a short hike to the Hidden Lake Overlook. By this point I had already decided that I'll come back to Glacier and western USA to do longer hikes through the national parks, so I was okay with not doing that many hikes this time!
-image: 1110441.jpg|Mountain goats on near the trail
-image: 1110446.jpg|Father...
-image: 1110447.jpg|...and the child!
-image: 1110451.jpg|Looks like a squirrel or something!
-image: 1110452.jpg|
-image: 1110455.jpg|I really liked how the laked mirrored the mountain!
-image: 1110472.jpg|
-image: 1110482.jpg|Snowy trail :P
-image: 1110484.jpg|
-image: 1110492.jpg|Looking good!
-image: 1110498.jpg|
+image: 1110441.jpg?1920x1442|Mountain goats on near the trail
+image: 1110446.jpg?1920x1442|Father...
+image: 1110447.jpg?1920x2557|...and the child!
+image: 1110451.jpg?1920x2557|Looks like a squirrel or something!
+image: 1110452.jpg?1920x1080|
+image: 1110455.jpg?1920x1442|I really liked how the laked mirrored the mountain!
+image: 1110472.jpg?1920x2557|
+image: 1110482.jpg?1920x2557|Snowy trail :P
+image: 1110484.jpg?1920x2557|
+image: 1110492.jpg?1920x1442|Looking good!
+image: 1110498.jpg?1920x2557|
 text: After the hike I decided to descend down on the east side to Rising Sun, which was maybe around ~15km from the top and ~10km from the eastern end of the road at St. Mary (probably totally wrong numbers, I don't remember!).
-image: 1110500.jpg|The road down on the east side
+image: 1110500.jpg?1920x1442|The road down on the east side
 image-group: 1110505.jpg?1920x2557 1110509.jpg?1920x1442
-image: 1110510.jpg|Apparently there had been a few forest fires in the park sonewhat recently.
+image: 1110510.jpg?1920x1442|Apparently there had been a few forest fires in the park sonewhat recently.
 text: At the Rising Sun I had a nice  dinner. I had originally planned to take a free bus back to the Logans Pass, but I felt like I had energy so I decided to bike back up instead. It started raining on the way up which sucked because I got pretty wet from the sweat and rain, but on the other hand it made the mountains a lot prettier!
-image: 1110518.jpg|
-image: 1110521.jpg|Bear! There were a bunch of cars stopped and one car passing by told me that there's a couple of bears ahead. And so there was, one adult bear with a cub following it!
+image: 1110518.jpg?1920x1080|
+image: 1110521.jpg?1920x1442|Bear! There were a bunch of cars stopped and one car passing by told me that there's a couple of bears ahead. And so there was, one adult bear with a cub following it!
 image-group: 1110522.jpg?1920x1442 1110525.jpg?1920x2557 1110532.jpg?1920x1442 1110538.jpg?1920x2557 1110534.jpg?1920x1080
-image: 1110548.jpg|Road down on the west side
+image: 1110548.jpg?1920x1080|Road down on the west side
 image-group: 1110551.jpg?1920x1442 1110572.jpg?1920x2557 1110582.jpg?1920x1442 1110598.jpg?1920x1442
-image: 1110613.jpg|Rainy Lake MacDonald. It started raining a lot during the descent and the rain continued all the way until I was back at the campground in Apgar!
+image: 1110613.jpg?1920x1442|Rainy Lake MacDonald. It started raining a lot during the descent and the rain continued all the way until I was back at the campground in Apgar!
 text: The Going-to-the-Sun road was really pretty and definitely the prettiest place so far since Utah, so it definitely met my expections :) I also found out that in late 1800's there was around 150 glaciers in the park. Today, only around 25 of those glaciers remains and it is expected that the remaining glaciers will melt away by 2035. Thanks global warming!

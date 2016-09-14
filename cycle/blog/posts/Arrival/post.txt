@@ -1,7 +1,7 @@
 title: Arrival
 trip: USA 2016
 date-range: 1-1
-main-image: 1060315.jpeg
+main-image: 1060315.jpeg?1920x1441
 
 text: Whee, I'm touring again! I'm starting in Las Vegas and I plan to first visit California, then head to Utah and Colorado. Then somehow get back to west coast where I'll likely be flying back from. So I have a long trip ahead!
 text: I arrived to Las Vegas around 5pm and spent the first couple hours waiting to be questioned because the border control officer thought I was suspicious! I don't blame her, I admit I was pretty suspicious and aloof. Anyways, after getting through the initial hassle I wandered around the airport for a few hours and managed to get a solid 4 hour sleep before heading off in the morning.

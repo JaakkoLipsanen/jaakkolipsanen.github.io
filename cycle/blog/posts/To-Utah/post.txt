@@ -1,7 +1,7 @@
 title: To Utah
 trip: USA 2016
 date-range: 16-19
-main-image: 1070092.jpg
+main-image: 1070092.jpg?1920x1442
 
 image-group: 1060871.jpg?1920x1442 1060873.jpg?1920x1442 1060882.jpg?1920x1080 1060888.jpg?1920x1080 1060928.jpg?1920x1442 1060934.jpg?1920x1442 1060937.jpg?1920x1442 1060950.jpg?1920x1442 1060956.jpg?1920x1442 1060966.jpg?1920x1442 1060984.jpg?1920x1572 toka.jpg?1599x899
 text: After leaving Vegas I headed to a smallish road going through Lake Mead National Recreation Area. Lots of hills and cliffs. The photos I took don't show it very well, but many of the cliffs were really red which looked cool! Apparently the redness is caused by the same reason as why Mars is red; there is a lot of iron on the ground which is oxidizing aka rusting!

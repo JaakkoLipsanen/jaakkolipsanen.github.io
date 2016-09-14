@@ -1,20 +1,20 @@
 title: Goosenecks
 trip: USA 2016
 date-range: 41-42
-main-image: 1090069.jpg
+main-image: 1090069.jpg?1920x1080
 
 text: The next morning I crossed the Lake Powell from Bullfrog to Halls Crossing. Even though Lake Powell is called a lake, it's just a part of Colorado River so you can't really go around it. From Halls Crossing it was around 150km to the next town, the Mexican Hat. The area around Halls Crossing was super dry and deserty and I was bit afraid that it would be like that the whole way. I was even offered a ride half way through and was pretty close to accepting it, but you know... you can't just skip the "boring" parts! And I'm pretty glad I didn't because the road was pretty fun actually and there were no cars so I just cycled in the middle of the road :)
-image: 1080954.jpg|Lake Powell
-image: 1080959.jpg|Some strange cavey things on the shore
+image: 1080954.jpg?1920x1080|Lake Powell
+image: 1080959.jpg?1920x1080|Some strange cavey things on the shore
 image-group: 1080961.jpg?1920x1442 1080963.jpg?1920x1080 1080970.jpg?1920x1442 1080980.jpg?1920x2557 1080984.jpg?1920x2557 1080992.jpg?1920x1442
-image: 1090002.jpg|Some strange looking rocks in the south!
-image: 1090019.jpg|
+image: 1090002.jpg?1920x1080|Some strange looking rocks in the south!
+image: 1090019.jpg?1920x1080|
 text: I was planning to go to the Natural Bridge National Monument which was located around 90km from the Halls Crossing. I met Anthony, a guy who had been cycling from SF, eating near the entrance to the side road leading to the monument. He had concluded that the 30km side trip wasn't worth it and I kinda agreed. So instead we talked for a pretty long time. Turns out, he was a programmer and founded a start-up in Australia, sold it to Walmart and know makes god knows how much money in San Francisco. And with that money he had bought himself a 7,500$ titanium bike :P
-image: 1090048.jpg|Muley Point
+image: 1090048.jpg?1920x2557|Muley Point
 image-group: 1090051.jpg?1920x1442 1090066.jpg?1920x1442 1090069.jpg?1920x1080
 text: On the way to the Mexican Hat there was also the Goosenecks State Park, which had an amazing view on the Colorado River!
 image-group: 1090089.jpg?1920x1442 1090086.jpg?1920x1442
-image: 1090105.jpg|More of those strange looking rocks!
-image: 1090117.jpg|
-image: 1090122.jpg|The Mexican Hat Rock, where the town got it's name.
-image: 1090133.jpg|In the evening those rocks started to look even stranger!
+image: 1090105.jpg?1920x1080|More of those strange looking rocks!
+image: 1090117.jpg?1920x2557|
+image: 1090122.jpg?1920x2557|The Mexican Hat Rock, where the town got it's name.
+image: 1090133.jpg?1920x1442|In the evening those rocks started to look even stranger!

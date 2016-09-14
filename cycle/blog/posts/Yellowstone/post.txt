@@ -1,38 +1,38 @@
 title: Yellowstone
 trip: USA 2016
 date-range: 76-78
-main-image: 1110066.jpg
+main-image: 1110066.jpg?1920x1084
 
 text: After crossing the Great Plains/Great Basin, I decided to stop following GDMBR and instead head to the Grand Teton NP and to the Yellowstone NP.
 text: The Grand Tetons is a really majestic mountain range in the western border of Wyoming. The mountains were super spiky and kinda reminded me of sawtooth :P I was kind of disappointed by the mountains in Colorado because they were so.. "mild" and.. I don't know, they just didn't wow me. But the Tetons definitely did! I didn't do any hikes, since all the interesting hikes were pretty long and I didn't have my hiking shoes anymore. Also apparently there was still plenty of snow on the trails in the mountains.. But I definitely want to return there to hike someday!
 image-group: 1100854.jpg?1920x2557 1100865.jpg?1920x1080 1100871.jpg?1920x1080 1100875.jpg?1920x1440 1100878.jpg?1920x1440 1100880.jpg?1920x1440 1100887.jpg?1920x1084
 text: After staying a night in the Jenny Lake campground, I headed off the Grand Teton NP and cycled into the neighbouring Yellowstone NP. There I stayed in a campground for two nights, so I actually stayes in a campground for three nights in a row which is pretty unprecedented for me :P But it was kind of fun and I met some other bikers in the Madison campground on the third night. The National Park campgrounds usually have some shared hiker/biker campsites so it that are much cheaper than normal sites so it doesn't really break the bank (the 15$-25$ that they cost normally is pretty ridicoulous).
-image: 1100896.jpg|Near the south entrance of the park
+image: 1100896.jpg?1920x1440|Near the south entrance of the park
 image-group: 1100914.jpg?1920x1084 1100925.jpg?1920x1440
-image: 1100952.jpg|A bison near the Old Faithful geyser! Bisons look really, really strange..
-image: 1100956.jpg|
-image: 1100960.jpg|Geyser erupting!
-image: 1100969.jpg|The Old Faithful geyser erupting. It erupts around every 90 minutes and the eruption lasts several minutes!
-image: 1100966.jpg|
-image: 1100972.jpg|I think this geyser erupted only like once a day and I just happened to be walking by! The water reached really really high!
-image: 1100974.jpg|And people got wet :P
-image: 1100975.jpg|Lots of funny looking little pools.
+image: 1100952.jpg?1920x1440|A bison near the Old Faithful geyser! Bisons look really, really strange..
+image: 1100956.jpg?1920x1084|
+image: 1100960.jpg?1920x2560|Geyser erupting!
+image: 1100969.jpg?1920x3402|The Old Faithful geyser erupting. It erupts around every 90 minutes and the eruption lasts several minutes!
+image: 1100966.jpg?1920x1440|
+image: 1100972.jpg?1920x3402|I think this geyser erupted only like once a day and I just happened to be walking by! The water reached really really high!
+image: 1100974.jpg?1920x2560|And people got wet :P
+image: 1100975.jpg?1920x1084|Lots of funny looking little pools.
 image-group: 1100976.jpg?1920x1084 1100979.jpg?1920x2560
-image: 1100989.jpg|I'm not really sure that what caused these colors. Some minerals maybe?
-image: 1100992.jpg|
-image: 1100994.jpg|Lot of the pools were boiling!
-image: 1100997.jpg|
-image: 1100999.jpg|Beautiful colors :)
+image: 1100989.jpg?1920x2560|I'm not really sure that what caused these colors. Some minerals maybe?
+image: 1100992.jpg?1920x1440|
+image: 1100994.jpg?1920x2560|Lot of the pools were boiling!
+image: 1100997.jpg?1920x2560|
+image: 1100999.jpg?1920x1440|Beautiful colors :)
 image-group: 1110003.jpg?1920x1084 1110005.jpg?1920x1440 1110010.jpg?1920x1084 1110011.jpg?1920x2560 1110012.jpg?1920x1440 1110017.jpg?1920x1440
-image: 1110023.jpg|The Old Faithful erupting again.
-image: 1110027.jpg|A tons of people watching the eruption. The eruption times are predicted only on a few geysers and the Old Faithful is one of the biggest and most frequent one, so it's the most popular by far.
+image: 1110023.jpg?1920x2560|The Old Faithful erupting again.
+image: 1110027.jpg?1920x1084|A tons of people watching the eruption. The eruption times are predicted only on a few geysers and the Old Faithful is one of the biggest and most frequent one, so it's the most popular by far.
 image-group: 1110028.jpg?1920x1084 1110030.jpg?1920x1440
-image: 1110033.jpg|Sapphire Pool
-image: 1110035.jpg|Really captivating color :)
+image: 1110033.jpg?1920x1440|Sapphire Pool
+image: 1110035.jpg?1920x1440|Really captivating color :)
 image-group: 1110047.jpg?1920x1440 1110054.jpg?1920x1440 1110060.jpg?1920x1084 1110062.jpg?1920x1084 1110063.jpg?1920x1084
-image: 1110066.jpg|The Grand Prismatic Pool. Ran out of battery on camera just after grabbing this photo. I thought that I'd have to bike all the way out of the park but it turned out that there was space in the Madison campground after all.
-image: 1110075.jpg|Two bisons hanging near the road leading to the west entrance of the park
-image: 1110081.jpg|The bisons caused a huge traffic jam. All the cars stopped to look at them! When I cycled off, there was a line of cars probably over 3km long!
-image: 1110087.jpg|
-image: 1110096.jpg|Montana!
+image: 1110066.jpg?1920x1084|The Grand Prismatic Pool. Ran out of battery on camera just after grabbing this photo. I thought that I'd have to bike all the way out of the park but it turned out that there was space in the Madison campground after all.
+image: 1110075.jpg?1920x2560|Two bisons hanging near the road leading to the west entrance of the park
+image: 1110081.jpg?1920x2560|The bisons caused a huge traffic jam. All the cars stopped to look at them! When I cycled off, there was a line of cars probably over 3km long!
+image: 1110087.jpg?1920x1440|
+image: 1110096.jpg?1920x2560|Montana!
 text: The Yellowstone was a really cool and unique park. All the other National Parks so far have been very.. static. Sceneries that have formed over millions of years of erosion or tectonic activity or whatnot. But Yellowstone was "alive" and active which was really cool :) Apparently there are only a couple other places in the world with active geysers (Iceland and somewhere in Russia), so you don't really see anything similiar very often :)

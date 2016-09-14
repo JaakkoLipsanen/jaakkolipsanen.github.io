@@ -1,23 +1,23 @@
 title: Colorado
 trip: USA 2016
 date-range: 55-58
-main-image: 1100202.jpg
+main-image: 1100202.jpg?1920x1440
 
 text: After the White Rim Trail and Moab it was time to head to Colorado. I was planning to cross the La Sal Mountains and go to Telluride-Silverton-Ouray area in southwest Colorado. There are a lot of interesting very high altitude rough mountain roads in that area, but unfortunately it seemed like most of them were still snow covered and closed. In addition, the road crossing the La Sal Mountains was also closed so I decided to not go in that direction at all.
 text: So I decided to head directly to east to Fruita and Grand Junction. I was thinking about cycling the Kokopelli Trail that goes between Moab and Fruita, but after noticing that the temperatures were forecasted to rise to about 40C, I decided to just take the fastest and easiest road to Colorado in hopes of cooler weather.
-image: 1100125.jpg|Intriguing looking road, but it was a dead-end.
-image: 1100126.jpg|Ghost town of Cisco
-image: 1100129.jpg|
-image: 1100130.jpg|The only road between Moab and Fruita outside of an interstate motorway.
-image: 1100132.jpg|
-image: 1100141.jpg|Sunset in Fruita.
+image: 1100125.jpg?1920x1442|Intriguing looking road, but it was a dead-end.
+image: 1100126.jpg?1920x1442|Ghost town of Cisco
+image: 1100129.jpg?1920x1442|
+image: 1100130.jpg?1920x1440|The only road between Moab and Fruita outside of an interstate motorway.
+image: 1100132.jpg?1920x1440|
+image: 1100141.jpg?1920x1440|Sunset in Fruita.
 text: Between Fruita to Grand Junction I decided to take a road that goes through the Colorado National Monument. The road first rises few hundred meters from Fruita, then runs along the edge of the cliff for a long time before descending into Grand Junction. The National Monunent was pretty, but very Utah-y so it wasn't super mind shattering or anything. I was also feeling very weak, since I had gone for a swim the day before in the Colorado River (me swimming? It was *that* hot) and afterwards cycled for hours shirtless. Bad mistake, since my whole back got sunburnt and it hurted a lot for a few days. There was a lot of dead skin falling out even like +week later!
-image: 1100148.jpg|View on the road ascending in Colorado National Monument.
-image: 1100155.jpg|
+image: 1100148.jpg?1920x1440|View on the road ascending in Colorado National Monument.
+image: 1100155.jpg?1920x2560|
 text: From Grand Junction there were suprisingly few road choices outside of the interstate motorways. I wanted to go to Grand Mesa, which is a small area high in the mountains southeast from the Grand Junction, and the only non-private roads to there seemed to be an interstate motorway or a tiny forest road. The forest road seemed interesting, but according to the forest service it was still snow covered.. So I had to bike for a while in the interstate and then bike on a somewhat big road all the way to Grand Mesa.
-image: 1100159.jpg|So green!
+image: 1100159.jpg?1920x1084|So green!
 image-group: 1100165.jpg?1920x1440 1100185.jpg?1920x3402
-image: 1100202.jpg|The forest was very beautiful
-image: 1100203.jpg|
-image: 1100207.jpg|Some of the lakes were still frozen st the top
+image: 1100202.jpg?1920x1440|The forest was very beautiful
+image: 1100203.jpg?1920x1084|
+image: 1100207.jpg?1920x1084|Some of the lakes were still frozen st the top
 image-group: 1100212.jpg?1920x1440 1100216.jpg?1920x1084 1100219.jpg?1920x1084 1100222.jpg?1920x1084

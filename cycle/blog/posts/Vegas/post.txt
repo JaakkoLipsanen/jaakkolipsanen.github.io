@@ -1,7 +1,7 @@
 title: Vegas
 trip: USA 2016
 date-range: 14-15
-main-image: 1060862.jpg
+main-image: 1060862.jpg?1920x1441
 
 image-group: 1060802.jpg?1920x2557 1060812.jpg?1920x1372 1060817.jpg?1920x1442 1060823.jpg?1920x2557 1060833.jpg?1920x2557 1060839.jpg?1920x2557 1060840.jpg?1920x1442 1060847.jpg?1920x1442 1060852.jpg?1920x2557 1060858.jpg?1920x1442 1060862.jpg?1920x1441
 text: I arrived to Vegas pretty late. I first went to an outdoor store to buy some stuff and by the time I was out, it was already dark. I found a nice quiet street that lead right next to my hostel and had a nice bicycle lane. It was really fun to blaze through the city in the dark! By the time I arrived to the hostel, I had already cycled over 90km and it was 11pm. One would think that I would just head to shower and sleep, but nope! For some reason, that in hindsight wasn't the wisest decision, I decided to not get a bed for the first night! I left my bike and my bags to the hostel and headed to to the Strip (aka where the casinos are).

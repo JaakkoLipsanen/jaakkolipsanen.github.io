@@ -1,23 +1,23 @@
 title: Observations and Hidden Canyons
 trip: USA 2016
 date-range: 28-28
-main-image: 1070541.jpg
+main-image: 1070541.jpg?1920x1442
 
 text: My plan for the second day in Zion was to wake up really early, take the first shuttle in to the valley (cars aren't allowed in the road leading to the valley, everyone must use one of the free buses) and start my hike before the crowds arrive. Yeah right. I woke up to my alarm around 6.30, shut it off and slept until 10am :)
 header: Observation Point
 text: After finally waking up and eating some breakfast, I took the shuttle to the Weeping Rock shuttle station. In there was the trailhead to the Observation Point and Hidden Canyon hikes. I decided to head to the Observation Point first. It was a long, but easy hike to the top. From the top you could see the valley and the Angel's Landing in front of you. It was interesting seeing the tiny people climbing on the ridge :)
-image: 1070520.jpg|On the Observation Point with Angel's Landing visible on the front.
+image: 1070520.jpg?1920x2557|On the Observation Point with Angel's Landing visible on the front.
 image-group: 1070528.jpg?1920x1442 1070539.jpg?1920x1442 1070541.jpg?1920x1442
-image: 1070548.jpg|The trail below
+image: 1070548.jpg?1920x2557|The trail below
 image-group: 1070591.jpg?1920x2557 1070569.jpg?1920x1442 1070600.jpg?1920x2557 1070609.jpg?1920x2557
-image: 1070619.jpg|It started raining on the way down. It made the valley look really moody!
-image: 1070626.jpg|
+image: 1070619.jpg?1920x1442|It started raining on the way down. It made the valley look really moody!
+image: 1070626.jpg?1920x1442|
 header: Hidden Canyon
 text: The next hike I did was the Hidden Canyon. Hidden Canyon and Observation Point shared the first mile or so of the trail, so I didn't have to go all the way back down to the valley floor. The Hidden Canyon hike is a relatively short trail to the beginning of the.. Hidden Canyon! After that, the trail ends but you can continue in to the canyon. The Hidden Canyon is really narrow and full of big rocks and obstacles. It was really fun to navigate through it, it kinda felt like a video game :) Most of the obstacles were pretty easy, but some of then were pretty hard to climb over/around! I got stuck around 30 minutes in to the canyon, but apparently you can continue into it as long as you want/can!
-image: 1070650.jpg|Here is where I got stuck. Tried to climb by the cliff on the right, but had no luck. The route through the logs didn't seem any easier (and I was afraid of falling into the pool with my camera!), so I turned back.
+image: 1070650.jpg?1920x2557|Here is where I got stuck. Tried to climb by the cliff on the right, but had no luck. The route through the logs didn't seem any easier (and I was afraid of falling into the pool with my camera!), so I turned back.
 image-group: 1070663.jpg?1920x1442 1070665.jpg?1920x2557 1070669.jpg?1920x2557 1070666.jpg?1920x1442 1070675.jpg?1920x1442
-image: 1070678.jpg|On the trail section
-image: 1070687.jpg|Really pretty stairs :)
-image: 1070694.jpg|
+image: 1070678.jpg?1920x2557|On the trail section
+image: 1070687.jpg?1920x2557|Really pretty stairs :)
+image: 1070694.jpg?1920x2557|
 header: Exit Zion
 text: All in all, Zion was really amazing. Definitely the prettiest and most mindbending place I've ever been and I can't see any other place topping it any time soon :)

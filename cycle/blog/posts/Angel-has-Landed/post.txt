@@ -1,7 +1,7 @@
 title: Angel has Landed
 trip: USA 2016
 date-range: 27-27
-main-image: 1070479.jpg
+main-image: 1070479.jpg?1920x1442
 
 text: And God is real.
 header: Angel's Landing

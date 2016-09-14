@@ -1,7 +1,7 @@
 title: There
 trip: USA 2016
 date-range: 5-8
-main-image: 1060569.jpg
+main-image: 1060569.jpg?1920x1442
 
 image-group: 1060441.jpg?1920x2557 1060432.jpg?1920x2557 1060474.jpg?1920x1442 1060419.jpg?1920x1442
 text: Yay, I finally got to Death Valley! The first place I visited was Dante's View. There was a pretty big climb up there and I was super tired biking it. It shouldn't have been as tough as it was and I think maybe I just hadn't been eating enough. Or maybe I was dehydrated, it was a hot day! I think dehydration causes loss of appetite too, which doesn't help! Anyways the Dante's View was really amazing sight. It was at around 1500m high and it had great view on the valley below! Definitely one of the top 3 sights I've ever seen. It was super strange looking at cars driving on a road over 1500 meters below, it almost felt fake :)

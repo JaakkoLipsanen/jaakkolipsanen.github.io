@@ -1,23 +1,23 @@
 title: Mt. Evans
 trip: USA 2016
 date-range: 64-65
-main-image: 1100345.jpg
+main-image: 1100345.jpg?1920x1440
 
 text: The highest road in the USA, the Mt Evans Scenic Byway starts from Idaho Springs and leads to the summit of the +4300m high Mt Evans, one of the highest mountains in Colorado. The road is about 45km long and climbs over 2000 meters up.
 text: So I camped maybe 10km after Idaho Springs and sincd it was forecasted to rain the next day, I decided to have a rest day before doing the climb. I didn't really do anything on that rest day. Was planning to write like 10 blog posts but yeah didn't happen :P
 text: The climb up was relatively easy. The grade was pretty mild, like 5-6% most of the time and I left most of my bags and stuff behind since I was going to be returning the same way. It dis get super windy after the treeline though which kinda made it more challenging and interesting. I was expecting to be out of breath and having difficulty breathing or something, but I didn't really feel any different up top than in lower altitudes. I did get very cold though during the last hour or so and once I reached the summit I put all the clothes I had with me on straight away. It was kinda interesting how the tire pressure increased the higher I went. Near the top the tires were rock hard and I could feel even the slightest bumps on the road!
-image: 1100328.jpg|
-image: 1100329.jpg|The road up.
+image: 1100328.jpg?1920x2560|
+image: 1100329.jpg?1920x1084|The road up.
 image-group: 1100330.jpg?1920x1084 1100333.jpg?1920x1084 1100338.jpg?1920x1440
-image: 1100345.jpg|The Summit Lake. Long way below from the actual summit though
-image: 1100348.jpg|
-image: 1100353.jpg|Yaayy. This wasn't actual summit either. There were bunch of rocks piled up that you could hike up that went maybe 10-20m higher.
-image: 1100358.jpg|The Summit Lake
+image: 1100345.jpg?1920x1440|The Summit Lake. Long way below from the actual summit though
+image: 1100348.jpg?1920x1440|
+image: 1100353.jpg?1920x1440|Yaayy. This wasn't actual summit either. There were bunch of rocks piled up that you could hike up that went maybe 10-20m higher.
+image: 1100358.jpg?1920x1440|The Summit Lake
 image-group: 1100363.jpg?1920x1440 1100378.jpg?1920x1440
-image: 1100385.jpg|An observatory at the summit
+image: 1100385.jpg?1920x2560|An observatory at the summit
 image-group: 1100397.jpg?1920x2557 1100410.jpg?1920x1442
-image: 1100439.jpg|Back on the Summit Lake
-image: 1100442.jpg|
+image: 1100439.jpg?1920x2557|Back on the Summit Lake
+image: 1100442.jpg?1920x2557|
 text: I could see really far away from the summit which was pretty interesting. I could see the skyscrapers of Denver that looked really tiny. The eastern half if the Colorado is really flat and it was cool seeing how the mountains ended and the flat began!
 text: The way down was really fun. 45km of downhill, not having to pedal almost at all most of the way :)  After the descent I realized that I got a sunburnt somewhat badly and apparently my eyes got sunburnt as well which was a bit scary.. I had a long break in Idaho Springs and in the evening I left from the town and headed up the Oh-My-God Road? Why is it called that? Because
-image: 1100446.jpg|Oh. My. God....
+image: 1100446.jpg?1920x1442|Oh. My. God....

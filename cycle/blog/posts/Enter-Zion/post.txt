@@ -1,7 +1,7 @@
 title: Enter Zion
 trip: USA 2016
 date-range: 26-26
-main-image: 1070334.jpg
+main-image: 1070334.jpg?1920x1442
 
 image-group: 1070265.jpg?1920x1442 1070269.jpg?1920x1442 1070274.jpg?1920x2557 1070280.jpg?1920x2557 1070283.jpg?1920x1442 1070284.jpg?1920x1442 1070294.jpg?1920x1442 1070310.jpg?1920x1442
 text: I entered Zion National Park from the east, and as I later found out, the eastern part of the park is totally different than the rest. The scenery before the park entrance was relatively boring; farmland, some forest etc, but right away when the park area began it was all replaced with these really cool cliffs and hills!

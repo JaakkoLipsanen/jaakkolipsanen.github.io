@@ -1,39 +1,39 @@
 title: The Great Plains
 trip: USA 2016
 date-range: 70-75
-main-image: 1100823.jpg
+main-image: 1100823.jpg?1920x1080
 
 text: So, after the Rocky Mountain NP and couple days on the TransAm route, I crossed into Wyoming. It was really grassy and treeless near the border and as it turns out, most of Wyoming is that way. The Great Plains, a huge grassy and windy "high desert" covers a significant portion of Wyoming.
 text: On the same evening as I entered Wyoming, my eye got really itchy and started tearing. It got so bad that I pretty much couldn't bike any further. Luckily, I was in the town of Saratoga so I just chilled, ate some anti-histamine and bought some eyedrops. As I was waiting for the eye to get better, a guy passed by and asked if I was okay and if I needed a place to stay. Turns out, he was a Warmshowers host (Couchsurfing for cyclists) and lived like two blocks away. I kinda hesitated first because I had just couple days before decided that I'll be cycling all the way to California instead of stopping in Seattle and I was trying to do more miles. But after the eye didn't get any better, I went to  house. And I'm really glad I did. Karim was a really great and kind guy. He had hosted people for only 10 days, but already had had 27 guests. He made some food and we talked for a long time. He hadn't really biked much but he had a fatbike and was getting into riding it. It came up that there is a hot spring in the town. I had seen it on the map but kinda forgot it once I got to town. It turns out that it's free and open 24/7, so we grabbed our towels and heades there and my god it was amazing. When we got there it was already dark and the sky was full of stars. The hot springs were basically two outdoor pools with the hot water bubbling from below the ground. Karim was a math teacher in the local school and was working on his masters degree and had an essay due soon (I'm pretty sure that he worked on it all night as a matter of fact...), so he left after 45 or so minutes, but I stayed there for probably +2 hours. Even after going to shower and putting clothes on, I just sat on the edge of the pool and stared at the steam rising from the water. It was really magical and man I wish I lived somewhere with a place like that within a walking distance! Karim had to leave to school pretty early and he had told me that it's okay for me to sleep as late as I want so that's what I did. Made some breakfast and headed on. This was the second time that I accepted an invitation to stay at somebodys house and both times I woke up with the host gone :P Although, the first time (in Estes Park), the host left before 5am to volunteer.
-image: 1100593.jpg|
-image: 1100596.jpg|After Saratoga I took a small dirt road through the grasslands to Rawlins
-image: 1100598.jpg|
-image: 1100607.jpg|A family of deers started panicking as I approached them. The mother and one of the kids ran away, but this one kinda wandered to me. After staring at me for a bit, it continued to the opposite direction than the rest of the family :P
-image: 1100610.jpg|God damnit Google Maps!! Getting really tired of it leading me through private roads. Was too pissed to turn around so continued on (and had to pretty much cycle through someones frontyard..)
-image: 1100611.jpg|
+image: 1100593.jpg?1920x2557|
+image: 1100596.jpg?1920x1442|After Saratoga I took a small dirt road through the grasslands to Rawlins
+image: 1100598.jpg?1920x1442|
+image: 1100607.jpg?1920x1442|A family of deers started panicking as I approached them. The mother and one of the kids ran away, but this one kinda wandered to me. After staring at me for a bit, it continued to the opposite direction than the rest of the family :P
+image: 1100610.jpg?1920x1442|God damnit Google Maps!! Getting really tired of it leading me through private roads. Was too pissed to turn around so continued on (and had to pretty much cycle through someones frontyard..)
+image: 1100611.jpg?1920x1442|
 text: After I got to Rawlins, I started following the Great Divide Mountain Bike Route, which goes from Canada all the way to the Mexico border in New Mexico, through the Great Plains. It was around 200km I think to the next town, and even that was just a tiny tiny town. The weather forecast said that I'll have headwind and "record high temperatures" (around 35C). Yay :P
-image: 1100617.jpg|
-image: 1100619.jpg|This scenery reminded me so much of Death Valley. Beautiful sunset, you can see cars tens of miles away and the mountains in the distance. I even saw some wild horses, just like when I entered the Death Valley!
-image: 1100638.jpg|Moon rising
-image: 1100645.jpg|Yup, it's a desert
+image: 1100617.jpg?1920x1440|
+image: 1100619.jpg?1920x1084|This scenery reminded me so much of Death Valley. Beautiful sunset, you can see cars tens of miles away and the mountains in the distance. I even saw some wild horses, just like when I entered the Death Valley!
+image: 1100638.jpg?1920x1440|Moon rising
+image: 1100645.jpg?1920x2560|Yup, it's a desert
 image-group: 1100648.jpg?1920x1440 1100650.jpg?1920x1440
-image: 1100655.jpg|Cycled around two hours to find some shade to cook breakfast. As the sun rose, the shadw grew pretty small behind this building :P
-image: 1100664.jpg|Nothing for miles..
-image: 1100668.jpg|and miles..
-image: 1100672.jpg|and miles..
-image: 1100685.jpg|and miles..
-image: 1100687.jpg|and miles!
-image: 1100695.jpg|Sometimes the road was barely even tire tracks
-image: 1100738.jpg|
-image: 1100777.jpg|Moonrise
-image: 1100783.jpg|Woke up to this fella standing still fir a good 10 minutes
+image: 1100655.jpg?1920x1440|Cycled around two hours to find some shade to cook breakfast. As the sun rose, the shadw grew pretty small behind this building :P
+image: 1100664.jpg?1920x1084|Nothing for miles..
+image: 1100668.jpg?1920x1440|and miles..
+image: 1100672.jpg?1920x1084|and miles..
+image: 1100685.jpg?1920x1440|and miles..
+image: 1100687.jpg?1920x1440|and miles!
+image: 1100695.jpg?1920x1084|Sometimes the road was barely even tire tracks
+image: 1100738.jpg?1920x2560|
+image: 1100777.jpg?1920x1440|Moonrise
+image: 1100783.jpg?1920x2560|Woke up to this fella standing still fir a good 10 minutes
 image-group: 1100786.jpg?1920x2560 1100796.jpg?1920x1084 1100800.jpg?1920x2560
 text: I met a lot of people who were racing in the Tour Divide, the race through GDMBR. The people I met were doing like +120 miles/200km per day, yet while they were still in Wyoming, the leader was already in New Mexico. Around midway through the Great Plains I had a nice meal in Atlantic City and bought some energy bars and snacks they sold in the restaurant.
-image: 1100801.jpg|
-image: 1100805.jpg|Hey, some trees and mountains!
-image: 1100806.jpg|
-image: 1100819.jpg|Really pretty
-image: 1100823.jpg|Like, seriously
+image: 1100801.jpg?1920x1440|
+image: 1100805.jpg?1920x1084|Hey, some trees and mountains!
+image: 1100806.jpg?1920x2560|
+image: 1100819.jpg?1920x1080|Really pretty
+image: 1100823.jpg?1920x1080|Like, seriously
 image-group: 1100826.jpg?1920x1080 1100828.jpg?1920x2557 1100835.jpg?1920x1442 1100837.jpg?1920x1442
-image: 1100845.jpg|Pronghorns/DEERS WITH HORNS in the sunset.
+image: 1100845.jpg?1920x1442|Pronghorns/DEERS WITH HORNS in the sunset.
 text: After I got to Pinedale, I stopped following the GDMBR and headed into the Grand Tetons and Yellowstone..

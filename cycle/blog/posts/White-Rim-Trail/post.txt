@@ -1,45 +1,45 @@
 title: White Rim Trail
 trip: USA 2016
 date-range: 51-54
-main-image: 1090862.jpg
+main-image: 1090862.jpg?1920x1442
 
 text: The White Rim Trail is one of the places that I was looking most forward to on this trip. It is a 100 mile/160km long Jeep trail that goes around the Island in the Sky district of the Canyonlands National Park. I was a bit unsure whether it would be too rough for my bike, since it's usually ridden with a mountain bike (and often with a support vehicle hauling all the gear and food). I pulled the trigger a couple weeks earlier and bought the backcountry permit. You have to camp in the primitive campgrounds along the road and the number of sites is quite limited. I reserved two nights on the campgrounds and since I was making the reservation pretty late, I actually got the first and the last campsite which meant that I would have to cycle almost 100km in one day!
 text: The road starts near the Island in the Sky Visitor Center, where I from with around 14L of water and food for like 4 days :P The road begins as the Shafer Trail and descends a lot of switchbacks down a steep cliff to the lower area of the district. The main roads and the visitor center in Island in the Sky district are basically around 150m higher than the White Rim Trail which goes around the district in that lower area. Hard to explain :P
 image-group: 1090820.jpg?1920x1080 1090833.jpg?1920x3412
-image: 1090836.jpg|The road below
-image: 1090840.jpg|Shafer switchbacks
+image: 1090836.jpg?1920x1080|The road below
+image: 1090840.jpg?1920x1442|Shafer switchbacks
 image-group: 1090845.jpg?1920x1442 1090858.jpg?1920x1442
-image: 1090862.jpg|Look back to the start of the road
+image: 1090862.jpg?1920x1442|Look back to the start of the road
 text: Soon after descending down the switchbacks, there is an intersection where the Shafer Trail ends and the White Rim Trail and Potash Road, which leads back to Moab along the Colorado River, begins.
-image: 1090873.jpg|Colorado River
+image: 1090873.jpg?1920x1442|Colorado River
 image-group: 1090895.jpg?1920x2557 1090892.jpg?1920x1442 1090905.jpg?1920x1442
-image: 1090915.jpg|My first campground, the Airport Campground, was just to the left of this picture beyond the "gap" that is visible. The road was incredibly beautiful in the evening.
-image: 1090937.jpg|
-image: 1090942.jpg|The next morning I woke up pretty early since I had around 100km to bike..
-image: 1090943.jpg|
-image: 1090944.jpg|The road was often just a rock
+image: 1090915.jpg?1920x2557|My first campground, the Airport Campground, was just to the left of this picture beyond the "gap" that is visible. The road was incredibly beautiful in the evening.
+image: 1090937.jpg?1920x2557|
+image: 1090942.jpg?1920x1442|The next morning I woke up pretty early since I had around 100km to bike..
+image: 1090943.jpg?1920x2557|
+image: 1090944.jpg?1920x2557|The road was often just a rock
 image-group: 1090952.jpg?1920x2557 1090957.jpg?1920x2557 1090960.jpg?1920x1080 1090977.jpg?1920x1442 1090983.jpg?1920x1080
-image: 1090988.jpg|The road had only two big hills and both of them were in the latter half. This is the first of them, Murphy Hogback. Doesn't look too bad but it was super steep and ground was pretty loose so the tires didn't have a lot of grip..
-image: 1090989.jpg|Murphy Hogback
+image: 1090988.jpg?1920x1080|The road had only two big hills and both of them were in the latter half. This is the first of them, Murphy Hogback. Doesn't look too bad but it was super steep and ground was pretty loose so the tires didn't have a lot of grip..
+image: 1090989.jpg?1920x2557|Murphy Hogback
 text: I had a nice long break on the top of the Murphy Hogback. There were lots of trees at the top which was pretty rare. There were stretches of +20km without any trees or big enough rocks have a break behind. The temperatures were around 35C and there were no clouds in the sky, which meant that it was super exhausting and I had to drink constantly. I also feel like cloudless sky makes places to look a bit less beautiful. It also makes it harder for me to take good photos... Not sure if the fault is in my camera or my photography skills. Probably bit of both?
-image: 1100001.jpg|
-image: 1100013.jpg|The road after Murphy.
+image: 1100001.jpg?1920x1442|
+image: 1100013.jpg?1920x2557|The road after Murphy.
 image-group: 1100020.jpg?1920x2557 1100032.jpg?1920x1442 1100036.jpg?1920x1442
 text: Just as I was about to start the second big climb of the road, the Hardscrabble, a British couple I had met earlier asked me if I want a beer or cold water. I didn't really want a beer but I got ice cold water which was so good! I had been drinking warm or even hot water for the whole day! Tim and Aileen then invited me to stay in their campground for the night which was much, much appreciated because I was pretty exhausted. There was also an other group who had actually helped Tim and Aileen when they apparently crashed their Jeep off the road earlier that day. Two of them were biking the road with mountain bikes (Paul and ??) and other two, both older men named Bill were driving a Jeep with all the supplies. They were just making steaks and hashed potatoes and they had so much of them that there were plenty enough for me too! And it was so good! In the morning they made some bacon, eggs and blueberry bagels which they again offered to me :) Tim and Aileen even gave me some grilled chicken to me for lunch. It was pretty burnt but still really good :)
-image: 1100045.jpg|Some bikers in the morning
+image: 1100045.jpg?1920x2557|Some bikers in the morning
 image-group: 1100047.jpg?1920x2557 1100052.jpg?1920x1442
-image: 1100060.jpg|Some sandier sections..
-image: 1100066.jpg|
-image: 1100079.jpg|The last ascent back up from the lowe areas in the Mineral Bottom
-image: 1100085.jpg|Mineral Bottom switchbacks
-image: 1100090.jpg|The last stretch back to the main road
+image: 1100060.jpg?1920x2557|Some sandier sections..
+image: 1100066.jpg?1920x2557|
+image: 1100079.jpg?1920x2557|The last ascent back up from the lowe areas in the Mineral Bottom
+image: 1100085.jpg?1920x1442|Mineral Bottom switchbacks
+image: 1100090.jpg?1920x1442|The last stretch back to the main road
 text: Since the White Rim Trail is a loop, I had left some food and water cached behind a rock where the trail ended. I had reserved a night in the hostel back in Moab for one night, but since I wasn't sure if I could make it back on the same day, I had decided to play it safe and reserve it for the next day. So I had some to kill. I decided to go back to the visitor center and hang there for a bit and then descend the Shafer switchbacks down again and follow the Potash Road and Colorado River back to Moab!
-image: 1100093.jpg|
-image: 1100097.jpg|Back again in here!
-image: 1100102.jpg|
-image: 1100103.jpg|Got a pinch/snakebite flat on the way down. Too low tire pressure and I was going too fast on the rough road.
-image: 1100106.jpg|Colorado River on the Potash road
+image: 1100093.jpg?1920x1442|
+image: 1100097.jpg?1920x2557|Back again in here!
+image: 1100102.jpg?1920x2557|
+image: 1100103.jpg?1920x2557|Got a pinch/snakebite flat on the way down. Too low tire pressure and I was going too fast on the rough road.
+image: 1100106.jpg?1920x2557|Colorado River on the Potash road
 image-group: 1100104.jpg?1920x1442 1100110.jpg?1920x1080
-image: 1100113.jpg|Potash Ponds. I think they were making salt or something in those ponds
-image: 1100117.jpg|Jughandle Arch
-image: 1100119.jpg|Colorado River again. Very pretty!
+image: 1100113.jpg?1920x1442|Potash Ponds. I think they were making salt or something in those ponds
+image: 1100117.jpg?1920x2557|Jughandle Arch
+image: 1100119.jpg?1920x1442|Colorado River again. Very pretty!

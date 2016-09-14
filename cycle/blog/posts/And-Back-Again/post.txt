@@ -1,7 +1,7 @@
 title: And Back Again
 trip: USA 2016
 date-range: 9-13
-main-image: 1060785.jpg
+main-image: 1060785.jpg?1920x1442
 
 text: The road leading out of Death Valley was a again a big ascent. I feel like the hills/mountain passes here in USA can be deceiving. They seem like "oh, that's just a small uphill, no biggie" but while they might not be steep, they are often very long. The road ascended over 1300 meters from zero altitude. Thats more than most of the mountain passes I did in the Alps or Pyrenees on my last tour. +30C temperatures made it definitely a hard climb!
 image-group: 1060651.jpg?1920x1442 1060654.jpg?1920x1442 1060657.jpg?1920x1442 1060665.jpg?1920x2557
