@@ -36,13 +36,16 @@ export class ImageBlock {
 		const parameters = str.split('|');
 		Assert(parameters.length > 0);
 
-		const source = parameters[0];
+		const imgParameters = parameters[0].split('?'); // jotain.jpg?1920x1080 for example
+		const source = imgParameters[0];
+		const resolutionStr = imgParameters[1].split('x');
+
 		const isFullWidth = false;
 		var photoText = "";
 		if (parameters.length > 1) {
 			photoText = parameters[1];
 		}
-		return new ImageBlock(new Photo(folder, source, photoText), isFullWidth);
+		return new ImageBlock(new Photo(folder, source, photoText, parseInt(resolutionStr[0]), parseInt(resolutionStr[1])), isFullWidth);
 	}
 }
 

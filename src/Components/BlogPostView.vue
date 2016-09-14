@@ -1,4 +1,4 @@
-re<template>
+<template>
 	<div id="container" v-on:click="onLoadButtonClicked" style="cursor: pointer">
 		<p class="blog-post-title"> {{ postInfo.Title }} </p>
 		<p class="blog-post-trip"> {{ postInfo.Trip }}</p>
@@ -13,7 +13,7 @@ re<template>
 				<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
 					<!-- style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.35);"> -->
 
-					<div style="width: 100%; padding-bottom: calcImgPaddingFromBlock(block); height: 0">
+					<div style="padding-bottom: {{ calcImgPaddingFromBlock(block) }}; position: relative; height: 0; background-color: rgb(44, 44, 44)">
 						<img photo="{{ block.Image }}" :srcset="block.Image.MultiPath" sizes="(max-width: 660px) 100vw, (max-width: 1100px) 660px, 60vw" style="width: 100%;" v-on:click="imageClicked(block.Image)">
 					</div>
 					<div v-if="block.Image.Text != '' "style="width: 100%; height: auto;">
@@ -21,7 +21,12 @@ re<template>
 					</div>
 				</div>
 			</div>
+
+
+			<cycle-map v-if="CycleRoutePath != undefined && DayRange != '0-0'" class="route-map" theme="light" :route-path="CycleRoutePath" :day-range="DayRange"></cycle-map>
 		</div>
+
+
 	</div>
 </template>
 
@@ -29,6 +34,7 @@ re<template>
 
 import { BlogSource, BlogPost, BlogQuery } from "../scripts/Blog.js";
 import ImageGroup from "./ImageGroup.vue";
+import CycleMap from "../Components/CycleMap.vue";
 
 export const BlogLoadStyle = {
 	Instant: 0,
@@ -48,11 +54,16 @@ export default {
 			post: null,
 			isOpen: false,
 			isLoaded: false,
+
+			styleObject: {
+				paddingBbottom: "calcImgPaddingFromBlock(block)"
+			}
 		};
 	},
 
 	components: {
-		"image-group": ImageGroup
+		"image-group": ImageGroup,
+		"cycle-map": CycleMap,
 	},
 
 	ready: async function() {
@@ -78,23 +89,20 @@ export default {
 			this.$dispatch('opening-post', this); // it's important that this is before the "this.isOpen = true" line, because calling this will call "close" on all blog post views, including the sender
 			this.isOpen = true;
 
-			console.log(this.$els);
-			console.log(this.$els.contentc);
-			console.log(this.$els["contentc"]);
-
-
 			setTimeout(() => {
 				$(this.$els.contentc).css("max-height", this.$els.contentc.scrollHeight);
 
-			}, 50);
-			console.log("opened: " +$(this.$els.contentc).css("max-height"));
-			//$(this.$els.contentc).addClass("content-container-opened");
-
+			}, 200);
 		},
 
 		load: async function() {
 			this.post = await this.blogSource.GetBlogPostByPostInfo(this.postInfo);
 			this.isLoaded = true;
+		},
+
+
+		calcImgPaddingFromBlock: function(block) {
+			return (1 / block.Image.AspectRatio * 100) + "%";
 		}
 	},
 
@@ -102,8 +110,26 @@ export default {
 		'close-blog': function() {
 			this.close();
 		}
+	},
+
+	computed: {
+		CycleRoutePath: function() {
+			if(!this.post) {
+				return undefined
+			}
+
+			return "/cycle/routes/" + this.post.TripUrlString + "/route.txt";
+		},
+
+		DayRange: function() {
+			if(!this.post) {
+				return undefined
+			}
+
+			return this.post.DayRange;
+		}
 	}
-};
+}
 </script>
 
 <style lang="sass" scoped>

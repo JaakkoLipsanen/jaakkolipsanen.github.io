@@ -1,5 +1,5 @@
 <template>
-	<div class="image-group-container">
+	<div v-el:image-group-container class="image-group-container">
 	</div>
 </template>
 
@@ -18,9 +18,9 @@ export default {
 	ready: function() {
 		const MaxImagesPerRow = IsTouchDevice() ? 2 : 2; // TODO: ANTTI MUUTA TÄTÄ JOS TÄÄ UPDATE KUSEE
 		const BaseAspectRatio = 4 / 3;
-		const groupContainer = $(".image-group-container").last();
-
+		const groupContainer = this.$els.imageGroupContainer;
 		const parent = this.$parent;
+
 		const createGroup = (allImages, firstImageIndex, imageCount) => {
 			Assert(firstImageIndex + imageCount <= allImages.length, "Error creating imagegroup: index out of bounds");
 
@@ -33,12 +33,15 @@ export default {
 			}
 
 			const container = $(document.createElement("div")).addClass("image-group").appendTo(groupContainer);
+			var groupAspectRatio = 0;
 			for(let i = firstImageIndex; i < firstImageIndex + imageCount; i++) {
 				const image = this.groupImages[i];
 
 				// the flex value is calculated by "imageAspectRatio / BaseAspectRatio". BaseAR is 4/3, so for 3:4 images for example value is 3/4 / (4/3) * 100 = 56.25
 				const imageContainer = $(document.createElement("div")).addClass("group-image").css("flex", "1 1 " + (image.AspectRatio / BaseAspectRatio * 100) + "%");
 				const imageElement = $(document.createElement("img")).attr("src", image.FullPath(imageQuality));
+
+				groupAspectRatio += image.AspectRatio;
 
 				imageElement.appendTo(imageContainer);
 				imageContainer.appendTo(container);
@@ -47,6 +50,16 @@ export default {
 					parent.imageClicked(image);
 				});
 			}
+
+			var marginPixels = 3 * 2;
+			groupAspectRatio += marginPixels / container.width();
+
+			// okay, this padding-bottom value IS NOT CORRECT. it would be correct if the images didn't have margin, but they have. I'm not sure how to calculate this,
+			// it's possible that I have to update the value everytime the image-group/window is resized :///
+			container.css("padding-bottom", "calc(" + (1 / groupAspectRatio * 100) + "%)");
+			container.css("position", "relative");
+			container.css("height", "0");
+			container.css("background-color", "rgb(44, 44, 44)"); // also, right now this is applied to the group container which is NOT CORRECT. I want this to be applied only to individual images
 
 			return imageCount;
 		};
@@ -80,7 +93,6 @@ export default {
 
 		generateGroups();
 	}
-
 };
 </script>
 
@@ -100,7 +112,6 @@ export default {
 }
 
 .group-image img {
-
-		width: 100%;
+	width: 100%;
 }
 </style>
