@@ -54,6 +54,7 @@ export default {
 			post: null,
 			isOpen: false,
 			isLoaded: false,
+			offsetOnLoad: 0,
 
 			styleObject: {
 				paddingBbottom: "calcImgPaddingFromBlock(block)"
@@ -82,27 +83,46 @@ export default {
 		close: function() {
 			this.isOpen = false;
 
+			$(this.$els.contentc).removeClass("transition-max-height");
 			$(this.$els.contentc).css("max-height", 0);
 		},
 
 		open: function() {
 			this.$dispatch('opening-post', this); // it's important that this is before the "this.isOpen = true" line, because calling this will call "close" on all blog post views, including the sender
 			this.isOpen = true;
+			$(this.$els.contentc).addClass("transition-max-height");
 
-			setTimeout(() => {
-				$(this.$els.contentc).css("max-height", this.$els.contentc.scrollHeight);
-
-			}, 200);
+			if(this.isLoaded) {
+				this.showContent();
+			}
 		},
 
 		load: async function() {
-			this.post = await this.blogSource.GetBlogPostByPostInfo(this.postInfo);
-			this.isLoaded = true;
-		},
 
+			var elementScrollValue = $(this.$el).offset().top;
+			var windowScrollValue = $('body').scrollTop();
+			this.offsetOnLoad =  elementScrollValue - windowScrollValue;
+			this.post = await this.blogSource.GetBlogPostByPostInfo(this.postInfo);
+
+			this.isLoaded = true;
+			this.onPostLoaded();
+		},
 
 		calcImgPaddingFromBlock: function(block) {
 			return (1 / block.Image.AspectRatio * 100) + "%";
+		},
+
+		onPostLoaded: function() {
+			if(this.isOpen) {
+				this.showContent();
+			}
+		},
+
+		showContent: function() {
+			$(this.$els.contentc).css("max-height", this.$els.contentc.scrollHeight);
+
+			var elementScrollValue = $(this.$el).offset().top;
+			$('html, body').scrollTop(elementScrollValue - this.offsetOnLoad);
 		}
 	},
 
@@ -136,9 +156,12 @@ export default {
 
 	.content-container {
 		max-height: 0px;
-		transition: max-height 0.5s ease-in-out;
-
 		overflow:  hidden;
+	//	transition: max-height 1.0s ease-in-out;
+	}
+
+	.transition-max-height {
+		transition: max-height 1.0s ease-in-out;
 	}
 
 	.content-container-opened {
