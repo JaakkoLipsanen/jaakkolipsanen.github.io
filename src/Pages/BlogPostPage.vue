@@ -201,8 +201,8 @@ export default {
 }
 
 #main-image-container {
-	 box-shadow: inset 0 0 10em #666;
 	 position: relative;
+	 box-shadow: inset 0 0 10em #666;
 
 	 /* main-image is 100% the height of the viewport/window */
 	 .main-image {
@@ -223,7 +223,9 @@ export default {
 		 font-weight: 800;
 		 font-size: 8vw;
 		 color: rgb(249, 249, 249);
+		 font-family: "Open Sans";
 
+		 text-align: center;
 		 @media all and (min-width: 1066px) and (max-width: 1920px) {
 			 font-size: 64px;
 		 }
@@ -239,6 +241,7 @@ export default {
 		 top: calc(100% - 54px);
 		 transform: translate(-50%, -50%);
 		 margin: 0;
+		 position: relative;
 
 		 h3 {
 			 font-weight: 700;

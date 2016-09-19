@@ -4,11 +4,7 @@
 
 		<div class="navbar-links">
 			<p  v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex }" v-for="(index, item) in items[selectedMainIndex].items">{{ item.toUpperCase() }} </p>
-
-			<div class="header-divider"></div>
-			<p style="width: 100px" v-on:click="mainLinkClicked" id="main-link"> {{ items[items.length - 1 - selectedMainIndex].main.toUpperCase() }} </p>
 		</div>
-
 
 		<div class="hamburger-menu">
 			<p  v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex }" v-for="(index, item) in items[selectedMainIndex].items">{{ item.toUpperCase() }} </p>
@@ -28,7 +24,7 @@ export default {
 
 			items: [
 				{ main: "coding", items: ["about", "projects", "cv"] },
-				{ main: "cycling", items: ["about", "blog", "trips"] }
+				{ main: "cycling", items: ["about me", "blog", "tours"] }
 			],
 
 			selectedMainIndex: 1,
@@ -222,39 +218,32 @@ export default {
 	  z-index: 1001;
 
 	  cursor: pointer;
+	  color: blue;
 	}
 
 	.navbar-links {
-		position: absolute; top: 0px; height: 48px;  right: 0px; margin-right: 12px;
+		height: 40px;
+		width: 50%;
+		margin: auto;
 
 		p {
-			display: inline-block; color: white; margin-right: 8px;
-			font-size: 22px;
-			font-weight: 800;
-			font-family: "Open Sans";
-			color: rgb(255, 255, 255);
-			opacity: 0.6;
+			display: inline-block; color: white; margin-right: 128px;
+			font-size: 18px;
+			font-weight: 400;
+			font-family: "Lato";
+			color: black;
+			opacity: 1;
 
 			cursor: pointer;
 			transition: opacity 0.15s ease-in-out;
 
 			&:hover {
-				color: white;
+				color: black;
 				opacity: 1;
 			}
 
 			&.selected {
-				color: white;
-				opacity: 1;
-			}
-		}
-
-		p:last-child {
-			margin-left: 8px;
-			color: white;
-			opacity: 0.35;
-
-			&:hover {
+				color: black;
 				opacity: 1;
 			}
 		}
@@ -269,25 +258,27 @@ export default {
 	}
 
 	$font-stack: 'Yanone Kaffeesatz', 'Segoe UI';
-	$light-gray: rgb(232, 232, 232); /* was 211, 211, 211 */
 
 	#navbar-container {
 		width: 100%;
-		height: 72px;
+		height: 64px;
 		top: 0;
 		z-index: 100;
 		position: absolute;
+
+		background-color: rgba(235, 235, 235, 0.5);
 	}
 
 	#navbar-header-text {
-		color: $light-gray;
+		color: rgb(64, 64, 64);
 		font: 400% $font-stack;
 
 		text-align: center;
 		margin: auto;
+		margin-left: 16px;
 		position: absolute;
 		top: 0;
-		left: calc(50% - 22.5px);
+		display: none;
 	}
 </style>
 

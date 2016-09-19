@@ -1,8 +1,22 @@
 <template>
 	<div class="page-content-container">
 		<div class="blog-post-container">
-			<h1 class="blog-post-title"> {{ currentPost.Title }} </h1>
-			<h2 class="blog-post-title-subtext"> {{ currentPost.Trip + ": Days " + currentPost.DayRange }} </h2>
+
+			<div id="main-image-container">
+				<div class="main-image" style="background-image: url({{ currentPost.MainImage.DefaultHDPath }})"></div>
+
+				<!-- Vignette -->
+				<div style="position: absolute; top: 0px; height: 100%; width: 100%;
+					background-color: rgba(0, 0, 0, 0.25); box-shadow: inset 0 0 10vw rgba(0, 0, 0, 0.9);" ></div>
+
+				<p class="main-image-title">  {{ currentPost.Title.toUpperCase() }}</p>
+				<div class="main-image-info-container">
+					<h3 v-if="DayRange != '0-0'" >Day {{ currentPost.DayRange }}</h3>
+				</div>
+			</div>
+
+		<!--	<h1 class="blog-post-title"> {{ currentPost.Title }} </h1>
+			<h2 class="blog-post-title-subtext"> {{ currentPost.Trip + ": Days " + currentPost.DayRange }} </h2> -->
 
 			<div class="blog-post-content-container" >
 				<div class="content-block" v-for="block in currentPost.ContentBlocks">
@@ -88,6 +102,57 @@ export default {
 
 <style lang="sass" id="style-sheet" disabled=false>
 
+#main-image-container {
+	position: relative;
+
+}
+	.main-image {
+		 width: 100%;
+		 padding-bottom: 66%;
+		 background-size: cover;
+		 background-position: center;
+		 background-color: black;
+	}
+
+	.main-image-title {
+		position: absolute;
+		margin: 0;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 95%;
+		text-align: center;
+		text-shadow: 1px 1px rgb(0, 0, 0);
+
+		font-weight: 300;
+		font-size: 34px;
+		color: rgb(249, 249, 249);
+
+
+		font-family: "Lato";
+	}
+
+	.main-image-info-container {
+		position: absolute;
+		left: 50%;
+		top: calc(100% - 54px);
+		transform: translate(-50%, -50%);
+		margin: 0;
+		font-family: "Lato";
+		font-style: italic;
+
+		h3 {
+			font-weight: 300;
+			font-size: 24px;
+			margin: -2px;
+			color: rgb(205, 205, 205);
+		}
+	}
+
+
+
+
+
 	.page-content-container {
 		height: auto;
 
@@ -130,9 +195,9 @@ export default {
 
 			p {
 				color: black;
-				font-weight: 400;
-				font-size: 16px;
-				font-family: "Open Sans";
+				font-weight: 300;
+				font-size: 17px;
+				font-family: "Lato";
 			}
 
 			.image-block {
@@ -141,6 +206,11 @@ export default {
 
 			.content-block {
 				margin: 16px 0;
+			}
+
+			.header-block {
+				font-family: "Lato";
+				font-weight: 300;
 			}
 		}
 	}
@@ -164,10 +234,10 @@ export default {
 
 			font-size: 14px;
 			font-weight: 300;
-				font-family: "Lato";
+			font-family: "Lato";
 
 			margin: 4px 0px;
-			margin-left: 16px;
+			margin-left: 24px;
 
 			&:hover {
 				font-weight: 400;
@@ -179,8 +249,11 @@ export default {
 			font-size: 14px;
 			font-weight: 600;
 
+			margin-left: 8px;
 			margin-bottom: 6px;
 			margin-top: 6px;
+
+			cursor: pointer;
 		}
 
 		.selected-sidebar-post {

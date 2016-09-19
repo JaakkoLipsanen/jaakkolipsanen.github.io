@@ -1,5 +1,4 @@
 "use strict";
-/*global google */
 
 import { LoadTextAsync, LoadXmlAsync, GetUriDirectory } from "./FileHelper.js";
 import { WaitAll } from "./AsyncHelper.js";
