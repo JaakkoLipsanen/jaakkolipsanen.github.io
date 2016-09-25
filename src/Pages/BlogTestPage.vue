@@ -1,52 +1,58 @@
 <template>
 	<div class="page-content-container">
-		<div class="blog-post-container">
 
-			<div id="main-image-container">
-				<div class="main-image" style="background-image: url({{ currentPost.MainImage.DefaultHDPath }})"></div>
+		<div id="main-image-container">
+			<div class="main-image" style="background-image: url({{ currentPost.MainImage.DefaultHDPath }})"></div>
 
-				<!-- Vignette -->
-				<div style="position: absolute; top: 0px; height: 100%; width: 100%;
-					background-color: rgba(0, 0, 0, 0.25); box-shadow: inset 0 0 10vw rgba(0, 0, 0, 0.5);" ></div>
+			<!-- Vignette -->
+			<div style="position: absolute; top: 0px; height: 100%; width: 100%;
+				background-color: rgba(0, 0, 0, 0.25); box-shadow: inset 0 0 10vw rgba(0, 0, 0, 0.5);" ></div>
 
-				<p class="main-image-title">  {{ currentPost.Title.toUpperCase() }}</p>
-				<div class="main-image-info-container">
-					<h3 v-if="DayRange != '0-0'" >Day {{ currentPost.DayRange }}</h3>
-				</div>
+			<p class="main-image-title">  {{ currentPost.Title.toUpperCase() }}</p>
+			<div class="main-image-info-container">
+				<h3 v-if="DayRange != '0-0'" >Day {{ currentPost.DayRange }}</h3>
 			</div>
-
-		<!--	<h1 class="blog-post-title"> {{ currentPost.Title }} </h1>
-			<h2 class="blog-post-title-subtext"> {{ currentPost.Trip + ": Days " + currentPost.DayRange }} </h2> -->
-
-			<div class="blog-post-content-container" >
-				<div class="content-block" v-for="block in currentPost.ContentBlocks">
-					<p v-if="block.Type == 'Text'" class="text-block">{{ block.Text }}</p>
-					<h1 v-if="block.Type == 'Header'" class="header-block"> {{ block.Title }} </h1>
-					<image-group v-if="block.Type == 'ImageGroup'" class="image-group-block" :group-images="block.Images"></image-group>
-					<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
-						<!-- style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.35);"> -->
-
-						<div style="padding-bottom: {{ calcImgPaddingFromBlock(block) }}; position: relative; height: 0; background-color: rgb(44, 44, 44)">
-							<img photo="{{ block.Image }}" :srcset="block.Image.MultiPath" sizes="(max-width: 660px) 100vw, (max-width: 1100px) 660px, 60vw" style="width: 100%;" v-on:click="imageClicked(block.Image)">
-						</div>
-						<div v-if="block.Image.Text != '' "style="width: 100%; height: auto;">
-							<p style="margin: 0; font-family: 'Raleway'; font-style: italic";>{{ block.Image.Text }}</p>
-						</div>
-					</div>
-				</div>
-
-
-			</div>
-
-		 </div>
-		<div class="sidebar">
-			<h4> - Western USA '16 </h4>
-			<p v-for="post in blog.PostInfos" v-on:click="openPost(post)" v-bind:class="{ 'selected-sidebar-post': post.Title == currentPost.Title }"> {{ post.Title }} </p>
-			<h4> + Europe '15 </h4>
-			<h4> + Winter in Spain '14 </h4>
-			<h4> + Sweden To Belgium '14 </h4>
 		</div>
 
+		<div class="blog-content-container">
+			<div class="blog-post-container">
+
+
+			<!--	<h1 class="blog-post-title"> {{ currentPost.Title }} </h1>
+				<h2 class="blog-post-title-subtext"> {{ currentPost.Trip + ": Days " + currentPost.DayRange }} </h2> -->
+
+				<div class="blog-post-content-container" >
+					<div class="content-block" v-for="block in currentPost.ContentBlocks">
+						<p v-if="block.Type == 'Text'" class="text-block">{{ block.Text }}</p>
+						<h1 v-if="block.Type == 'Header'" class="header-block"> {{ block.Title }} </h1>
+						<image-group v-if="block.Type == 'ImageGroup'" class="image-group-block" :group-images="block.Images"></image-group>
+						<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
+							<!-- style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.35);"> -->
+
+							<div style="padding-bottom: {{ calcImgPaddingFromBlock(block) }}; position: relative; height: 0; background-color: rgb(44, 44, 44)">
+								<img photo="{{ block.Image }}" :srcset="block.Image.MultiPath" sizes="(max-width: 660px) 100vw, (max-width: 1100px) 660px, 60vw" style="width: 100%;" v-on:click="imageClicked(block.Image)">
+							</div>
+							<div v-if="block.Image.Text != '' "style="width: 100%; height: auto;">
+								<p style="margin: 0; font-family: 'Raleway'; font-style: italic";>{{ block.Image.Text }}</p>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+
+				<cycle-map v-if="CycleRoutePath != undefined && DayRange != '0-0'" class="route-map" theme="light" :route-path="CycleRoutePath" :day-range="DayRange"></cycle-map>
+
+			 </div>
+			<div class="sidebar">
+				<h3> Other Blog Posts </h3>
+				<h4> - Western USA '16 </h4>
+				<p v-for="post in blog.PostInfos" v-on:click="openPost(post)" v-bind:class="{ 'selected-sidebar-post': post.Title == currentPost.Title }"> {{ post.Title }} </p>
+				<h4> + Europe '15 </h4>
+				<h4> + Winter in Spain '14 </h4>
+				<h4> + Sweden To Belgium '14 </h4>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -54,6 +60,7 @@
 import { BlogSource, BlogPost, BlogQuery } from "../scripts/Blog.js";
 import BlogPostView from "../Components/BlogPostView.vue";
 import ImageGroup from "../Components/ImageGroup.vue";
+import CycleMap from "../Components/CycleMap.vue";
 import Vue from "vue";
 
 export default {
@@ -67,6 +74,7 @@ export default {
 	components: {
 		"blog-post": BlogPostView,
 		"image-group": ImageGroup,
+		"cycle-map": CycleMap,
 	},
 
 	ready: function() {
@@ -92,6 +100,24 @@ export default {
 		}
 	},
 
+	computed: {
+		CycleRoutePath: function() {
+			if(!this.currentPost) {
+				return undefined
+			}
+
+			return "/cycle/routes/" + this.currentPost.TripUrlString + "/route.txt";
+		},
+
+		DayRange: function() {
+			if(!this.currentPost) {
+				return undefined
+			}
+
+			return this.currentPost.DayRange;
+		}
+	},
+
 	events: {
 		'opening-post': function(element) {
 			this.$broadcast('close-blog');
@@ -102,16 +128,27 @@ export default {
 
 <style lang="sass" id="style-sheet" disabled=false>
 
-#main-image-container {
-	position: relative;
 
-}
+	.route-map {
+		width: 100%  !important;
+		color: black !important;
+	}
+
+	#main-image-container {
+		position: relative;
+		width: 100%;
+	}
+
 	.main-image {
 		 width: 100%;
-		 padding-bottom: 66%;
+		 height: calc(54vh);
+
+		 max-height: 650px;
+		 min-height: 200px;	 
 		 background-size: cover;
 		 background-position: center;
 		 background-color: black;
+		 background-attachment: fixed;
 	}
 
 	.main-image-title {
@@ -153,12 +190,21 @@ export default {
 		height: auto;
 
 		width: 100%;
-		max-width: 1000px;
+		// max-width: 1000px;
 		margin: auto;
 
 		/* such a big margin-top because navbar doesn't affect layout */
-		margin-top: 128px;
+		margin-top: 118px;
 		margin-bottom: 48px;
+
+	//	margin-left: calc((100% - 700px) / 2);
+	}
+
+	.blog-content-container {
+		width: 100%;
+		max-width: 1000px;
+		margin: auto;
+		margin-top: 8px;
 
 		margin-left: calc((100% - 700px) / 2);
 	}
@@ -227,6 +273,7 @@ export default {
 		display: table-cell;
 		vertical-align: top;
 
+
 		p {
 			color: black;
 			cursor: pointer;
@@ -243,7 +290,7 @@ export default {
 			}
 		}
 
-		h4 {
+		h4, h3 {
 			font-family: "Raleway";
 			font-size: 14px;
 			font-weight: 600;
@@ -253,6 +300,12 @@ export default {
 			margin-top: 6px;
 
 			cursor: pointer;
+		}
+
+		h3 {
+			font-size: 18px;
+			margin-top: 16px;
+			margin-bottom: 14px;
 		}
 
 		.selected-sidebar-post {

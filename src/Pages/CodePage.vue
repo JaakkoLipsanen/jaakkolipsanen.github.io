@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style lang="sass" id="style-sheet" disabled=false>
+<style lang="sass" id="style-sheet" disabled=false scoped>
 
 	.show {
 	transition: opacity 15s ease-in-out;

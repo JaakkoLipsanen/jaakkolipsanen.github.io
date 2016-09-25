@@ -226,10 +226,11 @@ export default {
 		width: 100%;
 		margin: auto;
 		text-align: center;
+		margin-top: 20px;
 
 		p {
 			display: inline-block; color: white;
-			font-size: 19px;
+			font-size: 20px;
 			font-weight: 600;
 			font-family: "Raleway";
 			color: black;
@@ -277,12 +278,10 @@ export default {
 
 	#navbar-container {
 		width: 100%;
-		height: 64px;
+		height: 128px;
 		top: 0;
 		z-index: 100;
 		position: absolute;
-
-		background-color: rgba(235, 235, 235, 0.5);
 	}
 
 	#navbar-header-text {
