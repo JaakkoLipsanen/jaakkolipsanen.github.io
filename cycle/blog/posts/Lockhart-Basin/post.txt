@@ -1,9 +1,9 @@
-title: Lathrock Basin
+title: Lockhart Basin
 trip: USA 2016
 date-range: 46-47
 main-image: 1090613.jpg?1920x1080
 
-text: So, the Lathrock Basin road  is a small jeep trail near the Canyonlands National Park and the Colorado River. It was actually marked as a "hiking trail" in Google Maps so I initially didn't even realize that it was an actual road. There were lots of people camping in the early sections of the road (there are always lots of people camping in public kanssa just outside of a national parks), but after the first few kilometers I saw three groups of people during like +10h of cycling!
+text: So, the Lockhart Basin road  is a small jeep trail near the Canyonlands National Park and the Colorado River. It was actually marked as a "hiking trail" in Google Maps so I initially didn't even realize that it was an actual road. There were lots of people camping in the early sections of the road (there are always lots of people camping in public kanssa just outside of a national parks), but after the first few kilometers I saw three groups of people during like +10h of cycling!
 image-group: 1090404.jpg?1920x2557 1090406.jpg?1920x1080 1090410.jpg?1920x1080
 image: 1090413.jpg?1920x1442|River crossing! It was pretty wide and current was quite strong, but I didn't fall :) Didn't see a lot of people after the river.
 image-group: 1090415.jpg?1920x2557 1090420.jpg?1920x1080 1090428.jpg?1920x1442 1090435.jpg?1920x1442

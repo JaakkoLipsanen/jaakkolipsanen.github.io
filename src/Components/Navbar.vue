@@ -24,7 +24,7 @@ export default {
 
 			items: [
 				{ main: "coding", items: ["about", "projects", "cv"] },
-				{ main: "cycling", items: ["about me", "blog", "tours"] }
+				{ main: "cycling", items: ["home", "blog", "gear", "tours"] }
 			],
 
 			selectedMainIndex: 1,
@@ -223,28 +223,44 @@ export default {
 
 	.navbar-links {
 		height: 40px;
-		width: 50%;
+		width: 100%;
 		margin: auto;
+		text-align: center;
 
 		p {
-			display: inline-block; color: white; margin-right: 128px;
-			font-size: 18px;
-			font-weight: 400;
-			font-family: "Lato";
+			display: inline-block; color: white;
+			font-size: 19px;
+			font-weight: 600;
+			font-family: "Raleway";
 			color: black;
 			opacity: 1;
 
+			margin-right: 64px;
+
 			cursor: pointer;
-			transition: opacity 0.15s ease-in-out;
+			transition: opacity 0.15s ease-in-out, border-bottom 0.2s ease-in-out;
+			border-bottom: 2px solid transparent;
+			padding-bottom: 3px;
+			padding: 3px 1px;
+
 
 			&:hover {
 				color: black;
 				opacity: 1;
+
+				border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 			}
 
 			&.selected {
 				color: black;
 				opacity: 1;
+
+				border-bottom: 2px solid black;
+			}
+
+			&:last-child {
+				/* last child should have no margin, so that the centering works properly */
+				margin-right: 0px;
 			}
 		}
 	}
@@ -271,13 +287,16 @@ export default {
 
 	#navbar-header-text {
 		color: rgb(64, 64, 64);
-		font: 400% $font-stack;
+		font-size: 50px;
+		font-family: "Lato";
+		font-weight: 300;
 
+		width: 100%;
+		height: 100%;
 		text-align: center;
 		margin: auto;
-		margin-left: 16px;
 		position: absolute;
-		top: 0;
+		top: -3px;
 		display: none;
 	}
 </style>

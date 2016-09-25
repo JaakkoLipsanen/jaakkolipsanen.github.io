@@ -7,7 +7,7 @@
 
 				<!-- Vignette -->
 				<div style="position: absolute; top: 0px; height: 100%; width: 100%;
-					background-color: rgba(0, 0, 0, 0.25); box-shadow: inset 0 0 10vw rgba(0, 0, 0, 0.9);" ></div>
+					background-color: rgba(0, 0, 0, 0.25); box-shadow: inset 0 0 10vw rgba(0, 0, 0, 0.5);" ></div>
 
 				<p class="main-image-title">  {{ currentPost.Title.toUpperCase() }}</p>
 				<div class="main-image-info-container">
@@ -30,7 +30,7 @@
 							<img photo="{{ block.Image }}" :srcset="block.Image.MultiPath" sizes="(max-width: 660px) 100vw, (max-width: 1100px) 660px, 60vw" style="width: 100%;" v-on:click="imageClicked(block.Image)">
 						</div>
 						<div v-if="block.Image.Text != '' "style="width: 100%; height: auto;">
-							<p style="margin: 0; font-family: 'Lato'; font-style: italic";>{{ block.Image.Text }}</p>
+							<p style="margin: 0; font-family: 'Raleway'; font-style: italic";>{{ block.Image.Text }}</p>
 						</div>
 					</div>
 				</div>
@@ -138,7 +138,7 @@ export default {
 		top: calc(100% - 54px);
 		transform: translate(-50%, -50%);
 		margin: 0;
-		font-family: "Lato";
+		font-family: "Raleway";
 		font-style: italic;
 
 		h3 {
@@ -149,19 +149,18 @@ export default {
 		}
 	}
 
-
-
-
-
 	.page-content-container {
 		height: auto;
 
-		width: 60%;
+		width: 100%;
+		max-width: 1000px;
 		margin: auto;
 
 		/* such a big margin-top because navbar doesn't affect layout */
 		margin-top: 128px;
 		margin-bottom: 48px;
+
+		margin-left: calc((100% - 700px) / 2);
 	}
 
 	$side-bar-width: 300px;
@@ -195,9 +194,9 @@ export default {
 
 			p {
 				color: black;
-				font-weight: 300;
+				font-weight: 400;
 				font-size: 17px;
-				font-family: "Lato";
+				font-family: "Raleway";
 			}
 
 			.image-block {
@@ -245,7 +244,7 @@ export default {
 		}
 
 		h4 {
-			font-family: "Lato";
+			font-family: "Raleway";
 			font-size: 14px;
 			font-weight: 600;
 
