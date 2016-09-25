@@ -46,11 +46,11 @@
 			 </div>
 			<div class="sidebar">
 				<h3> Other Blog Posts </h3>
-				<h4> - Western USA '16 </h4>
-				<p v-for="post in blog.PostInfos" v-on:click="openPost(post)" v-bind:class="{ 'selected-sidebar-post': post.Title == currentPost.Title }"> {{ post.Title }} </p>
-				<h4> + Europe '15 </h4>
-				<h4> + Winter in Spain '14 </h4>
-				<h4> + Sweden To Belgium '14 </h4>
+
+				<h4 class="sidebar-tour-title" v-for="tour in tours"> {{ tour.name }}
+					<p class="sidebar-post" v-for="post in  getBlogPostsForTour(tour)" v-on:click="openPost(post)" v-bind:class="{ 'selected-sidebar-post': post.Title == currentPost.Title }"> {{ post.Title }} </p>
+					<p v-if="getBlogPostsForTour(tour).length == 0" style="font-style: italic "> no posts from this tour ! </p>
+				 </h4>
 			</div>
 		</div>
 	</div>
@@ -60,6 +60,7 @@
 import { BlogSource, BlogPost, BlogQuery } from "../scripts/Blog.js";
 import BlogPostView from "../Components/BlogPostView.vue";
 import ImageGroup from "../Components/ImageGroup.vue";
+import { CycleTourData } from "../scripts/CycleTourData.js";
 import CycleMap from "../Components/CycleMap.vue";
 import Vue from "vue";
 
@@ -68,6 +69,8 @@ export default {
 		return {
 			blog: null,
 			currentPost: null,
+
+			tours: CycleTourData.Tours.slice().reverse(),
 		};
 	},
 
@@ -88,6 +91,10 @@ export default {
 	},
 
 	methods: {
+		getBlogPostsForTour: function(tour) {
+			return this.blog.PostInfos.filter(post => post.Trip == tour.shortName);
+		},
+
 		getLoadStyleByIndex: function(index) {
 		/*	if(index == 0) { return 0; }
 			else if(index < 3) { return 1; } */
@@ -97,6 +104,7 @@ export default {
 
 		openPost: async function(post) {
 			this.currentPost = await this.blog.GetBlogPostByPostInfo(post);
+			window.scrollTo(0, 0);
 		}
 	},
 
@@ -128,7 +136,6 @@ export default {
 
 <style lang="sass" id="style-sheet" disabled=false>
 
-
 	.route-map {
 		width: 100%  !important;
 		color: black !important;
@@ -141,14 +148,16 @@ export default {
 
 	.main-image {
 		 width: 100%;
-		 height: calc(54vh);
+		 height: calc(64vh);
 
 		 max-height: 650px;
-		 min-height: 200px;	 
+		 min-height: 200px;
 		 background-size: cover;
 		 background-position: center;
 		 background-color: black;
 		 background-attachment: fixed;
+		 background-repeat: no-repeat;
+		 background-position: 50% -200px;
 	}
 
 	.main-image-title {
@@ -193,8 +202,6 @@ export default {
 		// max-width: 1000px;
 		margin: auto;
 
-		/* such a big margin-top because navbar doesn't affect layout */
-		margin-top: 118px;
 		margin-bottom: 48px;
 
 	//	margin-left: calc((100% - 700px) / 2);
@@ -273,10 +280,8 @@ export default {
 		display: table-cell;
 		vertical-align: top;
 
-
 		p {
 			color: black;
-			cursor: pointer;
 
 			font-size: 14px;
 			font-weight: 300;
@@ -285,9 +290,16 @@ export default {
 			margin: 4px 0px;
 			margin-left: 24px;
 
-			&:hover {
-				font-weight: 400;
+			&.sidebar-post {
+				cursor: pointer;
+				&:hover {
+					font-weight: 400;
+				}
 			}
+		}
+
+		.sidebar-tour-title {
+			margin-bottom: 10px;
 		}
 
 		h4, h3 {
@@ -298,8 +310,6 @@ export default {
 			margin-left: 8px;
 			margin-bottom: 6px;
 			margin-top: 6px;
-
-			cursor: pointer;
 		}
 
 		h3 {

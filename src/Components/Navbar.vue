@@ -6,6 +6,10 @@
 			<p  v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex }" v-for="(index, item) in items[selectedMainIndex].items">{{ item.toUpperCase() }} </p>
 		</div>
 
+		<a href="https://instagram.com/fl.ai">
+			<img class="instagram-icon" src="/assets/icons/Instagram-Icon.png">
+		</a>
+
 		<div class="hamburger-menu">
 			<p  v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex }" v-for="(index, item) in items[selectedMainIndex].items">{{ item.toUpperCase() }} </p>
 
@@ -37,6 +41,32 @@ export default {
 	ready: function() {
 		$(window).resize(() => {
 			this.SetHamburgerMenuVisibility(false);
+		});
+
+		$(window).scroll(function() {
+		  	if ($(document).scrollTop() > 0) {
+		    	$('#navbar-container').addClass('shrink');
+		  	}
+			else {
+		    	$('#navbar-container').removeClass('shrink');
+		  	}
+	  	});
+
+		$(window).on('mousewheel', function(event){
+    		var scrollValue = $(window).scrollTop();
+			var navbar = $('#navbar-container');
+			var isScrollDown = event.originalEvent.wheelDelta < 0;
+
+			if(scrollValue == 0 && isScrollDown && !navbar.hasClass('shrink')) {
+				navbar.addClass('shrink');
+				return false;
+			}
+			else if(scrollValue == 0 && !isScrollDown && navbar.hasClass('shrink')) {
+				navbar.removeClass('shrink');
+				return false;
+			}
+
+    		return true;
 		});
 	},
 
@@ -134,7 +164,7 @@ export default {
 
 <style lang="sass">
 
-	@media all and (max-width: 943px) {
+	@media all and (max-width: 615px) {
 		.hamburger-menu, .hamburger-menu-button {
 			visibility: visible !important;
 		}
@@ -144,13 +174,28 @@ export default {
 		}
 	}
 
-	@media all and (min-width: 944px) {
+	@media all and (min-width: 616px) {
 		.hamburger-menu, .hamburger-menu-button {
 			visibility: hidden  !important;
 		}
 
 		.navbar-links {
 			visibility: visible  !important;
+		}
+	}
+
+	.instagram-icon {
+		position: absolute;
+		top: 50%;
+		right: 16px;
+		transform: translateY(-50%);
+		transition: height 0.2s;
+
+		height: 36%;
+		min-height: 30px;
+
+		&:hover {
+			transform: translateY(-50%) scale(1.1333333333) ;
 		}
 	}
 
@@ -222,15 +267,13 @@ export default {
 	}
 
 	.navbar-links {
-		height: 40px;
+		height: 100%;
 		width: 100%;
 		margin: auto;
 		text-align: center;
-		margin-top: 20px;
 
 		p {
 			display: inline-block; color: white;
-			font-size: 20px;
 			font-weight: 600;
 			font-family: "Raleway";
 			color: black;
@@ -243,6 +286,12 @@ export default {
 			border-bottom: 2px solid transparent;
 			padding-bottom: 3px;
 			padding: 3px 1px;
+
+			position: relative;
+			top: 50%;
+			margin-top: 0px;
+			margin-bottom: 0px;
+			transform: translateY(-50%);
 
 
 			&:hover {
@@ -278,10 +327,22 @@ export default {
 
 	#navbar-container {
 		width: 100%;
-		height: 128px;
+		height: 118px;
+		background-color: white;
 		top: 0;
+		font-size: 20px;
 		z-index: 100;
-		position: absolute;
+
+		transition: height 0.2s, font-size 0.2s;
+		position: fixed;
+
+		&.shrink {
+			height: 40px;
+			position: fixed;
+			font-size: 16px;
+
+		//	border-bottom: solid 1px rgba(200, 200, 200, 0.5);
+		}
 	}
 
 	#navbar-header-text {

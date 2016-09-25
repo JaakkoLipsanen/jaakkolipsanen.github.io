@@ -349,7 +349,7 @@ export class CycleMap {
 			mapTypeControl: false,
 			zoomControl: true,
 
-			scrollwheel: false,
+			scrollwheel: true,
 			navigationControl: true,
 			scaleControl: false,
 			draggable: true,
@@ -361,7 +361,7 @@ export class CycleMap {
 			zoom: 5,
 			center: new google.maps.LatLng(48, 15), // middle of europe
 			styles: this.CurrentMapStyle.NormalStyle,
-			backgroundColor: "rgb(43, 43, 43)", // same color as the ocean in the map style
+			backgroundColor: "white", // same color as the ocean in the map style
 		};
 
 		this._googleMap = new google.maps.Map(container, googleMapsProperties);
