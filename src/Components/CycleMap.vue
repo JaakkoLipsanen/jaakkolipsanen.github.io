@@ -35,6 +35,12 @@ export default {
 			}
 
 			this.map.SetRoute(this.routes[value]);
+		},
+
+		"dayRange": function(value, oldValue) {
+			console.log(this.routes[this.routePath]);
+			console.log(this.dayRange);
+			this.map.SetRoute(this.routes[this.routePath], this.dayRange);
 		}
 	},
 

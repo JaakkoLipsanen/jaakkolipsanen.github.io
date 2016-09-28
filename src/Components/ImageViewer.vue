@@ -36,8 +36,8 @@ export default {
 	ready: function() {
 		const self = this;
 		$("#image").load(function() {
-			$("#image-cc").width("100%");
-			$("#image-cc").height("100%");
+			$("#image-cc").width("95%");
+			$("#image-cc").height("95%");
 			$("#image-cc").width(this.clientWidth);
 			$("#image-cc").height(this.clientHeight);
 
@@ -110,15 +110,15 @@ export default {
 		"show-photo": function(photo) {
 			this.currentPhoto = photo;
 			$("#image-viewer-container").show();
-			$("html").css("overflow", "hidden");
+			$("html").css("overflow", "disabled");
 		}
 	}
 };
 </script>
 
 <style lang="sass" scoped>
-	$exif-div-width: 180px;
-	$exif-div-height: 108px;
+	$exif-div-width: 280px;
+	$exif-div-height: 116px;
 	$exif-text-size: 16px;
 
 	#image-viewer-container {
@@ -135,8 +135,8 @@ export default {
 		width: 100%;
 		height: 100%;
 
-		background-color: rgb(24, 24, 24);
-		opacity: 1;
+		background-color: white;
+		opacity: 0.9;
 
 		cursor: pointer
 	}

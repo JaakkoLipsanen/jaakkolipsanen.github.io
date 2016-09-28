@@ -30,7 +30,7 @@
 							<!-- style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.35);"> -->
 
 							<div style="padding-bottom: {{ calcImgPaddingFromBlock(block) }}; position: relative; height: 0; background-color: rgb(44, 44, 44)">
-								<img photo="{{ block.Image }}" :srcset="block.Image.MultiPath" sizes="(max-width: 660px) 100vw, (max-width: 1100px) 660px, 60vw" style="width: 100%;" v-on:click="imageClicked(block.Image)">
+								<img photo="{{ block.Image }}" :srcset="block.Image.MultiPath" sizes="(max-width: 660px) 100vw, (max-width: 1100px) 660px, 60vw" style="width: 100%; cursor: pointer" v-on:click="imageClicked(block.Image)">
 							</div>
 							<div v-if="block.Image.Text != '' "style="width: 100%; height: auto;">
 								<p style="margin: 0; font-family: 'Raleway'; font-style: italic";>{{ block.Image.Text }}</p>
@@ -53,15 +53,20 @@
 				 </h4>
 			</div>
 		</div>
+
+		<image-viewer style="display: none"></image-viewer>
 	</div>
 </template>
 
 <script>;
 import { BlogSource, BlogPost, BlogQuery } from "../scripts/Blog.js";
+import { CycleTourData } from "../scripts/CycleTourData.js";
+
 import BlogPostView from "../Components/BlogPostView.vue";
 import ImageGroup from "../Components/ImageGroup.vue";
-import { CycleTourData } from "../scripts/CycleTourData.js";
+import ImageViewer from "../Components/ImageViewer.vue";
 import CycleMap from "../Components/CycleMap.vue";
+
 import Vue from "vue";
 
 export default {
@@ -78,6 +83,7 @@ export default {
 		"blog-post": BlogPostView,
 		"image-group": ImageGroup,
 		"cycle-map": CycleMap,
+		"image-viewer": ImageViewer
 	},
 
 	ready: function() {
@@ -105,6 +111,10 @@ export default {
 		openPost: async function(post) {
 			this.currentPost = await this.blog.GetBlogPostByPostInfo(post);
 			window.scrollTo(0, 0);
+		},
+
+		imageClicked: function(photo) {
+			this.$broadcast("show-photo", photo);
 		}
 	},
 
@@ -122,6 +132,7 @@ export default {
 				return undefined
 			}
 
+			console.log("fetch day");
 			return this.currentPost.DayRange;
 		}
 	},

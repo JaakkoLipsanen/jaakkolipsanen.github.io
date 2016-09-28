@@ -406,7 +406,7 @@ export class CycleMap {
 	}
 
 	async SetRoute(routeItem, dayRange) {
-		const routeView = routeItem.routeView || (routeItem.routeView = new RouteView(await Route.FromFile(routeItem.routePath), this.CurrentMapStyle.UseBigIcons, dayRange));
+		const routeView = /* routeItem.routeView || */ (routeItem.routeView = new RouteView(await Route.FromFile(routeItem.routePath), this.CurrentMapStyle.UseBigIcons, dayRange));
 
 		if(this.CurrentRouteView != null) {
 			this.CurrentRouteView.AssignMap(null);
