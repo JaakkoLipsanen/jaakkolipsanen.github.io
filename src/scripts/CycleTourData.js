@@ -19,28 +19,28 @@ export let CycleTourData = {
 
 	Tours: [
 		{
-			"name": "Sweden to Belgium '14",
+			"name": "Sweden to Belgium",
 			"shortName": "EUROPE 2014",
 			"year": "2014",
 			"description": ""
 		},
 
 		{
-			"name": "Spain December '14",
+			"name": "Spain Winter",
 			"shortName": "SPAIN 2014",
 			"year": "2014",
 			"description": ""
 		},
 
 		{
-			"name": "Western and Central Europe '15",
+			"name": "Western and Central Europe",
 			"shortName": "EUROPE 2015",
 			"year": "2015",
 			"description": ""
 		},
 
 		{
-			"name": "Western USA '16",
+			"name": "Western USA",
 			"shortName": "USA 2016",
 			"year": "2016",
 			"description": ""

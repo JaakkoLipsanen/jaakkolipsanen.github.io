@@ -5,13 +5,10 @@ import CodePage from "./Pages/CodePage.vue";
 import CodeProjectsPage from "./Pages/CodeProjectsPage.vue";
 import CodeCvPage from "./Pages/CodeCvPage.vue";
 
-import CycleAboutPage from "./Pages/CycleAboutPage.vue";
 import CycleTripsPage from "./Pages/CycleTripsPage.vue";
-import CycleBlogPage from "./Pages/CycleBlogPage.vue"
 import CycleTourPage from "./Pages/CycleTourPage.vue";
 import BlogPostPage from "./Pages/BlogPostPage.vue";
-import BlogArchivePage from "./Pages/BlogArchivePage.vue";
-import BlogTestPage from "./Pages/BlogTestPage.vue";
+import BlogListPage from "./Pages/BlogListPage.vue";
 
 import { mapify } from "es6-mapify";
 
@@ -29,13 +26,10 @@ var app = new Vue({
 		"code-projects-page": CodeProjectsPage,
 		"code-cv-page": CodeCvPage,
 
-		"cycle-about-page": CycleAboutPage,
 		"cycle-trips-page": CycleTripsPage,
 		"cycle-tour-page": CycleTourPage,
-		"cycle-blog-page": CycleBlogPage,
 		"blog-post-page": BlogPostPage,
-		"blog-archive-page": BlogArchivePage,
-		"blog-test-page": BlogTestPage,
+		"blog-list-page": BlogListPage,
 	},
 
 	data: {
@@ -108,7 +102,7 @@ var app = new Vue({
 				}
 				else if(path[1] == "blog") {
 					if(path.length == 2) {
-						this.ChangePage("cycle-blog-page", url, { }, false);
+						this.ChangePage("blog-list-page", url, { }, false);
 					}
 					else if(path.length == 3) {
 						this.ChangePage("blog-post-page", url, { TourName: undefined, PostName: path[2] }, false );
@@ -117,7 +111,7 @@ var app = new Vue({
 			}
 			else if(path[0] == "404.html") {
 				// this is default atm
-				this.ChangePage("blog-test-page", "/cycle", { }, true);
+				this.ChangePage("blog-list-page", "/cycle", { }, true);
 			}
 			else if(path[0] == "code") {
 				if(path.length == 1) {

@@ -297,9 +297,9 @@ export class Route {
 					else if(parts[0] == "t") { // "type". switches between cycle path and transport path. "t" == transport, "c" == cycle
 						data.push({ type: "path-type-change", pathType: (parts[1] === "t") ? "transport" : "cycle"});
 					}
-					else if(parts.length == 2) { // if not "n" or "t", then it coordinate
+					else if(parts.length == 3) { // if not "n" or "t", then it coordinate
 						const point = new google.maps.LatLng(parts[0], parts[1]);
-						data.push({ type: "coordinate", location: new google.maps.LatLng(parts[0], parts[1])});
+						data.push({ type: "coordinate", location: new google.maps.LatLng(parts[0], parts[1]), elevation: parts[2] });
 
 						lastLocation = point;
 					}

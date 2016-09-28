@@ -1,64 +1,86 @@
 <template>
-	<div id="post-container">
+	<div class="page-content-container">
+
 		<div id="main-image-container">
-			<div class="main-image" style="background-image: url({{ blogPost.MainImage.DefaultHDPath }})"></div>
+			<div class="main-image" style="background-image: url({{ currentPost.MainImage.DefaultHDPath }})"></div>
 
 			<!-- Vignette -->
 			<div style="position: absolute; top: 0px; height: 100%; width: 100%;
-				background-color: rgba(0, 0, 0, 0.3); box-shadow: inset 0 0 25vw rgb(0, 0, 0);" ></div>
+				background-color: rgba(0, 0, 0, 0.25); box-shadow: inset 0 0 10vw rgba(0, 0, 0, 0.5);" ></div>
 
-			<p class="main-image-title">  {{ blogPost.Title.toUpperCase() }}</p>
+			<p class="main-image-title">  {{ currentPost.Title.toUpperCase() }}</p>
 			<div class="main-image-info-container">
-				<h3 v-if="DayRange != '0-0'" >Day {{ blogPost.DayRange }}</h3>
+				<h3 v-if="DayRange != '0-0'" >Day {{ currentPost.DayRange }}</h3>
 			</div>
 		</div>
 
-		<div class="nav-cont" style="position: fixed; height: 48px; top: calc(100% - 48px);">
-			<h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: Yanone Kaffeesatz; margin: auto; font-size: 1.5em" v-on:click="blogListClicked">{{ blogPost.Trip }}</h1>
-			<p v-if="blog != null && blog.GetPreviousPostInfo(blogPost) != null" v-on:click="previousPostClicked" style="font-size: 22px; margin: auto; position: absolute; top: 12px; left: 32px;  font-weight: 700;  display: block"> {{ '&lt; ' + blog.GetPreviousPostInfo(blogPost).DisplayString }}</p>
-			<p v-if="blog != null && blog.GetNextPostInfo(blogPost) != null" v-on:click="nextPostClicked" style="font-size: 22px; margin: auto; position: absolute; top: 12px; right: 32px; font-weight: 700; display: block"> {{  blog.GetNextPostInfo(blogPost).DisplayString + ' &gt;' }}</p>
-		</div>
+		<div class="blog-content-container">
+			<div class="blog-post-container">
 
-		<div id="content-container">
-			<div class="content-block" v-for="block in blogPost.ContentBlocks">
 
-				<p v-if="block.Type == 'Text'" class="text-block">{{ block.Text }}</p>
-				<h1 v-if="block.Type == 'Header'" class="header-block"> {{ block.Title }} </h1>
-				<image-group v-if="block.Type == 'ImageGroup'" class="image-group-block" :group-images="block.Images"></image-group>
-				<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
-					<!-- style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.35);"> -->
-					<img photo="{{ block.Image }}" :srcset="block.Image.MultiPath" sizes="(max-width: 660px) 100vw, (max-width: 1100px) 660px, 60vw" style="width: 100%;" v-on:click="imageClicked(block.Image)">
-					<div v-if="block.Image.Text != '' "style="width: 100%; height: auto;">
-						<p style="margin: 0; font-family: 'Lato'";>{{ block.Image.Text }}</p>
+			<!--	<h1 class="blog-post-title"> {{ currentPost.Title }} </h1>
+				<h2 class="blog-post-title-subtext"> {{ currentPost.Trip + ": Days " + currentPost.DayRange }} </h2> -->
+
+				<div class="blog-post-content-container" >
+					<div class="content-block" v-for="block in currentPost.ContentBlocks">
+						<p v-if="block.Type == 'Text'" class="text-block">{{ block.Text }}</p>
+						<h1 v-if="block.Type == 'Header'" class="header-block"> {{ block.Title }} </h1>
+						<image-group v-if="block.Type == 'ImageGroup'" class="image-group-block" :group-images="block.Images"></image-group>
+						<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
+							<!-- style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.35);"> -->
+
+							<div style="padding-bottom: {{ calcImgPaddingFromBlock(block) }}; position: relative; height: 0; background-color: rgb(44, 44, 44)">
+								<img photo="{{ block.Image }}" :srcset="block.Image.MultiPath" sizes="(max-width: 660px) 100vw, (max-width: 1100px) 660px, 60vw" style="width: 100%; cursor: pointer" v-on:click="imageClicked(block.Image)">
+							</div>
+							<div v-if="block.Image.Text != '' "style="width: 100%; height: auto;">
+								<p style="margin: 0; font-family: 'Raleway'; font-style: italic";>{{ block.Image.Text }}</p>
+							</div>
+						</div>
 					</div>
+
+
 				</div>
+
+				<cycle-map v-if="CycleRoutePath != undefined && DayRange != '0-0'" class="route-map" theme="light" :route-path="CycleRoutePath" :day-range="DayRange"></cycle-map>
+
+			 </div>
+			<div class="sidebar">
+				<h3> Other Blog Posts </h3>
+
+				<h4 class="sidebar-tour-title" v-for="tour in tours"> {{ tour.name }} <span style="font-size: 12px"> ({{ tour.year }}) </span>
+					<p class="sidebar-post" v-for="post in  getBlogPostsForTour(tour)" v-on:click="openPost(post)" v-bind:class="{ 'selected-sidebar-post': post.Title == currentPost.Title }"> {{ post.Title }} </p>
+					<p v-if="getBlogPostsForTour(tour).length == 0" style="font-style: italic "> no posts from this tour ! </p>
+				 </h4>
 			</div>
 		</div>
 
-		<cycle-map v-if="CycleRoutePath != undefined && DayRange != '0-0'" class="route-map" theme="light" :route-path="CycleRoutePath" :day-range="DayRange"></cycle-map>
 		<image-viewer style="display: none"></image-viewer>
-
-		<div style="height: 72px"></div>
-
 	</div>
 </template>
 
-<script>
-import ImageGroup from "../Components/ImageGroup.vue";
-import CycleMap from "../Components/CycleMap.vue";
-import ImageViewer from "../Components/ImageViewer.vue";
+<script>;
 import { BlogSource, BlogPost, BlogQuery } from "../scripts/Blog.js";
+import { CycleTourData } from "../scripts/CycleTourData.js";
+
+import BlogPostView from "../Components/BlogPostView.vue";
+import ImageGroup from "../Components/ImageGroup.vue";
+import ImageViewer from "../Components/ImageViewer.vue";
+import CycleMap from "../Components/CycleMap.vue";
+
 import Vue from "vue";
 
 export default {
 	data() {
 		return {
 			blog: null,
-			blogPost: null,
+			currentPost: null,
+
+			tours: CycleTourData.Tours.slice().reverse(),
 		};
 	},
 
 	components: {
+		"blog-post": BlogPostView,
 		"image-group": ImageGroup,
 		"cycle-map": CycleMap,
 		"image-viewer": ImageViewer
@@ -67,65 +89,28 @@ export default {
 	ready: function() {
 		let data = this;
 		BlogSource.FromFile("/cycle/blog/posts.txt").then(async blog => {
-			const tour = data.$root.CurrentState().TourName;
-			data.blog = blog.CreateQuery((post) => (tour === undefined) || post.TripUrlString === tour.toLowerCase());
-			data.blogPost = await data.blog.GetBlogPostByName(data.$root.CurrentState().PostName);
+			data.blog = blog.CreateQuery();
+			data.blog.PostInfos.reverse(); // make the post infos go from newest to oldest
+
+			data.currentPost = await data.blog.GetBlogPostByPostInfo(data.$root.CurrentState().PostInfo);
 		});
-
-		$(window).on('resize', () => {
-			$("#main-image-container").height($("#main-img").height());
-		});
-
-		$(window).scroll(() => {;
-			const scrollAmount = $(window).scrollTop();
-			if(scrollAmount < 48) {
-				$(".nav-cont").removeClass("has-scrolled");
-			}
-			else {
-				$(".nav-cont").addClass("has-scrolled");
-			}
-		});
-	},
-
-	computed: {
-		CycleRoutePath: function() {
-			if(!this.blogPost) {
-				return undefined
-			}
-
-			return "/cycle/routes/" + this.blogPost.TripUrlString + "/route.txt";
-		},
-
-		DayRange: function() {
-			if(!this.blogPost) {
-				return undefined
-			}
-
-			return this.blogPost.DayRange;
-		}
 	},
 
 	methods: {
-		previousPostClicked: function() {
-			$('body').animate({
-          		scrollTop: 0
-        	}, Math.min($(window).scrollTop(), 800), "swing", async () => {
-				this.blogPost = await this.blog.GetBlogPostByPostInfo(this.blog.GetPreviousPostInfo(this.blogPost));
-				this.$root.ChangeURL("/cycle/blog/" + this.blogPost.Name, { TourName: this.$root.CurrentState().TourName, PostName: this.blogPost.Name });
-			});
+		getBlogPostsForTour: function(tour) {
+			return this.blog.PostInfos.filter(post => post.Trip == tour.shortName);
 		},
 
-		nextPostClicked: function() {
-			$('body').animate({
-          		scrollTop: 0
-        	}, Math.min($(window).scrollTop(), 800), "swing", async () => {
-				this.blogPost = await this.blog.GetBlogPostByPostInfo(this.blog.GetNextPostInfo(this.blogPost));
-				this.$root.ChangeURL("/cycle/blog/" + this.blogPost.Name, { TourName: this.$root.CurrentState().TourName, PostName: this.blogPost.Name });
-			});
+		getLoadStyleByIndex: function(index) {
+		/*	if(index == 0) { return 0; }
+			else if(index < 3) { return 1; } */
+
+			return 2;
 		},
 
-		blogListClicked: function() {
-			this.$root.ChangePage("cycle-tour-page", "/cycle/trips/" + this.blogPost.TripUrlString, { TourName:this.blogPost.TripUrlString });
+		openPost: async function(post) {
+			this.currentPost = await this.blog.GetBlogPostByPostInfo(post);
+			window.scrollTo(0, 0);
 		},
 
 		imageClicked: function(photo) {
@@ -133,215 +118,222 @@ export default {
 		}
 	},
 
+	computed: {
+		CycleRoutePath: function() {
+			if(!this.currentPost) {
+				return undefined
+			}
+
+			return "/cycle/routes/" + this.currentPost.TripUrlString + "/route.txt";
+		},
+
+		DayRange: function() {
+			if(!this.currentPost) {
+				return undefined
+			}
+
+			console.log("fetch day");
+			return this.currentPost.DayRange;
+		}
+	},
+
 	events: {
-		"StateUpdated": function() {
-			let data = this;
-			BlogSource.FromFile("/cycle/blog/posts.txt").then(async blog => {
-				const tour = data.$root.CurrentState().TourName;
-				data.blog = blog.CreateQuery((post) => (tour === undefined) || post.Trip.replace(" ", "").toLowerCase() === tour.toLowerCase());
-				data.blogPost = await data.blog.GetBlogPostByName(data.$root.CurrentState().PostName);
-			});
+		'opening-post': function(element) {
+			this.$broadcast('close-blog');
 		}
 	}
 };
 </script>
 
-<style lang="sass" id="style-sheet" disabled=false scoped>
+<style lang="sass" id="style-sheet" disabled=false>
 
-.nav-cont {
-	width: 100%;
-	z-index: 1;
-
-	p, h1 {
-		color: rgb(205, 205, 205);
-		cursor: pointer;
-		transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
-
-		&:hover {
-			color: white !important;
-			opacity: 1;
-		}
+	.route-map {
+		width: 100%  !important;
+		color: black !important;
 	}
 
-	p {
-		opacity: 0.65;
+	#main-image-container {
+		position: relative;
+		width: 100%;
 	}
 
-	h1 {
-		visibility: visible;
-	}
-}
+	.main-image {
+		 width: 100%;
+		 height: calc(64vh);
 
-.nav-cont.has-scrolled {
-	background-color: rgba(0, 0, 0, 0.3);
-
-	h1 {
-		visibility: visible;
-	}
-
-	p {
-		opacity: 1;
-		color: rgb(205, 205, 205);
-	}
-}
-
-.route-map {
-	width: 60% !important;
-	height: 75vh !important;
-}
-
-#post-container {
-	color: rgb(200, 200, 200);
-	font-size: 18px;
-	text-align: center;
-	font-family: "Yanone Kaffeesatz";
-
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-#main-image-container {
-	 position: relative;
-	 box-shadow: inset 0 0 10em #666;
-
-	 /* main-image is 100% the height of the viewport/window */
-	 .main-image {
-		  width: 100%;
-		  height: 100vh;
-		  background-size: cover;
-		  background-position: center;
-	 }
-
-	 .main-image-title {
-		 position: absolute;
-		 margin: 0;
-		 left: 50%;
-		 top: 50%;
-		 transform: translate(-50%, -50%);
-		 width: 95%;
-
-		 font-weight: 800;
-		 font-size: 8vw;
-		 color: rgb(249, 249, 249);
-		 font-family: "Open Sans";
-
-		 text-align: center;
-		 @media all and (min-width: 1066px) and (max-width: 1920px) {
-			 font-size: 64px;
-		 }
-
-		 @media all and (min-width: 1920px) {
-			font-size: 80px;
-		}
-	 }
-
-	 .main-image-info-container {
-		 position: absolute;
-		 left: 50%;
-		 top: calc(100% - 54px);
-		 transform: translate(-50%, -50%);
-		 margin: 0;
-		 position: relative;
-
-		 h3 {
-			 font-weight: 700;
-			 font-size: 24px;
-			 margin: -2px;
-			 color: rgb(205, 205, 205);
-		 }
-	 }
-}
-
-.content-block {
-	margin: 32px auto;
-
-	.image-block {
-		width: 60%;
-		cursor: pointer;
-
-		&.fullwidth-img {
-			width: 100% !important;
-		}
+		 max-height: 650px;
+		 min-height: 200px;
+		 background-size: cover;
+		 background-position: center;
+		 background-color: black;
+		 background-attachment: fixed;
+		 background-repeat: no-repeat;
+		 background-position: 50% -200px;
 	}
 
-	.text-block {
-		width: 60%;
-		max-width: 800px;
-		margin: 16px auto;
-		color: rgb(180, 180, 180);
+	.main-image-title {
+		position: absolute;
+		margin: 0;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 95%;
+		text-align: center;
+		text-shadow: 1px 1px rgb(0, 0, 0);
 
-		font-size: 22px;
+		font-weight: 300;
+		font-size: 34px;
+		color: rgb(249, 249, 249);
+
+
 		font-family: "Lato";
-		text-align: left;
 	}
 
-	.header-block {
-		width: 60%;
-		max-width: 800px;
+	.main-image-info-container {
+		position: absolute;
+		left: 50%;
+		top: calc(100% - 54px);
+		transform: translate(-50%, -50%);
+		margin: 0;
+		font-family: "Raleway";
+		font-style: italic;
+
+		h3 {
+			font-weight: 300;
+			font-size: 24px;
+			margin: -2px;
+			color: rgb(205, 205, 205);
+		}
+	}
+
+	.page-content-container {
+		height: auto;
+
+		width: 100%;
+		// max-width: 1000px;
 		margin: auto;
-		font-size: 2.5em;
-		text-align: left;
+
+		margin-bottom: 48px;
+
+	//	margin-left: calc((100% - 700px) / 2);
 	}
 
-	.image-group-block {
-		width: 60%;
+	.blog-content-container {
+		width: 100%;
+		max-width: 1000px;
 		margin: auto;
-	}
-}
+		margin-top: 8px;
 
-@media all and (max-width: 602px) {
-	.content-block {
-    	.image-block {
-    		width: 100% !important;
+		margin-left: calc((100% - 700px) / 2);
+	}
+
+	$side-bar-width: 300px;
+	.blog-post-container {
+
+		display: table-cell;
+		width: 100%;
+
+		.blog-post-title {
+			text-align: center;
+			margin-bottom: 8px;
+
+			font-family: "Lato";
+			font-weight: 500;
+			font-size: 24px;
 		}
 
-		.image-group-block {
-			width: 100% !important;
+		.blog-post-title-subtext {
+			text-align: center;
+			font-size: 15px;
+			margin-top: 0px;
+
+
+			font-family: "Lato";
+			font-style: italic;
+			font-weight: 500;
+		}
+
+		.blog-post-content-container {
+			margin: 8px;
+
+			p {
+				color: black;
+				font-weight: 400;
+				font-size: 17px;
+				font-family: "Raleway";
+			}
+
+			.image-block {
+				text-align: center;
+			}
+
+			.content-block {
+				margin: 16px 0;
+			}
+
+			.header-block {
+				font-family: "Lato";
+				font-weight: 300;
+			}
 		}
 	}
 
-	.route-map {
-		width: 100% !important;
+	@font-face {
+		font-family: "Alte Din";
+		src: url("/assets/fonts/Alte Din.ttf") format("truetype");
+
 	}
 
-	.text-block {
-		width: 95% !important;
-	}
+	.sidebar {
+		width: $side-bar-width;
+		min-width: $side-bar-width;
 
-	.header-block {
-		width: 95% !important;
-	}
-}
+		display: table-cell;
+		vertical-align: top;
 
-@media all and (max-width: 1100px) {
-	.navigation-controls.fixed-to-top {
-		background-color: rgba(0, 0, 0, 0.75);
-	}
+		p {
+			color: black;
 
-	.content-block {
-    	.image-block {
-    		width: 100% !important;
-			max-width: 660px!important;
+			font-size: 14px;
+			font-weight: 300;
+			font-family: "Lato";
+
+			margin: 4px 0px;
+			margin-left: 24px;
+
+			&.sidebar-post {
+				cursor: pointer;
+				&:hover {
+					font-weight: 400;
+				}
+			}
 		}
 
-		.image-group-block {
-			width: 100% !important;
-			max-width: 660px!important;
+		.sidebar-tour-title {
+			margin-bottom: 10px;
+		}
+
+		h4, h3 {
+			font-family: "Raleway";
+			font-size: 14px;
+			font-weight: 600;
+
+			margin-left: 8px;
+			margin-bottom: 6px;
+			margin-top: 6px;
+		}
+
+		h3 {
+			font-size: 18px;
+			margin-top: 16px;
+			margin-bottom: 14px;
+		}
+
+		.selected-sidebar-post {
+			/* make the selected post in the sidebar bolded */
+			font-weight: 600 !important;
+			font-style: italic;
 		}
 	}
-
-	.route-map {
-		width: 100% !important;
-		max-width: 660px!important;
-	}
-
-	.text-block {
-		width: 95% !important;
-		max-width: 660px!important;
-	}
-	.header-block {
-		width: 95% !important;
-	}
-}
 
 </style>

@@ -99,6 +99,9 @@ export default {
 				if(index === 0) { // "about"
 					this.$root.ChangePage("cycle-about-page", "/cycle", { });
 				}
+				else if(index == 1) { // "blog"
+					this.$root.ChangePage("blog-list-page", "/cycle/blog", { });
+				}
 				else {
 					this.$root.ChangePage("cycle-" + item + "-page", "/cycle/" + item, { });
 				}
