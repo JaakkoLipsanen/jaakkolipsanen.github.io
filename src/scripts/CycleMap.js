@@ -71,11 +71,7 @@ class RouteView {
 			routeData = route.CalculateRoute();
 		}
 		else {
-			// dayRange variable contains the date range in a string ("33-39" for example)
-			const dayStart = parseInt(dayRange.split("-")[0]);
-			const dayEnd = parseInt(dayRange.split("-")[1]);
-
-			routeData = route.CalculateRangedRoute(dayStart, dayEnd);
+			routeData = route.CalculateRangedRoute(dayRange.StartDay, dayRange.EndDay);
 		}
 
 		// cycling paths

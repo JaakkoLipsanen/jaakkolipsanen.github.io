@@ -22,7 +22,7 @@ import { ExitFullScreen, EnterFullScreen, OnFullscreenChange } from "../scripts/
 export default {
 	props: {
 		routePath: String,
-		dayRange: String, // "1-5" or "33-39" for example
+		dayRange: Object,
 		theme: {
 			type: String,
 			default: "dark"
@@ -38,8 +38,6 @@ export default {
 		},
 
 		"dayRange": function(value, oldValue) {
-			console.log(this.routes[this.routePath]);
-			console.log(this.dayRange);
 			this.map.SetRoute(this.routes[this.routePath], this.dayRange);
 		}
 	},

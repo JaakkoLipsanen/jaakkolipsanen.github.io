@@ -1,14 +1,13 @@
 import Vue from "vue";
 import Navbar from "./Components/Navbar.vue";
 
-import CodePage from "./Pages/CodePage.vue";
-import CodeProjectsPage from "./Pages/CodeProjectsPage.vue";
-import CodeCvPage from "./Pages/CodeCvPage.vue";
+import CodePage from "./Pages/Code/AboutPage.vue";
+import CodeProjectsPage from "./Pages/Code/ProjectsPage.vue";
+import CodeCvPage from "./Pages/Code/CvPage.vue";
 
-import CycleTripsPage from "./Pages/CycleTripsPage.vue";
-import CycleTourPage from "./Pages/CycleTourPage.vue";
-import BlogPostPage from "./Pages/BlogPostPage.vue";
-import BlogListPage from "./Pages/BlogListPage.vue";
+import CycleTourPage from "./Pages/Cycle/ToursPage.vue";
+import BlogPostPage from "./Pages/Cycle/BlogPostPage.vue";
+import BlogListPage from "./Pages/Cycle/BlogListPage.vue";
 
 import { mapify } from "es6-mapify";
 
@@ -26,7 +25,6 @@ var app = new Vue({
 		"code-projects-page": CodeProjectsPage,
 		"code-cv-page": CodeCvPage,
 
-		"cycle-trips-page": CycleTripsPage,
 		"cycle-tour-page": CycleTourPage,
 		"blog-post-page": BlogPostPage,
 		"blog-list-page": BlogListPage,

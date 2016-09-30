@@ -12,6 +12,40 @@ export class TextBlock {
 	}
 }
 
+export class DayRange {
+	constructor(start, end) {
+		console.log(start + " " + end)
+		Assert(Number.isInteger(start) && Number.isInteger(end) && start <= end && start >= 0 && end >= 0, "Invalid day range");
+
+		this.StartDay = start;
+		this.EndDay = end;
+	}
+
+	static Parse(str) {
+		let splitted = str.split('-');
+		Assert(splitted.length == 2, "Invalid string in DayRange.Parse");
+
+		return new DayRange(parseInt(splitted[0]), parseInt(splitted[1]));
+	}
+
+
+
+	get DisplayString() {
+		if(this.IsDayZero) {
+			return "Preparations";
+		}
+		else if(this.StartDay === this.EndDay) {
+			return "Day " + this.StartDay;
+		}
+
+		return "Day " + this.StartDay + "-" + this.EndDay;
+	}
+
+	get IsDayZero() {
+		return this.StartDay === 0 && this.EndDay === 0;
+	}
+}
+
 export class HeaderBlock {
 	constructor(title) {
 		this.Title = title;
@@ -88,14 +122,6 @@ export class BlogPost{
 		return this.Trip.replace(" ", "").toLowerCase()
 	}
 
-	get DisplayString() {
-		if(IsTouchDevice()) {
-			return "Day " + this.DayRange;
-		}
-
-		return "Day " + this.DayRange + ": " + this.Title;
-	}
-
 	static async FromFile(name, postFolder) {
 		return new Promise(async (resolve, reject) => {
 			try {
@@ -120,7 +146,7 @@ export class BlogPost{
 				Assert(ReadProperty(lines[3]) == "main-image", "Blog post .txt doesn't have 'main-image' tag (or not in the fourth line)");
 				const title = ParseProperty(lines[0]);
 				const trip = ParseProperty(lines[1]);
-				const dayRange = ParseProperty(lines[2]);
+				const dayRange = DayRange.Parse(ParseProperty(lines[2]));
 				const mainImage = new Photo(postFolder, ParseProperty(lines[3]));
 
 				let contentBlocks = [];
@@ -171,14 +197,6 @@ class BlogPostInfo {
 
 	get TripUrlString() {
 		return this.Trip.replace(" ", "").toLowerCase()
-	}
-
-	get DisplayString() {
-		if(IsTouchDevice()) {
-			return "Day " + this.DayRange;
-		}
-
-		return "Day " + this.DayRange + ": " + this.Title;
 	}
 
 	get Directory() {
@@ -291,7 +309,7 @@ export class BlogSource {
 					const name = parameters[0];
 					const trip = parameters[1];
 					const title = parameters[2];
-					const dayRange = parameters[3];
+					const dayRange = DayRange.Parse(parameters[3]);
 					const mainImage = parameters[4];
 
 					blogPosts.push(new BlogPostInfo(name, title, dayRange, trip, mainImage, directory));

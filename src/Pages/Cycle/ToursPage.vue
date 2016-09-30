@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import CycleMap from "../Components/CycleMap.vue";
-import { BlogSource } from "../scripts/Blog.js";
+import CycleMap from "../../Components/CycleMap.vue";
+import { BlogSource } from "../../scripts/Blog.js";
 
 export default {
 	data() {

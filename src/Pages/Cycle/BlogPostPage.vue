@@ -1,33 +1,28 @@
 <template>
 	<div class="page-content-container">
 
+		<!-- Main Image -->
 		<div id="main-image-container">
 			<div class="main-image" style="background-image: url({{ currentPost.MainImage.DefaultHDPath }})"></div>
 
 			<!-- Vignette -->
 			<div style="position: absolute; top: 0px; height: 100%; width: 100%;
-				background-color: rgba(0, 0, 0, 0.25); box-shadow: inset 0 0 10vw rgba(0, 0, 0, 0.5);" ></div>
+				background-color: rgba(0, 0, 0, 0.25); box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);" ></div>
 
 			<p class="main-image-title">  {{ currentPost.Title.toUpperCase() }}</p>
-			<div class="main-image-info-container">
-				<h3 v-if="DayRange != '0-0'" >Day {{ currentPost.DayRange }}</h3>
-			</div>
+			<p class="main-image-day-range" >{{ currentPost.DayRange.DisplayString }}</p>
 		</div>
 
 		<div class="blog-content-container">
 			<div class="blog-post-container">
 
-
-			<!--	<h1 class="blog-post-title"> {{ currentPost.Title }} </h1>
-				<h2 class="blog-post-title-subtext"> {{ currentPost.Trip + ": Days " + currentPost.DayRange }} </h2> -->
-
+				<!-- Blog post content -->
 				<div class="blog-post-content-container" >
 					<div class="content-block" v-for="block in currentPost.ContentBlocks">
 						<p v-if="block.Type == 'Text'" class="text-block">{{ block.Text }}</p>
 						<h1 v-if="block.Type == 'Header'" class="header-block"> {{ block.Title }} </h1>
 						<image-group v-if="block.Type == 'ImageGroup'" class="image-group-block" :group-images="block.Images"></image-group>
 						<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
-							<!-- style="background-image: url({{ blogPost.Directory + block.Source }}); height: 900px; background-size: cover; background-repeat: no-repeat; background-position: center; margin: 8px auto; box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.35);"> -->
 
 							<div style="padding-bottom: {{ calcImgPaddingFromBlock(block) }}; position: relative; height: 0; background-color: rgb(44, 44, 44)">
 								<img photo="{{ block.Image }}" :srcset="block.Image.MultiPath" sizes="(max-width: 660px) 100vw, (max-width: 1100px) 660px, 60vw" style="width: 100%; cursor: pointer" v-on:click="imageClicked(block.Image)">
@@ -41,31 +36,32 @@
 
 				</div>
 
-				<cycle-map v-if="CycleRoutePath != undefined && DayRange != '0-0'" class="route-map" theme="light" :route-path="CycleRoutePath" :day-range="DayRange"></cycle-map>
-
+				<cycle-map v-if="CycleRoutePath != undefined && !DayRange.IsZeroDay" class="route-map" theme="light" :route-path="CycleRoutePath" :day-range="DayRange"></cycle-map>
 			 </div>
-			<div class="sidebar">
-				<h3> Other Blog Posts </h3>
 
-				<h4 class="sidebar-tour-title" v-for="tour in tours"> {{ tour.name }} <span style="font-size: 12px"> ({{ tour.year }}) </span>
-					<p class="sidebar-post" v-for="post in  getBlogPostsForTour(tour)" v-on:click="openPost(post)" v-bind:class="{ 'selected-sidebar-post': post.Title == currentPost.Title }"> {{ post.Title }} </p>
-					<p v-if="getBlogPostsForTour(tour).length == 0" style="font-style: italic "> no posts from this tour ! </p>
+			 <!-- Side bar -->
+			 <div class="sidebar">
+				 <h3> Other Blog Posts </h3>
+
+				 <h4 class="sidebar-tour-title" v-for="tour in tours"> {{ tour.name }} <span style="font-size: 12px"> ({{ tour.year }}) </span>
+					 <p class="sidebar-post" v-for="post in  getBlogPostsForTour(tour)" v-on:click="openPost(post)" v-bind:class="{ 'selected-sidebar-post': post.Title == currentPost.Title }"> {{ post.Title }} </p>
+					 <p v-if="getBlogPostsForTour(tour).length == 0" style="font-style: italic "> no posts from this tour ! </p>
 				 </h4>
-			</div>
+			 </div>
 		</div>
 
 		<image-viewer style="display: none"></image-viewer>
 	</div>
 </template>
 
-<script>;
-import { BlogSource, BlogPost, BlogQuery } from "../scripts/Blog.js";
-import { CycleTourData } from "../scripts/CycleTourData.js";
+<script>
 
-import BlogPostView from "../Components/BlogPostView.vue";
-import ImageGroup from "../Components/ImageGroup.vue";
-import ImageViewer from "../Components/ImageViewer.vue";
-import CycleMap from "../Components/CycleMap.vue";
+import { BlogSource, BlogPost, BlogQuery } from "../../scripts/Blog.js";
+import { CycleTourData } from "../../scripts/CycleTourData.js";
+
+import ImageGroup from "../../Components/ImageGroup.vue";
+import ImageViewer from "../../Components/ImageViewer.vue";
+import CycleMap from "../../Components/CycleMap.vue";
 
 import Vue from "vue";
 
@@ -80,7 +76,6 @@ export default {
 	},
 
 	components: {
-		"blog-post": BlogPostView,
 		"image-group": ImageGroup,
 		"cycle-map": CycleMap,
 		"image-viewer": ImageViewer
@@ -132,7 +127,6 @@ export default {
 				return undefined
 			}
 
-			console.log("fetch day");
 			return this.currentPost.DayRange;
 		}
 	},
@@ -159,16 +153,13 @@ export default {
 
 	.main-image {
 		 width: 100%;
-		 height: calc(64vh);
+		 height: 85vh;
 
-		 max-height: 650px;
 		 min-height: 200px;
 		 background-size: cover;
 		 background-position: center;
-		 background-color: black;
 		 background-attachment: fixed;
 		 background-repeat: no-repeat;
-		 background-position: 50% -200px;
 	}
 
 	.main-image-title {
@@ -185,37 +176,30 @@ export default {
 		font-size: 34px;
 		color: rgb(249, 249, 249);
 
-
 		font-family: "Lato";
 	}
 
-	.main-image-info-container {
+	.main-image-day-range {
 		position: absolute;
 		left: 50%;
 		top: calc(100% - 54px);
 		transform: translate(-50%, -50%);
-		margin: 0;
+		margin: auto;
+
 		font-family: "Raleway";
 		font-style: italic;
+		font-weight: 300;
+		font-size: 24px;
 
-		h3 {
-			font-weight: 300;
-			font-size: 24px;
-			margin: -2px;
-			color: rgb(205, 205, 205);
-		}
+		color: rgb(205, 205, 205);
 	}
 
 	.page-content-container {
-		height: auto;
-
 		width: 100%;
-		// max-width: 1000px;
+		height: auto;
 		margin: auto;
 
 		margin-bottom: 48px;
-
-	//	margin-left: calc((100% - 700px) / 2);
 	}
 
 	.blog-content-container {
@@ -276,12 +260,6 @@ export default {
 				font-weight: 300;
 			}
 		}
-	}
-
-	@font-face {
-		font-family: "Alte Din";
-		src: url("/assets/fonts/Alte Din.ttf") format("truetype");
-
 	}
 
 	.sidebar {

@@ -13,16 +13,11 @@
 </template>
 
 <script>
-import Footer from "../Components/Footer.vue";
 
 export default {
 	data() {
 		return {
 		};
-	},
-
-	components: {
-		"footer-bar": Footer
 	},
 
 	ready: function() {

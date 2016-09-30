@@ -9,14 +9,14 @@
 				</div>
 
 				<h4 class="post-title"> {{ post.Title }} </h4>
-				<h4 class="post-tour-info"> {{ post.Trip + ": Day " + post.DayRange }} </h4>
+				<h4 class="post-tour-info"> {{ post.Trip + ": " + post.DayRange.DisplayString }} </h4>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import { BlogSource } from "../scripts/Blog.js";
+import { BlogSource } from "../../scripts/Blog.js";
 
 export default {
 	data() {

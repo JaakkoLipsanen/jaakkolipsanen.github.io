@@ -44,29 +44,29 @@ export default {
 		});
 
 		$(window).scroll(function() {
-		  	if ($(document).scrollTop() > 0) {
-		    	$('#navbar-container').addClass('shrink');
-		  	}
+			if ($(document).scrollTop() > 0) {
+				$('#navbar-container').addClass('shrink');
+			}
 			else {
-		    	$('#navbar-container').removeClass('shrink');
-		  	}
-	  	});
+				$('#navbar-container').removeClass('shrink');
+			}
+		});
 
-		$(window).on('mousewheel', function(event){
-    		var scrollValue = $(window).scrollTop();
+		$(window).on('mousewheel', function(event) {
+			var scrollValue = $(window).scrollTop();
 			var navbar = $('#navbar-container');
 			var isScrollDown = event.originalEvent.wheelDelta < 0;
 
-			if(scrollValue == 0 && isScrollDown && !navbar.hasClass('shrink')) {
+			if(scrollValue === 0 && isScrollDown && !navbar.hasClass('shrink')) {
 				navbar.addClass('shrink');
 				return false;
 			}
-			else if(scrollValue == 0 && !isScrollDown && navbar.hasClass('shrink')) {
+			else if(scrollValue === 0 && !isScrollDown && navbar.hasClass('shrink')) {
 				navbar.removeClass('shrink');
 				return false;
 			}
 
-    		return true;
+			return true;
 		});
 	},
 
@@ -99,7 +99,7 @@ export default {
 				if(index === 0) { // "about"
 					this.$root.ChangePage("cycle-about-page", "/cycle", { });
 				}
-				else if(index == 1) { // "blog"
+				else if(index === 1) { // "blog"
 					this.$root.ChangePage("blog-list-page", "/cycle/blog", { });
 				}
 				else {
