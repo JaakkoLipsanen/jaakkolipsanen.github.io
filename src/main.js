@@ -8,10 +8,12 @@ import CodeCvPage from "./Pages/Code/CvPage.vue";
 import CycleToursPage from "./Pages/Cycle/ToursPage.vue";
 import BlogPostPage from "./Pages/Cycle/BlogPostPage.vue";
 import BlogListPage from "./Pages/Cycle/BlogListPage.vue";
+import GearPage from "./Pages/Cycle/GearPage.vue";
+import HomePage from "./Pages/Cycle/HomePage.vue";
 
 import { mapify } from "es6-mapify";
 
-const ConstantURL = (window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
+const ConstantURL = false ? "/404.html" : undefined; // if accessing 404.html then don't modify url
 // Vue.config.debug = true;
 
 /* eslint-disable no-new */
@@ -26,6 +28,8 @@ var app = new Vue({
 		"code-cv-page": CodeCvPage,
 
 		"cycle-tours-page": CycleToursPage,
+		"gear-page": GearPage,
+		"home-page": HomePage,
 		"blog-post-page": BlogPostPage,
 		"blog-list-page": BlogListPage,
 	},
@@ -90,12 +94,9 @@ var app = new Vue({
 				if(path.length == 1) {
 					this.ChangePage("cycle-about-page", url, { }, false);
 				}
-				else if(path[1] == "trips") {
+				else if(path[1] == "tours") {
 					if(path.length == 2) {
-						this.ChangePage("cycle-trips-page", url, { }, false );
-					}
-					else if(path.length == 3) {
-						this.ChangePage("cycle-tour-page", url, { TourName: path[2] }, false );
+						this.ChangePage("cycle-tours-page", url, { }, false );
 					}
 				}
 				else if(path[1] == "blog") {
@@ -105,6 +106,9 @@ var app = new Vue({
 					else if(path.length == 3) {
 						this.ChangePage("blog-post-page", url, { TourName: undefined, PostName: path[2] }, false );
 					}
+				}
+				else if(path[1] === "gear") {
+					this.ChangePage("gear-page", url, { } );
 				}
 			}
 			else if(path[0] == "404.html") {

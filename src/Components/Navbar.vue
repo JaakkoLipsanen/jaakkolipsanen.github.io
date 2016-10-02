@@ -34,7 +34,8 @@ export default {
 			selectedMainIndex: 1,
 			selectedSubIndex: 0,
 
-			isHamburgerMenuOpen: false
+			isHamburgerMenuOpen: false,
+			isSmallNavbarForced: false,
 		};
 	},
 
@@ -43,31 +44,28 @@ export default {
 			this.SetHamburgerMenuVisibility(false);
 		});
 
-		$(window).scroll(function() {
-			if ($(document).scrollTop() > 0) {
-				$('#navbar-container').addClass('shrink');
-			}
-			else {
-				$('#navbar-container').removeClass('shrink');
-			}
+		$(window).scroll(() => {
+			this.updateNavbarSize();
 		});
 
-		$(window).on('mousewheel', function(event) {
+	/*	$(window).on('mousewheel', (event) => {
 			var scrollValue = $(window).scrollTop();
 			var navbar = $('#navbar-container');
 			var isScrollDown = event.originalEvent.wheelDelta < 0;
 
 			if(scrollValue === 0 && isScrollDown && !navbar.hasClass('shrink')) {
 				navbar.addClass('shrink');
-				return false;
+				return true;
 			}
-			else if(scrollValue === 0 && !isScrollDown && navbar.hasClass('shrink')) {
+			else if(scrollValue === 0 && !isScrollDown && navbar.hasClass('shrink') && !this.isSmallNavbarForced) {
+				console.log("rm2");
 				navbar.removeClass('shrink');
-				return false;
+				return true;
 			}
 
 			return true;
-		});
+		}); */
+
 	},
 
 	methods: {
@@ -85,6 +83,15 @@ export default {
 			this.SetHamburgerMenuVisibility(false);
 		},
 
+		updateNavbarSize: function() {
+			if ($(document).scrollTop() > 0 || this.isSmallNavbarForced) {
+				$('#navbar-container').addClass('shrink');
+			}
+			else if(!this.isSmallNavbarForced) {
+				$('#navbar-container').removeClass('shrink');
+			}
+		},
+
 		subLinkClicked: function(item, index) {
 			this.selectedSubIndex = index;
 			if(this.selectedMainIndex === 0) { // "coding"
@@ -96,13 +103,14 @@ export default {
 				}
 			}
 			else {
-				if(index === 0) { // "about"
-					this.$root.ChangePage("cycle-about-page", "/cycle", { });
+				if(index === 0) { // "home"
+					this.$root.ChangePage("home-page", "/cycle", { });
 				}
 				else if(index === 1) { // "blog"
 					this.$root.ChangePage("blog-list-page", "/cycle/blog", { });
 				}
 				else if(index == 2) { // gear
+					this.$root.ChangePage("gear-page", "/cycle/gear", { });
 				}
 				else if(index == 3) { // "tours"
 					this.$root.ChangePage("cycle-tours-page", "/cycle/tours", { });
@@ -128,6 +136,7 @@ export default {
 			const parts = page.split("-");
 			parts.pop(); // remove last value from 'parts' (it is always 'page')
 
+			this.isSmallNavbarForced = false;
 			if(parts[0] === "code") {
 				this.selectedMainIndex = 0;
 				if(parts.length === 1) {
@@ -139,6 +148,7 @@ export default {
 				else if(parts[1] === "cv") {
 					this.selectedSubIndex = 2;
 				}
+
 			}
 			else if(parts[0] === "cycle") {
 				this.selectedMainIndex = 1;
@@ -150,16 +160,26 @@ export default {
 				}
 				else if(parts[1] === "blog") {
 					this.selectedSubIndex = 1;
+					if(parts.length > 2) {
+						this.isSmallNavbarForced = true;
+					}
 				}
-				else if(parts[1] === "trips" || parts[1] === "tour") {
-					this.selectedSubIndex = 2;
+				else if(parts[1] === "trips" || parts[1] === "tours") {
+					this.selectedSubIndex = 3;
 				}
 			}
-			else if(parts[0] === "blog") { // "blog-post-page"
-				this.selectedMainIndex = 1;
+			else if(parts[0] === "blog") {
 				this.selectedSubIndex = 1;
+				this.isSmallNavbarForced = (parts[1] === "post");
+			}
+			else if(parts[0] == "gear") {
+				this.selectedSubIndex = 2;
+			}
+			else if(parts[0] == "home") {
+				this.selectedSubIndex = 0;
 			}
 
+			this.updateNavbarSize();
 			this.SetHamburgerMenuVisibility(false);
 		}
 	}
