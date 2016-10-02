@@ -1,22 +1,6 @@
 
 export let CycleTourData = {
 
-	GetAllShortNames: function() { // from oldest to newest
-		return Tours.map(tour => tour.shortName);
-	},
-
-	GetAllNames: function() { // from oldest to newest
-		return Tours.map(tour => tour.name);
-	},
-
-	GetTourByShortName: function(shortName) {
-		return Tours.find(x => x.shortName == shortName);
-	},
-
-	GetAllTours: function() {
-		return this.Tours;
-	},
-
 	Tours: [
 		{
 			"name": "Sweden to Belgium",
@@ -33,7 +17,7 @@ export let CycleTourData = {
 		},
 
 		{
-			"name": "Western and Central Europe",
+			"name": "Central Europe",
 			"shortName": "EUROPE 2015",
 			"year": "2015",
 			"description": ""
@@ -45,5 +29,21 @@ export let CycleTourData = {
 			"year": "2016",
 			"description": ""
 		},
-	]
+	],
+
+	GetAllShortNames: function() { // from oldest to newest
+		return this.Tours.map(tour => tour.shortName);
+	},
+
+	GetAllNames: function() { // from oldest to newest
+		return this.Tours.map(tour => tour.name);
+	},
+
+	GetTourByShortName: function(shortName) {
+		return this.Tours.find(x => x.shortName == shortName);
+	},
+
+	GetAllTours: function() {
+		return this.Tours;
+	},
 };

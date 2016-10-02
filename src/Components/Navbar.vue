@@ -102,8 +102,10 @@ export default {
 				else if(index === 1) { // "blog"
 					this.$root.ChangePage("blog-list-page", "/cycle/blog", { });
 				}
-				else {
-					this.$root.ChangePage("cycle-" + item + "-page", "/cycle/" + item, { });
+				else if(index == 2) { // gear
+				}
+				else if(index == 3) { // "tours"
+					this.$root.ChangePage("cycle-tours-page", "/cycle/tours", { });
 				}
 			}
 
@@ -140,7 +142,6 @@ export default {
 			}
 			else if(parts[0] === "cycle") {
 				this.selectedMainIndex = 1;
-				console.log(parts);
 				if(parts.length === 1) {
 					return;
 				}

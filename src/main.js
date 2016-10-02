@@ -5,7 +5,7 @@ import CodePage from "./Pages/Code/AboutPage.vue";
 import CodeProjectsPage from "./Pages/Code/ProjectsPage.vue";
 import CodeCvPage from "./Pages/Code/CvPage.vue";
 
-import CycleTourPage from "./Pages/Cycle/ToursPage.vue";
+import CycleToursPage from "./Pages/Cycle/ToursPage.vue";
 import BlogPostPage from "./Pages/Cycle/BlogPostPage.vue";
 import BlogListPage from "./Pages/Cycle/BlogListPage.vue";
 
@@ -25,7 +25,7 @@ var app = new Vue({
 		"code-projects-page": CodeProjectsPage,
 		"code-cv-page": CodeCvPage,
 
-		"cycle-tour-page": CycleTourPage,
+		"cycle-tours-page": CycleToursPage,
 		"blog-post-page": BlogPostPage,
 		"blog-list-page": BlogListPage,
 	},
@@ -109,7 +109,7 @@ var app = new Vue({
 			}
 			else if(path[0] == "404.html") {
 				// this is default atm
-				this.ChangePage("blog-list-page", "/cycle", { }, true);
+				this.ChangePage("cycle-tours-page", "/cycle", { }, true);
 			}
 			else if(path[0] == "code") {
 				if(path.length == 1) {

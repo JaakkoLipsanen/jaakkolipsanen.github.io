@@ -78,11 +78,13 @@ class RouteView {
 		for(let cyclingPath of routeData.CyclingPaths) {
 			this.Bounds.union(cyclingPath.GetBounds());
 
+			/* for smoothing/reducing point count */
+		//	let newArr =  cyclingPath.Points.filter((element, index) => index % 40 == 0);
 			this.CyclingPathLines.push(new google.maps.Polyline({
 				path: cyclingPath.Points,
 				strokeColor: "rgb(96, 96, 124)",
 				strokeOpacity: 1,
-				strokeWeight: 1.5,
+				strokeWeight: 2,
 
 				map: null
 			}));
@@ -121,6 +123,7 @@ class RouteView {
 				position: night.Location,
 				icon: (night.NightType == Night.Type.Tent ? (useBigIcons ? TentIconBig : TentIcon) : (useBigIcons ? HotelIconBig : HotelIcon)),
 				map : null,
+				opacity: 0.8
 			}));
 		}
 	}
@@ -313,8 +316,9 @@ export class Route {
 
 export const MapStyle = {
 	Dark: "dark",
-	Light: "light"
-}
+	Light: "light",
+	Barebones: "barebones"
+};
 
 export class CycleMap {
 	constructor(container, mapStyle = MapStyle.Dark) {
@@ -336,7 +340,7 @@ export class CycleMap {
 	}
 
 	get CurrentMapStyle() {
-		return (this._mapStyle == MapStyle.Dark) ? MapStyles.Dark : MapStyles.Light;
+		return (this._mapStyle == MapStyle.Dark) ? MapStyles.Dark : ((this._mapStyle == MapStyle.Light) ? MapStyles.Light : MapStyles.Barebones);
 	}
 
 	_initializeMap(container) {
@@ -346,7 +350,7 @@ export class CycleMap {
 			zoomControl: true,
 
 			scrollwheel: true,
-			navigationControl: true,
+			navigationControl: false,
 			scaleControl: false,
 			draggable: true,
 
@@ -360,6 +364,7 @@ export class CycleMap {
 			backgroundColor: "white", // same color as the ocean in the map style
 		};
 
+		console.log( this.CurrentMapStyle);
 		this._googleMap = new google.maps.Map(container, googleMapsProperties);
 
 		let streetViewChangedListeners = [];
@@ -693,5 +698,123 @@ const MapStyles = {
 				}
 			]
 		}
-	])
+	]),
+
+	Barebones: new Style([
+  {
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#ffffff"
+      },
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.neighborhood",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f0f0f0"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.man_made",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.natural",
+    "stylers": [
+      {
+        "color": "#eaeaea"
+      },
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#ffffff"
+      }
+    ]
+  }
+], true),
+
 };

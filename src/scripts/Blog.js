@@ -14,7 +14,6 @@ export class TextBlock {
 
 export class DayRange {
 	constructor(start, end) {
-		console.log(start + " " + end)
 		Assert(Number.isInteger(start) && Number.isInteger(end) && start <= end && start >= 0 && end >= 0, "Invalid day range");
 
 		this.StartDay = start;

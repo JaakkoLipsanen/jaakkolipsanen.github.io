@@ -7,8 +7,8 @@
 		<div style='width: 100%; height: 100%' class='cycle-map' v-el:cycle-map></div>
 
 		<!-- Bottom text -->
-		<p style=' margin-top: 0px; margin-left: 1px; float: left;'>{{ this.map.RouteLength + 'km, ' + this.map.NightCount +  ' days' }}</p>
-		<div style='display: inline; float: right; margin-right: 1px'>
+		<p class="map-length-and-night-count-text" style=' margin-top: 0px; margin-left: 1px; float: left;'>{{ this.map.RouteLength + 'km, ' + this.map.NightCount +  ' days' }}</p>
+		<div style='display: inline; float: right; margin-right: 2px'>
 			<img style='width: 10px; display: inline' src='/assets/icons/tent.png'><p style='display: inline; margin-left: 4px;'>camping </p>
 			<img style='margin-left: 4px; width: 10px; display: inline' src='/assets/icons/hotel.png'><p style='display: inline; margin-left: 4px;'>hotel</p>
 		</div>
