@@ -23,14 +23,16 @@
 		</div>
 
 		<cycle-map :route-path="CycleRoutePath" :theme="'light'" class="tour-map"></cycle-map>
-		<div style="height: 32px"></div>
+		<div style="height: 0px"></div>
+		<h2 style="margin-top: 0px; margin-bottom: 0px;"> {{ currentMap.RouteLength + ' kilometers!' }} </h4>
+		<h2 style="margin-top: 0px; margin-bottom: 64px;"> {{ currentMap.NightCount + ' days' }} </h4>
 
 		<h2> Blog Posts </h2>
-		<div v-if="blog.PostInfos.length > 0" class="blog-list-page-container">
-			<div class="blog-post-block" v-for="post in blog.PostInfos">
+		<h4 v-if="currentTourPostInfos.length == 0" style="font-weight: 500">no blog posts from this tour...</h4>
+		<div v-if="currentTourPostInfos.length > 0" class="blog-list-page-container">
+			<div class="blog-post-block" v-for="post in currentTourPostInfos">
 				<a href="" class="blog-post-title"> {{ post.Title }} </a>
 			</div>
-
 		</div>
 
 		<div style="height: 64px"></div>
@@ -46,7 +48,10 @@ export default {
 	data() {
 		return {
 			blog: null,
-			currentTourIndex: 1
+			currentTourPostInfos: null,
+			currentTourIndex: CycleTourData.Tours.length - 1,
+
+			currentMap: undefined
 		};
 	},
 
@@ -57,8 +62,8 @@ export default {
 	ready: function() {
 		const data = this;
 		BlogSource.FromFile("/cycle/blog/posts.txt").then(blog => {
-			data.blog = blog.CreateQuery(post => post.Trip === data.CurrentTour.shortName);
-			data.blog.PostInfos.reverse(); // make the post infos go from newest to oldest
+			data.blog = blog;
+			data.loadPosts();
 		});
 	},
 
@@ -86,8 +91,6 @@ export default {
 		NextTour: function() {
 			return CycleTourData.Tours[this.currentTourIndex + 1];
 		},
-
-
 	},
 
 	methods: {
@@ -97,6 +100,19 @@ export default {
 
 		ChangeTour: function(direction) {
 			this.currentTourIndex += direction;
+			this.loadPosts();
+		},
+
+		loadPosts: function(direction) {
+			this.currentTourPostInfos = this.blog.CreateQuery(post => post.Trip === this.CurrentTour.shortName).PostInfos;
+			this.currentTourPostInfos.reverse(); // make the post infos go from newest to oldest
+		}
+	},
+
+	events: {
+		"map-loaded": function(map) {
+			console.log(map);
+			this.currentMap = map;
 		}
 	}
 };

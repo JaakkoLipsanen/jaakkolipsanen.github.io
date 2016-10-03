@@ -35,10 +35,12 @@ export default {
 			}
 
 			this.map.SetRoute(this.routes[value]);
+			this.$dispatch('map-loaded', this.map);
 		},
 
 		"dayRange": function(value, oldValue) {
 			this.map.SetRoute(this.routes[this.routePath], this.dayRange);
+			this.$dispatch('map-loaded', this.map);
 		}
 	},
 
@@ -46,7 +48,7 @@ export default {
 		return {
 			map: null,
 			isMapFullscreen: false,
-			routes: {}
+			routes: { }
 		};
 	},
 
@@ -55,6 +57,8 @@ export default {
 		if(this.routePath != null) {
 			this.routes[this.routePath] = { routePath: this.routePath };
 			this.map.SetRoute(this.routes[this.routePath], this.dayRange);
+
+			this.$dispatch('map-loaded', this.map);
 		}
 
 		OnFullscreenChange(() => {
