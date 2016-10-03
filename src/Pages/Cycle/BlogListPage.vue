@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div style="height: 120px"> </div>
+		<div style="height: 96px"> </div>
 		<div v-if="blog.PostInfos.length > 0" class="blog-list-page-container">
 			<div class="blog-post-block" v-for="post in blog.PostInfos">
 

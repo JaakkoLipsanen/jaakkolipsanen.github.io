@@ -143,6 +143,11 @@ export default {
 
 <style lang="sass" id="style-sheet" disabled=false>
 
+	/* one big thing in this css file that may confuse is the main-image background attachement thing. if you use background-attachment: fixed,
+	/* chrome will re-paint the image everytime the window is scrolled which can cause some major lag (firefox works fine). so, to work around it,
+	/* i had to change main-image-container to be position: fixed, add transform: translateZ(0) (to cause it render in another layer or something)
+	/* and some other possibly a bit confusing things. https://mention.com/blog/building-a-beautiful-homepage-how-we-nailed-down-chrome-performance-rendering-issues/ */
+
 	.route-map {
 		width: 100%  !important;
 		color: black !important;
@@ -168,7 +173,7 @@ export default {
 
 		 min-height: 200px;
 		 background-size: cover;
-		 background-position: center;
+		 background-position: 50% 45%;
 	/*	 background-attachment: fixed; */
 		 background-repeat: no-repeat;
 	}
@@ -227,9 +232,26 @@ export default {
 		margin-left: calc((100% - 700px) / 2);
 	}
 
+	@media all and (min-width: 837px) and (max-width: 1250px) {
+		.blog-content-container {
+			margin: auto !important;
+		}
+	}
+
+	@media all and (max-width: 836px) {
+		.blog-content-container {
+			width: auto;
+			margin: 12px !important;
+		}
+
+		.sidebar {
+			display: block !important;
+			margin: auto !important;
+		}
+	}
+
 	$side-bar-width: 300px;
 	.blog-post-container {
-
 		display: table-cell;
 		width: 100%;
 

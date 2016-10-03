@@ -16,7 +16,7 @@
 			<div class="horizontal-divider"></div>
 			<p style="width: 100px" v-on:click="mainLinkClicked" id="main-link"> {{ items[items.length - 1 - selectedMainIndex].main.toUpperCase() }} </p>
 		</div>
-		<img class="hamburger-menu-button" src="/assets/icons/HamburgerMenuBlack.svg" v-on:click="ToggleHamburgerMenu" style="width: 40px; color: white;">
+		<img v-el:hamburger-menu-button  class="hamburger-menu-button" src="/assets/icons/HamburgerMenuBlack.svg" v-on:click="ToggleHamburgerMenu">
 	</div>
 </template>
 
@@ -42,30 +42,12 @@ export default {
 	ready: function() {
 		$(window).resize(() => {
 			this.SetHamburgerMenuVisibility(false);
+			this.updateNavbarSize();
 		});
 
 		$(window).scroll(() => {
 			this.updateNavbarSize();
 		});
-
-	/*	$(window).on('mousewheel', (event) => {
-			var scrollValue = $(window).scrollTop();
-			var navbar = $('#navbar-container');
-			var isScrollDown = event.originalEvent.wheelDelta < 0;
-
-			if(scrollValue === 0 && isScrollDown && !navbar.hasClass('shrink')) {
-				navbar.addClass('shrink');
-				return true;
-			}
-			else if(scrollValue === 0 && !isScrollDown && navbar.hasClass('shrink') && !this.isSmallNavbarForced) {
-				console.log("rm2");
-				navbar.removeClass('shrink');
-				return true;
-			}
-
-			return true;
-		}); */
-
 	},
 
 	methods: {
@@ -84,10 +66,10 @@ export default {
 		},
 
 		updateNavbarSize: function() {
-			if ($(document).scrollTop() > 0 || this.isSmallNavbarForced) {
+			if ($(document).scrollTop() > 0 || this.IsSmallNavbarForced()) {
 				$('#navbar-container').addClass('shrink');
 			}
-			else if(!this.isSmallNavbarForced) {
+			else if(!this.IsSmallNavbarForced()) {
 				$('#navbar-container').removeClass('shrink');
 			}
 		},
@@ -127,7 +109,11 @@ export default {
 		SetHamburgerMenuVisibility: function(visible) {
 			this.isHamburgerMenuOpen = visible;
 			$(".hamburger-menu").toggle(visible);
-			$(".hamburger-menu-button").css("position", visible ? "fixed" : "absolute");
+		},
+
+		IsSmallNavbarForced: function() {
+			let isHamburgerMenuVisible = $(".hamburger-menu-button").is(":visible");
+			return this.isSmallNavbarForced || isHamburgerMenuVisible;
 		}
 	},
 
@@ -189,22 +175,22 @@ export default {
 <style lang="sass">
 
 	@media all and (max-width: 615px) {
-		.hamburger-menu, .hamburger-menu-button {
-			visibility: visible !important;
+		.hamburger-menu-button {
+			display: block !important;
 		}
 
 		.navbar-links {
-			visibility: hidden !important;
+			display: none !important;
 		}
 	}
 
 	@media all and (min-width: 616px) {
 		.hamburger-menu, .hamburger-menu-button {
-			visibility: hidden  !important;
+			display: none  !important;
 		}
 
 		.navbar-links {
-			visibility: visible  !important;
+			display: block  !important;
 		}
 	}
 
@@ -225,21 +211,23 @@ export default {
 
 	.hamburger-menu {
 		width: 200px;
-		background-color: rgb(40, 40, 40);
+		background-color: white;
 		height: 100vh;
 
 		position: fixed;
-		right: 0;
+		left: 0;
 		top: 0;
 		z-index: 1000;
 		display: none;
+
+		margin-top: 32px;
 
 		p {
 			display: block; color: white; margin-right: 8px;
 			font-size: 22px;
 			font-weight: 800;
 			font-family: "Open Sans";
-			color: rgb(255, 255, 255);
+			color: black;
 			opacity: 0.6;
 
 			cursor: pointer;
@@ -247,12 +235,12 @@ export default {
 			margin-left: 8px;
 
 			&:hover {
-				color: white;
+				color: black;
 				opacity: 1;
 			}
 
 			&.selected {
-				color: white;
+				color: black;
 				opacity: 1;
 			}
 		}
@@ -278,16 +266,16 @@ export default {
 	}
 
 	.hamburger-menu-button {
-	  position: fixed;
-	  float: right;
-	  top: 0;
-	  right: 0;
-	  margin-right: 8px;
-	  margin-top: 6px;
-	  z-index: 1001;
+		height: 36%;
+		min-height: 32px;
 
-	  cursor: pointer;
-	  color: blue;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		margin-top: 0px;
+		margin-left: 8px;
+
+		cursor: pointer;
 	}
 
 	.navbar-links {
