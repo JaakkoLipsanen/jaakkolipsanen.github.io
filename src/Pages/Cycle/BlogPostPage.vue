@@ -89,7 +89,7 @@ export default {
 			data.blog = blog.CreateQuery();
 			data.blog.PostInfos.reverse(); // make the post infos go from newest to oldest
 
-			data.currentPost = await data.blog.GetBlogPostByPostInfo(data.$root.CurrentState().PostInfo);
+			data.currentPost = await data.blog.GetBlogPostByName(data.$root.CurrentState().PostName);
 		});
 	},
 
@@ -150,6 +150,7 @@ export default {
 
 	.route-map {
 		width: 100%  !important;
+		max-height: 60vh !important;
 		color: black !important;
 	}
 
