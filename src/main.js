@@ -40,7 +40,7 @@ var app = new Vue({
 
 	computed: {
 		CurrentUrl: function() {
-			return  window.location.pathname;
+			return window.location.pathname;
 		},
 	},
 
@@ -108,7 +108,7 @@ var app = new Vue({
 					}
 				}
 				else if(path[1] === "gear") {
-					this.ChangePage("gear-page", url, { } );
+					this.ChangePage("gear-page", url, { }, false);
 				}
 			}
 			else if(path[0] == "404.html") {
