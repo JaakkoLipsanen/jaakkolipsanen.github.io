@@ -92,7 +92,9 @@ var app = new Vue({
 
 			if(path[0] == "cycle") {
 				if(path.length == 1) {
-					this.ChangePage("cycle-about-page", url, { }, false);
+					/* since home page is not implemented, redirect to blog-list-page */
+					// this.ChangePage("cycle-about-page", url, { }, false);
+					this.ChangePage("blog-list-page", "/cycle/blog", { }, false);
 				}
 				else if(path[1] == "tours") {
 					if(path.length == 2) {

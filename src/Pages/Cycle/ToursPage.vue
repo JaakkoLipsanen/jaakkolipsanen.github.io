@@ -31,7 +31,7 @@
 		<h4 v-if="currentTourPostInfos.length == 0" style="font-weight: 500">no blog posts from this tour...</h4>
 		<div v-if="currentTourPostInfos.length > 0" class="blog-list-page-container">
 			<div class="blog-post-block" v-for="post in currentTourPostInfos">
-				<a href="" class="blog-post-title"> {{ post.Title }} </a>
+				<a href="{{ '/cycle/blog/' + post.Name }}" class="blog-post-title"> {{ post.Title }} </a>
 			</div>
 		</div>
 

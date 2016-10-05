@@ -59,7 +59,7 @@ export default {
 			container.css("padding-bottom", "calc(" + (1 / groupAspectRatio * 100) + "%)");
 			container.css("position", "relative");
 			container.css("height", "0");
-		//	container.css("background-color", "rgb(44, 44, 44)"); // also, right now this is applied to the group container which is NOT CORRECT. I want this to be applied only to individual images
+		//	container.css("background-color", "gray"); // also, right now this is applied to the group container which is NOT CORRECT. I want this to be applied only to individual images
 
 			return imageCount;
 		};

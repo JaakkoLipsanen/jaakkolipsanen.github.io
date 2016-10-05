@@ -3,7 +3,7 @@
 		<p id="navbar-header-text">{{ title }}</p>
 
 		<div class="navbar-links">
-			<p  v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex }" v-for="(index, item) in items[selectedMainIndex].items">{{ item.toUpperCase() }} </p>
+			<p v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex, 'disabled': !item.enabled }" v-for="(index, item) in navbarLinks">{{ item.name.toUpperCase() }} </p>
 		</div>
 
 		<a href="https://instagram.com/fl.ai">
@@ -11,10 +11,7 @@
 		</a>
 
 		<div class="hamburger-menu">
-			<p  v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex }" v-for="(index, item) in items[selectedMainIndex].items">{{ item.toUpperCase() }} </p>
-
-			<div class="horizontal-divider"></div>
-			<p style="width: 100px" v-on:click="mainLinkClicked" id="main-link"> {{ items[items.length - 1 - selectedMainIndex].main.toUpperCase() }} </p>
+			<p v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex }" v-for="(index, item) in navbarLinks">{{ item.name.toUpperCase() }} </p>
 		</div>
 		<img v-el:hamburger-menu-button  class="hamburger-menu-button" src="/assets/icons/HamburgerMenuBlack.svg" v-on:click="ToggleHamburgerMenu">
 	</div>
@@ -26,12 +23,13 @@ export default {
 		return {
 			title: "flai",
 
-			items: [
-				{ main: "coding", items: ["about", "projects", "cv"] },
-				{ main: "cycling", items: ["home", "blog", "gear", "tours"] }
+			navbarLinks: [
+					{ name: "home", enabled: false },
+					{ name: "blog", enabled: true },
+					{ name: "gear", enabled: false },
+					{ name: "tours", enabled: true }
 			],
 
-			selectedMainIndex: 1,
 			selectedSubIndex: 0,
 
 			isHamburgerMenuOpen: false,
@@ -51,20 +49,6 @@ export default {
 	},
 
 	methods: {
-		mainLinkClicked: function() {
-			if(this.selectedMainIndex === 0) {
-				this.$root.ChangePage("cycle-about-page", "/cycle", { });
-				this.selectedMainIndex = 1;
-			}
-			else {
-				this.$root.ChangePage("code-page", "/code", { });
-				this.selectedMainIndex = 0;
-			}
-
-			this.selectedSubIndex = 0;
-			this.SetHamburgerMenuVisibility(false);
-		},
-
 		updateNavbarSize: function() {
 			if ($(document).scrollTop() > 0 || this.IsSmallNavbarForced()) {
 				$('#navbar-container').addClass('shrink');
@@ -75,28 +59,23 @@ export default {
 		},
 
 		subLinkClicked: function(item, index) {
-			this.selectedSubIndex = index;
-			if(this.selectedMainIndex === 0) { // "coding"
-				if(index === 0) { // "about"
-					this.$root.ChangePage("code-page", "/code", { });
-				}
-				else {
-					this.$root.ChangePage("code-" + item + "-page", "/code/" + item, { });
-				}
+			if(!item.enabled) {
+				return;
 			}
-			else {
-				if(index === 0) { // "home"
-					this.$root.ChangePage("home-page", "/cycle", { });
-				}
-				else if(index === 1) { // "blog"
-					this.$root.ChangePage("blog-list-page", "/cycle/blog", { });
-				}
-				else if(index == 2) { // gear
-					this.$root.ChangePage("gear-page", "/cycle/gear", { });
-				}
-				else if(index == 3) { // "tours"
-					this.$root.ChangePage("cycle-tours-page", "/cycle/tours", { });
-				}
+
+			this.selectedSubIndex = index;
+
+			if(index === 0) { // "home"
+				this.$root.ChangePage("home-page", "/cycle", { });
+			}
+			else if(index === 1) { // "blog"
+				this.$root.ChangePage("blog-list-page", "/cycle/blog", { });
+			}
+			else if(index == 2) { // gear
+				this.$root.ChangePage("gear-page", "/cycle/gear", { });
+			}
+			else if(index == 3) { // "tours"
+				this.$root.ChangePage("cycle-tours-page", "/cycle/tours", { });
 			}
 
 			this.SetHamburgerMenuVisibility(false);
@@ -123,21 +102,7 @@ export default {
 			parts.pop(); // remove last value from 'parts' (it is always 'page')
 
 			this.isSmallNavbarForced = false;
-			if(parts[0] === "code") {
-				this.selectedMainIndex = 0;
-				if(parts.length === 1) {
-					this.selectedSubIndex = 0;
-				}
-				else if(parts[1] === "projects") {
-					this.selectedSubIndex = 1;
-				}
-				else if(parts[1] === "cv") {
-					this.selectedSubIndex = 2;
-				}
-
-			}
-			else if(parts[0] === "cycle") {
-				this.selectedMainIndex = 1;
+			if(parts[0] === "cycle") {
 				if(parts.length === 1) {
 					return;
 				}
@@ -223,7 +188,7 @@ export default {
 		margin-top: 32px;
 
 		p {
-			display: block; color: white; margin-right: 8px;
+			display: block; margin-right: 8px;
 			font-size: 22px;
 			font-weight: 800;
 			font-family: "Open Sans";
@@ -235,13 +200,15 @@ export default {
 			margin-left: 8px;
 
 			&:hover {
-				color: black;
 				opacity: 1;
 			}
 
 			&.selected {
-				color: black;
 				opacity: 1;
+			}
+
+			&.disabled {
+
 			}
 		}
 
@@ -285,7 +252,7 @@ export default {
 		text-align: center;
 
 		p {
-			display: inline-block; color: white;
+			display: inline-block;
 			font-weight: 600;
 			font-family: "Raleway";
 			color: black;
@@ -306,18 +273,20 @@ export default {
 			transform: translateY(-50%);
 
 
-			&:hover {
-				color: black;
+			&:hover:not(.disabled) {
 				opacity: 1;
 
 				border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 			}
 
-			&.selected {
-				color: black;
+			&.selected:not(.disabled) {
 				opacity: 1;
 
 				border-bottom: 2px solid black;
+			}
+
+			&.disabled {
+				color: rgba(0, 0, 0, 0.5);
 			}
 
 			&:last-child {
