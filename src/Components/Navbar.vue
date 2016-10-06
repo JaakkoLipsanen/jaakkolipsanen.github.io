@@ -286,7 +286,7 @@ export default {
 			}
 
 			&.disabled {
-				color: rgba(0, 0, 0, 0.5);
+				color: rgba(0, 0, 0, 0.4);
 			}
 
 			&:last-child {
