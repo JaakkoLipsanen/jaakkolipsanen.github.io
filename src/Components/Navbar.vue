@@ -7,13 +7,13 @@
 		</div>
 
 		<a href="https://instagram.com/fl.ai">
-			<img class="instagram-icon" src="/assets/icons/Instagram-Icon.png">
+			<img class="instagram-icon" src="/icons/Instagram-Icon.png">
 		</a>
 
 		<div class="hamburger-menu">
 			<p v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex }" v-for="(index, item) in navbarLinks">{{ item.name.toUpperCase() }} </p>
 		</div>
-		<img v-el:hamburger-menu-button  class="hamburger-menu-button" src="/assets/icons/HamburgerMenuBlack.svg" v-on:click="ToggleHamburgerMenu">
+		<img v-el:hamburger-menu-button  class="hamburger-menu-button" src="/icons/HamburgerMenuBlack.svg" v-on:click="ToggleHamburgerMenu">
 	</div>
 </template>
 

@@ -31,7 +31,7 @@
 		<h4 v-if="currentTourPostInfos.length == 0" style="font-weight: 500">no blog posts from this tour...</h4>
 		<div v-if="currentTourPostInfos.length > 0" class="blog-list-page-container">
 			<div class="blog-post-block" v-for="post in currentTourPostInfos">
-				<a href="{{ '/cycle/blog/' + post.Name }}" class="blog-post-title"> {{ post.Title }} </a>
+				<a href="{{ 'assets/cycle/blog/' + post.Name }}" class="blog-post-title"> {{ post.Title }} </a>
 			</div>
 		</div>
 
@@ -69,7 +69,7 @@ export default {
 
 	computed: {
 		CycleRoutePath: function() {
-			return "/cycle/routes/" + this.CurrentTour.shortName.replace(" ", "").toLowerCase() + "/route.txt";
+			return "assets/cycle/routes/" + this.CurrentTour.shortName.replace(" ", "").toLowerCase() + "/route.txt";
 		},
 
 		CurrentTour: function() {
@@ -95,7 +95,7 @@ export default {
 
 	methods: {
 		postClicked: function(post) {
-			this.$root.ChangePage("blog-post-page", "/cycle/blog/" + post.Name, { TourName: this.CurrentTour, PostName: post.Name });
+			this.$root.ChangePage("blog-post-page", "assets/cycle/blog/" + post.Name, { TourName: this.CurrentTour, PostName: post.Name });
 		},
 
 		ChangeTour: function(direction) {
