@@ -61,7 +61,7 @@ export default {
 
 	ready: function() {
 		const data = this;
-		BlogSource.FromFile("/cycle/blog/posts.txt").then(blog => {
+		BlogSource.FromFile("/assets/cycle/blog/posts.txt").then(blog => {
 			data.blog = blog;
 			data.loadPosts();
 		});
@@ -69,7 +69,7 @@ export default {
 
 	computed: {
 		CycleRoutePath: function() {
-			return "assets/cycle/routes/" + this.CurrentTour.shortName.replace(" ", "").toLowerCase() + "/route.txt";
+			return "/assets/cycle/routes/" + this.CurrentTour.shortName.replace(" ", "").toLowerCase() + "/route.txt";
 		},
 
 		CurrentTour: function() {
@@ -95,7 +95,7 @@ export default {
 
 	methods: {
 		postClicked: function(post) {
-			this.$root.ChangePage("blog-post-page", "assets/cycle/blog/" + post.Name, { TourName: this.CurrentTour, PostName: post.Name });
+			this.$root.ChangePage("blog-post-page", "/assets/cycle/blog/" + post.Name, { TourName: this.CurrentTour, PostName: post.Name });
 		},
 
 		ChangeTour: function(direction) {

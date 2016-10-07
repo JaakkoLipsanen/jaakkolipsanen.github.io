@@ -85,7 +85,7 @@ export default {
 
 	ready: function() {
 		let data = this;
-		BlogSource.FromFile("assets/cycle/blog/posts.txt").then(async blog => {
+		BlogSource.FromFile("/assets/cycle/blog/posts.txt").then(async blog => {
 			data.blog = blog.CreateQuery();
 			data.blog.PostInfos.reverse(); // make the post infos go from newest to oldest
 
@@ -125,7 +125,7 @@ export default {
 				return undefined
 			}
 
-			return "assets/cycle/routes/" + this.currentPost.TripUrlString + "/route.txt";
+			return "/assets/cycle/routes/" + this.currentPost.TripUrlString + "/route.txt";
 		},
 
 		DayRange: function() {

@@ -27,7 +27,7 @@ export default {
 
 	ready: function() {
 		const data = this;
-		BlogSource.FromFile("assets/cycle/blog/posts.txt").then(blog => {
+		BlogSource.FromFile("/assets/cycle/blog/posts.txt").then(blog => {
 			data.blog = blog.CreateQuery(post => post.TripUrlString === "usa2016");
 			data.blog.PostInfos.reverse();
 		});
