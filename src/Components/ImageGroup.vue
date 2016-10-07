@@ -26,10 +26,10 @@ export default {
 
 			let imageQuality;
 			if(IsTouchDevice()) {
-				imageQuality = (imageCount === 1) ? PhotoQuality.SD : PhotoQuality.LD;
+				imageQuality = (imageCount === 1) ? "360p" : "240p";
 			}
 			else {
-				imageQuality = (imageCount === 1) ? PhotoQuality.FullHD : ((imageCount === 2) ? PhotoQuality.HD : PhotoQuality.SD);
+				imageQuality = (imageCount === 1) ? "720p" : ((imageCount === 2) ? "360p" : "240p");
 			}
 
 			const container = $(document.createElement("div")).addClass("image-group").appendTo(groupContainer);

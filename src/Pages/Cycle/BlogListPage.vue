@@ -4,7 +4,7 @@
 		<div v-if="blog.PostInfos.length > 0" class="blog-list-page-container">
 			<div class="blog-post-block" v-for="post in blog.PostInfos">
 
-				<div class="blog-post-block-background" style="background-image: url({{ post.Directory + '480p/' + post.MainImage  }});" v-on:click="postClicked(post)">
+				<div class="blog-post-block-background" style="background-image: url({{ post.Directory + '360p/' + post.MainImage  }});" v-on:click="postClicked(post)">
 					<div class="post-block-container"> </div>
 				</div>
 

@@ -26,7 +26,7 @@
 							<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
 
 								<div style="position: relative; height: 0; background-color: rgb(215, 215, 215);  padding-bottom: {{ calculateImagePadding(block.Image) }}">
-									<img photo="{{ block.Image }}" :srcset="block.Image.MultiPath" sizes="(max-width: 660px) 100vw, (max-width: 1100px) 660px, 60vw" style="width: 100%; cursor: pointer;" v-on:click="imageClicked(block.Image)">
+									<img photo="{{ block.Image }}" :src="block.Image.FullPath('720p')" style="width: 100%; cursor: pointer;" v-on:click="imageClicked(block.Image)">
 								</div>
 								<div v-if="block.Image.Text != '' "style="width: 100%; height: auto;">
 									<p style="margin: 0; font-family: 'Raleway'; font-style: italic";>{{ block.Image.Text }}</p>
@@ -73,7 +73,7 @@ export default {
 			blog: null,
 			currentPost: null,
 
-			tours: CycleTourData.Tours.slice().reverse(),
+			tours: CycleTourData.Tours.slice().reverse(), // slice so make a copy of the original array
 		};
 	},
 
