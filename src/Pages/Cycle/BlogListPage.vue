@@ -94,7 +94,7 @@ export default {
 	text-align: center;
 }
 
-@media all and (max-width: 950px) {
+@media all and (max-width: 952px) {
 	.blog-post-block {
 		width: 85% !important;
 		margin: 16px 0 !important;

@@ -22,7 +22,12 @@ export class Photo {
 	}
 
 	FullPath(photoQuality = PhotoQuality.FullHD) {
-		return this.Folder + "/" + photoQuality + "/" + this.FileName;
+		return this.Folder + "/" + photoQuality + "/" + this._getFileNameForQuality(photoQuality);
+	}
+
+	_getFileNameForQuality(quality) {
+		// stupid ugly awful hack, but 10p images are stored as .png's :P
+		return (quality == "10p") ? this.FileName.slice().replace(".jpg", ".png") : this.FileName;
 	}
 
 	get DefaultPath() {

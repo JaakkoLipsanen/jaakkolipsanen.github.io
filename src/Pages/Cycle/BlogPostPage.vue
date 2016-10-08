@@ -1,18 +1,9 @@
 <template>
 	<div class="page-content-container">
 
-		<!-- Main Image -->
-		<div class="main-image-container">
-			<div class="main-image" style="background-image: url({{ currentPost.MainImage.DefaultHDPath }})"></div>
+		<cover-image class="cover-image" :image="currentPost.MainImage" :main-text="currentPost.Title.toUpperCase()" :sub-text="currentPost.DayRange.DisplayString"></cover-image>
 
-			<!-- Vignette -->
-			<div style="position: absolute; top: 0px; height: 100%; width: 100%;
-				background-color: rgba(0, 0, 0, 0.25); box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);" ></div>
-
-			<p class="main-image-title">  {{ currentPost.Title.toUpperCase() }}</p>
-			<p class="main-image-day-range" >{{ currentPost.DayRange.DisplayString }}</p>
-		</div>
-		<div class="main-image-container-spacer"></div>
+		<div class="cover-image-container-spacer"></div>
 		<div class="blog-content-background">
 			<div class="blog-content-container">
 				<div class="blog-post-container">
@@ -24,10 +15,9 @@
 							<h1 v-if="block.Type == 'Header'" class="header-block"> {{ block.Title }} </h1>
 							<image-group v-if="block.Type == 'ImageGroup'" class="image-group-block" :group-images="block.Images"></image-group>
 							<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
+								<image-component :image="block.Image"> </image-component>
 
-								<div style="position: relative; height: 0; background-color: rgb(215, 215, 215);  padding-bottom: {{ calculateImagePadding(block.Image) }}">
-									<img photo="{{ block.Image }}" :src="block.Image.FullPath('720p')" style="width: 100%; cursor: pointer;" v-on:click="imageClicked(block.Image)">
-								</div>
+
 								<div v-if="block.Image.Text != '' "style="width: 100%; height: auto;">
 									<p style="margin: 0; font-family: 'Raleway'; font-style: italic";>{{ block.Image.Text }}</p>
 								</div>
@@ -62,6 +52,8 @@ import { BlogSource, BlogPost, BlogQuery } from "../../scripts/Blog.js";
 import { CycleTourData } from "../../scripts/CycleTourData.js";
 
 import ImageGroup from "../../Components/ImageGroup.vue";
+import ImageComponent from "../../Components/Image.vue";
+import CoverImage from "../../Components/CoverImage.vue";
 import ImageViewer from "../../Components/ImageViewer.vue";
 import CycleMap from "../../Components/CycleMap.vue";
 
@@ -79,6 +71,8 @@ export default {
 
 	components: {
 		"image-group": ImageGroup,
+		"image-component": ImageComponent,
+		"cover-image": CoverImage,
 		"cycle-map": CycleMap,
 		"image-viewer": ImageViewer
 	},
@@ -113,10 +107,6 @@ export default {
 		imageClicked: function(photo) {
 			this.$broadcast("show-photo", photo);
 		},
-
-		calculateImagePadding: function(image) {
-			return (1 / image.AspectRatio * 100) + "%";
-		}
 	},
 
 	computed: {
@@ -152,68 +142,20 @@ export default {
 	/* i had to change main-image-container to be position: fixed, add transform: translateZ(0) (to cause it render in another layer or something)
 	/* and some other possibly a bit confusing things. https://mention.com/blog/building-a-beautiful-homepage-how-we-nailed-down-chrome-performance-rendering-issues/ */
 
+	$cover-image-height: 85vh;
+	.cover-image {
+		height: $cover-image-height;
+	}
+	.cover-image-container-spacer {
+		margin-top: $cover-image-height;
+	}
+
 	.route-map {
 		width: 100%  !important;
 		max-height: 60vh !important;
 		color: black !important;
 	}
 
-	$main-image-height: 85vh;
-	.main-image-container {
-		position: fixed;
-		top: 0;
-		transform: translateZ(0);
-		z-index: -1000;
-
-		width: 100%;
-	}
-
-	.main-image-container-spacer {
-		margin-top: $main-image-height;
-	}
-
-	.main-image {
-		 width: 100%;
-		 height: $main-image-height;
-
-		 min-height: 200px;
-		 background-size: cover;
-		 background-position: 50% 45%;
-	/*	 background-attachment: fixed; */
-		 background-repeat: no-repeat;
-	}
-
-	.main-image-title {
-		position: absolute;
-		margin: 0;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		width: 95%;
-		text-align: center;
-		text-shadow: 1px 1px rgb(0, 0, 0);
-
-		font-weight: 300;
-		font-size: 34px;
-		color: rgb(249, 249, 249);
-
-		font-family: "Lato";
-	}
-
-	.main-image-day-range {
-		position: absolute;
-		left: 50%;
-		top: calc(100% - 54px);
-		transform: translate(-50%, -50%);
-		margin: auto;
-
-		font-family: "Raleway";
-		font-style: italic;
-		font-weight: 300;
-		font-size: 24px;
-
-		color: rgb(205, 205, 205);
-	}
 
 	.page-content-container {
 		width: 100%;

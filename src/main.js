@@ -115,7 +115,8 @@ var app = new Vue({
 			}
 			else if(path[0] == "404.html") {
 				// this is default atm
-				this.ChangePage("cycle-tours-page", "/cycle", { }, true);
+				this.ChangePage("blog-list-page", "/cycle/blog", { }, true);
+			//	ConstructPageFromUrl("/cycle/blog/");
 			}
 			else if(path[0] == "code") {
 				if(path.length == 1) {
