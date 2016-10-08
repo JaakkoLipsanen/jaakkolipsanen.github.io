@@ -41,7 +41,7 @@ export default {
 };
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 	$cover-image-height: 85vh;
 	.cover-image-container {
 		position: fixed;

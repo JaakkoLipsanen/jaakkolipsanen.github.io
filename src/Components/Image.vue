@@ -25,6 +25,12 @@ export default {
 		progressive : {
 			type: Boolean,
 			default: true,
+		},
+
+		// okay if this gets changed after initialization, i'll ignore it
+		autoSize: {
+			type: Boolean,
+			default: true,
 		}
 	},
 
@@ -39,11 +45,13 @@ export default {
 	},
 
 	methods: {
-		calculateImagePadding: function(image) {
-			return (1 / image.AspectRatio * 100) + "%";
-		},
-
 		initialize: function() {
+			if(this.image == null) {
+		//		return;
+			}
+
+			console.log(this.image);
+
 			var blurryImage = $(this.$els.blurryImage);
 			var sharpImage = $(this.$els.sharpImage);
 
@@ -52,10 +60,12 @@ export default {
 			blurryImage.css("opacity", 1);
 			blurryImage.addClass("opacity-transition");
 
-			this.recalculateHeight();
-			$(window).resize(() => {
+			if(this.autoSize) {
 				this.recalculateHeight();
-			});
+				$(window).resize(() => {
+					this.recalculateHeight();
+				});
+			}
 
 			var tmpImage = new Image();
 			var src = this.image.FullPath(this.quality);
@@ -82,27 +92,19 @@ export default {
 	overflow: hidden;
 }
 
-.blurry-image {
-	width: 100%;
-	height: 100%;
-
-	opacity: 1;
-	background-size: cover;
-	background-repeat: no-repeat;
-	position: absolute;
-}
-
 .opacity-transition {
 	transition: opacity 0.75s ease-in-out;
 }
 
-.sharp-image {
-	position: absolute;
-	opacity: 1;
-	background-size: cover;
+.blurry-image, .sharp-image {
 	width: 100%;
 	height: 100%;
+	position: absolute;
+	opacity: 1;
 
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 </style>

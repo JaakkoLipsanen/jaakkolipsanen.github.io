@@ -2,10 +2,10 @@
 	<div>
 		<div style="height: 96px"> </div>
 		<div v-if="blog.PostInfos.length > 0" class="blog-list-page-container">
-			<div class="blog-post-block" v-for="post in blog.PostInfos">
-
-				<div class="blog-post-block-background" style="background-image: url({{ post.Directory + '360p/' + post.MainImage  }});" v-on:click="postClicked(post)">
-					<div class="post-block-container"> </div>
+			<div class="blog-post-block" v-for="post in blog.PostInfos" v-on:click="postClicked(post)">
+				<div class="image-container">
+					<image-component class="post-image" v-if="post.MainImage != null" :quality="'360p'" :auto-size="false" :image="post.MainImage"></image-component>
+					<div class='image-color-overlay'> </div>
 				</div>
 
 				<h4 class="post-title"> {{ post.Title }} </h4>
@@ -17,8 +17,13 @@
 
 <script>
 import { BlogSource } from "../../scripts/Blog.js";
+import ImageComponent from "../../Components/Image.vue";
 
 export default {
+	components: {
+		"image-component": ImageComponent,
+	},
+
 	data() {
 		return {
 			blog: null
@@ -30,6 +35,8 @@ export default {
 		BlogSource.FromFile("/assets/cycle/blog/posts.txt").then(blog => {
 			data.blog = blog.CreateQuery(post => post.TripUrlString === "usa2016");
 			data.blog.PostInfos.reverse();
+
+			$(".post-image").append("<div class='post-block-container'> </div>")
 		});
 	},
 
@@ -76,12 +83,11 @@ export default {
 }
 
 .blog-post-block-background {
-	width: 100%; background-position: center; background-size: cover;
+	width: 100%;
+	height: 100% !important; background-position: center; background-size: cover;
 }
 
-.post-block-container {
-	position: relative; width: 100%; padding-bottom: 66%; background-color: rgba(0, 0, 0, 0.3); transition: background-color 0.2s ease-in-out;
-}
+
 
 
 .blog-list-page-container {
@@ -109,13 +115,32 @@ export default {
 	}
 }
 
+
 .blog-post-block {
+	width: 400px;
 	text-align: center;
 	cursor: pointer;
 
 	display: inline-block;
 	margin: 16px 34px;
-
-	width: 400px;
 }
+
+$block-width: 400px;
+$block-height-aspect: 0.66;
+.image-container {
+	width: 100%;
+	padding-bottom: 66%;
+//	height: calc(#{$block-width} * #{$block-height-aspect});
+}
+
+.image-color-overlay {
+	position: absolute;
+	width: 100%;
+	padding-bottom: 66%;
+	top: 0;
+
+	background-color: rgba(0, 0, 0, 0.3);
+	transition: background-color 0.2s ease-in-out;
+}
+
 </style>

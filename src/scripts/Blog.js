@@ -311,7 +311,7 @@ export class BlogSource {
 					const dayRange = DayRange.Parse(parameters[3]);
 					const mainImage = parameters[4];
 
-					blogPosts.push(new BlogPostInfo(name, title, dayRange, trip, mainImage, directory));
+					blogPosts.push(new BlogPostInfo(name, title, dayRange, trip, new Photo(directory + "/posts/" + name, mainImage, "", ), directory));
 				}
 
 				resolve(new BlogSource(blogPosts, directory));
