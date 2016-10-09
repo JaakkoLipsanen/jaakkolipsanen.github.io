@@ -448,11 +448,11 @@ function CreateGoogleIcon(url, size = 6) {
 	};
 }
 
-const TentIcon = CreateGoogleIcon("/assets/icons/tent.png");
-const HotelIcon = CreateGoogleIcon("/assets/icons/hotel.png");
+const TentIcon = CreateGoogleIcon("/icons/tent.png");
+const HotelIcon = CreateGoogleIcon("/icons/hotel.png");
 
-const TentIconBig = CreateGoogleIcon("/assets/icons/tent_outlined.png", 8);
-const HotelIconBig = CreateGoogleIcon("/assets/icons/hotel_outlined.png", 8);
+const TentIconBig = CreateGoogleIcon("/icons/tent_outlined.png", 8);
+const HotelIconBig = CreateGoogleIcon("/icons/hotel_outlined.png", 8);
 
 class Style {
 	constructor(styleArray, bigIcons = false) {

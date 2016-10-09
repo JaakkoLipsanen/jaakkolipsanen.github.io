@@ -1,10 +1,16 @@
 <template>
-	<div class="cycle-map-container" v-el:cycle-map-container>
-		<div style='position: relative; z-index: 1;'>
-			<img class='resize-button fullscreen-button' src='/assets/icons/expand.png'  v-on:click='enterFullscreen' v-el:fullscreen-button>
-		</div>
+	<div class="cycle-map-and-info-container">
+		<div class="cycle-map-container" v-el:cycle-map-container>
 
-		<div style='width: 100%; height: 100%' class='cycle-map' v-el:cycle-map></div>
+			<div style='position: relative; z-index: 1;'>
+				<div class="fullscreen-button-container">
+					<img class='resize-button fullscreen-button' :src="isMapFullscreen ? '/icons/reduce.png' : '/icons/expand.png'"  v-on:click='enterFullscreen' v-el:fullscreen-button>
+				</div>
+			</div>
+
+			<div style='width: 100%; height: 100%' class='cycle-map' v-el:cycle-map></div>
+
+		</div>
 
 		<!-- Bottom text -->
 		<p v-if="map && map.IsRouteLoaded" class="map-length-and-night-count-text" style=' margin-top: 0px; margin-left: 1px; float: left;'>{{ map.RouteLength + 'km, ' + map.NightCount +  ' days' }}</p>
@@ -59,9 +65,10 @@ export default {
 		}
 
 		OnFullscreenChange(() => {
+			console.log("XXXXXXXXXXX");
 			this.isMapFullscreen = !this.isMapFullscreen;
 			$(this.$els.cycleMap).toggleClass("fullscreen", this.isMapFullscreen);
-			$(this.$els.fullScreenButton).attr("src", this.isMapFullscreen ? "/assets/icons/reduce.png" : "/assets/icons/expand.png");
+			$(this.$els.fullScreenButton).attr("src", this.isMapFullscreen ? "/icons/reduce.png" : "/icons/expand.png");
 
 			this.map.OnSizeChanged();
 		});
@@ -102,29 +109,51 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-	$map-size: 500px;
 	.cycle-map-container {
-		width: 80%;
-		height: $map-size;
+		width: 100%;
+		height: 100%;
 		margin: auto;
 
-		/* this is for the bottom text (days, kilmoeters and hotel/tent legend) since they are not calculated in the layout */
-		margin-bottom: 24px;
 
 		color: white;
 	}
 
-	.fullscreen-button {
-		width: 20px;
+	$default-map-size: 500px;
+	.cycle-map-and-info-container {
+		width: $default-map-size;
+		height: $default-map-size;
+
+		/* this is for the bottom text (days, kilmoeters and hotel/tent legend) since they are not calculated in the layout */
+		margin-bottom: 24px;
+	}
+
+	.fullscreen-button-container {
 		position: absolute;
 		top: 8px;
 		right: 8px;
-		opacity: 0.5
+		background-color: white;
+		border-radius: 2px;
+		text-align: center;
+
+		/* from gmaps zoom/streetview buttons */
+		box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+
+		width: 28px;
+		height: 28px;
+	}
+
+	.fullscreen-button {
+		width: 16px;
+		height: 16px;
+
+		margin-top: 6px;
+		display: inline-block;
+		opacity: 0.65;
 	}
 
 	.fullscreen-button:hover {
-		transform: scale(1.2, 1.2);
-		opacity: 1 !important;
+		transform: scale(1.1, 1.1);
+		opacity: 0.8 !important;
 		cursor: pointer;
 	}
 
@@ -138,7 +167,7 @@ export default {
 <style lang="sass">
 	// remove Google logo, copyright print etc from Google Maps. Not allowed but.. blargh
 	.gmnoprint a, .gmnoprint span, .gm-style-cc { display: none; }
-	.gmnoprint div { background:none !important; }
+//	.gmnoprint div { background:none !important; }
 	.cycle-map-container a[href^='http://maps.google.com/maps']{display:none !important}
 	.cycle-map-container a[href^='https://maps.google.com/maps']{display:none !important}
 </style>
