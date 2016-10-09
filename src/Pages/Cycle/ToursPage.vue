@@ -81,7 +81,7 @@ export default {
 		},
 
 		CurrentTour: function() {
-			return CycleTourData.Tours[this.currentTourIndex]; // GetTourByShortName("USA 2016");
+			return CycleTourData.Tours[this.currentTourIndex];
 		},
 
 		HasNextTour: function() {

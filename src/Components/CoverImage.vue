@@ -7,7 +7,7 @@
 			background-color: rgba(0, 0, 0, 0.25); box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.5);" ></div>
 
 		<p class="main-text">  {{ mainText }}</p>
-		<p class="sub-text" >{{ subText }}</p>
+		<p class="sub-text" v-html="subText" ></p> <!-- use v-html because want to accept html tags (like line-break) -->
 	</div>
 </template>
 
@@ -31,7 +31,6 @@ export default {
 			default: ""
 		},
 
-		// if this is set to true, then a 10p image is loaded first
 		subText: {
 			type: String,
 			default: ""
@@ -112,6 +111,7 @@ export default {
 		font-size: 24px;
 
 		color: rgb(205, 205, 205);
+		text-align: center;
 	}
 
 	// in

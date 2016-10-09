@@ -1,7 +1,7 @@
 <template>
 	<div class="page-content-container">
 
-		<cover-image v-if="currentPost" class="cover-image" :image="currentPost.MainImage" :main-text="currentPost.Title.toUpperCase()" :sub-text="currentPost.DayRange.DisplayString"></cover-image>
+		<cover-image v-if="currentPost" class="cover-image" :image="currentPost.MainImage" :main-text="currentPost.Title.toUpperCase()" :sub-text="CoverImageSubText"></cover-image>
 
 		<div class="cover-image-container-spacer"></div>
 		<div class="blog-content-background">
@@ -89,14 +89,7 @@ export default {
 
 	methods: {
 		getBlogPostsForTour: function(tour) {
-			return this.blog ? this.blog.PostInfos.filter(post => post.Trip == tour.shortName) : [];
-		},
-
-		getLoadStyleByIndex: function(index) {
-		/*	if(index == 0) { return 0; }
-			else if(index < 3) { return 1; } */
-
-			return 2;
+			return this.blog ? this.blog.PostInfos.filter(post => post.Trip === tour.shortName) : [];
 		},
 
 		openPost: async function(post) {
@@ -124,6 +117,12 @@ export default {
 			}
 
 			return this.currentPost.DayRange;
+		},
+
+		CoverImageSubText: function() {
+			return  this.currentPost.DayRange.DisplayString +
+					"<br>" + // line break
+					this.currentPost.Trip;
 		}
 	},
 

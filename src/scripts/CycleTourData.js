@@ -4,21 +4,21 @@ export let CycleTourData = {
 	Tours: [
 		{
 			"name": "Sweden to Belgium",
-			"shortName": "EUROPE 2014",
+			"shortName": "Europe 2014",
 			"year": "2014",
 			"description": ""
 		},
 
 		{
 			"name": "Spain Winter",
-			"shortName": "SPAIN 2014",
+			"shortName": "Spain 2014",
 			"year": "2014",
 			"description": ""
 		},
 
 		{
 			"name": "Central Europe",
-			"shortName": "EUROPE 2015",
+			"shortName": "Europe 2015",
 			"year": "2015",
 			"description": ""
 		},
@@ -40,7 +40,7 @@ export let CycleTourData = {
 	},
 
 	GetTourByShortName: function(shortName) {
-		return this.Tours.find(x => x.shortName == shortName);
+		return this.Tours.find(x => x.shortName === shortName);
 	},
 
 	GetAllTours: function() {
