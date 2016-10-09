@@ -11,9 +11,10 @@
 		</a>
 
 		<div class="hamburger-menu">
-			<p v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex }" v-for="(index, item) in navbarLinks">{{ item.name.toUpperCase() }} </p>
+			<img class="hamburger-menu-close-button" src="/icons/close.png" v-on:click="SetHamburgerMenuOpen(false)">
+			<p v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex, 'disabled': !item.enabled }" v-for="(index, item) in navbarLinks">{{ item.name.toUpperCase() }} </p>
 		</div>
-		<img v-el:hamburger-menu-button  class="hamburger-menu-button" src="/icons/HamburgerMenuBlack.svg" v-on:click="ToggleHamburgerMenu">
+		<img v-el:hamburger-menu-button  class="hamburger-menu-button" src="/icons/HamburgerMenuBlack.svg" v-on:click="SetHamburgerMenuOpen(true)">
 	</div>
 </template>
 
@@ -39,7 +40,7 @@ export default {
 
 	ready: function() {
 		$(window).resize(() => {
-			this.SetHamburgerMenuVisibility(false);
+			this.SetHamburgerMenuOpen(false);
 			this.updateNavbarSize();
 		});
 
@@ -78,16 +79,17 @@ export default {
 				this.$root.ChangePage("cycle-tours-page", "/cycle/tours", { });
 			}
 
-			this.SetHamburgerMenuVisibility(false);
+			this.SetHamburgerMenuOpen(false);
 		},
 
 		ToggleHamburgerMenu: function() {
-			this.SetHamburgerMenuVisibility(!this.isHamburgerMenuOpen);
+			this.SetHamburgerMenuOpen(!this.isHamburgerMenuOpen);
 		},
 
-		SetHamburgerMenuVisibility: function(visible) {
-			this.isHamburgerMenuOpen = visible;
-			$(".hamburger-menu").toggle(visible);
+		SetHamburgerMenuOpen: function(open) {
+			this.isHamburgerMenuOpen = open;
+
+			$(".hamburger-menu").toggleClass("open-hamburger-menu", open);
 		},
 
 		IsSmallNavbarForced: function() {
@@ -131,7 +133,7 @@ export default {
 			}
 
 			this.updateNavbarSize();
-			this.SetHamburgerMenuVisibility(false);
+			this.SetHamburgerMenuOpen(false);
 		}
 	}
 };
@@ -174,61 +176,72 @@ export default {
 		}
 	}
 
+	.open-hamburger-menu {
+		width: 100% !important;
+		height: 100vh !important;
+	}
+
 	.hamburger-menu {
-		width: 200px;
-		background-color: white;
-		height: 100vh;
+		width: 0px;
+		height: 0px;
+		background-color: rgb(32, 32, 32); // hsl(214, 66%, 60%);
+		transition: width .5s, height .5s;
 
 		position: fixed;
 		left: 0;
 		top: 0;
 		z-index: 1000;
-		display: none;
 
-		margin-top: 32px;
+		padding-top: 16px;
+		overflow: hidden;
 
 		p {
 			display: block; margin-right: 8px;
 			font-size: 22px;
-			font-weight: 800;
-			font-family: "Open Sans";
-			color: black;
-			opacity: 0.6;
+			font-weight: 700;
+			font-family: "Raleway";
+			color: white;;
+			opacity: 0.75;
 
+			border-bottom: 2px solid transparent;;
 			cursor: pointer;
 			transition: opacity 0.15s ease-in-out;
-			margin-left: 8px;
+			margin-left: 24px;
+			width: auto;
+			padding: 3px 1px;
 
-			&:hover {
+			display: table;
+
+			&:hover:not(.disabled):not(.selected) {
 				opacity: 1;
+				border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 			}
 
 			&.selected {
 				opacity: 1;
+				font-weight: 800 !important;
+				border-bottom: 2px solid white;
 			}
 
 			&.disabled {
-
+				opacity: 0.3;
+				cursor: default;
 			}
 		}
 
-		p:last-child {
-			color: white;
-			opacity: 0.35;
+		.hamburger-menu-close-button {
+			width: 24px;
+			height: 24px;
+			position: absolute;
+			top: 38px;
+			right: 24px;
+
+			opacity: 0.75;
+			cursor: pointer;
 
 			&:hover {
-				opacity: 1;
+				opacity: 0.9;
 			}
-		}
-
-		$horizontal-divider-margin: 8px;
-		.horizontal-divider {
-		     border-top:1px solid hsl(0, 0, 60);
-		     border-bottom:1px solid hsl(0, 0, 60);
-		     width: calc(100% - #{$horizontal-divider-margin} * 2);
-			 margin: auto $horizontal-divider-margin auto $horizontal-divider-margin;
-			 display: inline-block;
-			 box-sizing: border-box;
 		}
 	}
 
@@ -272,21 +285,19 @@ export default {
 			margin-bottom: 0px;
 			transform: translateY(-50%);
 
-
 			&:hover:not(.disabled) {
 				opacity: 1;
-
 				border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 			}
 
 			&.selected:not(.disabled) {
 				opacity: 1;
-
 				border-bottom: 2px solid black;
 			}
 
 			&.disabled {
 				color: rgba(0, 0, 0, 0.4);
+				cursor: default;
 			}
 
 			&:last-child {
