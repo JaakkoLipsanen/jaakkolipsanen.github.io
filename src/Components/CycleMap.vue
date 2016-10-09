@@ -3,8 +3,8 @@
 		<div class="cycle-map-container" v-el:cycle-map-container>
 
 			<div style='position: relative; z-index: 1;'>
-				<div class="fullscreen-button-container">
-					<img class='resize-button fullscreen-button' :src="isMapFullscreen ? '/icons/reduce.png' : '/icons/expand.png'"  v-on:click='enterFullscreen' v-el:fullscreen-button>
+				<div class="fullscreen-button-container" v-on:click='enterFullscreen'>
+					<img class='resize-button fullscreen-button' :src="isMapFullscreen ? '/icons/reduce.png' : '/icons/expand.png'" v-el:fullscreen-button>
 				</div>
 			</div>
 
@@ -65,10 +65,8 @@ export default {
 		}
 
 		OnFullscreenChange(() => {
-			console.log("XXXXXXXXXXX");
 			this.isMapFullscreen = !this.isMapFullscreen;
 			$(this.$els.cycleMap).toggleClass("fullscreen", this.isMapFullscreen);
-			$(this.$els.fullScreenButton).attr("src", this.isMapFullscreen ? "/icons/reduce.png" : "/icons/expand.png");
 
 			this.map.OnSizeChanged();
 		});
@@ -140,6 +138,7 @@ export default {
 
 		width: 28px;
 		height: 28px;
+		cursor: pointer;
 	}
 
 	.fullscreen-button {
@@ -151,10 +150,9 @@ export default {
 		opacity: 0.65;
 	}
 
-	.fullscreen-button:hover {
+	.fullscreen-button-container:hover > img {
 		transform: scale(1.1, 1.1);
 		opacity: 0.8 !important;
-		cursor: pointer;
 	}
 
 	.fullscreen {
