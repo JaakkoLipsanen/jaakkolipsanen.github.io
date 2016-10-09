@@ -15,7 +15,7 @@
 							<h1 v-if="block.Type == 'Header'" class="header-block"> {{ block.Title }} </h1>
 							<image-group v-if="block.Type == 'ImageGroup'" class="image-group-block" :group-images="block.Images"></image-group>
 							<div v-if="block.Type == 'Image'" class="image-block" v-bind:class="{ 'fullwidth-img': block.IsFullWidth }" style="margin: auto" v-else>
-								<image-component :image="block.Image"> </image-component>
+								<image-component :image="block.Image" v-on:click="imageClicked(block.Image)"> </image-component>
 
 
 								<div v-if="block.Image.Text != '' "style="width: 100%; height: auto;">

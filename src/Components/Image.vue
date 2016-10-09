@@ -1,7 +1,7 @@
 <template>
-	<div v-el:image-container class="image-container" style="cursor: pointer;"  v-on:click="imageClicked(block.Image)" >
+	<div v-el:image-container class="image-container" style="cursor: pointer;" >
 		<div v-el:sharp-image class="sharp-image"> </div>
-		<div v-el:blurry-image v-if="progressive" class="blurry-image opacity-transition" :style="{ 'background-image': 'url(' + image.FullPath('10p') + ')' }" v-on:click="imageClicked(block.Image)"> </div>
+		<div v-el:blurry-image v-if="progressive" class="blurry-image opacity-transition" :style="{ 'background-image': 'url(' + image.FullPath('10p') + ')' }"> </div>
 	</div>
 </template>
 
@@ -60,8 +60,11 @@ export default {
 
 			if(this.autoSize) {
 				this.recalculateHeight();
+
 				$(window).resize(() => {
-					this.recalculateHeight();
+					if(this.autoSize) {
+						this.recalculateHeight();
+					}
 				});
 			}
 

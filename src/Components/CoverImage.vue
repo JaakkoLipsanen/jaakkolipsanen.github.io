@@ -1,6 +1,6 @@
 <template>
 	<div class="cover-image-container">
-		<image-component class="cover-image" v-if="image != null" :image="image" :quality="240p"> </image-component>
+		<image-component class="cover-image" v-if="image != null" :quality="imageQuality" :auto-size="false" :image="image"> </image-component>
 
 		<!-- Vignette -->
 		<div style="position: absolute; top: 0px; height: 100%; width: 100%;
@@ -35,6 +35,26 @@ export default {
 		subText: {
 			type: String,
 			default: ""
+		}
+	},
+
+	data() {
+		return {
+			imageQuality: this.updateImageQuality()
+		};
+	},
+
+	ready: function() {
+		this.updateImageQuality();
+		$(window).resize(() => {
+			this.updateImageQuality();
+		});
+	},
+
+	methods: {
+		updateImageQuality: function() {
+			this.imageQuality = window.matchMedia("(min-width: 800px)").matches ? "1080p" : "480p"; // no 720p middle ground :// not sure if good
+			return this.imageQuality;
 		}
 	}
 };
