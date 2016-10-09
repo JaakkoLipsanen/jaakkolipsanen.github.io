@@ -41,5 +41,9 @@ export async function LoadXmlAsync(filePath) {
 }
 
 export function GetUriDirectory(url) {
-	return url.substring(0, url.lastIndexOf("/") + 1);
+	return url.substring(0, url.lastIndexOf("/") + 1).trim();
+}
+
+export function GetUriFileName(url) {
+	return url.substring(url.lastIndexOf("/") + 1).trim();
 }

@@ -193,7 +193,6 @@ export class Route {
 			destination.push(new Path(currentPath));
 		}
 
-		console.log(cyclePaths);
 		return { CyclingPaths: cyclePaths, TransportPaths: transportPaths, Nights: nights };
 	}
 
@@ -261,7 +260,6 @@ export class Route {
 			destination.push(new Path(currentPath));
 		}
 
-		console.log(cyclePaths);
 		return { CyclingPaths: cyclePaths, TransportPaths: transportPaths, Nights: nights };
 	}
 
@@ -339,6 +337,10 @@ export class CycleMap {
 		return this.CurrentRouteView.NightCount;
 	}
 
+	get IsRouteLoaded() {
+		return this.CurrentRouteView != null;
+	}
+
 	get CurrentMapStyle() {
 		return (this._mapStyle == MapStyle.Dark) ? MapStyles.Dark : ((this._mapStyle == MapStyle.Light) ? MapStyles.Light : MapStyles.Barebones);
 	}
@@ -364,7 +366,6 @@ export class CycleMap {
 			backgroundColor: "white", // same color as the ocean in the map style
 		};
 
-		console.log( this.CurrentMapStyle);
 		this._googleMap = new google.maps.Map(container, googleMapsProperties);
 
 		let streetViewChangedListeners = [];

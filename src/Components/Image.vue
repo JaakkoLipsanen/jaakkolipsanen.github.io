@@ -1,36 +1,36 @@
 <template>
 	<div v-el:image-container class="image-container" style="cursor: pointer;"  v-on:click="imageClicked(block.Image)" >
 		<div v-el:sharp-image class="sharp-image"> </div>
-		<div v-el:blurry-image v-if="progressive" class="blurry-image opacity-transition" style="background-image: url({{ image.FullPath('10p') }})" v-on:click="imageClicked(block.Image)"> </div>
+		<div v-el:blurry-image v-if="progressive" class="blurry-image opacity-transition" :style="{ 'background-image': 'url(' + image.FullPath('10p') + ')' }" v-on:click="imageClicked(block.Image)"> </div>
 	</div>
 </template>
 
 <script>
-import { Assert, IsTouchDevice, GetRandomInt } from "../scripts/MiscHelper.js";
-import { PhotoQuality } from "../scripts/Photo.js";
+
+import { GetUriFileName } from "../scripts/FileHelper.js";
 
 export default {
 	props: {
 		image: {
 			type: Object,
-			required: true,
+			required: true
 		},
 
 		quality: {
 			type: String,
-			default: '720p'
+			default: "720p"
 		},
 
 		// if this is set to true, then a 10p image is loaded first
-		progressive : {
+		progressive: {
 			type: Boolean,
-			default: true,
+			default: true
 		},
 
 		// okay if this gets changed after initialization, i'll ignore it
 		autoSize: {
 			type: Boolean,
-			default: true,
+			default: true
 		}
 	},
 
@@ -47,13 +47,11 @@ export default {
 	methods: {
 		initialize: function() {
 			if(this.image == null) {
-		//		return;
+				return;
 			}
 
-			console.log(this.image);
-
-			var blurryImage = $(this.$els.blurryImage);
-			var sharpImage = $(this.$els.sharpImage);
+			const blurryImage = $(this.$els.blurryImage);
+			const sharpImage = $(this.$els.sharpImage);
 
 			// set blurry image's transition to 1 and bypass transitions
 			blurryImage.removeClass("opacity-transition");
@@ -67,9 +65,15 @@ export default {
 				});
 			}
 
-			var tmpImage = new Image();
-			var src = this.image.FullPath(this.quality);
+			const getCurrentImageSource = () => this.image.FullPath(this.quality);
+			const src = getCurrentImageSource();
+
+			const tmpImage = new Image();
 			tmpImage.onload = () => {
+				if(GetUriFileName(tmpImage.src) !== GetUriFileName(getCurrentImageSource())) {
+					return; // image has been changed and another image is loading already
+				}
+
 				sharpImage.css("background-image", "url(    " + src + ")");
 				blurryImage.css("opacity", 0);
 			};
@@ -77,7 +81,7 @@ export default {
 		},
 
 		recalculateHeight: function() {
-			var height = this.$els.imageContainer.offsetWidth / this.image.AspectRatio + "px";;
+			const height = this.$els.imageContainer.offsetWidth / this.image.AspectRatio + "px";;
 			$(this.$els.imageContainer).css("height", height);
 		}
 	}

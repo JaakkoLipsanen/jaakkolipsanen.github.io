@@ -12,32 +12,31 @@
 </template>
 
 <script>
-import { Assert, IsTouchDevice, GetRandomInt } from "../scripts/MiscHelper.js";
-import { PhotoQuality } from "../scripts/Photo.js";
+
 import ImageComponent from "./Image.vue";
 
 export default {
 	components: {
-		"image-component": ImageComponent,
+		"image-component": ImageComponent
 	},
 
 	props: {
 		image: {
 			type: Object,
-			required: true,
+			required: true
 		},
 
 		mainText: {
 			type: String,
-			default: ''
+			default: ""
 		},
 
 		// if this is set to true, then a 10p image is loaded first
-		subText : {
+		subText: {
 			type: String,
-			default: '',
+			default: ""
 		}
-	},
+	}
 };
 </script>
 

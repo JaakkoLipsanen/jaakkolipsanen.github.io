@@ -24,8 +24,8 @@
 
 		<cycle-map :route-path="CycleRoutePath" :theme="'light'" class="tour-map"></cycle-map>
 		<div style="height: 0px"></div>
-		<h2 style="margin-top: 0px; margin-bottom: 0px;"> {{ currentMap.RouteLength + ' kilometers!' }} </h4>
-		<h2 style="margin-top: 0px; margin-bottom: 64px;"> {{ currentMap.NightCount + ' days' }} </h4>
+		<h2 style="margin-top: 0px; margin-bottom: 0px;"> {{ this.RouteLength + ' kilometers!' }} </h4>
+		<h2 style="margin-top: 0px; margin-bottom: 64px;"> {{ this.RouteNightCount + ' days' }} </h4>
 
 		<h2> Blog Posts </h2>
 		<h4 v-if="currentTourPostInfos.length == 0" style="font-weight: 500">no blog posts from this tour...</h4>
@@ -48,7 +48,7 @@ export default {
 	data() {
 		return {
 			blog: null,
-			currentTourPostInfos: null,
+			currentTourPostInfos: [],
 			currentTourIndex: CycleTourData.Tours.length - 1,
 
 			currentMap: undefined
@@ -68,6 +68,14 @@ export default {
 	},
 
 	computed: {
+		RouteLength: function() {
+			return this.currentMap ? this.currentMap.RouteLength : "";
+		},
+
+		RouteNightCount: function() {
+			return this.currentMap ? this.currentMap.NightCount : "";
+		},
+
 		CycleRoutePath: function() {
 			return "/assets/cycle/routes/" + this.CurrentTour.shortName.replace(" ", "").toLowerCase() + "/route.txt";
 		},
@@ -90,7 +98,7 @@ export default {
 
 		NextTour: function() {
 			return CycleTourData.Tours[this.currentTourIndex + 1];
-		},
+		}
 	},
 
 	methods: {

@@ -1,5 +1,5 @@
 <template>
-	<div id="image-viewer-container" v-on:click="closeImage" >
+	<div v-if="currentPhoto" id="image-viewer-container" v-on:click="closeImage" >
 		<div class='gallery-background'></div>
 
 		<div id="image-container" >
@@ -126,6 +126,8 @@ export default {
 		opacity: 1;
 		position: absolute;
 		z-index: 1000;
+
+		display: none;
 	}
 
 	.gallery-background {

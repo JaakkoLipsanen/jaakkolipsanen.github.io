@@ -1,7 +1,7 @@
 <template>
 	<div class="page-content-container">
 
-		<cover-image class="cover-image" :image="currentPost.MainImage" :main-text="currentPost.Title.toUpperCase()" :sub-text="currentPost.DayRange.DisplayString"></cover-image>
+		<cover-image v-if="currentPost" class="cover-image" :image="currentPost.MainImage" :main-text="currentPost.Title.toUpperCase()" :sub-text="currentPost.DayRange.DisplayString"></cover-image>
 
 		<div class="cover-image-container-spacer"></div>
 		<div class="blog-content-background">
@@ -10,7 +10,7 @@
 
 					<!-- Blog post content -->
 					<div class="blog-post-content-container" >
-						<div class="content-block" v-for="block in currentPost.ContentBlocks">
+						<div class="content-block" v-for="block in (currentPost ? currentPost.ContentBlocks : [])">
 							<p v-if="block.Type == 'Text'" class="text-block">{{ block.Text }}</p>
 							<h1 v-if="block.Type == 'Header'" class="header-block"> {{ block.Title }} </h1>
 							<image-group v-if="block.Type == 'ImageGroup'" class="image-group-block" :group-images="block.Images"></image-group>
@@ -35,14 +35,14 @@
 					 <h3> Other Blog Posts </h3>
 
 					 <h4 class="sidebar-tour-title" v-for="tour in tours"> {{ tour.name }} <span style="font-size: 12px"> ({{ tour.year }}) </span>
-						 <p class="sidebar-post" v-for="post in  getBlogPostsForTour(tour)" v-on:click="openPost(post)" v-bind:class="{ 'selected-sidebar-post': post.Title == currentPost.Title }"> {{ post.Title }} </p>
+						 <p class="sidebar-post" v-for="post in getBlogPostsForTour(tour)" v-on:click="openPost(post)" v-bind:class="{ 'selected-sidebar-post': currentPost && post.Title == currentPost.Title }"> {{ post.Title }} </p>
 						 <p v-if="getBlogPostsForTour(tour).length == 0" style="font-style: italic "> no posts from this tour ! </p>
 					 </h4>
 				 </div>
 			</div>
 		</div>
 
-		<image-viewer style="display: none"></image-viewer>
+		<image-viewer></image-viewer>
 	</div>
 </template>
 
@@ -89,7 +89,7 @@ export default {
 
 	methods: {
 		getBlogPostsForTour: function(tour) {
-			return this.blog.PostInfos.filter(post => post.Trip == tour.shortName);
+			return this.blog ? this.blog.PostInfos.filter(post => post.Trip == tour.shortName) : [];
 		},
 
 		getLoadStyleByIndex: function(index) {

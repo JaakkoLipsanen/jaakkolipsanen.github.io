@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div style="height: 96px"> </div>
-		<div v-if="blog.PostInfos.length > 0" class="blog-list-page-container">
+		<div v-if="blog && blog.PostInfos.length > 0" class="blog-list-page-container">
 			<div class="blog-post-block" v-for="post in blog.PostInfos" v-on:click="postClicked(post)">
 				<div class="image-container">
 					<image-component class="post-image" v-if="post.MainImage != null" :quality="'360p'" :auto-size="false" :image="post.MainImage"></image-component>
@@ -21,7 +21,7 @@ import ImageComponent from "../../Components/Image.vue";
 
 export default {
 	components: {
-		"image-component": ImageComponent,
+		"image-component": ImageComponent
 	},
 
 	data() {
@@ -35,8 +35,6 @@ export default {
 		BlogSource.FromFile("/assets/cycle/blog/posts.txt").then(blog => {
 			data.blog = blog.CreateQuery(post => post.TripUrlString === "usa2016");
 			data.blog.PostInfos.reverse();
-
-			$(".post-image").append("<div class='post-block-container'> </div>")
 		});
 	},
 

@@ -6,8 +6,6 @@
 
 <script>
 
-import Vue from "vue";
-
 export default {
 	data() {
 		return {
@@ -18,17 +16,6 @@ export default {
 	},
 
 	ready: function() {
-
-	},
-
-	methods: {
-
-	},
-
-	computed: {
-	},
-
-	events: {
 	}
 };
 </script>

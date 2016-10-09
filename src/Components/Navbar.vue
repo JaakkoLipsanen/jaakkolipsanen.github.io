@@ -33,7 +33,7 @@ export default {
 			selectedSubIndex: 0,
 
 			isHamburgerMenuOpen: false,
-			isSmallNavbarForced: false,
+			isSmallNavbarForced: false
 		};
 	},
 
@@ -51,10 +51,10 @@ export default {
 	methods: {
 		updateNavbarSize: function() {
 			if ($(document).scrollTop() > 0 || this.IsSmallNavbarForced()) {
-				$('#navbar-container').addClass('shrink');
+				$("#navbar-container").addClass("shrink");
 			}
 			else if(!this.IsSmallNavbarForced()) {
-				$('#navbar-container').removeClass('shrink');
+				$("#navbar-container").removeClass("shrink");
 			}
 		},
 
@@ -71,10 +71,10 @@ export default {
 			else if(index === 1) { // "blog"
 				this.$root.ChangePage("blog-list-page", "/cycle/blog", { });
 			}
-			else if(index == 2) { // gear
+			else if(index === 2) { // gear
 				this.$root.ChangePage("gear-page", "/cycle/gear", { });
 			}
-			else if(index == 3) { // "tours"
+			else if(index === 3) { // "tours"
 				this.$root.ChangePage("cycle-tours-page", "/cycle/tours", { });
 			}
 
@@ -91,7 +91,7 @@ export default {
 		},
 
 		IsSmallNavbarForced: function() {
-			let isHamburgerMenuVisible = $(".hamburger-menu-button").is(":visible");
+			const isHamburgerMenuVisible = $(".hamburger-menu-button").is(":visible");
 			return this.isSmallNavbarForced || isHamburgerMenuVisible;
 		}
 	},
@@ -123,10 +123,10 @@ export default {
 				this.selectedSubIndex = 1;
 				this.isSmallNavbarForced = (parts[1] === "post");
 			}
-			else if(parts[0] == "gear") {
+			else if(parts[0] === "gear") {
 				this.selectedSubIndex = 2;
 			}
-			else if(parts[0] == "home") {
+			else if(parts[0] === "home") {
 				this.selectedSubIndex = 0;
 			}
 

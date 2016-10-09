@@ -5,9 +5,13 @@
 
 <script>
 import { Assert, IsTouchDevice, GetRandomInt } from "../scripts/MiscHelper.js";
-import { PhotoQuality } from "../scripts/Photo.js";
+import ImageComponent from "./Image.vue";
 
 export default {
+	components: {
+		"image-component": ImageComponent
+	},
+
 	props: {
 		groupImages: {
 			type: Array,
@@ -16,6 +20,12 @@ export default {
 	},
 
 	ready: function() {
+	//	var imageComponent = this.$options.components["image-component"];
+	//	var img = new ImageComponent({ props:});
+
+	//	var child = new imageComponent({ el: this.$els.imageGroupContainer, parent: this,  props: { image: new Photo("", "", "", 1, 1) } });
+	//	console.log(child);
+
 		const MaxImagesPerRow = IsTouchDevice() ? 2 : 2; // TODO: ANTTI MUUTA TÄTÄ JOS TÄÄ UPDATE KUSEE
 		const BaseAspectRatio = 4 / 3;
 		const groupContainer = this.$els.imageGroupContainer;
