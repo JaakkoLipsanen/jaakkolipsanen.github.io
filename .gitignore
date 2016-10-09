@@ -4,3 +4,4 @@ assets/
 *.css.map
 
 node_modules/
+todo.txt
