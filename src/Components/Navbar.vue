@@ -12,7 +12,7 @@
 
 		<div class="hamburger-menu">
 			<img class="hamburger-menu-close-button" src="/icons/close.png" v-on:click="SetHamburgerMenuOpen(false)">
-			<p v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex, 'disabled': !item.enabled }" v-for="(index, item) in navbarLinks">{{ item.name.toUpperCase() }} </p>
+			<a :href="getSublinkAddress(item)" v-on:click="subLinkClicked($event, item, index)" :class="{ 'selected': index == selectedSubIndex, 'disabled': !item.enabled }" v-for="(index, item) in navbarLinks">{{ item.name.toUpperCase() }} </a>
 		</div>
 		<img v-el:hamburger-menu-button  class="hamburger-menu-button" src="/icons/HamburgerMenuBlack.svg" v-on:click="SetHamburgerMenuOpen(true)">
 	</div>
@@ -193,7 +193,7 @@ export default {
 		padding-top: 16px;
 		overflow: hidden;
 
-		p {
+		a {
 			display: block; margin-right: 8px;
 			font-size: 22px;
 			font-weight: 700;
@@ -204,11 +204,13 @@ export default {
 			border-bottom: 2px solid transparent;;
 			cursor: pointer;
 			transition: opacity 0.15s ease-in-out;
-			margin-left: 24px;
 			width: auto;
 			padding: 3px 1px;
 
 			display: table;
+			text-decoration: none;
+			margin: 1em 0px;
+			margin-left: 24px;
 
 			&:hover:not(.disabled):not(.selected) {
 				opacity: 1;
