@@ -93,7 +93,7 @@ var app = new Vue({
 					this.ChangePage("blog-list-page", url, { }, false);
 				}
 				else if(path.length == 2) {
-					this.ChangePage("blog-post-page", url, { PostName: path[2] }, false );
+					this.ChangePage("blog-post-page", url, { PostName: path[1] }, false );
 				}
 			}
 			else if(path[0] === "gear") {
