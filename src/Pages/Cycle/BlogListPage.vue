@@ -40,7 +40,7 @@ export default {
 
 	methods: {
 		postClicked: function(post) {
-			this.$root.ChangePage("blog-post-page", "/cycle/blog/" + post.Name, { PostName: post.Name });
+			this.$root.ChangePage("blog-post-page", "/blog/" + post.Name, { PostName: post.Name });
 		}
 	}
 };

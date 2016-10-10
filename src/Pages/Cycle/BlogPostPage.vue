@@ -94,7 +94,7 @@ export default {
 
 		openPost: async function(post) {
 			this.currentPost = await this.blog.GetBlogPostByPostInfo(post);
-			this.$root.ChangeURL("/cycle/blog/" + post.Name, { PostName: post.Name });
+			this.$root.ChangeURL("/blog/" + post.Name, { PostName: post.Name });
 			window.scrollTo(0, 0);
 		},
 

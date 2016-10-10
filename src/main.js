@@ -2,18 +2,16 @@ import Vue from "vue";
 import Navbar from "./Components/Navbar.vue";
 
 import CodePage from "./Pages/Code/AboutPage.vue";
-import CodeProjectsPage from "./Pages/Code/ProjectsPage.vue";
-import CodeCvPage from "./Pages/Code/CvPage.vue";
 
-import CycleToursPage from "./Pages/Cycle/ToursPage.vue";
 import BlogPostPage from "./Pages/Cycle/BlogPostPage.vue";
 import BlogListPage from "./Pages/Cycle/BlogListPage.vue";
-import GearPage from "./Pages/Cycle/GearPage.vue";
 import HomePage from "./Pages/Cycle/HomePage.vue";
+import GearPage from "./Pages/Cycle/GearPage.vue";
+import ToursPage from "./Pages/Cycle/ToursPage.vue";
 
 import { mapify } from "es6-mapify";
 
-const ConstantURL = (window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
+const ConstantURL = (false && window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
 // Vue.config.debug = true;
 
 /* eslint-disable no-new */
@@ -22,12 +20,9 @@ var app = new Vue({
 	el: "body",
 	components: {
 		"navbar": Navbar,
-
 		"code-page": CodePage,
-		"code-projects-page": CodeProjectsPage,
-		"code-cv-page": CodeCvPage,
 
-		"cycle-tours-page": CycleToursPage,
+		"tours-page": ToursPage,
 		"gear-page": GearPage,
 		"home-page": HomePage,
 		"blog-post-page": BlogPostPage,
@@ -89,45 +84,32 @@ var app = new Vue({
 
 		ConstructPageFromUrl: function(url) {
 			const path = url.split("/").filter(Boolean);
+			if(path.length === 0) {
+				this.ChangePage("home-page", url, { }, false);
+			}
 
-			if(path[0] == "cycle") {
-				if(path.length == 1) {
-					/* since home page is not implemented, redirect to blog-list-page */
-					// this.ChangePage("cycle-about-page", url, { }, false);
-					this.ChangePage("blog-list-page", "/cycle/blog", { }, false);
+			if(path[0] === "blog") {
+				if(path.length === 1) {
+					this.ChangePage("blog-list-page", url, { }, false);
 				}
-				else if(path[1] == "tours") {
-					if(path.length == 2) {
-						this.ChangePage("cycle-tours-page", url, { }, false );
-					}
-				}
-				else if(path[1] == "blog") {
-					if(path.length == 2) {
-						this.ChangePage("blog-list-page", url, { }, false);
-					}
-					else if(path.length == 3) {
-						this.ChangePage("blog-post-page", url, { TourName: undefined, PostName: path[2] }, false );
-					}
-				}
-				else if(path[1] === "gear") {
-					this.ChangePage("gear-page", url, { }, false);
+				else if(path.length == 3) {
+					this.ChangePage("blog-post-page", url, { PostName: path[2] }, false );
 				}
 			}
-			else if(path[0] == "404.html") {
-				// this is default atm
-				this.ChangePage("blog-list-page", "/cycle/blog", { }, true);
-			//	ConstructPageFromUrl("/cycle/blog/");
+			else if(path[0] === "gear") {
+				this.ChangePage("gear-page", url, { }, false);
+			}
+			else if(path[0] === "tours") {
+				this.ChangePage("tours-page", url, { }, false );
 			}
 			else if(path[0] == "code") {
-				if(path.length == 1) {
-					this.ChangePage("code-page", url, { }, false);
-				}
-				else if(path[1] == "cv") {
-					this.ChangePage("code-cv-page", url, { }, false);
-				}
-				else if(path[1] == "projects") {
-					this.ChangePage("code-projects-page", url, { }, false);
-				}
+				this.ChangePage("code-page", url, { }, false);
+			}
+
+
+			 /* "if in dev mode/localhost" */
+			 if(path[0] == "404.html") {
+				this.ChangePage("blog-list-page", "/blog", { }, false);
 			}
 		}
 	}

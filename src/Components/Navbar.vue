@@ -67,16 +67,16 @@ export default {
 			this.selectedSubIndex = index;
 
 			if(index === 0) { // "home"
-				this.$root.ChangePage("home-page", "/cycle", { });
+				this.$root.ChangePage("home-page", "/", { });
 			}
 			else if(index === 1) { // "blog"
-				this.$root.ChangePage("blog-list-page", "/cycle/blog", { });
+				this.$root.ChangePage("blog-list-page", "/blog", { });
 			}
 			else if(index === 2) { // gear
-				this.$root.ChangePage("gear-page", "/cycle/gear", { });
+				this.$root.ChangePage("gear-page", "/gear", { });
 			}
 			else if(index === 3) { // "tours"
-				this.$root.ChangePage("cycle-tours-page", "/cycle/tours", { });
+				this.$root.ChangePage("tours-page", "/tours", { });
 			}
 
 			this.SetHamburgerMenuOpen(false);
@@ -104,32 +104,18 @@ export default {
 			parts.pop(); // remove last value from 'parts' (it is always 'page')
 
 			this.isSmallNavbarForced = false;
-			if(parts[0] === "cycle") {
-				if(parts.length === 1) {
-					return;
-				}
-				else if(parts[1] === "about") {
-					this.selectedSubIndex = 0;
-				}
-				else if(parts[1] === "blog") {
-					this.selectedSubIndex = 1;
-					if(parts.length > 2) {
-						this.isSmallNavbarForced = true;
-					}
-				}
-				else if(parts[1] === "trips" || parts[1] === "tours") {
-					this.selectedSubIndex = 3;
-				}
-			}
-			else if(parts[0] === "blog") {
+			if(parts[0] === "blog") {
 				this.selectedSubIndex = 1;
-				this.isSmallNavbarForced = (parts[1] === "post");
+				this.isSmallNavbarForced = (parts[1] === "post"); // if blog-POST-page
 			}
 			else if(parts[0] === "gear") {
 				this.selectedSubIndex = 2;
 			}
 			else if(parts[0] === "home") {
 				this.selectedSubIndex = 0;
+			}
+			else if(parts[0] === "tours") {
+				this.selectedSubIndex = 3;
 			}
 
 			this.updateNavbarSize();
@@ -184,8 +170,8 @@ export default {
 	.hamburger-menu {
 		width: 0px;
 		height: 0px;
-		background-color: rgb(32, 32, 32); // hsl(214, 66%, 60%);
-		transition: width .5s, height .5s;
+		background-color: rgb(32, 32, 32);
+		transition: width .4s, height .4s;
 
 		position: fixed;
 		left: 0;
