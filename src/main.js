@@ -11,7 +11,7 @@ import ToursPage from "./Pages/Cycle/ToursPage.vue";
 
 import { mapify } from "es6-mapify";
 
-const ConstantURL = (false && window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
+const ConstantURL = (window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
 // Vue.config.debug = true;
 
 /* eslint-disable no-new */

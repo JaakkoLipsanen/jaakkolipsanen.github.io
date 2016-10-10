@@ -2,7 +2,7 @@
 	<div>
 		<div style="height: 96px"> </div>
 		<div v-if="blog && blog.PostInfos.length > 0" class="blog-list-page-container">
-			<div class="blog-post-block" v-for="post in blog.PostInfos" v-on:click="postClicked(post)">
+			<a :href="getPostLink(post)" class="blog-post-block" v-for="post in blog.PostInfos" v-on:click="postClicked($event, post)">
 				<div class="image-container">
 					<image-component class="post-image" v-if="post.MainImage != null" :quality="'360p'" :auto-size="false" :image="post.MainImage"></image-component>
 					<div class='image-color-overlay'> </div>
@@ -10,7 +10,7 @@
 
 				<h4 class="post-title"> {{ post.Title }} </h4>
 				<h4 class="post-tour-info"> {{ post.Trip + ": " + post.DayRange.DisplayString }} </h4>
-			</div>
+			</a>
 		</div>
 	</div>
 </template>
@@ -39,8 +39,15 @@ export default {
 	},
 
 	methods: {
-		postClicked: function(post) {
+		postClicked: function(event, post) {
+			if(event.which !== 1) return; // if middle or right click, then let the link do it's own work
+
+			event.preventDefault();
 			this.$root.ChangePage("blog-post-page", "/blog/" + post.Name, { PostName: post.Name });
+		},
+
+		getPostLink: function(post) {
+			return "/blog/" + post.Name;
 		}
 	}
 };
@@ -53,11 +60,13 @@ export default {
 	margin: 0px;
 	margin-top: 4px;
 	text-align: left;
+	color: black;
 }
 
 .post-tour-info {
 	font-weight: 500;
 	margin-top: 0px;
+	text-decoration: none;
 }
 
 .introduction-text {
@@ -66,7 +75,6 @@ export default {
 
 	text-align: center;
 }
-
 
 .blog-post-block:hover > div > div {
 	background-color: rgba(0, 0, 0, 0.1) !important;
@@ -104,7 +112,6 @@ export default {
 		margin: 16px 0 !important;
 		text-align: center;
 	}
-
 }
 
 @media all and (max-width: 1142px) and (min-width: 818px) {
@@ -113,7 +120,6 @@ export default {
 	}
 }
 
-
 .blog-post-block {
 	width: 400px;
 	text-align: center;
@@ -121,6 +127,7 @@ export default {
 
 	display: inline-block;
 	margin: 16px 34px;
+	text-decoration: none;
 }
 
 $block-width: 400px;
@@ -128,7 +135,6 @@ $block-height-aspect: 0.66;
 .image-container {
 	width: 100%;
 	padding-bottom: 66%;
-//	height: calc(#{$block-width} * #{$block-height-aspect});
 }
 
 .image-color-overlay {

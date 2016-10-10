@@ -35,7 +35,7 @@
 					 <h3> Other Blog Posts </h3>
 
 					 <h4 class="sidebar-tour-title" v-for="tour in tours"> {{ tour.name }} <span style="font-size: 12px"> ({{ tour.year }}) </span>
-						 <p class="sidebar-post" v-for="post in getBlogPostsForTour(tour)" v-on:click="openPost(post)" v-bind:class="{ 'selected-sidebar-post': currentPost && post.Title == currentPost.Title }"> {{ post.Title }} </p>
+						 <a :href="getSidebarLink(post)" class="sidebar-post" v-for="post in getBlogPostsForTour(tour)" v-on:click="sidebarLinkClicked($event, post)" v-bind:class="{ 'selected-sidebar-post': currentPost && post.Title == currentPost.Title }"> {{ post.Title }} </a>
 						 <p v-if="getBlogPostsForTour(tour).length == 0" style="font-style: italic "> no posts from this tour ! </p>
 					 </h4>
 				 </div>
@@ -92,7 +92,14 @@ export default {
 			return this.blog ? this.blog.PostInfos.filter(post => post.Trip === tour.shortName) : [];
 		},
 
-		openPost: async function(post) {
+		getSidebarLink: function(post) {
+			return "/blog/" + post.Name;
+		},
+
+		sidebarLinkClicked: async function(event, post) {
+			if(event.which != 1) return; // if middle click or right click, then let the <a> do it's own work
+
+			event.preventDefault();
 			this.currentPost = await this.blog.GetBlogPostByPostInfo(post);
 			this.$root.ChangeURL("/blog/" + post.Name, { PostName: post.Name });
 			window.scrollTo(0, 0);
@@ -254,8 +261,9 @@ export default {
 		display: table-cell;
 		vertical-align: top;
 
-		p {
+		p, a {
 			color: black;
+			display: block;
 
 			font-size: 14px;
 			font-weight: 300;
@@ -263,6 +271,7 @@ export default {
 
 			margin: 4px 0px;
 			margin-left: 24px;
+			text-decoration: none;
 
 			&.sidebar-post {
 				cursor: pointer;

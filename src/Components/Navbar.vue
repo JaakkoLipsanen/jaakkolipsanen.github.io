@@ -3,7 +3,7 @@
 		<p id="navbar-header-text">{{ title }}</p>
 
 		<div class="navbar-links">
-			<p v-on:click="subLinkClicked(item, index)" :class="{ 'selected': index == selectedSubIndex, 'disabled': !item.enabled }" v-for="(index, item) in navbarLinks">{{ item.name.toUpperCase() }} </p>
+			<a :href="getSublinkAddress(item)" v-on:click="subLinkClicked($event, item, index)" :class="{ 'selected': index == selectedSubIndex, 'disabled': !item.enabled }" v-for="(index, item) in navbarLinks">{{ item.name.toUpperCase() }} </a>
 		</div>
 
 		<a href="https://instagram.com/fl.ai">
@@ -25,10 +25,10 @@ export default {
 			title: "flai",
 
 			navbarLinks: [
-					{ name: "home", enabled: false },
-					{ name: "blog", enabled: true },
-					{ name: "gear", enabled: false },
-					{ name: "tours", enabled: true }
+				{ name: "home", enabled: false },
+				{ name: "blog", enabled: true },
+				{ name: "gear", enabled: false },
+				{ name: "tours", enabled: true }
 			],
 
 			selectedSubIndex: 0,
@@ -59,13 +59,18 @@ export default {
 			}
 		},
 
-		subLinkClicked: function(item, index) {
+		subLinkClicked: function(event, item, index) {
+			if(event.which !== 1) { // "1" means left-click
+				return; // let the link do it's own stuff if middle or right click
+			}
+
+			// on left click cancel the <a> href and change the page via code
+			event.preventDefault();
 			if(!item.enabled) {
-				return;
+				return false;
 			}
 
 			this.selectedSubIndex = index;
-
 			if(index === 0) { // "home"
 				this.$root.ChangePage("home-page", "/", { });
 			}
@@ -80,6 +85,13 @@ export default {
 			}
 
 			this.SetHamburgerMenuOpen(false);
+			return false; // cancel <a> link click
+		},
+
+		getSublinkAddress: function(item) {
+			if(item.name === "home") return "/";
+
+			return "/" + item.name;
 		},
 
 		ToggleHamburgerMenu: function() {
@@ -212,6 +224,7 @@ export default {
 			&.disabled {
 				opacity: 0.3;
 				cursor: default;
+				pointer-events: none;
 			}
 		}
 
@@ -250,7 +263,8 @@ export default {
 		margin: auto;
 		text-align: center;
 
-		p {
+		a {
+			text-decoration: none;
 			display: inline-block;
 			font-weight: 600;
 			font-family: "Raleway";
@@ -284,6 +298,7 @@ export default {
 			&.disabled {
 				color: rgba(0, 0, 0, 0.4);
 				cursor: default;
+				pointer-events: none;
 			}
 
 			&:last-child {
