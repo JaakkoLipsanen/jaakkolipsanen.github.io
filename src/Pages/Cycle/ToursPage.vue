@@ -119,7 +119,6 @@ export default {
 
 	events: {
 		"map-loaded": function(map) {
-			console.log(map);
 			this.currentMap = map;
 		}
 	}

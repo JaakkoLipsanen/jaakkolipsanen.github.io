@@ -27,7 +27,7 @@
 
 					</div>
 
-					<cycle-map v-if="CycleRoutePath != undefined && !DayRange.IsZeroDay" class="route-map" theme="light" :route-path="CycleRoutePath" :day-range="DayRange"></cycle-map>
+					<cycle-map v-if="CycleRoutePath != undefined && !DayRange.IsZeroDay" class="route-map" theme="light" :force-night-markers-visible="true" :route-path="CycleRoutePath" :day-range="DayRange"></cycle-map>
 				 </div>
 
 				 <!-- Side bar -->
@@ -97,7 +97,7 @@ export default {
 		},
 
 		sidebarLinkClicked: async function(event, post) {
-			if(event.which != 1) return; // if middle click or right click, then let the <a> do it's own work
+			if(event.which !== 1) return; // if middle click or right click, then let the <a> do it's own work
 
 			event.preventDefault();
 			this.currentPost = await this.blog.GetBlogPostByPostInfo(post);
@@ -248,8 +248,9 @@ export default {
 			}
 
 			.header-block {
-				font-family: "Lato";
-				font-weight: 300;
+				font-family: "Raleway";
+				font-weight: 400;
+				font-size: 30px;
 			}
 		}
 	}

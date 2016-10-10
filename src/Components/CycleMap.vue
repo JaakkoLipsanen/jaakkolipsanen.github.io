@@ -32,6 +32,12 @@ export default {
 		theme: {
 			type: String,
 			default: "dark"
+		},
+
+		/* doesn't support changing after initalization */
+		forceNightMarkersVisible: {
+			type: Boolean,
+			default: false
 		}
 	},
 	watch: {
@@ -57,7 +63,7 @@ export default {
 	},
 
 	ready: function() {
-		this.map = new CycleMap(this.$els.cycleMap, this.theme);
+		this.map = new CycleMap(this.$els.cycleMap, this.theme, { alwaysShowNightMarkers: this.forceNightMarkersVisible });
 		if(this.routePath != null) {
 			this.routes[this.routePath] = { routePath: this.routePath };
 			this.setRoute(this.routes[this.routePath], this.dayRange); // await this.map.SetRoute(this.routes[this.routePath], this.dayRange);

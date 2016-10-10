@@ -319,14 +319,16 @@ export const MapStyle = {
 };
 
 export class CycleMap {
-	constructor(container, mapStyle = MapStyle.Dark) {
+	constructor(container, mapStyle = MapStyle.Dark, properties = { }) {
 		this.CurrentRouteView = null;
 		this._isMouseOverMap = false;
 		this._googleMap = null;
 		this._isMouseOverMap = false;
 		this._mapStyle = mapStyle;
+		this._forceNightMarkersVisible = properties.alwaysShowNightMarkers;
+		console.log(properties);
 
-		this._initializeMap(container);
+		this._initializeMap(container, properties);
 	}
 
 	get RouteLength() {
@@ -345,18 +347,18 @@ export class CycleMap {
 		return (this._mapStyle == MapStyle.Dark) ? MapStyles.Dark : ((this._mapStyle == MapStyle.Light) ? MapStyles.Light : MapStyles.Barebones);
 	}
 
-	_initializeMap(container) {
+	_initializeMap(container, properties) {
 		let googleMapsProperties = {
 			panControl: false,
 			mapTypeControl: false,
-			zoomControl: true,
+			zoomControl: !properties.disableZoom,
 
-			scrollwheel: true,
+			scrollwheel: !properties.disableScrollWheel,
 			navigationControl: false,
 			scaleControl: false,
-			draggable: true,
+			draggable: !properties.disableDragging,
 
-			streetViewControl: true,
+			streetViewControl: !properties.disableStreetView,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 
 			// default values: if there is no route then these must be set
@@ -382,7 +384,7 @@ export class CycleMap {
 
 		const setNightMarkerVisibility = (markers, visible) => {
 			for(let nightMarker of markers) {
-				nightMarker.setMap(visible ? this._googleMap : null);
+				nightMarker.setMap(visible || this._forceNightMarkersVisible ? this._googleMap : null);
 			}
 		};
 
@@ -390,6 +392,7 @@ export class CycleMap {
 		$(container).mouseover(() => {
 			this._isMouseOverMap = true;
 			if(this.CurrentRouteView == null) return;
+			if(this._forceNightMarkersVisible) return; // otherwise it causes some strange "flashing" on the night markers
 
 			setNightMarkerVisibility(this.CurrentRouteView.NightMarkers, true);
 		});
@@ -398,6 +401,7 @@ export class CycleMap {
 		$(container).mouseout(() => {
 			this._isMouseOverMap = false;
 			if(this.CurrentRouteView == null) return;
+			if(this._forceNightMarkersVisible) return; // otherwise it causes some strange "flashing" on the night markers
 
 			setNightMarkerVisibility(this.CurrentRouteView.NightMarkers, false);
 		});
@@ -414,7 +418,7 @@ export class CycleMap {
 			this.CurrentRouteView.AssignMap(null);
 		}
 
-		routeView.AssignMap(this._googleMap, IsTouchDevice() || this._isMouseOverMap);
+		routeView.AssignMap(this._googleMap, IsTouchDevice() || this._isMouseOverMap || this._forceNightMarkersVisible);
 		this.CurrentRouteView = routeView;
 		this.OnSizeChanged();
 	}
