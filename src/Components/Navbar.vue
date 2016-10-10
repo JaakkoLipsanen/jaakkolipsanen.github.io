@@ -40,7 +40,7 @@ export default {
 
 	ready: function() {
 		$(window).resize(() => {
-			this.SetHamburgerMenuOpen(false);
+		//	this.SetHamburgerMenuOpen(false); // is this really needed?
 			this.updateNavbarSize();
 		});
 
@@ -176,7 +176,7 @@ export default {
 
 	.open-hamburger-menu {
 		width: 100% !important;
-		height: 100vh !important;
+		height: 110vh !important;
 	}
 
 	.hamburger-menu {

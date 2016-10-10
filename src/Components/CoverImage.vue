@@ -75,7 +75,7 @@ export default {
 		 width: 100%;
 		 height: $cover-image-height !important;
 
-		 min-height: 200px;
+		 min-height: 260px;
 		 background-size: cover;
 		 background-position: 50% 45%;
 		 background-repeat: no-repeat;
