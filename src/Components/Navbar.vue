@@ -14,11 +14,15 @@
 			<img class="hamburger-menu-close-button" src="/icons/close.png" v-on:click="SetHamburgerMenuOpen(false)">
 			<a :href="getSublinkAddress(item)" v-on:click="subLinkClicked($event, item, index)" :class="{ 'selected': index == selectedSubIndex, 'disabled': !item.enabled }" v-for="(index, item) in navbarLinks">{{ item.name.toUpperCase() }} </a>
 		</div>
-		<img v-el:hamburger-menu-button  class="hamburger-menu-button" src="/icons/HamburgerMenuBlack.svg" v-on:click="SetHamburgerMenuOpen(true)">
+
+		<hamburger-menu-button class="hamburger-menu-button" :text="navbarLinks[selectedSubIndex].name" v-on:click="SetHamburgerMenuOpen(true)"></hamburger-menu-button>
 	</div>
 </template>
 
 <script>
+
+import HamburgerMenuButton from "./HamburgerMenuButton.vue";
+
 export default {
 	data() {
 		return {
@@ -36,6 +40,10 @@ export default {
 			isHamburgerMenuOpen: false,
 			isSmallNavbarForced: false
 		};
+	},
+
+	components: {
+		"hamburger-menu-button": HamburgerMenuButton
 	},
 
 	ready: function() {
@@ -244,19 +252,6 @@ export default {
 				opacity: 0.9;
 			}
 		}
-	}
-
-	.hamburger-menu-button {
-		height: 36%;
-		min-height: 32px;
-
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		margin-top: 0px;
-		margin-left: 8px;
-
-		cursor: pointer;
 	}
 
 	.navbar-links {
