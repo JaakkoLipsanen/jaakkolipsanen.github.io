@@ -31,7 +31,6 @@
 
 <script>
 import { EXIF } from "../scripts/exif.js";
-import { PhotoStream } from "../scripts/PhotoStream.js";
 import ImageComponent from "./Image.vue";
 
 export default {
@@ -40,13 +39,13 @@ export default {
 	},
 
 	props: {
-		photoStream: Object,
+		photoStream: Object
 	},
 
 	data() {
 		return {
 			currentPhoto: null,
-			currentPhotoExif: null,
+			currentPhotoExif: null
 		};
 	},
 
@@ -197,7 +196,7 @@ export default {
 		bottom: 0;
 		top: 0;
 
-		/* using calc because need to have fixed space for text etc OLD: calc(80.5% - #{$exif-div-width}); */
+		/* using calc because need to have fixed space for text etc OLD: */
 		max-width: 95%;
 		height: calc(100%);
 
@@ -267,7 +266,7 @@ export default {
 		float: left;
 		transform: translateX(-50%);
 		cursor: pointer;
-		opacity: 0.65
+		opacity: 0.65;
 
 		&:hover:not(.disabled) {
 			opacity: 1;
