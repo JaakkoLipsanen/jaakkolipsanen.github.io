@@ -42,13 +42,14 @@
 			</div>
 		</div>
 
-		<image-viewer></image-viewer>
+		<image-viewer :photo-stream="BlogPostPhotoStream"></image-viewer>
 	</div>
 </template>
 
 <script>
 
 import { BlogSource, BlogPost, BlogQuery } from "../../scripts/Blog.js";
+import { PhotoStream } from "../../scripts/PhotoStream.js";
 import { CycleTourData } from "../../scripts/CycleTourData.js";
 
 import ImageGroup from "../../Components/ImageGroup.vue";
@@ -131,7 +132,13 @@ export default {
 			return  this.currentPost.DayRange.DisplayString +
 					"<br>" + // line break
 					this.currentPost.Trip;
-		}
+		},
+
+		BlogPostPhotoStream: function() {
+			if(this.currentPost == null) return null;
+
+			return PhotoStream.FromBlogPost(this.currentPost);
+		},
 	},
 
 	events: {
@@ -241,6 +248,7 @@ export default {
 
 			.image-block {
 				text-align: center;
+				cursor: pointer;
 			}
 
 			.content-block {

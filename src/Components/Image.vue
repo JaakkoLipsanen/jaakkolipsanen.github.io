@@ -1,7 +1,7 @@
 <template>
-	<div v-el:image-container class="image-container" style="cursor: pointer;" >
-		<div v-el:sharp-image class="sharp-image"> </div>
-		<div v-el:blurry-image v-if="progressive" class="blurry-image opacity-transition" :style="{ 'background-image': 'url(' + image.FullPath('10p') + ')' }"> </div>
+	<div v-el:image-container class="image-container" :style="'background-color: ' + backgroundColor">
+		<div v-el:sharp-image class="sharp-image opacity-transition" :style="'background-size:' + backgroundSize"> </div>
+		<div v-el:blurry-image v-if="progressive" class="blurry-image opacity-transition" :style="{ 'background-size': backgroundSize, 'background-image': 'url(' + image.FullPath('10p') + ')' }"> </div>
 	</div>
 </template>
 
@@ -31,6 +31,19 @@ export default {
 		autoSize: {
 			type: Boolean,
 			default: true
+		},
+
+		backgroundSize: {
+			type: String,
+			default: "cover",
+			validator: function(value) {
+				return value === "contain" || value === "cover";
+			}
+		},
+
+		backgroundColor: {
+			type: String,
+			default: "rgb(215, 215, 215)"
 		}
 	},
 
@@ -52,6 +65,9 @@ export default {
 
 			const blurryImage = $(this.$els.blurryImage);
 			const sharpImage = $(this.$els.sharpImage);
+
+			sharpImage.addClass("opacity-transition");
+			sharpImage.css("opacity", 0);
 
 			// set blurry image's transition to 1 and bypass transitions
 			blurryImage.removeClass("opacity-transition");
@@ -78,6 +94,9 @@ export default {
 				}
 
 				sharpImage.css("background-image", "url(    " + src + ")");
+
+				sharpImage.removeClass("opacity-transition");
+				sharpImage.css("opacity", 1);
 				blurryImage.css("opacity", 0);
 			};
 			tmpImage.src = src;
@@ -95,7 +114,6 @@ export default {
 .image-container {
 	position: relative;
 	height: 0;
-	background-color: rgb(215, 215, 215);
 	overflow: hidden;
 }
 

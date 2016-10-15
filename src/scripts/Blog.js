@@ -27,8 +27,6 @@ export class DayRange {
 		return new DayRange(parseInt(splitted[0]), parseInt(splitted[1]));
 	}
 
-
-
 	get DisplayString() {
 		if(this.IsDayZero) {
 			return "Preparations";

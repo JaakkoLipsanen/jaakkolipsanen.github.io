@@ -1,21 +1,28 @@
 <template>
-	<div v-if="currentPhoto" id="image-viewer-container" v-on:click="closeImage" >
+	<div id="image-viewer-container">
 		<div class='gallery-background'></div>
+		<img class="close-button" src="/icons/close-black.png" v-on:click="OnCloseButtonClicked()">
+
 
 		<div id="image-container" >
-			<h3 style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%)">loading image..</h3>
 			<div id="image-cc">
-				<img id="image" src="{{ currentPhoto.FullPath('orig') }}">
-				<p id="description-text">{{ currentPhoto.Description }}</p>
+				<image-component v-if="currentPhoto" id="image" :image="currentPhoto" :quality="ImageQuality" :auto-size="false" :background-size="'contain'" :background-color="'transparent'" v-on:click="ChangeImageByIndex(CurrentImageIndex + 1)"></image-component>
+				<p v-if="currentPhoto" class="photo-text"> {{ currentPhoto.Text }} </p>
 
-				<div id="exif-div">
+				<div class="photo-controls">
+					<div class="move-previous-button triangle-left" :class="{ disabled: CurrentImageIndex == 0 }" style="transform: rotate(180)" v-on:click="ChangeImageByIndex(CurrentImageIndex - 1)"> </div>
+					<div class="move-next-button triangle-right" :class="{ disabled: CurrentImageIndex == TotalImageCount - 1 }"  v-on:click="ChangeImageByIndex(CurrentImageIndex + 1)"> </div>
+					<p class="photo-index"> {{ (CurrentImageIndex + 1) + '/' + TotalImageCount }} </p>
+				</div>
+
+				<div v-if="currentPhotoExif" id="exif-div">
 					<p>{{ "Shutter Speed: " + currentPhotoExif.ShutterSpeed + "s" }}</p>
 					<p v-if="currentPhotoExif.FocalLength35mmEquivalent != undefined">{{ "Focal Length (35mm equiv): " + currentPhotoExif.FocalLength35mmEquivalent + "mm" }}</p>
 					<p>{{ "Aperture: " + currentPhotoExif.Aperture }}</p>
 					<p>{{ "ISO: " + currentPhotoExif.ISO }}</p>
 					<p>{{ "Date: " + currentPhotoExif.DateTime }}</p>
 
-					<a class="image-location-link" v-show="currentPhotoExif.GpsLocation != 'unknown, unknown'" v-bind:href="'https://www.google.com/maps/place/' + currentPhotoExif.GpsLocation.replace(' ', '') + '/@' + currentPhotoExif.GpsLocation.replace(' ', '') + ',12z'" target="_blank">{{ "Location: " + currentPhotoExif.GpsLocation }}</a>
+					<a class="image-location-link" v-if="currentPhotoExif.GpsLocation != 'unknown, unknown'" v-bind:href="'https://www.google.com/maps/place/' + currentPhotoExif.GpsLocation.replace(' ', '') + '/@' + currentPhotoExif.GpsLocation.replace(' ', '') + ',12z'" target="_blank">{{ "Location: " + currentPhotoExif.GpsLocation }}</a>
 				</div>
 			</div>
 		</div>
@@ -24,23 +31,51 @@
 
 <script>
 import { EXIF } from "../scripts/exif.js";
+import { PhotoStream } from "../scripts/PhotoStream.js";
+import ImageComponent from "./Image.vue";
 
 export default {
+	components: {
+		"image-component": ImageComponent
+	},
+
+	props: {
+		photoStream: Object,
+	},
+
 	data() {
 		return {
 			currentPhoto: null,
-			currentPhotoExif: null
+			currentPhotoExif: null,
 		};
 	},
 
-	ready: function() {
-		const self = this;
-		$("#image").load(function() {
-			$("#image-cc").width("95%");
-			$("#image-cc").height("95%");
-			$("#image-cc").width(this.clientWidth);
-			$("#image-cc").height(this.clientHeight);
+	methods: {
+		OnCloseButtonClicked: function() {
+			$("#image-viewer-container").hide();
+			$("html").css("overflow", "auto");
 
+			this.currentPhoto = null;
+			this.currentPhotoExif = null;
+		},
+
+		OpenImage: function(photo, photostream) {
+			this.currentPhoto = photo;
+			$("#image-viewer-container").show();
+			$("html").css("overflow", "disabled");
+
+		},
+
+		ChangeImageByIndex: function(index) {
+			if(index < 0 || index >= this.TotalImageCount) {
+				return;
+			}
+
+			this.currentPhoto = this.photoStream.Photos[index];
+		},
+
+		SetupExif: function() {
+			/*
 			const parseDegrees = (degMinSec, ref) => {
 				const DecimalPlaces = 5;
 				const Divider = Math.pow(10, DecimalPlaces);
@@ -80,46 +115,33 @@ export default {
 				};
 
 			}, false);
-		});
-
-		$(window).resize(function() {
-			$("#image-cc").width("100%");
-			$("#image-cc").height("100%");
-
-			$("#image-cc").width($("#image").outerWidth());
-			$("#image-cc").height($("#image").outerHeight());
-		});
+			*/
+		}
 	},
 
-	methods: {
-		"closeImage": function(e) {
-			// if clicked element is link then don't close image
-			if(e.srcElement.tagName.toLowerCase() === "a") {
-				return;
-			}
+	computed: {
+		CurrentImageIndex: function() {
+			return (this.photoStream === null || this.currentPhoto === null) ? 0 : (this.photoStream.IndexOf(this.currentPhoto));
+		},
 
-			$("#image-viewer-container").hide();
-			$("html").css("overflow", "auto");
+		TotalImageCount: function() {
+			return (this.photoStream === null) ? 0 : this.photoStream.Count;
+		},
 
-			this.currentPhoto = null;
-			this.currentPhotoExif = null;
+		ImageQuality: function() {
+			return '1080p'; // todo: 720p on mobile, orig on desktop? or a persistent button between 720p/orig/1080p
 		}
 	},
 
 	events: {
 		"show-photo": function(photo) {
-			this.currentPhoto = photo;
-			$("#image-viewer-container").show();
-			$("html").css("overflow", "disabled");
+			this.OpenImage(photo);
 		}
 	}
 };
 </script>
 
 <style lang="sass" scoped>
-	$exif-div-width: 280px;
-	$exif-div-height: 116px;
-	$exif-text-size: 16px;
 
 	#image-viewer-container {
 		transition: opacity 0.3s ease-in-out;
@@ -138,14 +160,12 @@ export default {
 		height: 100%;
 
 		background-color: white;
-		opacity: 0.9;
-
-		cursor: pointer
+		opacity: 1;
 	}
 
 	#image-cc {
 		width: 100%;
-		height: 100%;
+		height: calc(95% - 48px);
 
 		margin: auto;
 		position: absolute;
@@ -158,11 +178,13 @@ export default {
 	#image {
 		position: absolute;
 		top: 0;
-		bottom: 0;
+		bottom: 64px;
 		left: 0;
 		right: 0;
 		margin: auto;
 
+		width: auto;
+		height: auto;
 		max-width: 100%;
 		max-height: 100%;
 	}
@@ -175,18 +197,117 @@ export default {
 		bottom: 0;
 		top: 0;
 
-		/* using calc because need to have fixed space for text etc */
-		max-width: calc(80.5% - #{$exif-div-width});
+		/* using calc because need to have fixed space for text etc OLD: calc(80.5% - #{$exif-div-width}); */
+		max-width: 95%;
 		height: calc(100%);
 
 		margin: auto;
-		cursor: pointer;
 	}
 
+	.close-button {
+		float:left;
+		position: fixed;
+		right: 8px;
+		top: 8px;
+		width: 26px;
+		height: 26px;
+		opacity: 0.65;
+		transition: opacity 0.3s, transform 0.3s;
+		cursor: pointer;
+		z-index: 100000;
+
+		&:hover {
+			opacity: 1;
+			transform: scale(1.1);
+		}
+	}
+
+	.photo-controls {
+		position: absolute;
+		bottom: 8px;
+		width: 100%;
+	}
+
+	.photo-index {
+		position: absolute;
+		float: left;
+		margin-left: 50%;
+		transform: translateX(-50%);
+		font-family: "Lato";
+
+		/* same as prev/next triangle height */
+		line-height: 24px;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.disabled {
+		opacity: 0.4 !important;
+		cursor: default !important;
+	}
+
+	.move-previous-button {
+		margin-left: calc(50% - 48px);
+		display: inline-block;
+		position: absolute;
+		float: left;
+		transform: translateX(-50%);
+		cursor: pointer;
+		opacity: 0.65;
+
+		&:hover:not(.disabled) {
+			opacity: 1;
+		}
+	}
+
+	.move-next-button {
+		margin-left: calc(50% + 48px);
+		display: inline-block;
+		position: absolute;
+		float: left;
+		transform: translateX(-50%);
+		cursor: pointer;
+		opacity: 0.65
+
+		&:hover:not(.disabled) {
+			opacity: 1;
+		}
+	}
+
+	.triangle-right {
+		width: 0;
+		height: 0;
+		border-top: 12px solid transparent;
+		border-bottom: 12px solid transparent;
+
+		border-left: 18px solid rgba(0, 0, 0, 1);
+		border-radius: 4px;
+	}
+
+	.triangle-left {
+		width: 0;
+		height: 0;
+		border-top: 12px solid transparent;
+		border-bottom: 12px solid transparent;
+
+		border-right: 18px solid  rgba(0, 0, 0, 1);
+		border-radius: 4px;
+	}
+
+	.photo-text {
+		position: absolute;
+		bottom: 0px;
+		text-align: center;
+		font-family: "Raleway";
+		font-style: italic;
+
+		width: 90%;
+		left: 5%;
+	}
 
 	@media all and (max-width: 1279px) {
    	 	#image-container {
-			max-width: 85% !important;
+			max-width: 100% !important;
 		}
 
 		#exif-div {
@@ -194,6 +315,10 @@ export default {
 		}
     }
 
+
+	$exif-div-width: 280px;
+	$exif-div-height: 116px;
+	$exif-text-size: 16px;
 
 	#description-text {
 		float: left;
