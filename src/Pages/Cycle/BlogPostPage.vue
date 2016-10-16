@@ -1,7 +1,7 @@
 <template>
 	<div class="page-content-container">
 
-		<cover-image v-if="currentPost" :image="currentPost.MainImage" :main-text="currentPost.Title.toUpperCase()" :sub-text="CoverImageSubText"></cover-image>
+		<cover-image :image="CoverImage" :main-text="CoverImageMainText" :sub-text="CoverImageSubText"></cover-image>
 
 		<div class="blog-content-background">
 			<div class="blog-content-container">
@@ -127,7 +127,27 @@ export default {
 			return this.currentPost.DayRange;
 		},
 
+		CoverImage: function() {
+			if(this.currentPost === null) {
+				return null;
+			}
+
+			return this.currentPost.MainImage;
+		},
+
+		CoverImageMainText: function() {
+			if(this.currentPost === null) {
+				return "";
+			}
+
+			return this.currentPost.Title.toUpperCase();
+		},
+
 		CoverImageSubText: function() {
+			if(this.currentPost === null) {
+				return "";
+			}
+
 			return  this.currentPost.DayRange.DisplayString +
 					"<br>" + // line break
 					this.currentPost.Trip;
@@ -149,12 +169,6 @@ export default {
 </script>
 
 <style lang="sass" id="style-sheet" disabled=false>
-
-	/* one big thing in this css file that may confuse is the main-image background attachement thing. if you use background-attachment: fixed,
-	/* chrome will re-paint the image everytime the window is scrolled which can cause some major lag (firefox works fine). so, to work around it,
-	/* i had to change main-image-container to be position: fixed, add transform: translateZ(0) (to cause it render in another layer or something)
-	/* and some other possibly a bit confusing things. https://mention.com/blog/building-a-beautiful-homepage-how-we-nailed-down-chrome-performance-rendering-issues/ */
-
 
 	.route-map {
 		width: 100%  !important;
@@ -221,7 +235,6 @@ export default {
 			text-align: center;
 			font-size: 15px;
 			margin-top: 0px;
-
 
 			font-family: "Lato";
 			font-style: italic;

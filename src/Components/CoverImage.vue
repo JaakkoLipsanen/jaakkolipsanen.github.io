@@ -26,7 +26,7 @@ export default {
 
 	props: {
 		image: {
-			type: Object,
+		//	type: Object, // unfortunately, I'm allowing null/undefined to be passed and null/undefined isn't "Object" according to vue logic
 			required: true
 		},
 
@@ -104,6 +104,13 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+	/* one big thing in this css file that may confuse is the main-image background attachement thing. if you use background-attachment: fixed,
+	/* chrome will re-paint the image everytime the window is scrolled which can cause some major lag (firefox works fine). so, to work around it,
+	/* i had to change main-image-container to be position: fixed, add transform: translateZ(0) (to cause it render in another layer or something)
+	/* and some other possibly a bit confusing things. https://mention.com/blog/building-a-beautiful-homepage-how-we-nailed-down-chrome-performance-rendering-issues/ */
+
+
+
 	// the height will be programmitcally be changed to "px" units in setupHeight(). this must be kept
 	// here as well, JS-only solution causes a jump on page load
 	$cover-image-height: 85vh;
