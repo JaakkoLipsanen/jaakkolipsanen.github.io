@@ -13,7 +13,7 @@
 		</div>
 
 		<!-- Bottom text -->
-		<p v-if="map && map.IsRouteLoaded" class="map-length-and-night-count-text" style=' margin-top: 0px; margin-left: 1px; float: left;'>{{ map.RouteLength + 'km, ' + map.NightCount +  ' days' }}</p>
+		<p v-if="map && map.IsRouteLoaded" class="map-length-and-night-count-text" style=' margin-top: 0px; margin-left: 1px; float: left;'>{{ RouteInfoText }}</p>
 		<div style='display: inline; float: right; margin-right: 2px'>
 			<img style='width: 10px; display: inline' src='/icons/tent.png'><p style='display: inline; margin-left: 4px;'>camping </p>
 			<img style='margin-left: 4px; width: 10px; display: inline' src='/icons/hotel.png'><p style='display: inline; margin-left: 4px;'>hotel</p>
@@ -101,6 +101,14 @@ export default {
 			else {
 				EnterFullScreen(this.$els.cycleMapContainer);
 			}
+		}
+	},
+
+	computed: {
+		RouteInfoText: function() {
+			if(!this.map) return "";
+
+			return this.map.RouteLength + "km, " + this.map.NightCount +  " day" + (this.map.NightCount > 1 ? "s" : ""); // days vs day
 		}
 	},
 

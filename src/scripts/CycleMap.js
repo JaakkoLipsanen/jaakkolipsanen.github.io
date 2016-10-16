@@ -326,7 +326,6 @@ export class CycleMap {
 		this._isMouseOverMap = false;
 		this._mapStyle = mapStyle;
 		this._forceNightMarkersVisible = properties.alwaysShowNightMarkers;
-		console.log(properties);
 
 		this._initializeMap(container, properties);
 	}

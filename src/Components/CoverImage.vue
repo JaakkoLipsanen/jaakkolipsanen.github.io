@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="cover-image-container">
-			<image-component class="cover-image" :quality="imageQuality" :auto-size="false" :image="image"> </image-component>
+			<image-component v-if="image" class="cover-image" :quality="imageQuality" :auto-size="false" :image="image"> </image-component>
 
 			<!-- Vignette -->
 			<div style="position: absolute; top: 0px; height: 100%; width: 100%;

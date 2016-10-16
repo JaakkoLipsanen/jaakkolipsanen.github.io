@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import { EXIF } from "../scripts/exif.js";
 import ImageComponent from "./Image.vue";
 
 export default {
@@ -128,7 +127,7 @@ export default {
 		},
 
 		ImageQuality: function() {
-			return '1080p'; // todo: 720p on mobile, orig on desktop? or a persistent button between 720p/orig/1080p
+			return "1080p"; // todo: 720p on mobile, orig on desktop? or a persistent button between 720p/orig/1080p
 		}
 	},
 
