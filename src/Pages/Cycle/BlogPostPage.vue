@@ -1,9 +1,8 @@
 <template>
 	<div class="page-content-container">
 
-		<cover-image v-if="currentPost" class="cover-image" :image="currentPost.MainImage" :main-text="currentPost.Title.toUpperCase()" :sub-text="CoverImageSubText"></cover-image>
+		<cover-image v-if="currentPost" :image="currentPost.MainImage" :main-text="currentPost.Title.toUpperCase()" :sub-text="CoverImageSubText"></cover-image>
 
-		<div class="cover-image-container-spacer"></div>
 		<div class="blog-content-background">
 			<div class="blog-content-container">
 				<div class="blog-post-container">
@@ -156,13 +155,6 @@ export default {
 	/* i had to change main-image-container to be position: fixed, add transform: translateZ(0) (to cause it render in another layer or something)
 	/* and some other possibly a bit confusing things. https://mention.com/blog/building-a-beautiful-homepage-how-we-nailed-down-chrome-performance-rendering-issues/ */
 
-	$cover-image-height: 85vh;
-	.cover-image {
-		height: $cover-image-height;
-	}
-	.cover-image-container-spacer {
-		margin-top: $cover-image-height;
-	}
 
 	.route-map {
 		width: 100%  !important;
