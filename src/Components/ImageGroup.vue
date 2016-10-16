@@ -43,12 +43,17 @@ export default {
 			}
 
 			const container = $(document.createElement("div")).addClass("image-group").appendTo(groupContainer);
-			var groupAspectRatio = 0;
+			let groupAspectRatio = 0;
 			for(let i = firstImageIndex; i < firstImageIndex + imageCount; i++) {
 				const image = this.groupImages[i];
 
+				const MarginSize = "3px";
+				const leftMargin = (i !== firstImageIndex) ? MarginSize : "0px";
+				const rightMargin = (i !== firstImageIndex + imageCount - 1) ? MarginSize : "0px";
+
+				const margin = "0px " + rightMargin + " 0px " + leftMargin;
 				// the flex value is calculated by "imageAspectRatio / BaseAspectRatio". BaseAR is 4/3, so for 3:4 images for example value is 3/4 / (4/3) * 100 = 56.25
-				const imageContainer = $(document.createElement("div")).addClass("group-image").css("flex", "1 1 " + (image.AspectRatio / BaseAspectRatio * 100) + "%");
+				const imageContainer = $(document.createElement("div")).addClass("group-image").css("flex", "1 1 " + (image.AspectRatio / BaseAspectRatio * 100) + "%").css("margin", margin);
 				const imageElement = $(document.createElement("img")).attr("src", image.FullPath(imageQuality));
 
 				groupAspectRatio += image.AspectRatio;
@@ -61,7 +66,8 @@ export default {
 				});
 			}
 
-			var marginPixels = 3 * 2;
+			// i don't know if this works at all or if the results are better than without... but whatever :P close enough!
+			const marginPixels = (imageCount - 1) * 6; // 2 == 1* (2* 3px), 3 == 2* (2*3px) etc
 			groupAspectRatio += marginPixels / container.width();
 
 			// okay, this padding-bottom value IS NOT CORRECT. it would be correct if the images didn't have margin, but they have. I'm not sure how to calculate this,
@@ -113,6 +119,7 @@ export default {
 
 .image-group {
 	display: flex;
+	margin-bottom: 6px;
 }
 
 .group-image {
