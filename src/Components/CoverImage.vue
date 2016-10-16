@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="cover-image-container">
-			<image-component class="cover-image" v-if="image != null" :quality="imageQuality" :auto-size="false" :image="image"> </image-component>
+			<image-component class="cover-image" :quality="imageQuality" :auto-size="false" :image="image"> </image-component>
 
 			<!-- Vignette -->
 			<div style="position: absolute; top: 0px; height: 100%; width: 100%;
@@ -75,7 +75,7 @@ export default {
 				$(".cover-image-container").css("height", newHeight + "px");
 				$(".cover-image-container-spacer").css("margin-top", newHeight + "px");
 
-				windowHeightOnPreviousHeightUpdate = newHeight;
+				windowHeightOnPreviousHeightUpdate = $(window).height();
 			};
 
 			$(window).resize(() => {

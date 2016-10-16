@@ -55,6 +55,12 @@ export default {
 
 	ready: function() {
 		this.initialize();
+
+		$(window).resize(this.onResize);
+	},
+
+	destroyed: function() {
+		$(window).off("resize", this.onResize);
 	},
 
 	methods: {
@@ -76,12 +82,6 @@ export default {
 
 			if(this.autoSize) {
 				this.recalculateHeight();
-
-				$(window).resize(() => {
-					if(this.autoSize) {
-						this.recalculateHeight();
-					}
-				});
 			}
 
 			const getCurrentImageSource = () => this.image.FullPath(this.quality);
@@ -105,6 +105,12 @@ export default {
 		recalculateHeight: function() {
 			const height = this.$els.imageContainer.offsetWidth / this.image.AspectRatio + "px";;
 			$(this.$els.imageContainer).css("height", height);
+		},
+
+		onResize: function() {
+			if(this.autoSize) {
+				this.recalculateHeight();
+			}
 		}
 	}
 };
