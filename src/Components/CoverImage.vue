@@ -125,7 +125,6 @@ export default {
 		 width: 100%;
 		 height: 100%;
 
-		 min-height: 260px;
 		 background-size: cover;
 		 background-position: 50% 45%;
 		 background-repeat: no-repeat;
