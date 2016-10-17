@@ -4,10 +4,9 @@
 </template>
 
 <script>
-import { Assert, IsTouchDevice, GetRandomInt, FormatString } from "../scripts/MiscHelper.js";
+import { Assert, IsTouchDevice, GetRandomInt } from "../scripts/MiscHelper.js";
 import ImageComponent from "./Image.vue";
 import Vue from "vue";
-
 
 export default {
 	components: {
