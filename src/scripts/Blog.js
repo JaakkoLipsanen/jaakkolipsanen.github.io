@@ -115,8 +115,12 @@ export class BlogPost{
 		this.ContentBlocks = contentBlocks;
 	}
 
+	get URL() {
+		return this.Name.toLowerCase();
+	}
+
 	get TripUrlString() {
-		return this.Trip.replace(" ", "").toLowerCase()
+		return this.Trip.replace(" ", "").toLowerCase();
 	}
 
 	static async FromFile(name, postFolder) {
@@ -192,6 +196,10 @@ class BlogPostInfo {
 		this._directory = directory;
 	}
 
+	get URL() {
+		return this.Name.toLowerCase();
+	}
+
 	get TripUrlString() {
 		return this.Trip.replace(" ", "").toLowerCase()
 	}
@@ -245,6 +253,8 @@ export class BlogQuery {
 	}
 
 	async GetBlogPostByName(name) {
+		name = name.toLowerCase();
+
 		const blog = this;
 		return new Promise(async (resolve, reject) => {
 			try {
@@ -303,7 +313,7 @@ export class BlogSource {
 				let blogPosts = [];
 				for(let i = 1; i < posts.length; i++) { // starts from 1 because first line is file format explaining comment
 					const parameters = posts[i].split('|');
-					const name = parameters[0];
+					const name = parameters[0].toLowerCase();
 					const trip = parameters[1];
 					const title = parameters[2];
 					const dayRange = DayRange.Parse(parameters[3]);

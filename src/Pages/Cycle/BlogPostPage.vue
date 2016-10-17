@@ -101,7 +101,7 @@ export default {
 
 			event.preventDefault();
 			this.currentPost = await this.blog.GetBlogPostByPostInfo(post);
-			this.$root.ChangeURL("/blog/" + post.Name, { PostName: post.Name });
+			this.$root.ChangeURL("/blog/" + post.URL, { PostName: post.Name });
 			window.scrollTo(0, 0);
 		},
 

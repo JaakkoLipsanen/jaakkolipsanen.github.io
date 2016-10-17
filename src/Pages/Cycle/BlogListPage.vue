@@ -43,7 +43,7 @@ export default {
 			if(event.which !== 1) return; // if middle or right click, then let the link do it's own work
 
 			event.preventDefault();
-			this.$root.ChangePage("blog-post-page", "/blog/" + post.Name, { PostName: post.Name });
+			this.$root.ChangePage("blog-post-page", "/blog/" + post.URL, { PostName: post.Name });
 		},
 
 		getPostLink: function(post) {
