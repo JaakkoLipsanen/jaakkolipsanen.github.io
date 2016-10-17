@@ -4,8 +4,10 @@
 </template>
 
 <script>
-import { Assert, IsTouchDevice, GetRandomInt } from "../scripts/MiscHelper.js";
+import { Assert, IsTouchDevice, GetRandomInt, FormatString } from "../scripts/MiscHelper.js";
 import ImageComponent from "./Image.vue";
+import Vue from "vue";
+
 
 export default {
 	components: {
@@ -19,67 +21,85 @@ export default {
 		}
 	},
 
+	methods: {
+		GetImageByPath: function(filename) {
+			return this.groupImages.find(image => image.FileName === filename);
+		},
+
+		GetImageQuality: function(imagesOnRow) {
+			if(IsTouchDevice()) {
+				return (imagesOnRow === 1) ? "360p" : "240p";
+			}
+			else {
+				return (imagesOnRow === 1) ? "720p" : ((imagesOnRow === 2) ? "360p" : "240p");
+			}
+		}
+	},
+
 	ready: function() {
-	//	var imageComponent = this.$options.components["image-component"];
-	//	var img = new ImageComponent({ props:});
-
-	//	var child = new imageComponent({ el: this.$els.imageGroupContainer, parent: this,  props: { image: new Photo("", "", "", 1, 1) } });
-	//	console.log(child);
-
-		const MaxImagesPerRow = IsTouchDevice() ? 2 : 2; // TODO: ANTTI MUUTA TÄTÄ JOS TÄÄ UPDATE KUSEE
 		const BaseAspectRatio = 4 / 3;
 		const groupContainer = this.$els.imageGroupContainer;
-		const parent = this.$parent;
 
 		const createGroup = (allImages, firstImageIndex, imageCount) => {
 			Assert(firstImageIndex + imageCount <= allImages.length, "Error creating imagegroup: index out of bounds");
 
-			let imageQuality;
-			if(IsTouchDevice()) {
-				imageQuality = (imageCount === 1) ? "360p" : "240p";
-			}
-			else {
-				imageQuality = (imageCount === 1) ? "720p" : ((imageCount === 2) ? "360p" : "240p");
-			}
+			const imageQuality = this.GetImageQuality(imageCount);
+			const createImageGroupTemplate = () => {
+				let template = "<div class='image-group' style='padding-bottom: {0}'>"; // {0} will be set later
 
-			const container = $(document.createElement("div")).addClass("image-group").appendTo(groupContainer);
-			let groupAspectRatio = 0;
-			for(let i = firstImageIndex; i < firstImageIndex + imageCount; i++) {
-				const image = this.groupImages[i];
+				let groupAspectRatio = 0;
+				for(let i = firstImageIndex; i < firstImageIndex + imageCount; i++) {
+					const image = this.groupImages[i];
 
-				const MarginSize = "3px";
-				const leftMargin = (i !== firstImageIndex) ? MarginSize : "0px";
-				const rightMargin = (i !== firstImageIndex + imageCount - 1) ? MarginSize : "0px";
+					const MarginSize = "3px";
+					const leftMargin = (i !== firstImageIndex) ? MarginSize : "0px";
+					const rightMargin = (i !== firstImageIndex + imageCount - 1) ? MarginSize : "0px";
 
-				const margin = "0px " + rightMargin + " 0px " + leftMargin;
-				// the flex value is calculated by "imageAspectRatio / BaseAspectRatio". BaseAR is 4/3, so for 3:4 images for example value is 3/4 / (4/3) * 100 = 56.25
-				const imageContainer = $(document.createElement("div")).addClass("group-image").css("flex", "1 1 " + (image.AspectRatio / BaseAspectRatio * 100) + "%").css("margin", margin);
-				const imageElement = $(document.createElement("img")).attr("src", image.FullPath(imageQuality));
+					const margin = "0px " + rightMargin + " 0px " + leftMargin;
 
-				groupAspectRatio += image.AspectRatio;
+					// create .group-image
+					template += `<div class='group-image' style='flex: 1 1 ${(image.AspectRatio / BaseAspectRatio * 100)}%; margin: ${margin}'>`;
+					template += `    <image-component :image='GetImageByPath("${image.FileName}")' quality='${imageQuality}' :auto-size='true' v-on:click='imageClicked(GetImageByPath("${image.FileName}"))'> </image-component>`;
+					template += "</div>";
 
-				imageElement.appendTo(imageContainer);
-				imageContainer.appendTo(container);
+					groupAspectRatio += image.AspectRatio;
+				}
 
-				imageContainer.click(function() {
-					parent.imageClicked(image);
-				});
-			}
+				// end of .image-group
+				template += "</div>";
 
-			// i don't know if this works at all or if the results are better than without... but whatever :P close enough!
-			const marginPixels = (imageCount - 1) * 6; // 2 == 1* (2* 3px), 3 == 2* (2*3px) etc
-			groupAspectRatio += marginPixels / container.width();
+				// i don't know if this works at all or if the results are better than without... but whatever :P close enough!
+				const marginPixels = (imageCount - 1) * 6; // 2 == 1* (2* 3px), 3 == 2* (2*3px) etc
+				groupAspectRatio += marginPixels / $(groupContainer).width();
 
-			// okay, this padding-bottom value IS NOT CORRECT. it would be correct if the images didn't have margin, but they have. I'm not sure how to calculate this,
-			// it's possible that I have to update the value everytime the image-group/window is resized :///
-			container.css("padding-bottom", "calc(" + (1 / groupAspectRatio * 100) + "%)");
-			container.css("position", "relative");
-			container.css("height", "0");
-		//	container.css("background-color", "gray"); // also, right now this is applied to the group container which is NOT CORRECT. I want this to be applied only to individual images
+				// replace the {0} that contains the padding-bottom with actual value
+				template = template.replace("{0}", (1 / groupAspectRatio * 100) + "%");
+				return template;
+			};
 
+			const parent = this;
+			const ImageGroup = Vue.extend({
+				template: createImageGroupTemplate(),
+				components: {
+					"image-component": ImageComponent
+				},
+
+				methods: {
+					GetImageByPath: function(filename) {
+						return parent.GetImageByPath(filename); // this.groupImages.find(image => image.FileName === filename);
+					},
+
+					imageClicked: function(photo) {
+						parent.$parent.imageClicked(photo);
+					}
+				}
+			});
+
+			new ImageGroup().$mount().$appendTo(groupContainer);
 			return imageCount;
 		};
 
+		const MaxImagesPerRow = IsTouchDevice() ? 2 : 2; // :P
 		const generateGroups = (currentImage = 0, lastRowCount = -1) => {
 			const imagesRemaining = this.groupImages.length - currentImage;
 			const currentImageAtStart = currentImage;
@@ -120,6 +140,8 @@ export default {
 .image-group {
 	display: flex;
 	margin-bottom: 6px;
+	position: relative;
+	height: 0;
 }
 
 .group-image {
