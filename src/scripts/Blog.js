@@ -64,7 +64,8 @@ export class ImageBlock {
 	}
 
 	static Parse(folder, str) {
-		const parameters = str.split('|');
+		const i = str.indexOf('|'); // index of first '|'. On left side will be the resolution, on right side will be the image text/caption
+		const parameters = [str.substr(0, i), str.substr(i + 1)]; // str.split('|', 1);
 		Assert(parameters.length > 0);
 
 		const imgParameters = parameters[0].split('?'); // jotain.jpg?1920x1080 for example
