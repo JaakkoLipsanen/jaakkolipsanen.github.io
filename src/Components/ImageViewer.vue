@@ -163,9 +163,8 @@ export default {
 
 	#image-cc {
 		width: 100%;
-		height: calc(95% - 48px);
+		height: calc(100% - 24px);
 
-		margin: auto;
 		position: absolute;
 		top: 0;
 		bottom: 0;
