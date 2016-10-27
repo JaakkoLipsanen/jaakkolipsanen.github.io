@@ -27,7 +27,7 @@ export class Photo {
 
 	_getFileNameForQuality(quality) {
 		// stupid ugly awful hack, but 10p images are stored as .png's :P
-		return (quality == "10p") ? this.FileName.slice().replace(".jpg", ".png") : this.FileName;
+		return (quality == "10p") ? this.FileName.slice().replace(".jpg", ".png").replace(".JPG", ".png") : this.FileName;
 	}
 
 	get DefaultPath() {
