@@ -152,6 +152,18 @@ export class Route {
 		this._data = data;
 	}
 
+
+	_findNextCoordinateAfterIndex(index) {
+		for(let i = index + 1; i < this._data.length; i++) {
+			const element = this._data[i];
+			if(element.type === "coordinate") {
+				return element.location;
+			}
+		}
+
+		return undefined;
+	}
+
 	CalculateRoute() {
 		const cyclePaths = [];
 		const transportPaths = [];
@@ -159,6 +171,7 @@ export class Route {
 
 		let currentPathType = "cycle"; // cycle is default/initial path type
 		let currentPath = [];
+		let lastCoordinate = undefined;
 		for(let i = 0; i < this._data.length; i++) {
 			const element = this._data[i];
 			if(element.type === "night") {
@@ -175,15 +188,30 @@ export class Route {
 					continue;
 				}
 
+				if(element.pathType === "cycle" && currentPathType === "transport") {
+					const coordinate = this._findNextCoordinateAfterIndex(i);
+					if(coordinate !== undefined) {
+						console.log("asdf");
+						currentPath.push(coordinate);
+					}
+				}
+
 				let destination = (currentPathType === "cycle") ? cyclePaths : transportPaths;
 				destination.push(new Path(currentPath));
-				currentPathType = element.pathType;
 
 				// new array for the new path
 				currentPath = [];
+				if(lastCoordinate !== undefined && element.pathType === "transport") {
+					// add last coordinate to the new path as starting point. this way,
+					// there will be no gaps between paths
+					currentPath.push(lastCoordinate);
+				}
+
+				currentPathType = element.pathType;
 			}
 			else if(element.type === "coordinate") {
 				currentPath.push(element.location);
+				lastCoordinate = element.location;
 			}
 		}
 
@@ -262,6 +290,7 @@ export class Route {
 
 		return { CyclingPaths: cyclePaths, TransportPaths: transportPaths, Nights: nights };
 	}
+
 
 	static async FromFile(filePath) {
 		return new Promise(async (resolve, reject) => {
