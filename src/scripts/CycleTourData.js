@@ -29,6 +29,12 @@ export let CycleTourData = {
 			"year": "2016",
 			"description": ""
 		},
+		{
+			"name": "Israel & Jordan",
+			"shortName": "ISRAEL & JORDAN 2016",
+			"year": "2016",
+			"description": ""
+		},
 	],
 
 	GetAllShortNames: function() { // from oldest to newest
