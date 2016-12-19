@@ -77,7 +77,7 @@ export default {
 		},
 
 		CycleRoutePath: function() {
-			return "/assets/cycle/routes/" + this.CurrentTour.shortName.replace(" ", "").toLowerCase() + "/route.txt";
+			return "/assets/cycle/routes/" + this.CurrentTour.shortName.replace(/ /g, "").toLowerCase() + "/route.txt";
 		},
 
 		CurrentTour: function() {
