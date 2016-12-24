@@ -121,7 +121,7 @@ export class BlogPost{
 	}
 
 	get TripUrlString() {
-		return this.Trip.replace(" ", "").toLowerCase();
+		return this.Trip.replace(/ /g, "").toLowerCase();
 	}
 
 	static async FromFile(name, postFolder) {
@@ -202,7 +202,7 @@ class BlogPostInfo {
 	}
 
 	get TripUrlString() {
-		return this.Trip.replace(" ", "").toLowerCase()
+		return this.Trip.replace(/ /g, "").toLowerCase();
 	}
 
 	get Directory() {
