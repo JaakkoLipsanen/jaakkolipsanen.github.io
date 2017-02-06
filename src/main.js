@@ -9,14 +9,12 @@ import HomePage from "./Pages/Cycle/HomePage.vue";
 import GearPage from "./Pages/Cycle/GearPage.vue";
 import ToursPage from "./Pages/Cycle/ToursPage.vue";
 
-import { mapify } from "es6-mapify";
-
-const ConstantURL = (window.location.pathname == "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
+const ConstantURL = (window.location.pathname === "/404.html") ? "/404.html" : undefined; // if accessing 404.html then don't modify url
 // Vue.config.debug = true;
 
 /* eslint-disable no-new */
 /* eslint-disable no-unused-vars */
-var app = new Vue({
+const app = new Vue({
 	el: "body",
 	components: {
 		"navbar": Navbar,
@@ -26,17 +24,17 @@ var app = new Vue({
 		"gear-page": GearPage,
 		"home-page": HomePage,
 		"blog-post-page": BlogPostPage,
-		"blog-list-page": BlogListPage,
+		"blog-list-page": BlogListPage
 	},
 
 	data: {
-		currentView: "",
+		currentView: ""
 	},
 
 	computed: {
 		CurrentUrl: function() {
 			return window.location.pathname;
-		},
+		}
 	},
 
 	ready: function() {
@@ -60,7 +58,7 @@ var app = new Vue({
 				window.history.replaceState(parameters, "", ConstantURL || url);
 			}
 
-			if(this.currentView == pageName) {
+			if(this.currentView === pageName) {
 				this.$broadcast("StateUpdated");
 			}
 			else {
@@ -92,7 +90,7 @@ var app = new Vue({
 				if(path.length === 1) {
 					this.ChangePage("blog-list-page", url, { }, false);
 				}
-				else if(path.length == 2) {
+				else if(path.length === 2) {
 					this.ChangePage("blog-post-page", url, { PostName: path[1] }, false );
 				}
 			}
@@ -102,21 +100,19 @@ var app = new Vue({
 			else if(path[0] === "tours") {
 				this.ChangePage("tours-page", url, { }, false );
 			}
-			else if(path[0] == "code") {
+			else if(path[0] === "code") {
 				this.ChangePage("code-page", url, { }, false);
 			}
 
 
-			 /* "if in dev mode/localhost" */
-			 if(path[0] == "404.html") {
+			/* "if in dev mode/localhost" */
+			if(path[0] === "404.html") {
 				this.ChangePage("blog-list-page", "/blog", { }, false);
 			}
 		}
 	}
 });
 
-window.addEventListener('popstate', function(event) {
+window.addEventListener("popstate", function(event) {
 	app.PopState();
 });
-
-// setTimeout(() => { app.currentView = "code-page" }, 3000);

@@ -1,6 +1,5 @@
 
-export let CycleTourData = {
-
+export const CycleTourData = {
 	Tours: [
 		{
 			"name": "Sweden to Belgium",
@@ -34,7 +33,7 @@ export let CycleTourData = {
 			"shortName": "Israel & Jordan 2016",
 			"year": "2016",
 			"description": ""
-		},
+		}
 	],
 
 	GetAllShortNames: function() { // from oldest to newest
@@ -51,5 +50,5 @@ export let CycleTourData = {
 
 	GetAllTours: function() {
 		return this.Tours;
-	},
+	}
 };

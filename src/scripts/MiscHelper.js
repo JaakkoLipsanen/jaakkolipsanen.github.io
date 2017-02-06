@@ -19,20 +19,20 @@ export function OnFullscreenChange(callback) {
 }
 
 export function IsTouchDevice() {
-	return 'ontouchstart' in window // works on most browsers
-		|| 'onmsgesturechange' in window; // works on ie10
+	return "ontouchstart" in window || // works on most browsers
+			"onmsgesturechange" in window; // works on ie10
 };
 
 export function Assert(condition, message) {
-    if (!condition) {
-        throw message || "Assertion failed";
-    }
+	if (!condition) {
+		throw message || "Assertion failed";
+	}
 }
 
 export function IsEmptyOrWhitespace(str) {
-    return (str.length === 0 || !str.trim());
+	return (str.length === 0 || !str.trim());
 };
 
 export function GetRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }

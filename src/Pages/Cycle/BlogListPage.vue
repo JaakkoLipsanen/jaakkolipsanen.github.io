@@ -93,9 +93,6 @@ export default {
 	height: 100% !important; background-position: center; background-size: cover;
 }
 
-
-
-
 .blog-list-page-container {
 	margin: auto;
 	margin-top: 8px;
@@ -130,8 +127,6 @@ export default {
 	text-decoration: none;
 }
 
-$block-width: 400px;
-$block-height-aspect: 0.66;
 .image-container {
 	width: 100%;
 	padding-bottom: 66%;

@@ -3,10 +3,12 @@
 		<div class='gallery-background'></div>
 		<img class="close-button" src="/icons/close-black.png" v-on:click="OnCloseButtonClicked()">
 
-
 		<div id="image-container" >
 			<div id="image-cc">
-				<image-component v-if="currentPhoto" id="image" :image="currentPhoto" :quality="ImageQuality" :auto-size="false" :background-size="'contain'" :background-color="'transparent'" v-on:click="ChangeImageByIndex(CurrentImageIndex + 1)"></image-component>
+				<image-component
+						v-if="currentPhoto" id="image" v-on:click="ChangeImageByIndex(CurrentImageIndex + 1)"
+						:image="currentPhoto" :quality="ImageQuality" :auto-size="false" :background-size="'contain'" :background-color="'transparent'"></image-component>
+
 				<p v-if="currentPhoto" class="photo-text"> {{ currentPhoto.Text }} </p>
 
 				<div class="photo-controls">
@@ -22,7 +24,9 @@
 					<p>{{ "ISO: " + currentPhotoExif.ISO }}</p>
 					<p>{{ "Date: " + currentPhotoExif.DateTime }}</p>
 
-					<a class="image-location-link" v-if="currentPhotoExif.GpsLocation != 'unknown, unknown'" v-bind:href="'https://www.google.com/maps/place/' + currentPhotoExif.GpsLocation.replace(' ', '') + '/@' + currentPhotoExif.GpsLocation.replace(' ', '') + ',12z'" target="_blank">{{ "Location: " + currentPhotoExif.GpsLocation }}</a>
+					<a class="image-location-link" v-if="currentPhotoExif.GpsLocation != 'unknown, unknown'"
+						v-bind:href="'https://www.google.com/maps/place/' + currentPhotoExif.GpsLocation.replace(' ', '') + '/@' + currentPhotoExif.GpsLocation.replace(' ', '') + ',12z'"
+						target="_blank">{{ "Location: " + currentPhotoExif.GpsLocation }}</a>
 				</div>
 			</div>
 		</div>

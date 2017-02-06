@@ -5,7 +5,7 @@ export const PhotoQuality = {
 	FullHD: "1080p",
 	HD: "720p",
 	SD: "480p",
-	LD: "480p", // "LowDefinition" todo: 240p images?
+	LD: "480p" // "LowDefinition" todo: 240p images?
 };
 
 export class Photo {
@@ -27,7 +27,7 @@ export class Photo {
 
 	_getFileNameForQuality(quality) {
 		// stupid ugly awful hack, but 10p images are stored as .png's :P
-		return (quality == "10p") ? this.FileName.slice().replace(".jpg", ".png").replace(".JPG", ".png") : this.FileName;
+		return (quality === "10p") ? this.FileName.slice().replace(".jpg", ".png").replace(".JPG", ".png") : this.FileName;
 	}
 
 	get DefaultPath() {
@@ -44,4 +44,3 @@ export class Photo {
 		return this.AspectRatio < 1;
 	}
 }
-// /cycle/blog/posts/usa-16/1080p/img1.jpg 1920w, /cycle/blog/posts/usa-16/1080p/img2.jpg 720w

@@ -25,7 +25,6 @@ export default {
 	events: {
 		"selected-route-changed": function(selectedItem) {
 			this.selectedItem = selectedItem;
-			console.log("CHANGED");
 		}
 	}
 };

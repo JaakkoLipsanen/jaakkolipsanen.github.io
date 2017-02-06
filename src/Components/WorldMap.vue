@@ -20,9 +20,9 @@ export default {
 		const europe15 =  (await Route.FromFile("/cycle/routes/europe2015/route.txt")).CalculateRoute();
 
 		const paintRoute = function (context, route) {
-			var mapWidth = context.canvas.width;
-			var mapHeight = context.canvas.height;
-			var lonToX = function (longitude) {
+			let mapWidth = context.canvas.width;
+			let mapHeight = context.canvas.height;
+			let lonToX = function (longitude) {
 				// häx!! for some reason, longitude > 0 works pretty much perfectly, but with negative values it doesn't work properly (some values are correct, some are bit wrong)
 				if (longitude > 0)
 					return mapWidth / 2 + (longitude / 180 * (mapWidth / 2)) * 0.946;
@@ -31,8 +31,8 @@ export default {
 				}
 			}
 			const latToY = function (latitude) {
-				var latRad = latitude * Math.PI / 180;
-				var mercN = Math.log(Math.tan((Math.PI / 4) + (latRad / 2)));
+				let latRad = latitude * Math.PI / 180;
+				let mercN = Math.log(Math.tan((Math.PI / 4) + (latRad / 2)));
 				return mapHeight * 0.65131894484 - (mapWidth * mercN / (2 * Math.PI)) * 0.935;
 			}
 			for (let i = 0; i < route.CyclingPaths.length; i++) {
@@ -56,7 +56,7 @@ export default {
 		const canvas = document.getElementById("route-canvas");
 
 		const paintCanvas = function () {
-			var context = canvas.getContext('2d');
+			let context = canvas.getContext('2d');
 			context.beginPath();
 			paintRoute(context, europe14);
 			paintRoute(context, spain14);
