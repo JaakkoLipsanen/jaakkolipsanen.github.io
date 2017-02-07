@@ -29,7 +29,7 @@ export default {
 				new Photo("/assets/cycle/blog/posts/ruby-beach-and-rest-of-washington", "1120610.jpg"),
 				new Photo("/assets/cycle/blog/posts/oregon-coast-part-1", "P1120983.JPG"),
 				new Photo("/assets/cycle/blog/posts/lost-coast", "P1130350.JPG"),
-				new Photo("/assets/cycle/blog/posts/judean-desert-and-the-dead-sea", "1140983~3.jpg"),
+				new Photo("/assets/cycle/blog/posts/judean-desert-and-the-dead-sea", "1140983~3.jpg")
 			])
 		};
 	},
@@ -55,6 +55,10 @@ export default {
 	margin: auto;
 	padding-top: 118px;
 	margin-bottom: 0px;
+
+	@media all and (max-width: 615px) {
+		padding-top: 72px !important;
+	}
 }
 
 .slideshow {
@@ -66,16 +70,17 @@ export default {
 		width: 960px;
 	}
 
-	@media all and (min-width: 615px) and (max-width: 1080px) {
+	@media all and (min-width: 616px) and (max-width: 705px) {
+		width: 585px;
+	}
+
+	@media all and (min-width: 706px) and (max-width: 1080px) {
 		width: calc(100% - 120px);
 	}
 
-	@media all and (max-width: 614px) {
+	@media all and (max-width: 615px) {
 		width: calc(95%);
 	}
 }
  
 </style>
-
-	<!--	<img src="/assets/cycle/blog/posts/negev-mitzpe-ramon-loop/orig/1170226~2.jpg" class="display-img">
-	constructor(folder, fileName, text = "", width = -1, height = -1) { -->

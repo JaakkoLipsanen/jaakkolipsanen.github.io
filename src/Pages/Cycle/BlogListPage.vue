@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<div style="height: 96px"> </div>
 		<div v-if="blog && blog.PostInfos.length > 0" class="blog-list-page-container">
 			<a :href="getPostLink(post)" class="blog-post-block" v-for="post in blog.PostInfos" v-on:click="postClicked($event, post)">
 				<div class="image-container">
@@ -101,6 +100,14 @@ export default {
 	max-width: 1600px;
 
 	text-align: center;
+
+	@media all and (max-width: 615px) {
+		padding-top: 54px;
+	}
+
+	@media all and (min-width: 616px) {
+		padding-top: 96px;
+	}
 }
 
 @media all and (max-width: 952px) {
