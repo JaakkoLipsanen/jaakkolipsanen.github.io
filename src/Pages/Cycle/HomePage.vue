@@ -66,21 +66,31 @@ export default {
 		width: 50%;
 	}
 
-	@media all and (min-width: 1081px) and (max-width: 1919px) {
+	@media all and (min-width: 1578px) and (max-width: 1919px) {
 		width: 960px;
 	}
 
-	@media all and (min-width: 616px) and (max-width: 705px) {
+	@media all and (min-width: 1420px) and (max-width: 1577px) {
+		width: calc(100% - 617px);
+	}
+
+	@media all and (min-width: 1081px) and (max-width: 1419px) {
+		width: calc(802px);
+	}
+
+	@media all and (min-width: 864px) and (max-width: 1080px) {
+		width: calc(100% - 278px);
+	}
+	
+	@media all and (min-width: 616px) and (max-width: 863px) {
 		width: 585px;
 	}
 
-	@media all and (min-width: 706px) and (max-width: 1080px) {
-		width: calc(100% - 120px);
-	}
 
 	@media all and (max-width: 615px) {
 		width: calc(95%);
 	}
+	max-height: calc(100% - 118px);
 }
  
 </style>
