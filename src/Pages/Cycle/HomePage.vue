@@ -1,6 +1,6 @@
 <template>
 	<div class="page-content-container">
-		<slideshow class="slideshow" :images="images"></slideshow>
+		<slideshow class="slideshow" :images="slideshowImages" :quality="slideshowQuality"></slideshow>
 	</div>
 </template>
 
@@ -8,12 +8,12 @@
 
 import Slideshow from "../../Components/Slideshow.vue";
 import { Photo } from "../../scripts/Photo.js";
-import { Shuffle } from "../../scripts/MiscHelper.js";
+import { Shuffle, IsTouchDevice } from "../../scripts/MiscHelper.js";
 
 export default {
 	data() {
 		return {
-			images: Shuffle([
+			slideshowImages: Shuffle([
 				new Photo("/assets/cycle/blog/posts/and-back-again", "1060788.jpg"),
 				new Photo("/assets/cycle/blog/posts/angel-has-landed", "1070479.jpg"),
 				new Photo("/assets/cycle/blog/posts/colorado", "1100202.jpg"),
@@ -30,7 +30,11 @@ export default {
 				new Photo("/assets/cycle/blog/posts/oregon-coast-part-1", "P1120983.JPG"),
 				new Photo("/assets/cycle/blog/posts/lost-coast", "P1130350.JPG"),
 				new Photo("/assets/cycle/blog/posts/judean-desert-and-the-dead-sea", "1140983~3.jpg")
-			])
+			]),
+
+			// lower quality would be better for bandwidth etc, but since the slideshow moves to the next pic
+			// only when it gets loaded, it doesnt really matter. I think 720p/1080p is good
+			slideshowQuality: IsTouchDevice() ? "720p" : "1080p" // todo, create & use "IsMobile" instead
 		};
 	},
 
@@ -39,7 +43,7 @@ export default {
 	},
 
 	ready: function() {
-	}
+	},
 };
 </script>
 
