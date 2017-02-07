@@ -27,7 +27,7 @@ export default {
 			default: true
 		},
 
-		// okay if this gets changed after initialization, i'll ignore it
+		// okay, if this gets changed after initialization, i'll ignore it
 		autoSize: {
 			type: Boolean,
 			default: true

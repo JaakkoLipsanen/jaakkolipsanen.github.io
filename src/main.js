@@ -107,7 +107,7 @@ const app = new Vue({
 
 			/* "if in dev mode/localhost" */
 			if(path[0] === "404.html") {
-				this.ChangePage("blog-list-page", "/blog", { }, false);
+				this.ChangePage("home-page", "/", { }, false);
 			}
 		}
 	}

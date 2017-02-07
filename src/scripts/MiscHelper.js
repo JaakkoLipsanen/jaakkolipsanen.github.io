@@ -36,3 +36,15 @@ export function IsEmptyOrWhitespace(str) {
 export function GetRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+export function Shuffle(array) {
+	let j, x, i;
+	for (i = array.length; i; i--) {
+		j = Math.floor(Math.random() * i);
+		x = array[i - 1];
+		array[i - 1] = array[j];
+		array[j] = x;
+	}
+
+	return array;
+}

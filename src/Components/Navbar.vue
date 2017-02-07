@@ -29,7 +29,7 @@ export default {
 			title: "flai",
 
 			navbarLinks: [
-				{ name: "home", enabled: false },
+				{ name: "home", enabled: true },
 				{ name: "blog", enabled: true },
 				{ name: "gear", enabled: false },
 				{ name: "tours", enabled: true }
