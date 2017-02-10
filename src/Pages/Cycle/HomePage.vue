@@ -123,7 +123,7 @@ export default {
 
 	@media all and (max-width: 615px) {
 		width: calc(95%);
-		padding-top: 72px !important;
+		padding-top: 64px !important;
 	}
 }
 
@@ -150,6 +150,10 @@ export default {
 
 	margin-bottom: 0px;
 	color: rgb(32, 32, 32);
+
+	@media all and (max-width: 500px) {
+		font-size: 20px;
+	}
 }
 
 .rest-of-posts-link-container {

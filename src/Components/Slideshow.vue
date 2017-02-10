@@ -106,6 +106,7 @@ export default {
 
 .slideshow-container {
 	position: relative;
+	background-color: rgb(240, 240, 240);
 }
 
 </style>
