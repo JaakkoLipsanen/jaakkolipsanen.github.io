@@ -54,37 +54,6 @@ export default {
 
 <style lang="sass" id="style-sheet" scoped>
 
-.post-title, .post-tour-info {
-	font-family: "Raleway";
-	margin: 0px;
-	margin-top: 4px;
-	text-align: left;
-	color: black;
-}
-
-.post-tour-info {
-	font-weight: 500;
-	margin-top: 0px;
-	text-decoration: none;
-}
-
-.blog-post-block:hover > div > div {
-	background-color: rgba(0, 0, 0, 0.1) !important;
-
-	h1 {
-		color: white !important;
-	}
-
-	h3 {
-		color: white !important;
-	}
-}
-
-.blog-post-block-background {
-	width: 100%;
-	height: 100% !important; background-position: center; background-size: cover;
-}
-
 .blog-list-page-container {
 	margin: auto;
 	margin-top: 8px;
@@ -103,20 +72,6 @@ export default {
 	}
 }
 
-@media all and (max-width: 952px) {
-	.blog-post-block {
-		width: 85% !important;
-		margin: 16px 0 !important;
-		text-align: center;
-	}
-}
-
-@media all and (max-width: 1142px) and (min-width: 818px) {
-	.tour-map {
-		width: 800px !important;
-	}
-}
-
 .blog-post-block {
 	width: 400px;
 	text-align: center;
@@ -124,6 +79,39 @@ export default {
 
 	display: inline-block;
 	margin: 16px 34px;
+	text-decoration: none;
+
+	&:hover > div > div {
+		background-color: rgba(0, 0, 0, 0.1) !important;
+	}
+
+	@media all and (max-width: 952px) {
+		width: 85% !important;
+		margin: 16px 0 !important;
+		text-align: center;
+	}
+}
+
+.blog-post-block-background {
+	width: 100%;
+	height: 100% !important; background-position: center; background-size: cover;
+}
+
+.post-title, .post-tour-info {
+	font-family: "Raleway";
+	margin: 0px;
+	margin-top: 4px;
+	text-align: left;
+	color: black;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.post-tour-info {
+	font-weight: 500;
+	margin-top: 0px;
 	text-decoration: none;
 }
 

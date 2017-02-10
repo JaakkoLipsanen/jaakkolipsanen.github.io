@@ -1,18 +1,25 @@
 <template>
 	<div class="page-content-container">
 		<slideshow class="slideshow" :images="slideshowImages" :quality="slideshowQuality"></slideshow>
-		<p style="font-weight: bold;width: 100%; font-size: 24px; margin-bottom: 0px; color: rgb(32, 32, 32); font-family: 'Raleway'">recent blog posts</p>
-		<div style="width: 100%;border-bottom: solid 2px;margin: 0px;margin-top: 6px;color: rgb(64, 64, 64);"></div>
-		
-		<a :href="getPostLink(post)" class="blog-post-block" v-for="post in blog.PostInfos" v-on:click="postClicked($event, post)">
-			<div class="image-container">
-				<image-component class="post-image" v-if="post.MainImage != null" :quality="'360p'" :auto-size="false" :image="post.MainImage"></image-component>
-				<div class='image-color-overlay'> </div>
-			</div>
 
-			<h4 class="post-title"> {{ post.Title }} </h4>
-			<h4 class="post-tour-info"> {{ post.Trip + ": " + post.DayRange.DisplayString }} </h4>
-		</a>
+		<p class="recent-posts-text">recent blog posts</p>
+		<div class="divider"></div>
+		
+		<div>
+			<a :href="getPostLink(post)" class="blog-post-block" v-for="post in blog.PostInfos" v-on:click="postClicked($event, post)">
+				<div class="image-container">
+					<image-component class="post-image" v-if="post.MainImage != null" :quality="'360p'" :auto-size="false" :image="post.MainImage"></image-component>
+					<div class='image-color-overlay'> </div>
+				</div>
+
+				<h4 class="post-title"> {{ post.Title }} </h4>
+				<h4 class="post-tour-info"> {{ post.Trip + ": " + post.DayRange.DisplayString }} </h4>
+			</a>
+		</div>
+
+		<div class="rest-of-posts-link-container">
+			<a href="/blog">rest of the blog posts ></a>
+		</div>
 	</div>
 </template>
 
@@ -50,7 +57,7 @@ export default {
 
 			// lower quality would be better for bandwidth etc, but since the slideshow moves to the next pic
 			// only when it gets loaded, it doesnt really matter. I think 720p/1080p is good
-			slideshowQuality: IsTouchDevice() ? "720p" : "1080p" // todo, create & use "IsMobile" instead
+			slideshowQuality: IsTouchDevice() ? "720p" : "orig" // todo, create & use "IsMobile" instead
 		};
 	},
 
@@ -88,7 +95,7 @@ export default {
 .page-content-container {
 	margin: auto;
 	padding-top: 118px;
-	margin-bottom: 0px;
+	margin-bottom: 64px;
 
 	@media all and (min-width: 1920px) {
 		width: 50%;
@@ -123,92 +130,103 @@ export default {
 .slideshow {
 	width: 100%;
 
-	/* 75% because the images are all 4:3 */
-	padding-bottom: 75%;
+	/* 66.66% for 3:2 aspect ratio */
+	padding-bottom: 66.666%;
 	margin-bottom: 32px;
 }
 
+.divider {
+	width: 100%;
+	border-bottom: solid 2px;
+	color: rgb(64, 64, 64);
+	margin: 0px;
+	margin-top: 6px;
+}
 
+.recent-posts-text {
+	font-family: "Raleway";
+	font-weight: bold; 
+	font-size: 24px;
 
+	margin-bottom: 0px; 
+	color: rgb(32, 32, 32); 
+}
 
+.rest-of-posts-link-container {
+	text-align: right; 
+	margin-top: 8px;
 
+	/* the actual link */
+	a {
+		font-family: 'Raleway'; 
+		font-weight: 700; 
+		font-size: 18px; 
 
+		color:black; 
+		text-decoration: none; 
 
+		&:hover {
+			opacity: 0.9;
+			color: rgb(72, 72, 72);
+		}
+	}
+}
+
+$blog-post-block-margin: 24px;
 .blog-post-block {
-	width: 400px;
 	text-align: center;
 	cursor: pointer;
 
 	display: inline-block;
-	margin: 16px 34px;
+	margin: 16px $blog-post-block-margin;
 	text-decoration: none;
-}
 
-.post-title, .post-tour-info {
-	font-family: "Raleway";
-	margin: 0px;
-	margin-top: 4px;
-	text-align: left;
-	color: black;
-}
-
-.post-tour-info {
-	font-weight: 500;
-	margin-top: 0px;
-	text-decoration: none;
-}
-
-.introduction-text {
-	width: 90%;
-	margin: 16px auto;
-
-	text-align: center;
-}
-
-.blog-post-block:hover > div > div {
-	background-color: rgba(0, 0, 0, 0.1) !important;
-
-	h1 {
-		color: white !important;
+	&:hover > div > div {
+		background-color: rgba(0, 0, 0, 0.1) !important;
 	}
 
-	h3 {
-		color: white !important;
-	}
-}
+	@media all and (min-width: 2276px) {
+		width: calc(100% / 3 - #{$blog-post-block-margin} * 1.34);
+		&:nth-child(3n + 1) {
+			margin-left: 0px;
+		}
 
-
-@media all and (max-width: 952px) {
-	.blog-post-block {
-		width: 85% !important;
-		margin: 16px 0 !important;
-		text-align: center;
-	}
-}
-
-.blog-post-block-background {
-	width: 100%;
-	height: 100% !important; background-position: center; background-size: cover;
-}
-
-.blog-list-page-container {
-	margin: auto;
-	margin-top: 8px;
-	margin-bottom: 32px;
-	width: 100%;
-	max-width: 1600px;
-
-	text-align: center;
-
-	@media all and (max-width: 615px) {
-		padding-top: 54px;
+		&:nth-child(3n) {
+			margin-right: 0px;
+		}
 	}
 
-	@media all and (min-width: 616px) {
-		padding-top: 96px;
+
+	@media all and (min-width: 958px) and (max-width: 2275px) {
+		width: calc(50% - #{$blog-post-block-margin});
+		&:nth-child(2n + 1) {
+			margin-left: 0px;
+		}
+
+		&:nth-child(2n) {
+			margin-right: 0px;
+		}
+
+		&:nth-child(n + 5) {
+			display: none;
+		}
+	}
+
+	@media all and (max-width: 957px) {
+		width: 100%;
+		margin-left: 0px;
+		margin-right: 0px;
+
+		&:nth-child(n + 4) {
+			display: none;
+		}
 	}
 }
 
+.post-image {
+	width: 100% !important;
+	padding-bottom: 66.66% !important;
+}
 
 .image-container {
 	width: 100%;
@@ -225,5 +243,22 @@ export default {
 	transition: background-color 0.2s ease-in-out;
 }
 
- 
+.post-title, .post-tour-info {
+	font-family: "Raleway";
+	margin: 0px;
+	margin-top: 4px;
+	text-align: left;
+	color: black;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.post-tour-info {
+	font-weight: 500;
+	margin-top: 0px;
+	text-decoration: none;
+}
+
 </style>
