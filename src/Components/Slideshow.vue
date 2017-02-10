@@ -57,9 +57,9 @@ export default {
 			}
 
 			// from http://stackoverflow.com/a/5058336
-			$('<img/>').attr('src', newImageUrl).one("load", () => { // todo: start loading this asap after the previous image is loaded
+			$("<img/>").attr("src", newImageUrl).one("load", () => { // todo: start loading this asap after the previous image is loaded
 				$(this).remove(); // prevent memory leaks as @benweet suggested
-				
+
 				foreground.css("opacity", 0);
 				background.css("opacity", 1);
 

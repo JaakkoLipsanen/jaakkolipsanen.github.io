@@ -145,25 +145,25 @@ export default {
 
 .recent-posts-text {
 	font-family: "Raleway";
-	font-weight: bold; 
+	font-weight: bold;
 	font-size: 24px;
 
-	margin-bottom: 0px; 
-	color: rgb(32, 32, 32); 
+	margin-bottom: 0px;
+	color: rgb(32, 32, 32);
 }
 
 .rest-of-posts-link-container {
-	text-align: right; 
+	text-align: right;
 	margin-top: 8px;
 
 	/* the actual link */
 	a {
-		font-family: 'Raleway'; 
-		font-weight: 700; 
-		font-size: 18px; 
+		font-family: 'Raleway';
+		font-weight: 700;
+		font-size: 18px;
 
-		color:black; 
-		text-decoration: none; 
+		color:black;
+		text-decoration: none;
 
 		&:hover {
 			opacity: 0.9;
