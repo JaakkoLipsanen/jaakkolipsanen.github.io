@@ -85,20 +85,19 @@ const app = new Vue({
 			if(path.length === 0 || path[0] === "home") {
 				this.ChangePage("home-page", "/", { }, false);
 			}
-
-			if(path[0] === "blog") {
+			else if(path[0] === "blog") {
 				if(path.length === 1) {
 					this.ChangePage("blog-list-page", url, { }, false);
 				}
 				else if(path.length === 2) {
-					this.ChangePage("blog-post-page", url, { PostName: path[1] }, false );
+					this.ChangePage("blog-post-page", url, { PostName: path[1] }, false);
 				}
 			}
 			else if(path[0] === "gear") {
 				this.ChangePage("gear-page", url, { }, false);
 			}
 			else if(path[0] === "tours") {
-				this.ChangePage("tours-page", url, { }, false );
+				this.ChangePage("tours-page", url, { }, false);
 			}
 			else if(path[0] === "code") {
 				this.ChangePage("code-page", url, { }, false);
