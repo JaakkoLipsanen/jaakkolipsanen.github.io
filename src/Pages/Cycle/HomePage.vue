@@ -18,7 +18,7 @@
 		</div>
 
 		<div class="rest-of-posts-link-container">
-			<a href="/blog">rest of the blog posts ></a>
+			<a href="/blog" v-on:click="restOfPostsLinkClicked($event)">more blog posts ></a>
 		</div>
 	</div>
 </template>
@@ -85,6 +85,13 @@ export default {
 
 		getPostLink: function(post) {
 			return "/blog/" + post.Name;
+		},
+
+		restOfPostsLinkClicked: function(event) {
+			if(event.which !== 1) return; // if middle or right click, then let the link do it's own work
+
+			event.preventDefault();
+			this.$root.ChangePage("blog-list-page", "/blog", { });
 		}
 	}
 };
