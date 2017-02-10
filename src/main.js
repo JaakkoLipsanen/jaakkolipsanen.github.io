@@ -82,8 +82,8 @@ const app = new Vue({
 
 		ConstructPageFromUrl: function(url) {
 			const path = url.split("/").filter(Boolean);
-			if(path.length === 0) {
-				this.ChangePage("home-page", url, { }, false);
+			if(path.length === 0 || path[0] === "home") {
+				this.ChangePage("home-page", "/", { }, false);
 			}
 
 			if(path[0] === "blog") {
