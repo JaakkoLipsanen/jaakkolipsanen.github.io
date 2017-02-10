@@ -132,7 +132,7 @@ export default {
 
 	/* 66.66% for 3:2 aspect ratio */
 	padding-bottom: 66.666%;
-	margin-bottom: 32px;
+	margin-bottom: 24px;
 }
 
 .divider {
