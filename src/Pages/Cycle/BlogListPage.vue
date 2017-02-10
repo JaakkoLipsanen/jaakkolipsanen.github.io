@@ -68,13 +68,6 @@ export default {
 	text-decoration: none;
 }
 
-.introduction-text {
-	width: 90%;
-	margin: 16px auto;
-
-	text-align: center;
-}
-
 .blog-post-block:hover > div > div {
 	background-color: rgba(0, 0, 0, 0.1) !important;
 

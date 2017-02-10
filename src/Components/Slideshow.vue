@@ -101,7 +101,6 @@ export default {
 
 .slideshow-container {
 	position: relative;
-	margin: auto;
 }
 
 </style>

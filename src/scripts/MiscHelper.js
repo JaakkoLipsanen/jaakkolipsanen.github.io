@@ -18,6 +18,7 @@ export function OnFullscreenChange(callback) {
 	$(document).on("fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange", callback);
 }
 
+// todo: create "IsMobile"?
 export function IsTouchDevice() {
 	return "ontouchstart" in window || // works on most browsers
 			"onmsgesturechange" in window; // works on ie10
