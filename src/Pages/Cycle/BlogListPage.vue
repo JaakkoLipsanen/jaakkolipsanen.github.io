@@ -17,6 +17,7 @@
 <script>
 import { BlogSource } from "../../scripts/Blog.js";
 import ImageComponent from "../../Components/Image.vue";
+import { RESOURCES_URL } from "../../scripts/MiscHelper.js";
 
 export default {
 	components: {
@@ -31,7 +32,7 @@ export default {
 
 	ready: function() {
 		const data = this;
-		BlogSource.FromFile("/assets/cycle/blog/posts.txt").then(blog => {
+		BlogSource.FromFile(`${RESOURCES_URL}/cycle/blog/posts.txt`).then(blog => {
 			data.blog = blog.CreateQuery(post => true);
 			data.blog.PostInfos.reverse();
 		});

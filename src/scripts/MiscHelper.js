@@ -1,4 +1,6 @@
 
+export const RESOURCES_URL = "https://s3.eu-central-1.amazonaws.com/flai";
+
 // http://stackoverflow.com/a/7934009
 export function EnterFullScreen(element) {
 	var func = element.requestFullScreen || element.mozRequestFullScreen || element.webkitRequestFullScreen;

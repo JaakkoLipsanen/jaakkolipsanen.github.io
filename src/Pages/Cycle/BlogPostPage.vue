@@ -50,6 +50,7 @@
 import { BlogSource, BlogPost, BlogQuery } from "../../scripts/Blog.js";
 import { PhotoStream } from "../../scripts/PhotoStream.js";
 import { CycleTourData } from "../../scripts/CycleTourData.js";
+import { RESOURCES_URL } from "../../scripts/MiscHelper.js";
 
 import ImageGroup from "../../Components/ImageGroup.vue";
 import ImageComponent from "../../Components/Image.vue";
@@ -79,7 +80,7 @@ export default {
 
 	ready: function() {
 		let data = this;
-		BlogSource.FromFile("/assets/cycle/blog/posts.txt").then(async blog => {
+		BlogSource.FromFile(`${RESOURCES_URL}/cycle/blog/posts.txt`).then(async blog => {
 			data.blog = blog.CreateQuery();
 			data.blog.PostInfos.reverse(); // make the post infos go from newest to oldest
 
@@ -116,7 +117,7 @@ export default {
 				return undefined
 			}
 
-			return "/assets/cycle/routes/" + this.currentPost.TripUrlString + "/route.txt";
+			return  `${RESOURCES_URL}/cycle/routes/` + this.currentPost.TripUrlString + "/route.txt";
 		},
 
 		DayRange: function() {

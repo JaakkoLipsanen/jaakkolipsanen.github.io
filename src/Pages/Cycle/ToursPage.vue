@@ -43,6 +43,7 @@
 import CycleMap from "../../Components/CycleMap.vue";
 import { BlogSource } from "../../scripts/Blog.js";
 import { CycleTourData } from "../../scripts/CycleTourData.js";
+import { RESOURCES_URL } from "../../scripts/MiscHelper.js";
 
 export default {
 	data() {
@@ -61,7 +62,7 @@ export default {
 
 	ready: function() {
 		const data = this;
-		BlogSource.FromFile("/assets/cycle/blog/posts.txt").then(blog => {
+		BlogSource.FromFile(`${RESOURCES_URL}/cycle/blog/posts.txt`).then(blog => {
 			data.blog = blog;
 			data.loadPosts();
 		});
@@ -77,7 +78,7 @@ export default {
 		},
 
 		CycleRoutePath: function() {
-			return "/assets/cycle/routes/" + this.CurrentTour.shortName.replace(/ /g, "").toLowerCase() + "/route.txt";
+			return `${RESOURCES_URL}/cycle/routes/` + this.CurrentTour.shortName.replace(/ /g, "").toLowerCase() + "/route.txt";
 		},
 
 		CurrentTour: function() {
@@ -103,7 +104,7 @@ export default {
 
 	methods: {
 		postClicked: function(post) {
-			this.$root.ChangePage("blog-post-page", "/assets/cycle/blog/" + post.Name, { TourName: this.CurrentTour, PostName: post.Name });
+			this.$root.ChangePage("blog-post-page", `${RESOURCES_URL}/cycle/blog/` + post.Name, { TourName: this.CurrentTour, PostName: post.Name });
 		},
 
 		ChangeTour: function(direction) {

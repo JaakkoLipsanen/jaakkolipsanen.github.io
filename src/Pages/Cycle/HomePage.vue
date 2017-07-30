@@ -4,7 +4,7 @@
 
 		<p class="recent-posts-text">recent blog posts</p>
 		<div class="divider"></div>
-		
+
 		<div>
 			<a :href="getPostLink(post)" class="blog-post-block" v-for="post in blog.PostInfos" v-on:click="postClicked($event, post)">
 				<div class="image-container">
@@ -27,7 +27,7 @@
 
 import Slideshow from "../../Components/Slideshow.vue";
 import { Photo } from "../../scripts/Photo.js";
-import { Shuffle, IsTouchDevice } from "../../scripts/MiscHelper.js";
+import { Shuffle, IsTouchDevice, RESOURCES_URL } from "../../scripts/MiscHelper.js";
 
 import { BlogSource } from "../../scripts/Blog.js";
 import ImageComponent from "../../Components/Image.vue";
@@ -37,22 +37,22 @@ export default {
 		return {
 			blog: null,
 			slideshowImages: Shuffle([
-				new Photo("/assets/cycle/blog/posts/and-back-again", "1060788.jpg"),
-				new Photo("/assets/cycle/blog/posts/angel-has-landed", "1070479.jpg"),
-				new Photo("/assets/cycle/blog/posts/colorado", "1100202.jpg"),
-				new Photo("/assets/cycle/blog/posts/day-one", "1140612~2.jpg"),
-				new Photo("/assets/cycle/blog/posts/down-and-back-up-again", "1180150~2.jpg"),
-				new Photo("/assets/cycle/blog/posts/enter-capitol", "1080602.jpg"),
-				new Photo("/assets/cycle/blog/posts/lockhart-basin", "1090621.jpg"),
-				new Photo("/assets/cycle/blog/posts/negev-mitzpe-ramon-loop", "1160850~2.jpg"),
-				new Photo("/assets/cycle/blog/posts/negev-mitzpe-ramon-loop", "1170226~2.jpg"),
-				new Photo("/assets/cycle/blog/posts/wadi-rum", "1170842~2.jpg"),
-				new Photo("/assets/cycle/blog/posts/through-west-bank-to-jerusalem", "1180639~2.jpg"),
-				new Photo("/assets/cycle/blog/posts/the-green-israel", "1140788~2.jpg"),
-				new Photo("/assets/cycle/blog/posts/ruby-beach-and-rest-of-washington", "1120610.jpg"),
-				new Photo("/assets/cycle/blog/posts/oregon-coast-part-1", "P1120983.JPG"),
-				new Photo("/assets/cycle/blog/posts/lost-coast", "P1130350.JPG"),
-				new Photo("/assets/cycle/blog/posts/judean-desert-and-the-dead-sea", "1140983~3.jpg")
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/and-back-again`, "1060788.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/angel-has-landed`, "1070479.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/colorado`, "1100202.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/day-one`, "1140612~2.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/down-and-back-up-again`, "1180150~2.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/enter-capitol`, "1080602.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/lockhart-basin`, "1090621.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/negev-mitzpe-ramon-loop`, "1160850~2.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/negev-mitzpe-ramon-loop`, "1170226~2.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/wadi-rum`, "1170842~2.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/through-west-bank-to-jerusalem`, "1180639~2.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/the-green-israel`, "1140788~2.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/ruby-beach-and-rest-of-washington`, "1120610.jpg"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/oregon-coast-part-1`, "P1120983.JPG"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/lost-coast`, "P1130350.JPG"),
+				new Photo(`${RESOURCES_URL}/cycle/blog/posts/judean-desert-and-the-dead-sea`, "1140983~3.jpg")
 			]),
 
 			// lower quality would be better for bandwidth etc, but since the slideshow moves to the next pic
@@ -68,7 +68,7 @@ export default {
 
 	ready: function() {
 		const data = this;
-		BlogSource.FromFile("/assets/cycle/blog/posts.txt").then(blog => {
+		BlogSource.FromFile(`${RESOURCES_URL}/cycle/blog/posts.txt`).then(blog => {
 			data.blog = blog.CreateQuery(post => true);
 			data.blog.PostInfos.reverse();
 			data.blog.PostInfos = data.blog.PostInfos.slice(0, 6);
@@ -123,7 +123,7 @@ export default {
 	@media all and (min-width: 864px) and (max-width: 1080px) {
 		width: calc(100% - 278px);
 	}
-	
+
 	@media all and (min-width: 616px) and (max-width: 863px) {
 		width: 585px;
 	}

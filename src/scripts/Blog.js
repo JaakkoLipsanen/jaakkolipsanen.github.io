@@ -259,7 +259,7 @@ export class BlogQuery {
 		const blog = this;
 		return new Promise(async (resolve, reject) => {
 			try {
-				const postPath = blog.Directory + "/posts/" + name + "/";
+				const postPath = blog.Directory + "/posts/" + name;
 				if(!blog._blogPosts.has(postPath)) {
 					blog._blogPosts.set(postPath, await BlogPost.FromFile(name, postPath));
 				}
