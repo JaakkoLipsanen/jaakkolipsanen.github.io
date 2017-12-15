@@ -33,7 +33,13 @@ export const CycleTourData = {
 			"shortName": "Israel & Jordan 2016",
 			"year": "2016",
 			"description": ""
-		}
+		},
+		{
+			"name": "Morocco",
+			"shortName": "Morocco 2017",
+			"year": "2017",
+			"description": ""
+		},
 	],
 
 	GetAllShortNames: function() { // from oldest to newest
