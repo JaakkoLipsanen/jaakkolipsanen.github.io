@@ -306,15 +306,15 @@ export class Route {
 				let lastLocation = undefined;
 				for(let i = 1; i < lines.length; i++) {
 					const line = lines[i];
-					if(line.trim().length == 0) {
+					if(line.trim().length == 0 || line.startsWith("//")) {
 						continue;
 					}
 
 					const parts = line.trim().split(" ");
 					Assert(parts.length > 0);
 
-					if(parts[0] == "n") { // night
-						let nightType = (parts[1] === "h") ? Night.Type.Hotel : Night.Type.Tent;;
+					if(parts[0] == "n" || parts[0] == "night") { // night
+						let nightType = (parts[1] === "h" || parts[1] == "hotel") ? Night.Type.Hotel : Night.Type.Tent;
 
 						Assert(lastLocation != undefined, "Error loading cycle route: 'lastLocation' is null. There is a night before the first coordinate");
 						data.push({ type: "night", day: day, night: new Night(lastLocation, nightType) });
@@ -323,9 +323,9 @@ export class Route {
 					else if(parts[0] == "t") { // "type". switches between cycle path and transport path. "t" == transport, "c" == cycle
 						data.push({ type: "path-type-change", pathType: (parts[1] === "t") ? "transport" : "cycle"});
 					}
-					else if(parts.length == 3) { // if not "n" or "t", then it coordinate
+					else if(parts.length == 2 || parts.length == 3) { // if not "n" or "t", then it coordinate
 						const point = new google.maps.LatLng(parts[0], parts[1]);
-						data.push({ type: "coordinate", location: new google.maps.LatLng(parts[0], parts[1]), elevation: parts[2] });
+						data.push({ type: "coordinate", location: new google.maps.LatLng(parts[0], parts[1]), elevation: parts[2] || 0 });
 
 						lastLocation = point;
 					}
