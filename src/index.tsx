@@ -1,9 +1,12 @@
-import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './App';
+import routes from './routes';
+import history from './history';
 import './global.css';
 
-ReactDOM.render(
-	<App />,
-	document.getElementById('root') as HTMLElement
-);
+const renderRoute = (path: string) => {
+	const route = routes.matchRoute(path);
+	ReactDOM.render(route.render(), document.getElementById('root'));
+};
+
+renderRoute(history.location.pathname);
+history.listen(location => renderRoute(location.pathname));
