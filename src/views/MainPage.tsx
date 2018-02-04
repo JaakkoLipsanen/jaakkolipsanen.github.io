@@ -1,12 +1,25 @@
 import * as React from 'react';
-import history from '../history';
+import styled from 'styled-components';
+import * as blog from '../blog';
+
+import BlogPostPreview from '../components/BlogPostPreview';
+
+const MainpageLayout = styled.div`
+	width: 70vw;
+	max-width: 800px;
+	margin: auto;
+`;
 
 class MainPage extends React.Component<{}, {}> {
 	render() {
+
+		const blogPostInfosToRender = blog.getBlogPostInfos().reverse().slice(0, 6);
 		return (
-			<div className="App">
-				<a onClick={() => history.push('/404')}>test</a>
-			</div>
+			<MainpageLayout>
+				{blogPostInfosToRender.map(blogPost => 
+					<BlogPostPreview key={blogPost.name} blogPostInfo={blogPost} /> 
+				)}
+			</MainpageLayout>
 		);
 	}
 }
