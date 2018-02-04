@@ -2,6 +2,7 @@ import * as React from 'react';
 import MainPage from './views/MainPage';
 import NotFound from './views/NotFound';
 
+export interface Route { render: () => JSX.Element; }
 const routes = [
 	{ path: ['', '/'], render: () => <MainPage />}
 ];
