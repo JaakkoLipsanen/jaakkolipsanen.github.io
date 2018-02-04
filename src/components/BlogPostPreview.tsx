@@ -8,7 +8,7 @@ import { ImageQuality, formatDateRange } from '../common';
 
 import Link from './Link';
 
-const BlogPostPreviewImageOverlay = styled.div`
+const PreviewImageOverlay = styled.div`
 	position: absolute;
 	top: 0;
 	width: 100%;
@@ -18,7 +18,7 @@ const BlogPostPreviewImageOverlay = styled.div`
 	transition: background-color 0.3s;
 `;
 
-const BlogPostPreviewLinkContainer = styled(Link)`
+const PreviewLinkContainer = styled(Link)`
 	position: relative;
 	display: block;
 	margin: 16px 0;
@@ -28,14 +28,14 @@ const BlogPostPreviewLinkContainer = styled(Link)`
 	text-decoration: none;
 
 	&:hover {
-		${BlogPostPreviewImageOverlay} {
+		${PreviewImageOverlay} {
 			background-color: transparent;
 		}
 	}
 `;
 
-type BlogPostPreviewImageProps = { src: string };
-const BlogPostPreviewImage = withProps<BlogPostPreviewImageProps>(styled.div)`
+type PreviewImageProps = { src: string };
+const PreviewImage = withProps<PreviewImageProps>(styled.div)`
 	width: 100%;
 	padding-bottom: 66%;
 
@@ -44,13 +44,13 @@ const BlogPostPreviewImage = withProps<BlogPostPreviewImageProps>(styled.div)`
 	background-image: url(${props => props.src });
 `;
 
-const BlogPostPreviewTitle = styled.h4`
+const PreviewTitle = styled.h4`
 	width: 100%;
 	margin: 0;
 	margin-top: 3px;
 `;
 
-const BlogPostPreviewDescription = styled.p`
+const PreviewDescription = styled.p`
 	width: 100%;
 	margin: 0;
 
@@ -60,13 +60,13 @@ const BlogPostPreviewDescription = styled.p`
 const BlogPostPreview = (props: { blogPostInfo: BlogPostInfo }) => {
 	const { name, title, trip, coverImage, dateRange } = props.blogPostInfo;
 	return (
-		<BlogPostPreviewLinkContainer href={`/blog/${name}`}>
-			<BlogPostPreviewImage src={aws.getImageUrl(name, ImageQuality.HD, coverImage)} />
-			<BlogPostPreviewImageOverlay />
+		<PreviewLinkContainer href={`/blog/${name}`}>
+			<PreviewImage src={aws.getImageUrl(name, ImageQuality.HD, coverImage)} />
+			<PreviewImageOverlay />
 
-			<BlogPostPreviewTitle>{title}</BlogPostPreviewTitle>
-			<BlogPostPreviewDescription>{trip}: {formatDateRange(dateRange)}</BlogPostPreviewDescription>
-		</BlogPostPreviewLinkContainer>
+			<PreviewTitle>{title}</PreviewTitle>
+			<PreviewDescription>{trip}: {formatDateRange(dateRange)}</PreviewDescription>
+		</PreviewLinkContainer>
 	);
 };
 
