@@ -3,18 +3,21 @@ import styled, { css } from 'styled-components';
 import withProps from 'styled-components-ts';
 
 import history from '../history';
+import paths from '../paths';
 
 type Link = { name: string, url: string, enabled: boolean };
 const links: Link[] = [
-	{ name: 'home', url: '/', enabled: true },
-	{ name: 'blog', url: '/blog', enabled: true },
-	{ name: 'gear', url: '/gear', enabled: false },
-	{ name: 'tours', url: '/tours', enabled: true }
+	{ name: 'home', url: paths.home, enabled: true },
+	{ name: 'blog', url: paths.blogList, enabled: true },
+	{ name: 'gear', url: paths.gear, enabled: false },
+	{ name: 'tours', url: paths.tours, enabled: true }
 ];
 
 const NavContainer = styled.div`
 	display: grid;
 	height: 118px;
+
+	background-color: white;
 `;
 
 const NavLinksContainer = styled.div`

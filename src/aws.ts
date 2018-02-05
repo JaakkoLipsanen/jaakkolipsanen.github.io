@@ -7,7 +7,7 @@ const transformImageFilename = (quality: ImageQuality, filename: string) =>
 const aws = {
 	BASE_URL: AWS_BASE_URL,
 	blogPostsListUrl: `${AWS_BASE_URL}/cycle/blog/posts.txt`,
-	getBlogPostUrl: (blogPostName: string) => `${AWS_BASE_URL}/cycle/blog/posts/${blogPostName}`,
+	getBlogPostUrl: (blogPostName: string) => `${AWS_BASE_URL}/cycle/blog/posts/${blogPostName}/post.txt`,
 	getImageUrl: (blogPostName: string, imageQuality: ImageQuality, imageFilename: string) => 
 		`${AWS_BASE_URL}/cycle/blog/posts/${blogPostName}/` +
 		`${imageQuality}/${transformImageFilename(imageQuality, imageFilename)}`

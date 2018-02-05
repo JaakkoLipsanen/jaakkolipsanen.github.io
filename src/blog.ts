@@ -59,8 +59,8 @@ const parseBlogPost = (name: string, blogPostText: string): BlogPost => {
 		.map(line => line.trim())
 		.filter(line => !line.startsWith('//') && line.length !== 0);
 
-	const readTag = (line: string) => line.substr(0, line.indexOf(':'));
-	const parseTag = (line: string) => line.substr(line.indexOf(':') + 1);
+	const readTag = (line: string) => line.substr(0, line.indexOf(':')).trim();
+	const parseTag = (line: string) => line.substr(line.indexOf(':') + 1).trim();
 	
 	const title = parseTag(lines[0]);
 	const trip = parseTag(lines[1]);
@@ -97,6 +97,10 @@ export const initialize = async () => {
 
 export const getBlogPostInfos = () => {
 	return blogPostInfos.slice();
+};
+
+export const findBlogPostInfoByName = (name: string) => {
+	return blogPostInfos.find(post => post.name === name);
 };
 
 export const loadBlogPost = async (blogPostInfo: BlogPostInfo) => {

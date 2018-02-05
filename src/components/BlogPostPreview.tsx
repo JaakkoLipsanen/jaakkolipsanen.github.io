@@ -1,8 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import withProps from 'styled-components-ts';
-import aws from '../aws';
 
+import aws from '../aws';
+import paths from '../paths';
 import { BlogPostInfo } from '../blog';
 import { ImageQuality, formatDateRange } from '../common';
 
@@ -60,7 +61,7 @@ const PreviewDescription = styled.p`
 const BlogPostPreview = (props: { blogPostInfo: BlogPostInfo }) => {
 	const { name, title, trip, coverImage, dateRange } = props.blogPostInfo;
 	return (
-		<PreviewLinkContainer href={`/blog/${name}`}>
+		<PreviewLinkContainer href={paths.buildBlogPostPath(name)}>
 			<PreviewImage src={aws.getImageUrl(name, ImageQuality.HD, coverImage)} />
 			<PreviewImageOverlay />
 
