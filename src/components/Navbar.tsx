@@ -5,6 +5,7 @@ import withProps from 'styled-components-ts';
 import history from '../history';
 import paths from '../paths';
 
+const NAVBAR_HEIGHT = 118;
 type Link = { name: string, url: string, enabled: boolean };
 const links: Link[] = [
 	{ name: 'home', url: paths.home, enabled: true },
@@ -13,11 +14,23 @@ const links: Link[] = [
 	{ name: 'tours', url: paths.tours, enabled: true }
 ];
 
-const NavContainer = styled.div`
+type NavContainerProps = { shrink: boolean };
+const NavContainer = withProps<NavContainerProps>(styled.div)`
 	display: grid;
-	height: 118px;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: ${props => props.shrink ? '40px' : `${NAVBAR_HEIGHT}px`};
+	font-size: ${props => props.shrink ? '16px' : '20px'};
 
 	background-color: white;
+	z-index: 1;
+
+	transition: height 0.3s, font-size 0.3s;
+`;
+
+const NavTakeSpace = styled.div`
+	height: ${NAVBAR_HEIGHT}px;
 `;
 
 const NavLinksContainer = styled.div`
@@ -28,7 +41,6 @@ const NavLinksContainer = styled.div`
 
 type NavLinkProps = { selected: boolean, enabled: boolean };
 const NavLink = withProps<NavLinkProps>(styled.a)`
-	font-size: 20px;
 	font-weight: 600;
 
 	text-decoration: none;
@@ -37,13 +49,13 @@ const NavLink = withProps<NavLinkProps>(styled.a)`
 	border-bottom: 2px solid ${props => props.selected ? 'black' : 'transparent'};
 	transition: border-bottom 0.3s;
 
-	pointer-events: ${props => props.enabled ? 'inherit' : 'disabled'};
+	pointer-events: ${props => props.enabled ? 'inherit' : 'none'};
 	margin: 0px 32px;
 	padding: 3px 1px;
 
 	&:hover {
 		${props => (props.enabled && !props.selected)
-			? css` border-bottom: ${props.selected ? 'inherit' : '2px solid rgba(0, 0, 0, 0.5)'};`
+			? css`border-bottom: 2px solid rgba(0, 0, 0, 0.5);`
 			: ''
 		};
 	}
@@ -64,14 +76,31 @@ const isLinkSelected = (link: Link) => (link.url === '/')
 	? history.location.pathname === '/'
 	: history.location.pathname.startsWith(link.url);
 
-class Navbar extends React.Component {
+interface NavbarState { shrink: boolean; }
+class Navbar extends React.Component<{}, NavbarState> {
+	state = {
+		shrink: false,
+	};
+
+	handleScroll = () => {
+		const shrink = window.scrollY > 0;
+		this.setState({ shrink });
+	}
+
+	componentDidMount() {
+		window.addEventListener('scroll', this.handleScroll);
+	}
+
 	render() {
 		return (
-			<NavContainer>
-				<NavLinksContainer>
-					{links.map(link => <Link key={link.name} link={link} selected={isLinkSelected(link)} />)}
-				</NavLinksContainer>
-			</NavContainer>
+			<>
+				<NavContainer shrink={this.state.shrink}>
+					<NavLinksContainer>
+						{links.map(link => <Link key={link.name} link={link} selected={isLinkSelected(link)} />)}
+					</NavLinksContainer>
+				</NavContainer>
+				<NavTakeSpace />
+			</>
 		);
 	}
 }

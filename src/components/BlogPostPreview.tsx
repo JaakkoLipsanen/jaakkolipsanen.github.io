@@ -22,7 +22,7 @@ const PreviewImageOverlay = styled.div`
 const PreviewLinkContainer = styled(Link)`
 	position: relative;
 	display: block;
-	margin: 16px 0;
+	margin-bottom: 32px;
 
 	color: black;
 	cursor: pointer;
