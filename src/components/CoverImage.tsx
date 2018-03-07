@@ -31,6 +31,9 @@ const ImageOverlay = styled.div`
 	height: 100%;
 	box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.5);
 	background-color: rgba(0, 0, 0, 0.15);
+
+	position: absolute;
+	top: 0;
 `;
 
 const ImageTitle = styled.h2`
@@ -39,6 +42,10 @@ const ImageTitle = styled.h2`
 	text-align: center;
 	transform: translate(0, 50%);
 	margin: 0;
+
+	position: absolute;
+	top: 0;
+	width: 100%;
 `;
 
 interface CoverImageProps { blogPost: BlogPost; height: string; }
