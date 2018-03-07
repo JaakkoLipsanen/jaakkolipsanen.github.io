@@ -58,10 +58,10 @@ const parseImageTagValue = (value: string): Image => {
 
 const parseElement = (tag: string, value: string): BlogPostElement | null  => {
 	switch (tag) {
-		case 'text': return <TextElement> { type: 'text', text: value };
-		case 'header': return <HeaderElement> { type: 'header',  title: value };
-		case 'image': return <ImageElement> { type: 'image', image: parseImageTagValue(value) };
-		case 'image-group': return <ImageGroupElement> { type: 'image-group',  images: value.split(' ') };
+		case 'text': return { type: 'text', text: value };
+		case 'header': return { type: 'header', title: value };
+		case 'image': return { type: 'image', image: parseImageTagValue(value) };
+		case 'image-group': return { type: 'image-group', images: value.split(' ') };
 
 		default: console.error('Unrecognized element in blog post', tag, value); return null;
 	}
@@ -86,7 +86,7 @@ const parseBlogPost = (name: string, blogPostText: string): BlogPost => {
 
 		const element = parseElement(tag, value);
 		if (!element) {
-			return <TextElement> { type: 'text', text: `<Invalid element in blog post ${tag}: ${value}` };
+			return { type: 'text', text: `<Invalid element in blog post ${tag}: ${value}` } as TextElement;
 		}
 
 		return element;
@@ -118,5 +118,5 @@ export const findBlogPostInfoByName = (name: string) => {
 
 export const loadBlogPost = async (blogPostInfo: BlogPostInfo) => {
 	const blogPostText = await loadText(aws.getBlogPostUrl(blogPostInfo.name));
-	return <Readonly<BlogPost>> parseBlogPost(blogPostInfo.name, blogPostText);
+	return parseBlogPost(blogPostInfo.name, blogPostText) as Readonly<BlogPost>;
 };

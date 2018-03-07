@@ -28,7 +28,8 @@
             "public-before-private",
             "static-before-instance",
             "variables-before-functions"
-        ],
+		  ],
+		  "no-angle-bracket-type-assertion": true,
         "no-any": true,
         "no-arg": true,
         "no-bitwise": true,
