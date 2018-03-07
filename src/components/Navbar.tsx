@@ -6,10 +6,10 @@ import history from '../history';
 import paths from '../paths';
 
 const NAVBAR_HEIGHT = 118;
-type Link = { name: string, url: string, enabled: boolean };
+type Link = { name: string, url: string, enabled: boolean, forceShrinked?: boolean };
 const links: Link[] = [
 	{ name: 'home', url: paths.home, enabled: true },
-	{ name: 'blog', url: paths.blogList, enabled: true },
+	{ name: 'blog', url: paths.blogList, enabled: true, forceShrinked: true },
 	{ name: 'gear', url: paths.gear, enabled: false },
 	{ name: 'tours', url: paths.tours, enabled: true }
 ];
@@ -92,9 +92,12 @@ class Navbar extends React.Component<{}, NavbarState> {
 	}
 
 	render() {
+		const selected = links.find(link => isLinkSelected(link));
+		const shrink = this.state.shrink || Boolean(selected && selected.forceShrinked);
+
 		return (
 			<>
-				<NavContainer shrink={this.state.shrink}>
+				<NavContainer shrink={shrink}>
 					<NavLinksContainer>
 						{links.map(link => <Link key={link.name} link={link} selected={isLinkSelected(link)} />)}
 					</NavLinksContainer>

@@ -9,11 +9,11 @@ export interface BlogPostInfo {
 	coverImage: string;
 }
 
-type TextElement = { type: 'text', text: string };
-type HeaderElement = { type: 'header', title: string };
-type ImageElement = { type: 'image', image: string };
-type ImageGroupElement = { type: 'image-group', images: string[] };
-type BlogPostElement = TextElement | HeaderElement | ImageElement | ImageGroupElement;
+interface TextElement { type: 'text'; text: string; }
+interface HeaderElement { type: 'header'; title: string; }
+interface ImageElement { type: 'image'; image: string; }
+interface ImageGroupElement { type: 'image-group'; images: string[]; }
+export type BlogPostElement = TextElement | HeaderElement | ImageElement | ImageGroupElement;
 
 export interface BlogPost {
 	name: string;

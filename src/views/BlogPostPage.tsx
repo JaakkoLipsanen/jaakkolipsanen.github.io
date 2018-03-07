@@ -1,47 +1,42 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import withProps from 'styled-components-ts';
 
-import aws from '../aws';
 import history from '../history';
-import { ImageQuality } from '../common';
+import { BlogPostElement } from '../blog';
 import { findBlogPostInfoByName, loadBlogPost, BlogPost } from '../blog';
+import CoverImage from '../components/CoverImage';
 
 const BlogPostPageLayout = styled.div`
 	width: 100vw;
 	margin: 0;
-`;
-
-type CoverImageContainerProps = { src: string };
-const CoverImageContainer = withProps<CoverImageContainerProps>(styled.div)`
-	width: 100%;
-	height: 85vh;
-
-	position: fixed;
+	position: absolute;
 	top: 0;
-	z-index: -1;
-
-	background-position: center;
-	background-size: cover;
-	background-image: url(${props => props.src });
 `;
 
-const CoverImageTitle = styled.h2`
-	color: white;
-	height: 100%;
-	text-align: center;
-	transform: translate(0, 50%);
-	margin: 0;
+const BlogContentContainer = styled.div`
+	background-color: white;
 `;
 
-const CoverImage = (props: { blogPost: BlogPost }) => {
-	const blogPost = props.blogPost;
-	const { title } = blogPost;
+type BlogContentProps = { elements: BlogPostElement[] };
+const BlogContent = (props: BlogContentProps) => {
+	const Element = ({ element }: { element: BlogPostElement }) => {
+		switch (element.type) {
+			case 'text':
+				return <p>{element.text}</p>;
+			case 'header':
+				return <p>{element.title}</p>;
+			case 'image':
+				return <p>{element.image}</p>;
+
+			default:
+				return <span style={{ color: 'red' }}>Unrecognized element type: {element.type}</span>;
+		}
+	};
 
 	return (
-		<CoverImageContainer src={aws.getImageUrl(blogPost.name, ImageQuality.FullHD, blogPost.coverImage)}>
-			<CoverImageTitle>{title}</CoverImageTitle>
-		</CoverImageContainer>
+		<BlogContentContainer>
+			{props.elements.map((element, i) => <Element key={i} element={element} />)}
+		</BlogContentContainer>
 	);
 };
 
@@ -68,7 +63,8 @@ class BlogPostPage extends React.Component<BlogPostPageProps, BlogPostPageState>
 
 		return (
 			<BlogPostPageLayout>
-				<CoverImage blogPost={this.state.blogPost} />
+				<CoverImage blogPost={this.state.blogPost} height={'85vh'} />
+				<BlogContent elements={this.state.blogPost.content} />
 			</BlogPostPageLayout>
 		);
 	}
