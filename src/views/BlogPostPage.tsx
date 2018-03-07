@@ -26,8 +26,19 @@ const BlogContentContainer = styled.div`
 	overflow: hidden;
 `;
 
+const BlogImageContainer = styled.div`
+	width: 100%;
+	margin-bottom: 16px;
+`;
+
 const BlogImage = styled.img`
 	width: 100%;
+`;
+
+const BlogImageText = styled.p`
+	font-style: italic;
+	text-align: center;
+	margin: 0;
 `;
 
 type BlogContentProps = { elements: BlogPostElement[], blogPostName: string };
@@ -39,7 +50,12 @@ const BlogContent = (props: BlogContentProps) => {
 			case 'header':
 				return <h4>{element.title}</h4>;
 			case 'image':
-				return <BlogImage src={aws.getImageUrl(props.blogPostName, ImageQuality.FullHD, element.image)} />;
+				return (
+					<BlogImageContainer>
+						<BlogImage src={aws.getImageUrl(props.blogPostName, ImageQuality.FullHD, element.image.filename)} />
+						<BlogImageText>{element.image.imageText}</BlogImageText>
+					</BlogImageContainer>
+				);
 			default:
 				return <span style={{ color: 'red' }}>Unrecognized element type: {element.type}</span>;
 		}

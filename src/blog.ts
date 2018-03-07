@@ -1,5 +1,5 @@
 import aws from './aws';
-import { DateRange } from './common';
+import { DateRange, Size, parseSize } from './common';
 
 export interface BlogPostInfo { 
 	name: string;
@@ -9,9 +9,15 @@ export interface BlogPostInfo {
 	coverImage: string;
 }
 
+export interface Image {
+	filename: string;
+	resolution: Size;
+	imageText: string;
+}
+
 interface TextElement { type: 'text'; text: string; }
 interface HeaderElement { type: 'header'; title: string; }
-interface ImageElement { type: 'image'; image: string; }
+interface ImageElement { type: 'image'; image: Image; }
 interface ImageGroupElement { type: 'image-group'; images: string[]; }
 export type BlogPostElement = TextElement | HeaderElement | ImageElement | ImageGroupElement;
 
@@ -43,11 +49,18 @@ const parseBlogPostList = (blogPostListText: string) => {
 	});
 };
 
+// <image_filename>?<width>x<height>|<optional image text>
+const parseImageTagValue = (value: string): Image => {
+	const [filename, rest] = value.split('?');
+	const [resolutionStr, imageText] = rest.split('|');
+	return { filename, imageText, resolution: parseSize(resolutionStr) };	
+};
+
 const parseElement = (tag: string, value: string): BlogPostElement | null  => {
 	switch (tag) {
 		case 'text': return <TextElement> { type: 'text', text: value };
 		case 'header': return <HeaderElement> { type: 'header',  title: value };
-		case 'image': return <ImageElement> { type: 'image', image: value };
+		case 'image': return <ImageElement> { type: 'image', image: parseImageTagValue(value) };
 		case 'image-group': return <ImageGroupElement> { type: 'image-group',  images: value.split(' ') };
 
 		default: console.error('Unrecognized element in blog post', tag, value); return null;
