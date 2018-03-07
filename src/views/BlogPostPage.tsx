@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import history from '../history';
 import { BlogPostElement } from '../blog';
 import { findBlogPostInfoByName, loadBlogPost, BlogPost } from '../blog';
+import aws from '../aws';
+import { ImageQuality } from '../common';
 import CoverImage from '../components/CoverImage';
 
 const BlogPostPageLayout = styled.div`
@@ -13,30 +15,42 @@ const BlogPostPageLayout = styled.div`
 	top: 0;
 `;
 
-const BlogContentContainer = styled.div`
+const BlogContentBackground = styled.div`
 	background-color: white;
 `;
 
-type BlogContentProps = { elements: BlogPostElement[] };
+const BlogContentContainer = styled.div`
+	max-width: 1000px;
+	padding: 0 24px;
+	margin: auto;
+	overflow: hidden;
+`;
+
+const BlogImage = styled.img`
+	width: 100%;
+`;
+
+type BlogContentProps = { elements: BlogPostElement[], blogPostName: string };
 const BlogContent = (props: BlogContentProps) => {
 	const Element = ({ element }: { element: BlogPostElement }) => {
 		switch (element.type) {
 			case 'text':
 				return <p>{element.text}</p>;
 			case 'header':
-				return <p>{element.title}</p>;
+				return <h4>{element.title}</h4>;
 			case 'image':
-				return <p>{element.image}</p>;
-
+				return <BlogImage src={aws.getImageUrl(props.blogPostName, ImageQuality.FullHD, element.image)} />;
 			default:
 				return <span style={{ color: 'red' }}>Unrecognized element type: {element.type}</span>;
 		}
 	};
 
 	return (
-		<BlogContentContainer>
-			{props.elements.map((element, i) => <Element key={i} element={element} />)}
-		</BlogContentContainer>
+		<BlogContentBackground>
+			<BlogContentContainer>
+				{props.elements.map((element, i) => <Element key={i} element={element} />)}
+			</BlogContentContainer>
+		</BlogContentBackground>
 	);
 };
 
@@ -64,7 +78,7 @@ class BlogPostPage extends React.Component<BlogPostPageProps, BlogPostPageState>
 		return (
 			<BlogPostPageLayout>
 				<CoverImage blogPost={this.state.blogPost} height={'85vh'} />
-				<BlogContent elements={this.state.blogPost.content} />
+				<BlogContent blogPostName={this.state.blogPost.name} elements={this.state.blogPost.content} />
 			</BlogPostPageLayout>
 		);
 	}
