@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import withProps from 'styled-components-ts';
 
+import { TakeHeight } from './helpers';
 import history from '../history';
 import paths from '../paths';
 
@@ -27,10 +28,6 @@ const NavContainer = withProps<NavContainerProps>(styled.div)`
 	z-index: 1;
 
 	transition: height 0.3s, font-size 0.3s;
-`;
-
-const NavTakeSpace = styled.div`
-	height: ${NAVBAR_HEIGHT}px;
 `;
 
 const NavLinksContainer = styled.div`
@@ -102,7 +99,7 @@ class Navbar extends React.Component<{}, NavbarState> {
 						{links.map(link => <Link key={link.name} link={link} selected={isLinkSelected(link)} />)}
 					</NavLinksContainer>
 				</NavContainer>
-				<NavTakeSpace />
+				<TakeHeight height={`${NAVBAR_HEIGHT}px`} />
 			</>
 		);
 	}
