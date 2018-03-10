@@ -26,6 +26,13 @@ const BlogContentContainer = styled.div`
 	overflow: hidden;
 `;
 
+const BlogHeader = styled.h4`
+	font-size: 1.5em;
+	font-weight: 500;
+	margin-top: 24px;
+	margin-bottom: 18px;
+`;
+
 const BlogImageContainer = styled.div`
 	width: 100%;
 	margin-bottom: 16px;
@@ -48,7 +55,7 @@ const BlogContent = (props: BlogContentProps) => {
 			case 'text':
 				return <p>{element.text}</p>;
 			case 'header':
-				return <h4>{element.title}</h4>;
+				return <BlogHeader>{element.title}</BlogHeader>;
 			case 'image':
 				return (
 					<BlogImageContainer>
