@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import withProps from 'styled-components-ts';
 
+import InstagramIcon from '../assets/icons/instagram.svg';
 import { TakeHeight } from './helpers';
 import history from '../history';
 import paths from '../paths';
@@ -18,12 +19,14 @@ const links: Link[] = [
 type NavContainerProps = { shrink: boolean };
 const NavContainer = withProps<NavContainerProps>(styled.div)`
 	display: grid;
+	grid-template-columns: 0px auto 0px; /* hack because of NavImage... */
+
 	position: fixed;
 	top: 0px;
 	width: 100%;
 	height: ${props => props.shrink ? '40px' : `${NAVBAR_HEIGHT}px`};
-	font-size: ${props => props.shrink ? '16px' : '20px'};
 
+	font-size: ${props => props.shrink ? '16px' : '20px'};
 	background-color: white;
 	z-index: 1;
 
@@ -34,6 +37,8 @@ const NavLinksContainer = styled.div`
 	align-self: center;
 	align-content: center;
 	text-align: center;
+
+	grid-column: 2;
 `;
 
 type NavLinkProps = { selected: boolean, enabled: boolean };
@@ -57,6 +62,29 @@ const NavLink = withProps<NavLinkProps>(styled.a)`
 		};
 	}
 `;
+
+const NavImage = styled.img`
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+
+	height: 36%;
+	min-height: 30px;
+	transition: transform 0.2s;
+
+	&:hover {
+		transform: translateY(-50%) scale(1.2);
+	}
+`;
+
+const NavSideButton = ({ href, src, side = 'right' }: { href: string, src: string, side?: 'right' | 'left' }) => {
+	const style = (side === 'right') ? { right: '16px' } : { left: '16px' };
+	return (
+		<a href={href}>
+			<NavImage style={style} src={src} />
+		</a>
+	);
+};
 
 const Link = (props: { link: Link, selected: boolean }) => (
 	<NavLink 
@@ -98,6 +126,9 @@ class Navbar extends React.Component<{}, NavbarState> {
 					<NavLinksContainer>
 						{links.map(link => <Link key={link.name} link={link} selected={isLinkSelected(link)} />)}
 					</NavLinksContainer>
+
+					<NavSideButton side='right' href='https://instagram.com/fl.ai' src={InstagramIcon} />
+
 				</NavContainer>
 				<TakeHeight height={`${NAVBAR_HEIGHT}px`} />
 			</>
