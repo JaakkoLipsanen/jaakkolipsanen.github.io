@@ -3,6 +3,7 @@ import * as pathToRegexp from 'path-to-regexp';
 
 import paths from './paths';
 import MainPage from './views/MainPage';
+import BlogListPage from './views/BlogListPage';
 import BlogPostPage from './views/BlogPostPage';
 import NotFound from './views/NotFound';
 
@@ -11,6 +12,7 @@ type Parameters = { [k: string]: string | null };
 
 const routes = [
 	{ path: paths.home, render: (params: Parameters) => <MainPage />},
+	{ path: paths.blogList, render: (params: Parameters) => <BlogListPage />},
 	{ path: paths.blogPostTemplate, render: ({ name }: Parameters) => <BlogPostPage name={name!} />}
 ];
 
