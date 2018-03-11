@@ -109,7 +109,7 @@ export const initialize = async () => {
 };
 
 export const getBlogPostInfos = () => {
-	return blogPostInfos.slice();
+	return blogPostInfos.slice() as ReadonlyArray<BlogPostInfo>;
 };
 
 export const findBlogPostInfoByName = (name: string) => {

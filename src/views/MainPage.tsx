@@ -13,7 +13,7 @@ const MainpageLayout = styled.div`
 class MainPage extends React.Component<{}, {}> {
 	render() {
 
-		const blogPostInfosToRender = blog.getBlogPostInfos().reverse().slice(0, 6);
+		const blogPostInfosToRender = blog.getBlogPostInfos().slice().reverse().slice(0, 6);
 		return (
 			<MainpageLayout>
 				{blogPostInfosToRender.map(blogPost => 
