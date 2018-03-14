@@ -116,6 +116,10 @@ class Navbar extends React.Component<{}, NavbarState> {
 		window.addEventListener('scroll', this.handleScroll);
 	}
 
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.handleScroll);
+	}
+
 	render() {
 		const selected = links.find(link => isLinkSelected(link));
 		const shrink = this.state.shrink || Boolean(selected && selected.forceShrinked);
