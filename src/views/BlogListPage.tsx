@@ -5,9 +5,21 @@ import * as blog from '../blog';
 import BlogPostPreview from '../components/BlogPostPreview';
 
 const BlogListPageLayout = styled.div`
-	width: 70vw;
-	max-width: 800px;
+	width: 85vw;
+	max-width: 1600px;
 	margin: auto;
+
+	display: grid;
+	grid-column-gap: 48px;
+
+	grid-template-columns: 1fr;
+	@media screen and (min-width: 940px) {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	@media screen and (min-width: 1400px) {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
 `;
 
 class BlogListPage extends React.Component<{}, {}> {
