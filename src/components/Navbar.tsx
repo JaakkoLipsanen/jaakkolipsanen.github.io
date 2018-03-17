@@ -77,7 +77,8 @@ const NavImage = styled.img`
 	}
 `;
 
-const NavSideButton = ({ href, src, side = 'right' }: { href: string, src: string, side?: 'right' | 'left' }) => {
+type NavSideButtonProps = { href: string, src: string, side?: 'right' | 'left' };
+const NavSideButton = ({ href, src, side = 'right' }: NavSideButtonProps) => {
 	const style = (side === 'right') ? { right: '16px' } : { left: '16px' };
 	return (
 		<a href={href}>
