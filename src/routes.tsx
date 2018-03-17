@@ -7,13 +7,14 @@ import BlogListPage from './views/BlogListPage';
 import BlogPostPage from './views/BlogPostPage';
 import NotFound from './views/NotFound';
 
-export interface Route { render: () => JSX.Element; }
+interface RouteTemplate { path: string; forceShrinked?: boolean; render: (params: Parameters) => JSX.Element; }
+export interface Route { forceShrinked?: boolean; render: () => JSX.Element; }
 type Parameters = { [k: string]: string | null };
 
-const routes = [
+const routes: RouteTemplate[] = [
 	{ path: paths.home, render: (params: Parameters) => <MainPage />},
 	{ path: paths.blogList, render: (params: Parameters) => <BlogListPage />},
-	{ path: paths.blogPostTemplate, render: ({ name }: Parameters) => <BlogPostPage name={name!} />}
+	{ path: paths.blogPostTemplate, forceShrinked: true, render: ({ name }: Parameters) => <BlogPostPage name={name!} />}
 ];
 
 const matchRoute = (path: string): Route => {
@@ -37,7 +38,7 @@ const matchRoute = (path: string): Route => {
 			{ }
 		);
 
-		foundRoute = { render: () => route.render(parameters) };
+		foundRoute = { forceShrinked: route.forceShrinked, render: () => route.render(parameters) };
 		return true;
 	});
 

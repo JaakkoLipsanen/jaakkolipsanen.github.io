@@ -21,7 +21,7 @@ class App extends React.Component<{}, AppState> {
 		const CurrentRoute = () => this.state.currentRoute.render();
 		return (
 			<div>
-				<Navbar />
+				<Navbar forceShrinked={Boolean(this.state.currentRoute.forceShrinked)} />
 				<CurrentRoute />
 			</div>
 		);

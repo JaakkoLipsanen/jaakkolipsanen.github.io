@@ -7,15 +7,15 @@ import { TakeHeight } from './helpers';
 import history from '../history';
 import paths from '../paths';
 
-const NAVBAR_HEIGHT = 118;
-type Link = { name: string, url: string, enabled: boolean, forceShrinked?: boolean };
+type Link = { name: string, url: string, enabled: boolean };
 const links: Link[] = [
 	{ name: 'home', url: paths.home, enabled: true },
-	{ name: 'blog', url: paths.blogList, enabled: true, forceShrinked: true },
+	{ name: 'blog', url: paths.blogList, enabled: true },
 	{ name: 'gear', url: paths.gear, enabled: false },
 	{ name: 'tours', url: paths.tours, enabled: true }
 ];
 
+const NAVBAR_HEIGHT = 118;
 type NavContainerProps = { shrink: boolean };
 const NavContainer = withProps<NavContainerProps>(styled.div)`
 	display: grid;
@@ -101,8 +101,9 @@ const isLinkSelected = (link: Link) => (link.url === '/')
 	? history.location.pathname === '/'
 	: history.location.pathname.startsWith(link.url);
 
+interface NavbarProps { forceShrinked: boolean; }
 interface NavbarState { shrink: boolean; }
-class Navbar extends React.Component<{}, NavbarState> {
+class Navbar extends React.Component<NavbarProps, NavbarState> {
 	state = {
 		shrink: false,
 	};
@@ -121,9 +122,7 @@ class Navbar extends React.Component<{}, NavbarState> {
 	}
 
 	render() {
-		const selected = links.find(link => isLinkSelected(link));
-		const shrink = this.state.shrink || Boolean(selected && selected.forceShrinked);
-
+		const shrink = this.state.shrink || this.props.forceShrinked;
 		return (
 			<>
 				<NavContainer shrink={shrink}>
