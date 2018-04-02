@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import history from '../history';
 import { BlogPostElement } from '../blog';
 import { findBlogPostInfoByName, loadBlogPost, BlogPost } from '../blog';
-import aws from '../aws';
 import { ImageQuality } from '../common';
 import CoverImage from '../components/CoverImage';
+import { Image, Text, Header, Unknown } from '../components/blog-elements';
 
 const BlogPostPageLayout = styled.div`
 	width: 100vw;
@@ -26,45 +26,14 @@ const BlogContentContainer = styled.div`
 	overflow: hidden;
 `;
 
-const BlogHeader = styled.h4`
-	font-size: 1.5em;
-	font-weight: 500;
-	margin-top: 24px;
-	margin-bottom: 18px;
-`;
-
-const BlogImageContainer = styled.div`
-	width: 100%;
-	margin-bottom: 16px;
-`;
-
-const BlogImage = styled.img`
-	width: 100%;
-`;
-
-const BlogImageText = styled.p`
-	font-style: italic;
-	text-align: center;
-	margin: 0;
-`;
-
 type BlogContentProps = { elements: BlogPostElement[], blogPostName: string };
 const BlogContent = (props: BlogContentProps) => {
 	const Element = ({ element }: { element: BlogPostElement }) => {
 		switch (element.type) {
-			case 'text':
-				return <p>{element.text}</p>;
-			case 'header':
-				return <BlogHeader>{element.title}</BlogHeader>;
-			case 'image':
-				return (
-					<BlogImageContainer>
-						<BlogImage src={aws.getImageUrl(props.blogPostName, ImageQuality.FullHD, element.image.filename)} />
-						<BlogImageText>{element.image.imageText}</BlogImageText>
-					</BlogImageContainer>
-				);
-			default:
-				return <span style={{ color: 'red' }}>Unrecognized element type: {element.type}</span>;
+			case 'text': return <Text>{element.text}</Text>;
+			case 'header': return <Header>{element.title}</Header>;
+			case 'image': return <Image blogPostName={props.blogPostName} image={element.image} quality={ImageQuality.FullHD} />;
+			default: return <Unknown element={element} />;
 		}
 	};
 
