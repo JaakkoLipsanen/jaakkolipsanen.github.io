@@ -1,2 +1,2 @@
 import createBrowserHistory from 'history/createBrowserHistory'
-export default createBrowserHistory()
+export const history = createBrowserHistory()

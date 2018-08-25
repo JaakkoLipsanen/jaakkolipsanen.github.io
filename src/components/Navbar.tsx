@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components'
 import withProps from 'styled-components-ts'
 
 import InstagramIcon from '../assets/icons/instagram.svg'
-import history from '../history'
-import paths from '../paths'
+import { history } from '../history'
+import { paths } from '../paths'
 import { TakeHeight } from './helpers'
 
 type Link = { name: string; url: string; enabled: boolean }

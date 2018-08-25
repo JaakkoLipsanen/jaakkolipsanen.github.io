@@ -6,7 +6,7 @@ const transformImageFilename = (quality: ImageQuality, filename: string) =>
 		? filename
 		: filename.replace('.jpg|.jpeg|.JPG|.JPEG', '.png')
 
-const aws = {
+export const aws = {
 	BASE_URL: AWS_BASE_URL,
 	blogPostsListUrl: `${AWS_BASE_URL}/cycle/blog/posts.txt`,
 	getBlogPostUrl: (blogPostName: string) =>
@@ -19,5 +19,3 @@ const aws = {
 		`${AWS_BASE_URL}/cycle/blog/posts/${blogPostName}/` +
 		`${imageQuality}/${transformImageFilename(imageQuality, imageFilename)}`
 }
-
-export default aws

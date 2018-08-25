@@ -1,4 +1,4 @@
-import aws from './aws'
+import { aws } from './aws'
 import { DateRange, parseSize, Size } from './common'
 
 export interface BlogPostInfo {

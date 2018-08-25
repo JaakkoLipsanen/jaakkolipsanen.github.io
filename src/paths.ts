@@ -1,4 +1,4 @@
-export default {
+export const paths = {
 	home: '/',
 	blogList: '/blog',
 	gear: '/gear',

@@ -2,12 +2,11 @@ import * as React from 'react'
 import styled from 'styled-components'
 import withProps from 'styled-components-ts'
 
-import aws from '../aws'
+import { aws } from '../aws'
 import { BlogPostInfo } from '../blog'
 import { formatDateRange, ImageQuality } from '../common'
-import paths from '../paths'
-
-import { Link } from './Link'
+import { paths } from '../paths'
+import { Link } from './link'
 
 const PreviewImageOverlay = styled.div`
 	position: absolute;

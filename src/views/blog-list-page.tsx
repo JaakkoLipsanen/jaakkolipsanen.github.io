@@ -1,8 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import * as blog from '../blog'
-
-import { BlogPostPreview } from '../components/BlogPostPreview'
+import { BlogPostPreview } from '../components/blog-post-preview'
 
 const BlogListPageLayout = styled.div`
 	width: 85vw;

@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import withProps from 'styled-components-ts'
 
-import aws from '../aws'
+import { aws } from '../aws'
 import { BlogPost } from '../blog'
 import { formatDateRange, ImageQuality } from '../common'
 import { TakeHeight } from './helpers'

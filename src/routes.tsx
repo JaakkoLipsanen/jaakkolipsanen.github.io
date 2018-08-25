@@ -1,11 +1,11 @@
 import * as React from 'react'
 import * as pathToRegexp from 'path-to-regexp'
 
-import paths from './paths'
-import { BlogListPage } from './views/BlogListPage'
-import { BlogPostPage } from './views/BlogPostPage'
-import { MainPage } from './views/MainPage'
-import { NotFound } from './views/NotFound'
+import { paths } from './paths'
+import { BlogListPage } from './views/blog-list-page'
+import { BlogPostPage } from './views/blog-post-page'
+import { MainPage } from './views/main-page'
+import { NotFound } from './views/not-found'
 
 interface RouteTemplate {
 	path: string

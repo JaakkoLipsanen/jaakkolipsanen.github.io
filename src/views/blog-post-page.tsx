@@ -8,6 +8,7 @@ import {
 	loadBlogPost
 } from '../blog'
 import { ImageQuality } from '../common'
+import { history } from '../history'
 import {
 	Header,
 	Image,
@@ -15,8 +16,7 @@ import {
 	Text,
 	Unknown
 } from '../components/blog-elements'
-import { CoverImage } from '../components/CoverImage'
-import history from '../history'
+import { CoverImage } from '../components/cover-image'
 
 const BlogPostPageLayout = styled.div`
 	width: 100vw;

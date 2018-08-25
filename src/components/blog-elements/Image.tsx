@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
-import aws from '../../aws'
+import { aws } from '../../aws'
 import { Image as ImageDescription } from '../../blog'
 import { ImageQuality } from '../../common'
 

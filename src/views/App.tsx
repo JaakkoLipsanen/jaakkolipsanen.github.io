@@ -1,8 +1,7 @@
 import * as React from 'react'
-import history from '../history'
+import { history } from '../history'
 import { matchRoute, Route } from '../routes'
-
-import { Navbar } from '../components/Navbar'
+import { Navbar } from '../components/navbar'
 
 interface AppState {
 	currentRoute: Route
