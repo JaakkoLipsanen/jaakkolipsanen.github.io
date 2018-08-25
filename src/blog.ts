@@ -18,7 +18,7 @@ export interface Image {
 interface TextElement { type: 'text'; text: string; }
 interface HeaderElement { type: 'header'; title: string; }
 interface ImageElement { type: 'image'; image: Image; }
-interface ImageGroupElement { type: 'image-group'; images: string[]; }
+interface ImageGroupElement { type: 'image-group'; images: Image[]; }
 export type BlogPostElement = TextElement | HeaderElement | ImageElement | ImageGroupElement;
 
 export interface BlogPost {
@@ -61,7 +61,7 @@ const parseElement = (tag: string, value: string): BlogPostElement | null  => {
 		case 'text': return { type: 'text', text: value };
 		case 'header': return { type: 'header', title: value };
 		case 'image': return { type: 'image', image: parseImageTagValue(value) };
-		case 'image-group': return { type: 'image-group', images: value.split(' ') };
+		case 'image-group': return { type: 'image-group', images: value.split(' ').map(parseImageTagValue) };
 
 		default: console.error('Unrecognized element in blog post', tag, value); return null;
 	}

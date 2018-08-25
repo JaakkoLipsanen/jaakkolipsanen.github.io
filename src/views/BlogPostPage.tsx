@@ -6,7 +6,7 @@ import { BlogPostElement } from '../blog';
 import { findBlogPostInfoByName, loadBlogPost, BlogPost } from '../blog';
 import { ImageQuality } from '../common';
 import CoverImage from '../components/CoverImage';
-import { Image, Text, Header, Unknown } from '../components/blog-elements';
+import { Image, ImageGroup, Text, Header, Unknown } from '../components/blog-elements';
 
 const BlogPostPageLayout = styled.div`
 	width: 100vw;
@@ -33,6 +33,7 @@ const BlogContent = (props: BlogContentProps) => {
 			case 'text': return <Text>{element.text}</Text>;
 			case 'header': return <Header>{element.title}</Header>;
 			case 'image': return <Image blogPostName={props.blogPostName} image={element.image} quality={ImageQuality.FullHD} />;
+			case 'image-group': return <ImageGroup blogPostName={props.blogPostName} images={element.images} />;
 			default: return <Unknown element={element} />;
 		}
 	};
