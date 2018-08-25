@@ -8,7 +8,7 @@ import {
 	loadBlogPost
 } from '../blog'
 import { ImageQuality } from '../common'
-import { history } from '../history'
+import { history } from '../routing/history'
 import {
 	Header,
 	Image,

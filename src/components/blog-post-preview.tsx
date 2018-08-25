@@ -5,7 +5,7 @@ import withProps from 'styled-components-ts'
 import { aws } from '../aws'
 import { BlogPostInfo } from '../blog'
 import { formatDateRange, ImageQuality } from '../common'
-import { paths } from '../paths'
+import { paths } from '../routing/paths'
 import { Link } from './link'
 
 const PreviewImageOverlay = styled.div`

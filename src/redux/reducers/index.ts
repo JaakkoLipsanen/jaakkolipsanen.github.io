@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux'
-import page from './page'
+import location from './location'
+import { StateType } from 'typesafe-actions'
 
-export default combineReducers({
-	page
+const reducers = combineReducers({
+	location
 })
+
+export type RootState = StateType<typeof reducers>
+export default reducers

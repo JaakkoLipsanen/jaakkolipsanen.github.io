@@ -7,7 +7,9 @@
 		"member-access": false,
 		"no-console": false,
 		"object-literal-sort-keys": false,
-		"no-submodule-imports": [true, "history"],
-		"ordered-imports": false
+		"no-submodule-imports": [true, "history", "rxjs"],
+		"ordered-imports": false,
+		"class-name": false,
+		"variable-name": false
 	}
 }

@@ -1,32 +1,28 @@
 import * as React from 'react'
-import { history } from '../history'
-import { matchRoute, Route } from '../routes'
+import { createSelector } from 'reselect'
+import { matchRoute, Route } from '../routing/routes'
 import { Navbar } from '../components/navbar'
+import { connect } from 'react-redux'
+import { RootState } from '../redux/reducers'
 
-interface AppState {
+interface AppProps {
 	currentRoute: Route
 }
 
-export class App extends React.Component<{}, AppState> {
-	state: AppState = {
-		currentRoute: matchRoute(history.location.pathname)
-	}
+const _App = ({ currentRoute }: AppProps) => (
+	<React.Fragment>
+		<Navbar forceShrinked={Boolean(currentRoute.forceShrinked)} />
+		<currentRoute.render />
+	</React.Fragment>
+)
 
-	componentDidMount() {
-		history.listen(location =>
-			this.setState({ currentRoute: matchRoute(location.pathname) })
-		)
-	}
+const routeSelector = createSelector(
+	(state: RootState) => state.location,
+	location => matchRoute(location)
+)
 
-	render() {
-		const CurrentRoute = () => this.state.currentRoute.render()
-		return (
-			<>
-				<Navbar
-					forceShrinked={Boolean(this.state.currentRoute.forceShrinked)}
-				/>
-				<CurrentRoute />
-			</>
-		)
-	}
-}
+const mapStateToProps = (state: RootState) => ({
+	currentRoute: routeSelector(state)
+})
+
+export const App = connect(mapStateToProps)(_App)

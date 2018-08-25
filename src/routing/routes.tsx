@@ -2,10 +2,10 @@ import * as React from 'react'
 import * as pathToRegexp from 'path-to-regexp'
 
 import { paths } from './paths'
-import { BlogListPage } from './views/blog-list-page'
-import { BlogPostPage } from './views/blog-post-page'
-import { MainPage } from './views/main-page'
-import { NotFound } from './views/not-found'
+import { BlogListPage } from '../views/blog-list-page'
+import { BlogPostPage } from '../views/blog-post-page'
+import { MainPage } from '../views/main-page'
+import { NotFound } from '../views/not-found'
 
 interface RouteTemplate {
 	path: string
@@ -21,8 +21,8 @@ export interface Route {
 type Parameters = { [k: string]: string | null }
 
 export const routes: RouteTemplate[] = [
-	{ path: paths.home, render: (params: Parameters) => <MainPage /> },
-	{ path: paths.blogList, render: (params: Parameters) => <BlogListPage /> },
+	{ path: paths.home, render: _ => <MainPage /> },
+	{ path: paths.blogList, render: _ => <BlogListPage /> },
 	{
 		path: paths.blogPostTemplate,
 		forceShrinked: true,
