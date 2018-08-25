@@ -1,22 +1,22 @@
-import * as React from 'react';
-import styled, { css } from 'styled-components';
-import withProps from 'styled-components-ts';
+import * as React from 'react'
+import styled, { css } from 'styled-components'
+import withProps from 'styled-components-ts'
 
-import InstagramIcon from '../assets/icons/instagram.svg';
-import { TakeHeight } from './helpers';
-import history from '../history';
-import paths from '../paths';
+import InstagramIcon from '../assets/icons/instagram.svg'
+import history from '../history'
+import paths from '../paths'
+import { TakeHeight } from './helpers'
 
-type Link = { name: string, url: string, enabled: boolean };
+type Link = { name: string; url: string; enabled: boolean }
 const links: Link[] = [
 	{ name: 'home', url: paths.home, enabled: true },
 	{ name: 'blog', url: paths.blogList, enabled: true },
 	{ name: 'gear', url: paths.gear, enabled: false },
 	{ name: 'tours', url: paths.tours, enabled: true }
-];
+]
 
-const NAVBAR_HEIGHT = 118;
-type NavContainerProps = { shrink: boolean };
+const NAVBAR_HEIGHT = 118
+type NavContainerProps = { shrink: boolean }
 const NavContainer = withProps<NavContainerProps>(styled.div)`
 	display: grid;
 	grid-template-columns: 0px auto 0px; /* hack because of NavImage... */
@@ -24,14 +24,14 @@ const NavContainer = withProps<NavContainerProps>(styled.div)`
 	position: fixed;
 	top: 0px;
 	width: 100%;
-	height: ${props => props.shrink ? '40px' : `${NAVBAR_HEIGHT}px`};
+	height: ${props => (props.shrink ? '40px' : `${NAVBAR_HEIGHT}px`)};
 
-	font-size: ${props => props.shrink ? '16px' : '20px'};
+	font-size: ${props => (props.shrink ? '16px' : '20px')};
 	background-color: white;
 	z-index: 1;
 
 	transition: height 0.3s, font-size 0.3s;
-`;
+`
 
 const NavLinksContainer = styled.div`
 	align-self: center;
@@ -39,29 +39,31 @@ const NavLinksContainer = styled.div`
 	text-align: center;
 
 	grid-column: 2;
-`;
+`
 
-type NavLinkProps = { selected: boolean, enabled: boolean };
+type NavLinkProps = { selected: boolean; enabled: boolean }
 const NavLink = withProps<NavLinkProps>(styled.a)`
 	font-weight: 600;
 
 	text-decoration: none;
 	color: black;
-	opacity: ${props => props.enabled ? 1 : 0.4};
-	border-bottom: 2px solid ${props => props.selected ? 'black' : 'transparent'};
+	opacity: ${props => (props.enabled ? 1 : 0.4)};
+	border-bottom: 2px solid ${props => (props.selected ? 'black' : 'transparent')};
 	transition: border-bottom 0.3s;
 
-	pointer-events: ${props => props.enabled ? 'inherit' : 'none'};
+	pointer-events: ${props => (props.enabled ? 'inherit' : 'none')};
 	margin: 0px 32px;
 	padding: 3px 1px;
 
 	&:hover {
-		${props => (props.enabled && !props.selected)
-			? css`border-bottom: 2px solid rgba(0, 0, 0, 0.5);`
-			: ''
-		};
+		${props =>
+			props.enabled && !props.selected
+				? css`
+						border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+				  `
+				: ''};
 	}
-`;
+`
 
 const NavImage = styled.img`
 	position: absolute;
@@ -75,69 +77,91 @@ const NavImage = styled.img`
 	&:hover {
 		transform: translateY(-50%) scale(1.2);
 	}
-`;
+`
 
-type NavSideButtonProps = { href: string, src: string, side?: 'right' | 'left' };
+type NavSideButtonProps = {
+	href: string
+	src: string
+	side?: 'right' | 'left'
+}
+
 const NavSideButton = ({ href, src, side = 'right' }: NavSideButtonProps) => {
-	const style = (side === 'right') ? { right: '16px' } : { left: '16px' };
+	const style = side === 'right' ? { right: '16px' } : { left: '16px' }
 	return (
 		<a href={href}>
 			<NavImage style={style} src={src} />
 		</a>
-	);
-};
+	)
+}
 
-const Link = (props: { link: Link, selected: boolean }) => (
-	<NavLink 
-		href={`/${props.link.name}`} 
-		selected={props.selected} 
+const Link = (props: { link: Link; selected: boolean }) => (
+	<NavLink
+		href={`/${props.link.name}`}
+		selected={props.selected}
 		enabled={props.link.enabled}
-		onClick={e => { e.preventDefault(); history.push(`${props.link.url}`); }}
+		onClick={e => {
+			e.preventDefault()
+			history.push(`${props.link.url}`)
+		}}
 	>
 		{props.link.name.toUpperCase()}
 	</NavLink>
-);
+)
 
-const isLinkSelected = (link: Link) => (link.url === '/')
-	? history.location.pathname === '/'
-	: history.location.pathname.startsWith(link.url);
+const isLinkSelected = (link: Link) =>
+	link.url === '/'
+		? history.location.pathname === '/'
+		: history.location.pathname.startsWith(link.url)
 
-interface NavbarProps { forceShrinked: boolean; }
-interface NavbarState { shrink: boolean; }
-class Navbar extends React.Component<NavbarProps, NavbarState> {
+interface NavbarProps {
+	forceShrinked: boolean
+}
+
+interface NavbarState {
+	shrink: boolean
+}
+
+export class Navbar extends React.Component<NavbarProps, NavbarState> {
 	state = {
-		shrink: false,
-	};
+		shrink: false
+	}
 
 	handleScroll = () => {
-		const shrink = window.scrollY > 0;
-		this.setState({ shrink });
+		const shrink = window.scrollY > 0
+		this.setState({ shrink })
 	}
 
 	componentDidMount() {
-		window.addEventListener('scroll', this.handleScroll);
+		window.addEventListener('scroll', this.handleScroll)
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('scroll', this.handleScroll);
+		window.removeEventListener('scroll', this.handleScroll)
 	}
 
 	render() {
-		const shrink = this.state.shrink || this.props.forceShrinked;
+		const shrink = this.state.shrink || this.props.forceShrinked
 		return (
 			<>
 				<NavContainer shrink={shrink}>
 					<NavLinksContainer>
-						{links.map(link => <Link key={link.name} link={link} selected={isLinkSelected(link)} />)}
+						{links.map(link => (
+							<Link
+								key={link.name}
+								link={link}
+								selected={isLinkSelected(link)}
+							/>
+						))}
 					</NavLinksContainer>
 
-					<NavSideButton side='right' href='https://instagram.com/fl.ai' src={InstagramIcon} />
-
+					<NavSideButton
+						side="right"
+						href="https://instagram.com/fl.ai"
+						src={InstagramIcon}
+					/>
 				</NavContainer>
 				<TakeHeight height={`${NAVBAR_HEIGHT}px`} />
 			</>
-		);
+		)
 	}
 }
-
-export default Navbar;

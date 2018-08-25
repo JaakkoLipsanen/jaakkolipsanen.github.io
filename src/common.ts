@@ -8,23 +8,26 @@ export enum ImageQuality {
 }
 
 export interface Size {
-	width: number;
-	height: number;
+	width: number
+	height: number
 }
 
-export interface DateRange { start: number; end: number; }
+export interface DateRange {
+	start: number
+	end: number
+}
 
 export function parseSize(str: string) {
-	const [width, height] = str.split('x');
-	return { width: parseInt(width, 10), height: parseInt(height, 10) };
+	const [width, height] = str.split('x')
+	return { width: parseInt(width, 10), height: parseInt(height, 10) }
 }
 
 export function formatDateRange(dateRange: DateRange) {
 	if (dateRange.start === 0 && dateRange.end === 0) {
-		return 'Preparations';
+		return 'Preparations'
 	} else if (dateRange.start === dateRange.end) {
-		return `Day ${dateRange.start}`;
+		return `Day ${dateRange.start}`
 	}
-	
-	return `Day ${dateRange.start}-${dateRange.end}`;
+
+	return `Day ${dateRange.start}-${dateRange.end}`
 }

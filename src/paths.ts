@@ -1,4 +1,3 @@
-
 export default {
 	home: '/',
 	blogList: '/blog',
@@ -7,4 +6,4 @@ export default {
 
 	blogPostTemplate: '/blog/:name',
 	buildBlogPostPath: (postName: string) => `/blog/${postName}`
-};
+}

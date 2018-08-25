@@ -1,51 +1,62 @@
-import * as React from 'react';
-import * as pathToRegexp from 'path-to-regexp';
+import * as React from 'react'
+import * as pathToRegexp from 'path-to-regexp'
 
-import paths from './paths';
-import MainPage from './views/MainPage';
-import BlogListPage from './views/BlogListPage';
-import BlogPostPage from './views/BlogPostPage';
-import NotFound from './views/NotFound';
+import paths from './paths'
+import { BlogListPage } from './views/BlogListPage'
+import { BlogPostPage } from './views/BlogPostPage'
+import { MainPage } from './views/MainPage'
+import { NotFound } from './views/NotFound'
 
-interface RouteTemplate { path: string; forceShrinked?: boolean; render: (params: Parameters) => JSX.Element; }
-export interface Route { forceShrinked?: boolean; render: () => JSX.Element; }
-type Parameters = { [k: string]: string | null };
+interface RouteTemplate {
+	path: string
+	forceShrinked?: boolean
+	render: (params: Parameters) => JSX.Element
+}
 
-const routes: RouteTemplate[] = [
-	{ path: paths.home, render: (params: Parameters) => <MainPage />},
-	{ path: paths.blogList, render: (params: Parameters) => <BlogListPage />},
-	{ path: paths.blogPostTemplate, forceShrinked: true, render: ({ name }: Parameters) => <BlogPostPage name={name!} />}
-];
+export interface Route {
+	forceShrinked?: boolean
+	render: () => JSX.Element
+}
 
-const matchRoute = (path: string): Route => {
-	const NOT_FOUND = { render: () => <NotFound /> };
+type Parameters = { [k: string]: string | null }
 
-	let foundRoute: Route | null = null;
+export const routes: RouteTemplate[] = [
+	{ path: paths.home, render: (params: Parameters) => <MainPage /> },
+	{ path: paths.blogList, render: (params: Parameters) => <BlogListPage /> },
+	{
+		path: paths.blogPostTemplate,
+		forceShrinked: true,
+		render: ({ name }: Parameters) => <BlogPostPage name={name!} />
+	}
+]
+
+export const matchRoute = (path: string): Route => {
+	const NOT_FOUND = { render: () => <NotFound /> }
+
+	let foundRoute: Route | null = null
 	const found = routes.find(route => {
-		const keys: pathToRegexp.Key[] = [];
-		const regexp = pathToRegexp(route.path, keys);
+		const keys: pathToRegexp.Key[] = []
+		const regexp = pathToRegexp(route.path, keys)
 
-		const result = regexp.exec(path);
+		const result = regexp.exec(path)
 		if (!result) {
-			return false;
+			return false
 		}
-		
-		const PARAMETER_OFFSET = 1;
+
+		const PARAMETER_OFFSET = 1
 		const parameters: Parameters = keys.reduce(
 			(acc: Parameters, cur: pathToRegexp.Key, index: number) => {
-				return { ...acc, [cur.name]: result[index + PARAMETER_OFFSET] };
-			}, 
-			{ }
-		);
+				return { ...acc, [cur.name]: result[index + PARAMETER_OFFSET] }
+			},
+			{}
+		)
 
-		foundRoute = { forceShrinked: route.forceShrinked, render: () => route.render(parameters) };
-		return true;
-	});
+		foundRoute = {
+			forceShrinked: route.forceShrinked,
+			render: () => route.render(parameters)
+		}
+		return true
+	})
 
-	return (found && foundRoute) || NOT_FOUND;
-};
-	
-export default {
-	routes,
-	matchRoute
-};
+	return (found && foundRoute) || NOT_FOUND
+}

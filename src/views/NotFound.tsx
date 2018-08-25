@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import * as React from 'react'
+import styled from 'styled-components'
 
 const Centered = styled.h1`
 	position: absolute;
@@ -14,6 +14,6 @@ const Centered = styled.h1`
 	flex-direction: column;
 
 	pointer-events: none;
-`;
+`
 
-export default () => <Centered>Page not found</Centered>;
+export const NotFound = () => <Centered>Page not found</Centered>

@@ -1,31 +1,33 @@
-import * as React from 'react';
-import routes, { Route } from '../routes';
-import history from '../history';
+import * as React from 'react'
+import history from '../history'
+import { matchRoute, Route } from '../routes'
 
-import Navbar from '../components/Navbar';
+import { Navbar } from '../components/Navbar'
 
 interface AppState {
-	currentRoute: Route;
+	currentRoute: Route
 }
 
-class App extends React.Component<{}, AppState> {
+export class App extends React.Component<{}, AppState> {
 	state: AppState = {
-		currentRoute: routes.matchRoute(history.location.pathname)
-	};
+		currentRoute: matchRoute(history.location.pathname)
+	}
 
 	componentDidMount() {
-		history.listen(location => this.setState({ currentRoute: routes.matchRoute(location.pathname) }));
+		history.listen(location =>
+			this.setState({ currentRoute: matchRoute(location.pathname) })
+		)
 	}
 
 	render() {
-		const CurrentRoute = () => this.state.currentRoute.render();
+		const CurrentRoute = () => this.state.currentRoute.render()
 		return (
 			<div>
-				<Navbar forceShrinked={Boolean(this.state.currentRoute.forceShrinked)} />
+				<Navbar
+					forceShrinked={Boolean(this.state.currentRoute.forceShrinked)}
+				/>
 				<CurrentRoute />
 			</div>
-		);
+		)
 	}
 }
-
-export default App;

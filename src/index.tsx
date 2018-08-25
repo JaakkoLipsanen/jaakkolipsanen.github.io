@@ -1,14 +1,14 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import App from './views/App';
-import * as blog from './blog';
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import * as blog from './blog'
+import { App } from './views/App'
 
-import 'typeface-raleway';
-import './global.css';
+import 'typeface-raleway'
+import './global.css'
 
 const render = async () => {
-	await blog.initialize();
-	ReactDOM.render(<App />, document.getElementById('root'));
-};
+	await blog.initialize()
+	ReactDOM.render(<App />, document.getElementById('root'))
+}
 
-render();
+render()
