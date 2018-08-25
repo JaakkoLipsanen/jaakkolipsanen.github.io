@@ -21,12 +21,12 @@ export class App extends React.Component<{}, AppState> {
 	render() {
 		const CurrentRoute = () => this.state.currentRoute.render()
 		return (
-			<div>
+			<>
 				<Navbar
 					forceShrinked={Boolean(this.state.currentRoute.forceShrinked)}
 				/>
 				<CurrentRoute />
-			</div>
+			</>
 		)
 	}
 }

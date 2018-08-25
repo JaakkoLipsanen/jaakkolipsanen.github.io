@@ -3,14 +3,19 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@types/react-redux": "^6.0.6",
 		"history": "^4.7.2",
 		"path-to-regexp": "^2.1.0",
-		"react": "^16.2.0",
+		"react": "^16.4.2",
 		"react-dom": "^16.2.0",
-		"react-scripts-ts": "2.12.0",
-		"styled-components": "^2.4.0",
-		"styled-components-ts": "0.0.8",
-		"typeface-raleway": "0.0.54"
+		"react-redux": "^5.0.7",
+		"react-scripts-ts": "^2.17.0",
+		"redux": "^4.0.0",
+		"redux-devtools-extension": "^2.13.5",
+		"styled-components": "^3.4.5",
+		"styled-components-ts": "^0.0.14",
+		"typeface-raleway": "0.0.54",
+		"typesafe-actions": "^2.0.4"
 	},
 	"scripts": {
 		"watch": "react-scripts-ts start",
@@ -19,9 +24,10 @@
 	"devDependencies": {
 		"@types/history": "^4.6.2",
 		"@types/node": "^9.3.0",
-		"@types/react": "^16.0.34",
-		"@types/react-dom": "^16.0.3",
+		"@types/react": "^16.4.2",
+		"@types/react-dom": "^16.0.7",
 		"prettier": "1.14.2",
-		"tslint-config-prettier": "^1.15.0"
+		"tslint-config-prettier": "^1.15.0",
+		"typescript": "^3.0.1"
 	}
 }
