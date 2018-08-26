@@ -1,14 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
-import {
-	BlogPost,
-	BlogPostElement,
-	findBlogPostInfoByName,
-	loadBlogPost
-} from '../blog'
+import { BlogPost, BlogPostElement } from '../blog'
 import { ImageQuality } from '../common'
-import { history } from '../routing/history'
 import {
 	Header,
 	Image,
@@ -17,6 +11,9 @@ import {
 	Unknown
 } from '../components/blog-elements'
 import { CoverImage } from '../components/cover-image'
+import { connect } from 'react-redux'
+import { RootState } from '../redux/reducers'
+import { blogPostByNameSelector } from '../redux/selectors/blog'
 
 const BlogPostPageLayout = styled.div`
 	width: 100vw;
@@ -77,42 +74,27 @@ const BlogContent = (props: BlogContentProps) => {
 
 interface BlogPostPageProps {
 	name: string
+	blogPost?: BlogPost
 }
 
-interface BlogPostPageState {
-	blogPost: BlogPost | null
+const _BlogPostPage = ({ blogPost }: BlogPostPageProps) => {
+	if (!blogPost) {
+		return null
+	}
+
+	return (
+		<BlogPostPageLayout>
+			<CoverImage blogPost={blogPost} height={'85vh'} />
+			<BlogContent
+				blogPostName={blogPost.name}
+				elements={blogPost.content}
+			/>
+		</BlogPostPageLayout>
+	)
 }
 
-export class BlogPostPage extends React.Component<
-	BlogPostPageProps,
-	BlogPostPageState
-> {
-	state: BlogPostPageState = {
-		blogPost: null
-	}
-
-	async componentDidMount() {
-		const blogPostInfo = findBlogPostInfoByName(this.props.name)
-		if (!blogPostInfo) {
-			return history.push('/404')
-		}
-
-		this.setState({ blogPost: await loadBlogPost(blogPostInfo) })
-	}
-
-	render() {
-		if (!this.state.blogPost) {
-			return null
-		}
-
-		return (
-			<BlogPostPageLayout>
-				<CoverImage blogPost={this.state.blogPost} height={'85vh'} />
-				<BlogContent
-					blogPostName={this.state.blogPost.name}
-					elements={this.state.blogPost.content}
-				/>
-			</BlogPostPageLayout>
-		)
-	}
-}
+export const BlogPostPage = connect(
+	(state: RootState, props: BlogPostPageProps) => ({
+		blogPost: blogPostByNameSelector(props.name)(state)
+	})
+)(_BlogPostPage)

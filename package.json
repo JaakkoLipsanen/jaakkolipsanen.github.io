@@ -3,9 +3,11 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@types/ramda": "^0.25.36",
 		"@types/react-redux": "^6.0.6",
 		"history": "^4.7.2",
 		"path-to-regexp": "^2.1.0",
+		"ramda": "^0.25.0",
 		"react": "^16.4.2",
 		"react-dom": "^16.2.0",
 		"react-redux": "^5.0.7",

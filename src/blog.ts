@@ -50,7 +50,6 @@ export interface BlogPost {
 	content: BlogPostElement[]
 }
 
-let blogPostInfos: ReadonlyArray<Readonly<BlogPostInfo>> = []
 const loadText = async (url: string) => {
 	const response = await fetch(url)
 	return response.text()
@@ -66,13 +65,15 @@ const parseBlogPostList = (blogPostListText: string) => {
 		const [name, trip, title, dateRangeStr, coverImage] = line.split('|')
 		const [start, end] = dateRangeStr.split('-')
 
-		return {
+		const blogPostInfo: BlogPostInfo = {
 			coverImage,
 			name,
 			title,
 			trip,
 			dateRange: { start: parseInt(start, 10), end: parseInt(end, 10) }
 		}
+
+		return blogPostInfo
 	})
 }
 
@@ -145,20 +146,12 @@ const parseBlogPost = (name: string, blogPostText: string): BlogPost => {
 	}
 }
 
-export const initialize = async () => {
+export const fetchBlogPostInfos = async () => {
 	const blogPostListText = await loadText(aws.blogPostsListUrl)
-	blogPostInfos = parseBlogPostList(blogPostListText)
+	return parseBlogPostList(blogPostListText)
 }
 
-export const getBlogPostInfos = () => {
-	return blogPostInfos.slice() as ReadonlyArray<BlogPostInfo>
-}
-
-export const findBlogPostInfoByName = (name: string) => {
-	return blogPostInfos.find(post => post.name === name)
-}
-
-export const loadBlogPost = async (blogPostInfo: BlogPostInfo) => {
-	const blogPostText = await loadText(aws.getBlogPostUrl(blogPostInfo.name))
-	return parseBlogPost(blogPostInfo.name, blogPostText) as Readonly<BlogPost>
+export const fetchBlogPost = async (name: string) => {
+	const blogPostText = await loadText(aws.getBlogPostUrl(name))
+	return parseBlogPost(name, blogPostText)
 }

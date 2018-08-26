@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
-import location from './location'
 import { StateType } from 'typesafe-actions'
+import location from './location'
+import blog from './blog'
 
 const reducers = combineReducers({
-	location
+	location,
+	blog
 })
 
 export type RootState = StateType<typeof reducers>
