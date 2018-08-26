@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components'
 import InstagramIcon from '../assets/icons/instagram.svg'
 import { history } from '../routing/history'
 import { paths } from '../routing/paths'
-import { TakeHeight } from './helpers'
 
 type Link = { name: string; url: string; enabled: boolean }
 const links: Link[] = [
@@ -26,7 +25,8 @@ const NavContainer = styled.div<NavContainerProps>`
 	height: ${props => (props.shrink ? '40px' : `${NAVBAR_HEIGHT}px`)};
 
 	font-size: ${props => (props.shrink ? '16px' : '20px')};
-	background-color: white;
+	background-color: transparent;
+	filter: invert(1);
 	z-index: 1;
 
 	transition: height 0.3s, font-size 0.3s;
@@ -142,26 +142,23 @@ export class Navbar extends React.Component<NavbarProps, NavbarState> {
 	render() {
 		const shrink = this.state.shrink || this.props.forceShrinked
 		return (
-			<>
-				<NavContainer shrink={shrink}>
-					<NavLinksContainer>
-						{links.map(link => (
-							<Link
-								key={link.name}
-								link={link}
-								selected={isLinkSelected(link)}
-							/>
-						))}
-					</NavLinksContainer>
+			<NavContainer shrink={shrink}>
+				<NavLinksContainer>
+					{links.map(link => (
+						<Link
+							key={link.name}
+							link={link}
+							selected={isLinkSelected(link)}
+						/>
+					))}
+				</NavLinksContainer>
 
-					<NavSideButton
-						side="right"
-						href="https://instagram.com/fl.ai"
-						src={InstagramIcon}
-					/>
-				</NavContainer>
-				<TakeHeight height={`${NAVBAR_HEIGHT}px`} />
-			</>
+				<NavSideButton
+					side="right"
+					href="https://instagram.com/fl.ai"
+					src={InstagramIcon}
+				/>
+			</NavContainer>
 		)
 	}
 }

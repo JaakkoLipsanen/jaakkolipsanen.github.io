@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+
 import * as blog from '../blog'
 import { BlogPostPreview } from '../components/blog-post-preview'
 import { RootState } from '../redux/reducers'
@@ -10,6 +11,7 @@ const BlogListPageLayout = styled.div`
 	width: 85vw;
 	max-width: 1600px;
 	margin: auto;
+	margin-top: 128px;
 
 	display: grid;
 	grid-column-gap: 48px;
