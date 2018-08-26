@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 
 import { Carousel } from './carousel'
+import { Text } from './text'
 
 const HeroCarouselContainer = styled.div`
 	width: 100%;
@@ -52,6 +53,13 @@ const MoreBelowIndicator = styled.div`
 	background-color: white;
 `
 
+const ItemDescriptionText = styled(Text)`
+	position: absolute;
+	left: 12px;
+	bottom: 12px;
+	margin: 0px;
+`
+
 export type HeroCarouselItem = {
 	src: string
 	description: string
@@ -70,17 +78,9 @@ export const HeroCarousel = ({ items }: HeroCarouselProps) => (
 				<CarouselImageContainer>
 					<CarouselImage src={item.src} />
 					<CarouselOverlay />
-					<p
-						style={{
-							position: 'absolute',
-							left: '12px',
-							bottom: '12px',
-							margin: '0px',
-							color: 'white'
-						}}
-					>
+					<ItemDescriptionText variant="body" color="white">
 						{item.description} <small>({item.year})</small>
-					</p>
+					</ItemDescriptionText>
 				</CarouselImageContainer>
 			)}
 		/>
