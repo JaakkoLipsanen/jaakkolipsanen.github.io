@@ -1,11 +1,13 @@
+import './global.css'
+import 'normalize.css'
+import 'typeface-raleway'
+
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+
 import { store } from './redux'
 import { App } from './views/app'
-
-import 'typeface-raleway'
-import './global.css'
 
 const render = async () => {
 	ReactDOM.render(
