@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import withProps from 'styled-components-ts'
 
 import { aws } from '../aws'
 import { BlogPost } from '../blog'
@@ -8,7 +7,7 @@ import { formatDateRange, ImageQuality } from '../common'
 import { TakeHeight } from './helpers'
 
 type ImageContainerProps = { height: string }
-const ImageContainer = withProps<ImageContainerProps>(styled.div)`
+const ImageContainer = styled.div<ImageContainerProps>`
 	width: 100%;
 	height: ${props => props.height};
 
@@ -17,7 +16,7 @@ const ImageContainer = withProps<ImageContainerProps>(styled.div)`
 `
 
 type ImageProps = { src: string }
-const Image = withProps<ImageProps>(styled.div)`
+const Image = styled.div<ImageProps>`
 	width: 100%;
 	height: 100%;
 

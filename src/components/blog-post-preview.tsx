@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import withProps from 'styled-components-ts'
 
 import { aws } from '../aws'
 import { BlogPostInfo } from '../blog'
@@ -35,7 +34,7 @@ const PreviewLinkContainer = styled(Link)`
 `
 
 type PreviewImageProps = { src: string }
-const PreviewImage = withProps<PreviewImageProps>(styled.div)`
+const PreviewImage = styled.div<PreviewImageProps>`
 	width: 100%;
 	padding-bottom: 66%;
 

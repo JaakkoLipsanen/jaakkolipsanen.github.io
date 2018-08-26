@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components'
-import withProps from 'styled-components-ts'
 
 import InstagramIcon from '../assets/icons/instagram.svg'
 import { history } from '../routing/history'
@@ -17,7 +16,7 @@ const links: Link[] = [
 
 const NAVBAR_HEIGHT = 118
 type NavContainerProps = { shrink: boolean }
-const NavContainer = withProps<NavContainerProps>(styled.div)`
+const NavContainer = styled.div<NavContainerProps>`
 	display: grid;
 	grid-template-columns: 0px auto 0px; /* hack because of NavImage... */
 
@@ -42,13 +41,14 @@ const NavLinksContainer = styled.div`
 `
 
 type NavLinkProps = { selected: boolean; enabled: boolean }
-const NavLink = withProps<NavLinkProps>(styled.a)`
+const NavLink = styled.a<NavLinkProps>`
 	font-weight: 600;
 
 	text-decoration: none;
 	color: black;
 	opacity: ${props => (props.enabled ? 1 : 0.4)};
-	border-bottom: 2px solid ${props => (props.selected ? 'black' : 'transparent')};
+	border-bottom: 2px solid
+		${props => (props.selected ? 'black' : 'transparent')};
 	transition: border-bottom 0.3s;
 
 	pointer-events: ${props => (props.enabled ? 'inherit' : 'none')};
