@@ -47,7 +47,7 @@ export class Carousel<T> extends React.Component<
 
 		return (
 			<CarouselContainer className={className}>
-				<ItemContainer>
+				<ItemContainer key={index % items.length}>
 					{render({ item: items[index % items.length] })}
 				</ItemContainer>
 			</CarouselContainer>

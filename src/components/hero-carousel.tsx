@@ -1,25 +1,29 @@
 import * as React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 import { Carousel } from './carousel'
 import { Text } from './text'
 
+const CAROUSEL_AUTOPLAY_TIME = 6000
+const ANIMATE_BACKGROUND_POSITION = false
+const BACKGROUND_POSITION_ANIMATION_RANGE = 10 // [50-this, 50+this]
+
 const HeroCarouselContainer = styled.div`
 	width: 100%;
-	height: 100vh;
+	height: 100vh; /* meh */
 `
 
 class _ImageCarousel extends Carousel<HeroCarouselItem> {}
 const ImageCarousel = styled(_ImageCarousel)`
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 `
 
 const CarouselOverlay = styled.div`
 	position: absolute;
 	top: 0;
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 	background: linear-gradient(
 		to bottom,
 		rgba(0, 0, 0, 0.4) 0%,
@@ -34,6 +38,20 @@ const CarouselImageContainer = styled.div`
 	height: 100%;
 `
 
+// TODO: make this use transform: translate(x, y) to make it smooth. Requires few
+// things, for example requires calculating screen/container aspect ratio compared to image aspect ratio
+const BackgroundPositionAnimation = keyframes`
+  from {
+	 background-position: ${50 - BACKGROUND_POSITION_ANIMATION_RANGE}% ${50 +
+	BACKGROUND_POSITION_ANIMATION_RANGE}%;
+  }
+
+  to {
+	  background-position: ${50 + BACKGROUND_POSITION_ANIMATION_RANGE}% ${50 -
+	BACKGROUND_POSITION_ANIMATION_RANGE}%;
+  }
+`
+
 type CarouselImageProps = { src: string }
 const CarouselImage = styled.div<CarouselImageProps>`
 	background-image: url(${props => props.src});
@@ -41,6 +59,13 @@ const CarouselImage = styled.div<CarouselImageProps>`
 	background-position: center;
 	width: 100%;
 	height: 100%;
+
+	will-change: transform;
+	${ANIMATE_BACKGROUND_POSITION &&
+		`animation: ${BackgroundPositionAnimation} ${CAROUSEL_AUTOPLAY_TIME /
+			1000}s
+		linear;
+	`};
 `
 
 const MoreBelowIndicator = styled.div`
@@ -73,6 +98,7 @@ type HeroCarouselProps = {
 export const HeroCarousel = ({ items }: HeroCarouselProps) => (
 	<HeroCarouselContainer>
 		<ImageCarousel
+			autoplayTime={CAROUSEL_AUTOPLAY_TIME}
 			items={items}
 			render={({ item }) => (
 				<CarouselImageContainer>
