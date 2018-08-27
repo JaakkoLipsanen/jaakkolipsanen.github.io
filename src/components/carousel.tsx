@@ -21,8 +21,8 @@ const ItemContainer = styled.div`
 
 const PosedItemContainer = posed(ItemContainer)({
 	preEnter: { opacity: 0 },
-	enter: { opacity: 1, transition: { duration: 1000, ease: 'easeInOut' } },
-	exit: { opacity: 1, transition: { duration: 1000 } } // no exit animation
+	enter: { opacity: 1, transition: { duration: 1500, ease: 'easeInOut' } },
+	exit: { opacity: 1, transition: { duration: 1500 } } // no exit animation
 })
 
 type CarouselState = { index: number }
