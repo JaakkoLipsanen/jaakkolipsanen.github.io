@@ -1,10 +1,12 @@
 import * as React from 'react'
+import posed, { PoseGroup } from 'react-pose'
 import styled from 'styled-components'
 
 const CarouselContainer = styled.div`
 	width: 100%;
 	height: 100%;
 	position: relative;
+	background: rgba(0, 0, 0, 0.1);
 `
 
 const ItemContainer = styled.div`
@@ -13,7 +15,15 @@ const ItemContainer = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
+
+	will-change: opacity;
 `
+
+const PosedItemContainer = posed(ItemContainer)({
+	preEnter: { opacity: 0 },
+	enter: { opacity: 1, transition: { duration: 1000, ease: 'easeInOut' } },
+	exit: { opacity: 1, transition: { duration: 1000 } } // no exit animation
+})
 
 type CarouselState = { index: number }
 type CarouselProps<T> = {
@@ -47,9 +57,11 @@ export class Carousel<T> extends React.Component<
 
 		return (
 			<CarouselContainer className={className}>
-				<ItemContainer key={index % items.length}>
-					{render({ item: items[index % items.length] })}
-				</ItemContainer>
+				<PoseGroup animateOnMount preEnterPose="preEnter">
+					<PosedItemContainer key={index % items.length}>
+						{render({ item: items[index % items.length] })}
+					</PosedItemContainer>
+				</PoseGroup>
 			</CarouselContainer>
 		)
 	}

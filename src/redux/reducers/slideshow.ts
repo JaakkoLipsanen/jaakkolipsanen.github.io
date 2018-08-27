@@ -1,67 +1,59 @@
 import { aws } from '../../aws'
 import { ImageQuality } from '../../common'
 
+const getImageQuality = () => {
+	const height = window.innerHeight * Math.min(1.75, window.devicePixelRatio)
+	if (height > 1300) {
+		return ImageQuality.Original
+	} else if (height > 800) {
+		return ImageQuality.FullHD
+	}
+
+	return ImageQuality.HD
+}
+
+const IMAGE_QUALITY = getImageQuality()
 const slideshowItems = [
 	{
-		src: `${aws.getImageUrl(
-			'and-back-again',
-			ImageQuality.Original,
-			'1060788.jpg'
-		)}`,
+		src: `${aws.getImageUrl('and-back-again', IMAGE_QUALITY, '1060788.jpg')}`,
 		description: 'Zion National Park',
 		year: '2016'
 	},
 	{
 		src: `${aws.getImageUrl(
 			'angel-has-landed',
-			ImageQuality.Original,
+			IMAGE_QUALITY,
 			'1070479.jpg'
 		)}`,
 		description: 'Zion National Park',
 		year: '2016'
 	},
 	{
-		src: `${aws.getImageUrl(
-			'colorado',
-			ImageQuality.Original,
-			'1100202.jpg'
-		)}`,
+		src: `${aws.getImageUrl('colorado', IMAGE_QUALITY, '1100202.jpg')}`,
 		description: 'Zion National Park',
 		year: '2016'
 	},
 	{
-		src: `${aws.getImageUrl(
-			'day-one',
-			ImageQuality.Original,
-			'1140612~2.jpg'
-		)}`,
+		src: `${aws.getImageUrl('day-one', IMAGE_QUALITY, '1140612~2.jpg')}`,
 		description: 'Zion National Park',
 		year: '2016'
 	},
 	{
 		src: `${aws.getImageUrl(
 			'down-and-back-up-again',
-			ImageQuality.Original,
+			IMAGE_QUALITY,
 			'1180150~2.jpg'
 		)}`,
 		description: 'Zion National Park',
 		year: '2016'
 	},
 	{
-		src: `${aws.getImageUrl(
-			'enter-capitol',
-			ImageQuality.Original,
-			'1080602.jpg'
-		)}`,
+		src: `${aws.getImageUrl('enter-capitol', IMAGE_QUALITY, '1080602.jpg')}`,
 		description: 'Zion National Park',
 		year: '2016'
 	},
 	{
-		src: `${aws.getImageUrl(
-			'lockhart-basin',
-			ImageQuality.Original,
-			'1090621.jpg'
-		)}`,
+		src: `${aws.getImageUrl('lockhart-basin', IMAGE_QUALITY, '1090621.jpg')}`,
 		description: 'lockhart-basin',
 		year: '2016'
 	},
@@ -69,7 +61,7 @@ const slideshowItems = [
 	{
 		src: `${aws.getImageUrl(
 			'negev-mitzpe-ramon-loop',
-			ImageQuality.Original,
+			IMAGE_QUALITY,
 			'1160850~2.jpg'
 		)}`,
 		description: 'lockhart-basin',
@@ -78,25 +70,21 @@ const slideshowItems = [
 	{
 		src: `${aws.getImageUrl(
 			'negev-mitzpe-ramon-loop',
-			ImageQuality.Original,
+			IMAGE_QUALITY,
 			'1170226~2.jpg'
 		)}`,
 		description: 'lockhart-basin',
 		year: '2016'
 	},
 	{
-		src: `${aws.getImageUrl(
-			'wadi-rum',
-			ImageQuality.Original,
-			'1170842~2.jpg'
-		)}`,
+		src: `${aws.getImageUrl('wadi-rum', IMAGE_QUALITY, '1170842~2.jpg')}`,
 		description: 'lockhart-basin',
 		year: '2016'
 	},
 	{
 		src: `${aws.getImageUrl(
 			'through-west-bank-to-jerusalem',
-			ImageQuality.Original,
+			IMAGE_QUALITY,
 			'1180639~2.jpg'
 		)}`,
 		description: 'lockhart-basin',
@@ -105,7 +93,7 @@ const slideshowItems = [
 	{
 		src: `${aws.getImageUrl(
 			'the-green-israel',
-			ImageQuality.Original,
+			IMAGE_QUALITY,
 			'1140788~2.jpg'
 		)}`,
 		description: 'The Green Israel',
@@ -114,7 +102,7 @@ const slideshowItems = [
 	{
 		src: `${aws.getImageUrl(
 			'ruby-beach-and-rest-of-washington',
-			ImageQuality.Original,
+			IMAGE_QUALITY,
 			'1120610.jpg'
 		)}`,
 		description: 'The Green Israel',
@@ -123,7 +111,7 @@ const slideshowItems = [
 	{
 		src: `${aws.getImageUrl(
 			'oregon-coast-part-1',
-			ImageQuality.Original,
+			IMAGE_QUALITY,
 			'P1120983.JPG'
 		)}`,
 		description: 'The Green Israel',
