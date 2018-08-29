@@ -86,12 +86,14 @@ export type HeroCarouselItem = {
 
 type HeroCarouselProps = {
 	items: ReadonlyArray<HeroCarouselItem>
+	autoplay: boolean
 }
 
-export const HeroCarousel = ({ items }: HeroCarouselProps) => (
+export const HeroCarousel = ({ items, autoplay }: HeroCarouselProps) => (
 	<>
 		<HeroCarouselContainer>
 			<ImageCarousel
+				autoplay={autoplay}
 				autoplayTime={CAROUSEL_AUTOPLAY_TIME}
 				items={items}
 				preload={({ item }) => preloadImage(item.src)}

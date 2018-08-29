@@ -42,11 +42,16 @@ const MoreBelowIndicator = styled.div`
 interface MainPageProps {
 	blogPostInfos: ReadonlyArray<blog.BlogPostInfo>
 	slideshowItems: ReadonlyArray<HeroCarouselItem>
+	autoplaySlideshow: boolean
 }
 
-const _MainPage = ({ blogPostInfos, slideshowItems }: MainPageProps) => (
+const _MainPage = ({
+	blogPostInfos,
+	slideshowItems,
+	autoplaySlideshow
+}: MainPageProps) => (
 	<Mainpage>
-		<HeroCarousel items={slideshowItems} />
+		<HeroCarousel items={slideshowItems} autoplay={autoplaySlideshow} />
 		<BlogPostListContainer>
 			<MoreBelowIndicator />
 			<BlogPostList>
@@ -66,5 +71,6 @@ const slideshowItemsSelector = createSelector(
 const DISPLAYED_BLOG_POST_COUNT = 6
 export const MainPage = connect((state: RootState) => ({
 	blogPostInfos: recentBlogPostInfosSelector(DISPLAYED_BLOG_POST_COUNT)(state),
-	slideshowItems: slideshowItemsSelector(state)
+	slideshowItems: slideshowItemsSelector(state),
+	autoplaySlideshow: state.common.isPageVisible
 }))(_MainPage)

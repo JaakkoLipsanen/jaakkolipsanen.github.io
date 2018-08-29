@@ -1,5 +1,7 @@
 import { combineEpics } from 'redux-observable'
-import locationEpics from './location'
-import blogEpics from './blog'
 
-export default combineEpics(locationEpics, blogEpics)
+import blogEpics from './blog'
+import commonEpics from './common'
+import locationEpics from './location'
+
+export default combineEpics(locationEpics, blogEpics, commonEpics)

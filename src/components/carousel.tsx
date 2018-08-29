@@ -32,6 +32,7 @@ type CarouselProps<T> = {
 	className?: string
 	autoplayTime?: number
 	preload: (args: { item: T; index: number }) => Promise<unknown>
+	autoplay: boolean
 }
 
 export class Carousel<T> extends React.Component<
@@ -49,6 +50,25 @@ export class Carousel<T> extends React.Component<
 	}
 
 	componentWillUnmount() {
+		this._stopAutoplay()
+	}
+
+	componentDidUpdate(prevProps: CarouselProps<T>) {
+		if (prevProps.autoplay !== this.props.autoplay) {
+			if (this.props.autoplay) {
+				this._continueAutoplay()
+			} else {
+				this._stopAutoplay()
+			}
+		}
+	}
+
+	_continueAutoplay() {
+		this._scheduleMoveToNext()
+		this._preloadNextItem()
+	}
+
+	_stopAutoplay() {
 		clearTimeout(this._timeoutTimer!)
 	}
 
@@ -71,8 +91,9 @@ export class Carousel<T> extends React.Component<
 				this._isNextOneLoaded = false
 				this._nextItemLoadPromise = undefined
 
-				this._scheduleMoveToNext()
-				this._preloadNextItem()
+				if (this.props.autoplay) {
+					this._continueAutoplay()
+				}
 			}
 		)
 	}
