@@ -1,3 +1,4 @@
+import * as R from 'ramda'
 import * as React from 'react'
 import posed, { PoseGroup } from 'react-pose'
 import styled from 'styled-components'
@@ -17,6 +18,24 @@ const ItemContainer = styled.div`
 	left: 0;
 
 	will-change: opacity;
+`
+
+const CarouselItemDotsContainer = styled.div`
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	display: flex;
+	flex-direction: row;
+`
+
+const CarouselItemDot = styled.div<{ active: boolean }>`
+	width: 6px;
+	height: 6px;
+	margin: 0px 4px;
+	border-radius: 50%;
+	background: white;
+	opacity: ${({ active }) => (active ? 0.7 : 0.3)};
+	transition: opacity 1s;
 `
 
 const PosedItemContainer = posed(ItemContainer)({
@@ -123,6 +142,11 @@ export class Carousel<T> extends React.Component<
 						{this._hasItems() && render({ item: items[index] })}
 					</PosedItemContainer>
 				</PoseGroup>
+				<CarouselItemDotsContainer>
+					{R.range(0, items.length).map(i => (
+						<CarouselItemDot key={i} active={index === i} />
+					))}
+				</CarouselItemDotsContainer>
 			</CarouselContainer>
 		)
 	}

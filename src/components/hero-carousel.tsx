@@ -73,8 +73,8 @@ const CarouselImage = styled.div<CarouselImageProps>`
 
 const ItemDescriptionText = styled(Text)`
 	position: absolute;
-	left: 12px;
-	bottom: 12px;
+	left: 10px;
+	bottom: 10px;
 	margin: 0px;
 `
 
