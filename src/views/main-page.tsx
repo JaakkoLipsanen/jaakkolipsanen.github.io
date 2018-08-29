@@ -16,10 +16,27 @@ const Mainpage = styled.div`
 `
 
 const BlogPostListContainer = styled.div`
+	width: 100%;
+	position: relative;
+	background-color: white;
+`
+
+const BlogPostList = styled.div`
 	width: 70vw;
 	max-width: 800px;
+	padding-top: 48px;
 	margin: auto;
-	margin-top: 128px;
+	overflow: hidden;
+`
+
+const MoreBelowIndicator = styled.div`
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, -100%);
+	width: 3px;
+	height: 72px;
+	background-color: white;
 `
 
 interface MainPageProps {
@@ -31,9 +48,12 @@ const _MainPage = ({ blogPostInfos, slideshowItems }: MainPageProps) => (
 	<Mainpage>
 		<HeroCarousel items={slideshowItems} />
 		<BlogPostListContainer>
-			{blogPostInfos.map(blogPost => (
-				<BlogPostPreview key={blogPost.name} blogPostInfo={blogPost} />
-			))}
+			<MoreBelowIndicator />
+			<BlogPostList>
+				{blogPostInfos.map(blogPost => (
+					<BlogPostPreview key={blogPost.name} blogPostInfo={blogPost} />
+				))}
+			</BlogPostList>
 		</BlogPostListContainer>
 	</Mainpage>
 )
