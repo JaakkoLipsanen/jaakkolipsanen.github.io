@@ -1,3 +1,4 @@
+import preloadImage from 'image-promise'
 import * as React from 'react'
 import styled, { keyframes } from 'styled-components'
 
@@ -100,6 +101,7 @@ export const HeroCarousel = ({ items }: HeroCarouselProps) => (
 		<ImageCarousel
 			autoplayTime={CAROUSEL_AUTOPLAY_TIME}
 			items={items}
+			preload={({ item }) => preloadImage(item.src)}
 			render={({ item }) => (
 				<CarouselImageContainer>
 					<CarouselImage src={item.src} />

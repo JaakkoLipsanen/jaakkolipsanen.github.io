@@ -29,7 +29,7 @@ interface MainPageProps {
 
 const _MainPage = ({ blogPostInfos, slideshowItems }: MainPageProps) => (
 	<Mainpage>
-		<HeroCarousel items={shuffle(slideshowItems)} />
+		<HeroCarousel items={slideshowItems} />
 		<BlogPostListContainer>
 			{blogPostInfos.map(blogPost => (
 				<BlogPostPreview key={blogPost.name} blogPostInfo={blogPost} />

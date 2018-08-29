@@ -10,6 +10,7 @@
 		"no-submodule-imports": [true, "history", "rxjs"],
 		"ordered-imports": false,
 		"class-name": false,
-		"variable-name": false
+		"variable-name": false,
+		"no-unused-expression": false
 	}
 }

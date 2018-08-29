@@ -31,6 +31,7 @@ type CarouselProps<T> = {
 	items: ReadonlyArray<T>
 	className?: string
 	autoplayTime?: number
+	preload: (args: { item: T; index: number }) => Promise<unknown>
 }
 
 export class Carousel<T> extends React.Component<
@@ -38,17 +39,53 @@ export class Carousel<T> extends React.Component<
 	CarouselState
 > {
 	state = { index: 0 }
-	private _intervalTimer?: NodeJS.Timer
+	private _isNextOneLoaded = false
+	private _nextItemLoadPromise?: Promise<unknown>
+	private _timeoutTimer?: NodeJS.Timer
 
 	componentDidMount() {
-		this._intervalTimer = setInterval(
-			() => this.setState(state => ({ index: state.index + 1 })),
+		this._scheduleMoveToNext()
+		this._preloadNextItem()
+	}
+
+	componentWillUnmount() {
+		clearTimeout(this._timeoutTimer!)
+	}
+
+	_wrapIndex = (i: number) => i % this.props.items.length
+	_scheduleMoveToNext = () => {
+		this._timeoutTimer = setTimeout(
+			this._moveToNextItem,
 			this.props.autoplayTime || 3000
 		)
 	}
 
-	componentWillUnmount() {
-		clearInterval(this._intervalTimer!)
+	_moveToNextItem = async () => {
+		if (!this._isNextOneLoaded && this._nextItemLoadPromise) {
+			await this._nextItemLoadPromise
+		}
+
+		this.setState(
+			state => ({ index: this._wrapIndex(state.index + 1) }),
+			() => {
+				this._isNextOneLoaded = false
+				this._nextItemLoadPromise = undefined
+
+				this._scheduleMoveToNext()
+				this._preloadNextItem()
+			}
+		)
+	}
+
+	_preloadNextItem = () => {
+		const { index } = this.state
+		const { preload, items } = this.props
+
+		this._isNextOneLoaded = false
+		this._nextItemLoadPromise = preload({
+			item: items[this._wrapIndex(index + 1)],
+			index: this._wrapIndex(index + 1)
+		}).catch(_ => true)
 	}
 
 	render() {
@@ -58,8 +95,8 @@ export class Carousel<T> extends React.Component<
 		return (
 			<CarouselContainer className={className}>
 				<PoseGroup animateOnMount preEnterPose="preEnter">
-					<PosedItemContainer key={index % items.length}>
-						{render({ item: items[index % items.length] })}
+					<PosedItemContainer key={index}>
+						{render({ item: items[index] })}
 					</PosedItemContainer>
 				</PoseGroup>
 			</CarouselContainer>
