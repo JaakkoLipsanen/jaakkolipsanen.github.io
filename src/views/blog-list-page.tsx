@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import * as blog from '../blog'
 import { BlogPostPreview } from '../components/blog-post-preview'
 import { RootState } from '../redux/reducers'
-import { recentBlogPostInfosSelector } from '../redux/selectors/blog'
+import { createRecentBlogPostInfosSelector } from '../redux/selectors/blog'
 
 const BlogListPageLayout = styled.div`
 	width: 85vw;
@@ -38,6 +38,7 @@ const _BlogListPage = ({ blogPostInfos }: BlogListPageProps) => (
 	</BlogListPageLayout>
 )
 
+const recentBlogPostInfosSelector = createRecentBlogPostInfosSelector()
 export const BlogListPage = connect((state: RootState) => ({
-	blogPostInfos: recentBlogPostInfosSelector()(state)
+	blogPostInfos: recentBlogPostInfosSelector(state)
 }))(_BlogListPage)

@@ -8,7 +8,7 @@ import { shuffle } from '../common'
 import { BlogPostPreview } from '../components/blog-post-preview'
 import { HeroCarousel, HeroCarouselItem } from '../components/hero-carousel'
 import { RootState } from '../redux/reducers'
-import { recentBlogPostInfosSelector } from '../redux/selectors/blog'
+import { createRecentBlogPostInfosSelector } from '../redux/selectors/blog'
 
 const Mainpage = styled.div`
 	width: 100vw;
@@ -69,8 +69,14 @@ const slideshowItemsSelector = createSelector(
 )
 
 const DISPLAYED_BLOG_POST_COUNT = 6
+const recentBlogPostInfosSelector = createRecentBlogPostInfosSelector(
+	DISPLAYED_BLOG_POST_COUNT
+)
+
 export const MainPage = connect((state: RootState) => ({
-	blogPostInfos: recentBlogPostInfosSelector(DISPLAYED_BLOG_POST_COUNT)(state),
+	blogPostInfos: recentBlogPostInfosSelector(state),
 	slideshowItems: slideshowItemsSelector(state),
-	autoplaySlideshow: state.common.isPageVisible
+	autoplaySlideshow:
+		state.common.isPageVisible &&
+		state.common.bodyScrollY < window.innerHeight
 }))(_MainPage)

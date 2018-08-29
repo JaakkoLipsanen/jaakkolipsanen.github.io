@@ -1,7 +1,10 @@
 import { createSelector } from 'reselect'
+
 import { RootState } from '../reducers'
 
-export const recentBlogPostInfosSelector = (amount: number | null = null) =>
+export const createRecentBlogPostInfosSelector = (
+	amount: number | null = null
+) =>
 	createSelector(
 		(state: RootState) => state.blog.blogPostInfos,
 		blogPostInfos =>

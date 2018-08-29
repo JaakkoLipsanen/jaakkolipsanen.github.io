@@ -72,6 +72,7 @@ export class Carousel<T> extends React.Component<
 		clearTimeout(this._timeoutTimer!)
 	}
 
+	_hasItems = () => this.props.items.length > 0
 	_wrapIndex = (i: number) => i % this.props.items.length
 	_scheduleMoveToNext = () => {
 		this._timeoutTimer = setTimeout(
@@ -103,10 +104,12 @@ export class Carousel<T> extends React.Component<
 		const { preload, items } = this.props
 
 		this._isNextOneLoaded = false
-		this._nextItemLoadPromise = preload({
-			item: items[this._wrapIndex(index + 1)],
-			index: this._wrapIndex(index + 1)
-		}).catch(_ => true)
+		this._nextItemLoadPromise = this._hasItems()
+			? preload({
+					item: items[this._wrapIndex(index + 1)],
+					index: this._wrapIndex(index + 1)
+			  }).catch(_ => true)
+			: Promise.resolve(true)
 	}
 
 	render() {
@@ -117,7 +120,7 @@ export class Carousel<T> extends React.Component<
 			<CarouselContainer className={className}>
 				<PoseGroup animateOnMount preEnterPose="preEnter">
 					<PosedItemContainer key={index}>
-						{render({ item: items[index] })}
+						{this._hasItems() && render({ item: items[index] })}
 					</PosedItemContainer>
 				</PoseGroup>
 			</CarouselContainer>
