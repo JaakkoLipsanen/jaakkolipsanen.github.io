@@ -22,11 +22,22 @@ const BlogPostListContainer = styled.div`
 `
 
 const BlogPostList = styled.div`
-	width: 70vw;
-	max-width: 800px;
-	padding-top: 48px;
+	width: 90%;
+	padding-top: 32px;
 	margin: auto;
 	overflow: hidden;
+
+	display: grid;
+	grid-gap: 4%;
+	grid-template-columns: repeat(1, 1fr);
+
+	@media (min-width: 900px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media (min-width: 1200px) {
+		width: calc(1200px * 0.9);
+	}
 `
 
 const MoreBelowIndicator = styled.div`
@@ -68,7 +79,8 @@ const slideshowItemsSelector = createSelector(
 	items => shuffle(items)
 )
 
-const DISPLAYED_BLOG_POST_COUNT = 6
+// TODO: create a 'show more' button. Initially show only 6 or 10 or something, when clicked show all posts
+const DISPLAYED_BLOG_POST_COUNT = undefined
 const recentBlogPostInfosSelector = createRecentBlogPostInfosSelector(
 	DISPLAYED_BLOG_POST_COUNT
 )
