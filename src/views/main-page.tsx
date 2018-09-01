@@ -17,6 +17,7 @@ const Mainpage = styled.div`
 
 const BlogPostListContainer = styled.div`
 	width: 100%;
+	min-height: 66vh;
 	position: relative;
 	background-color: white;
 `
