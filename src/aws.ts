@@ -1,4 +1,5 @@
 import { ImageQuality } from './common'
+
 const AWS_BASE_URL = 'https://s3.eu-central-1.amazonaws.com/flai'
 
 const transformImageFilename = (quality: ImageQuality, filename: string) =>
@@ -11,6 +12,9 @@ export const aws = {
 	blogPostsListUrl: `${AWS_BASE_URL}/cycle/blog/posts.txt`,
 	getBlogPostUrl: (blogPostName: string) =>
 		`${AWS_BASE_URL}/cycle/blog/posts/${blogPostName}/post.txt`,
+	tripInfosUrl: `${AWS_BASE_URL}/cycle/routes/trips.json`,
+	getRouteUrl: (tripShortName: string) =>
+		`${AWS_BASE_URL}/cycle/routes/${tripShortName}/route.txt`,
 	getImageUrl: (
 		blogPostName: string,
 		imageQuality: ImageQuality,

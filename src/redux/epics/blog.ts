@@ -1,21 +1,11 @@
-import {
-	Epic,
-	ofType,
-	combineEpics,
-	ActionsObservable,
-	StateObservable
-} from 'redux-observable'
-import { map, switchMap, take, filter } from 'rxjs/operators'
-import {
-	RootActions,
-	LocationActions,
-	BlogActions,
-	InitAction
-} from '../actions'
-import { RootState } from '../reducers'
-import { fetchBlogPostInfos, fetchBlogPost } from '../../blog'
-import { updateBlogPostInfos, updateBlogPost } from '../actions/blog'
+import { ActionsObservable, combineEpics, Epic, ofType, StateObservable } from 'redux-observable'
+import { filter, map, switchMap, take } from 'rxjs/operators'
+
+import { fetchBlogPost, fetchBlogPostInfos } from '../../blog'
+import { BlogActions, InitAction, LocationActions, RootActions } from '../actions'
+import { updateBlogPost, updateBlogPostInfos } from '../actions/blog'
 import { UPDATE_LOCATION } from '../actions/location'
+import { RootState } from '../reducers'
 import { blogPostByNameSelector } from '../selectors/blog'
 
 const loadBlogPostInfos$: Epic<RootActions, RootActions, RootState> = action$ =>
