@@ -1,7 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
+
+import { Image } from '../../api/blog'
 import { aws } from '../../aws'
-import { Image } from '../../blog'
 import { ImageQuality } from '../../common'
 
 const isPortrait = (img: Image) => img.resolution.height > img.resolution.width

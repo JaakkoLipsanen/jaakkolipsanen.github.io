@@ -41,3 +41,13 @@ export function shuffle<T>(_arr: ReadonlyArray<T>) {
 
 	return arr
 }
+
+export const loadJson = async (url: string) => {
+	const response = await fetch(url)
+	return response.json()
+}
+
+export const loadText = async (url: string) => {
+	const response = await fetch(url)
+	return response.text()
+}

@@ -1,7 +1,7 @@
 import { Epic, ofType } from 'redux-observable'
 import { map, switchMap, take } from 'rxjs/operators'
 
-import { fetchTrips } from '../../trip'
+import { fetchTrips } from '../../api/trip'
 import { RootActions } from '../actions'
 import { updateTrips } from '../actions/trip'
 import { RootState } from '../reducers'

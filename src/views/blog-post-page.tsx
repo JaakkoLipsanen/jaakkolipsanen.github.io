@@ -1,22 +1,16 @@
 import * as React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { BlogPost, BlogPostElement } from '../blog'
+import { BlogPost, BlogPostElement } from '../api/blog'
 import { ImageQuality } from '../common'
-import {
-	Header,
-	Image,
-	ImageGroup,
-	Text,
-	Unknown
-} from '../components/blog-elements'
+import { Header, Image, ImageGroup, Text, Unknown } from '../components/blog-elements'
 import { CoverImage } from '../components/cover-image'
-import { connect } from 'react-redux'
 import { RootState } from '../redux/reducers'
 import { blogPostByNameSelector } from '../redux/selectors/blog'
 
 const BlogPostPageLayout = styled.div`
-	width: 100vw;
+	width: 100%;
 	margin: 0;
 	position: absolute;
 	top: 0;

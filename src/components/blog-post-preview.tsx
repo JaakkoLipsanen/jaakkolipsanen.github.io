@@ -1,8 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
+import { BlogPostInfo } from '../api/blog'
 import { aws } from '../aws'
-import { BlogPostInfo } from '../blog'
 import { formatDateRange, ImageQuality } from '../common'
 import { paths } from '../routing/paths'
 import { Link } from './link'

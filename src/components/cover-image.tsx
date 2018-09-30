@@ -1,8 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
+import { BlogPost } from '../api/blog'
 import { aws } from '../aws'
-import { BlogPost } from '../blog'
 import { formatDateRange, ImageQuality } from '../common'
 import { TakeHeight } from './helpers'
 

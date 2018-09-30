@@ -1,8 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
+import { Image as ImageDescription } from '../../api/blog'
 import { aws } from '../../aws'
-import { Image as ImageDescription } from '../../blog'
 import { ImageQuality } from '../../common'
 
 const BlogImageContainer = styled.div`

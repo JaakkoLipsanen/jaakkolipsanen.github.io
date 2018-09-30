@@ -3,8 +3,10 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@types/ramda": "^0.25.36",
+		"@types/google-map-react": "^0.23.8",
+		"@types/ramda": "^0.25.38",
 		"@types/react-redux": "^6.0.6",
+		"google-map-react": "^1.0.8",
 		"history": "^4.7.2",
 		"image-promise": "^5.0.1",
 		"normalize.css": "^8.0.0",

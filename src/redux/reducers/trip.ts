@@ -1,4 +1,4 @@
-import { Trip } from '../../trip'
+import { Trip } from '../../api/trip'
 import { trip as actions, TripActions } from '../actions'
 
 type TripState = {

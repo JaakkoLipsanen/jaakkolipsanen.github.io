@@ -1,7 +1,7 @@
 import { ActionsObservable, combineEpics, Epic, ofType, StateObservable } from 'redux-observable'
 import { filter, map, switchMap, take } from 'rxjs/operators'
 
-import { fetchBlogPost, fetchBlogPostInfos } from '../../blog'
+import { fetchBlogPost, fetchBlogPostInfos } from '../../api/blog'
 import { BlogActions, InitAction, LocationActions, RootActions } from '../actions'
 import { updateBlogPost, updateBlogPostInfos } from '../actions/blog'
 import { UPDATE_LOCATION } from '../actions/location'

@@ -1,5 +1,6 @@
 import { action } from 'typesafe-actions'
-import { BlogPostInfo, BlogPost } from '../../blog'
+
+import { BlogPost, BlogPostInfo } from '../../api/blog'
 
 export const UPDATE_BLOG_POST_INFOS = 'UPDATE_BLOG_POST_INFOS'
 export const UPDATE_BLOG_POST = 'UPDATE_BLOG_POST'

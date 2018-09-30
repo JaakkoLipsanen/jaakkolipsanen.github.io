@@ -1,5 +1,6 @@
 import * as R from 'ramda'
-import { BlogPostInfo, BlogPost } from '../../blog'
+
+import { BlogPost, BlogPostInfo } from '../../api/blog'
 import { blog as actions, BlogActions } from '../actions'
 
 type BlogState = {

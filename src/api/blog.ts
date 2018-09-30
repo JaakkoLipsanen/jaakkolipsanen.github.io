@@ -1,5 +1,5 @@
-import { aws } from './aws'
-import { DateRange, parseSize, Size } from './common'
+import { aws } from '../aws'
+import { DateRange, loadText, parseSize, Size } from '../common'
 
 export interface BlogPostInfo {
 	name: string
@@ -48,11 +48,6 @@ export interface BlogPost {
 	dateRange: DateRange
 	coverImage: string
 	content: BlogPostElement[]
-}
-
-const loadText = async (url: string) => {
-	const response = await fetch(url)
-	return response.text()
 }
 
 const parseBlogPostList = (blogPostListText: string) => {

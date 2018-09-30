@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import * as blog from '../blog'
+import * as blog from '../api/blog'
 import { BlogPostPreview } from '../components/blog-post-preview'
 import { RootState } from '../redux/reducers'
 import { createRecentBlogPostInfosSelector } from '../redux/selectors/blog'

@@ -4,6 +4,7 @@ import { StateType } from 'typesafe-actions'
 import blog from './blog'
 import common from './common'
 import location from './location'
+import route from './route'
 import slideshow from './slideshow'
 import trip from './trip'
 
@@ -12,7 +13,8 @@ const reducers = combineReducers({
 	blog,
 	slideshow,
 	common,
-	trip
+	trip,
+	route
 })
 
 export type RootState = StateType<typeof reducers>

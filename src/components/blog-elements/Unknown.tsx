@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { BlogPostElement } from '../../blog'
+
+import { BlogPostElement } from '../../api/blog'
 
 export const Unknown = (props: { element: BlogPostElement }) => (
 	<span style={{ color: 'red' }}>
