@@ -4,7 +4,8 @@
 	"private": true,
 	"dependencies": {
 		"@types/google-map-react": "^0.23.8",
-		"@types/ramda": "^0.25.38",
+		"@types/googlemaps": "^3.30.13",
+		"@types/ramda": "types/npm-ramda#dist",
 		"@types/react-redux": "^6.0.6",
 		"google-map-react": "^1.0.8",
 		"history": "^4.7.2",

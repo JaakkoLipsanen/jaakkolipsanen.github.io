@@ -38,10 +38,10 @@ const getPolylinePropsForPathType = (
 }
 
 const polylinesFromRoute = (
-	gmapsApi: any,
+	gmapsApi: GoogleMapsApi,
 	route: Route,
 	routeIndex: number = 0
-): Polyline[] => {
+) => {
 	return route.paths.map(
 		path =>
 			new gmapsApi.Polyline({
@@ -55,12 +55,15 @@ const polylinesFromRoute = (
 	)
 }
 
-const boundsFromPolylines = (gmapsApi: any, polylines: any[]) => {
+const boundsFromPolylines = (
+	gmapsApi: GoogleMapsApi,
+	polylines: google.maps.Polyline[]
+) => {
 	const bounds = new gmapsApi.LatLngBounds()
 	polylines.forEach(pl =>
 		pl
 			.getPath()
-			.forEach((latlng: any) =>
+			.forEach(latlng =>
 				bounds.extend(new gmapsApi.LatLng(latlng.lat(), latlng.lng()))
 			)
 	)
@@ -74,17 +77,14 @@ const MapContainer = styled.div`
 	background-color: gray;
 `
 
+type GoogleMapsApi = typeof google.maps
 type MapProps = {
 	routes: ReadonlyArray<{ trip: Trip; route?: Route }>
 }
 
-type Polyline = {
-	setMap: (map: any) => void
-}
-
 class Map extends React.Component<MapProps, {}> {
-	private gmap: any
-	private gmapsApi: any
+	private gmap?: google.maps.Map
+	private gmapsApi?: GoogleMapsApi
 
 	isGmapsApiInitialized() {
 		return Boolean(this.gmapsApi)
@@ -107,17 +107,22 @@ class Map extends React.Component<MapProps, {}> {
 	}
 
 	updatePolylines() {
+		if (!this.gmap || !this.gmapsApi) {
+			return
+		}
+
+		const _gmap = this.gmap
+		const _gmapsApi = this.gmapsApi
+
 		// flatten typing doesnt work?
-		const polylines: any[] = R.flatten(
+		const polylines: google.maps.Polyline[] = R.flatten(
 			this.props.routes
 				.filter(r => r.route)
-				.map((route, i) =>
-					polylinesFromRoute(this.gmapsApi, route.route!, i)
-				)
+				.map((route, i) => polylinesFromRoute(_gmapsApi, route.route!, i))
 		)
 
-		this.gmap.fitBounds(boundsFromPolylines(this.gmapsApi, polylines))
-		polylines.forEach((pl: any) => pl.setMap(this.gmap))
+		_gmap.fitBounds(boundsFromPolylines(_gmapsApi, polylines))
+		polylines.forEach(pl => pl.setMap(_gmap))
 
 		this.forceUpdate()
 	}
@@ -133,7 +138,8 @@ class Map extends React.Component<MapProps, {}> {
 					defaultZoom={5}
 					options={{
 						styles: gmapsStyle,
-						mapTypeId: this.gmapsApi && this.gmapsApi.MapTypeId.TERRAIN
+						mapTypeId:
+							this.gmapsApi && (this.gmapsApi.MapTypeId.TERRAIN as any)
 					}}
 					onGoogleApiLoaded={({ map, maps }) =>
 						this.onGoogleApiLoaded(map, maps)
