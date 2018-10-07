@@ -9,9 +9,11 @@ import { shuffle } from '../common'
 import { BlogPostPreview } from '../components/blog-post-preview'
 import { HeroCarousel, HeroCarouselItem } from '../components/hero-carousel'
 import Map from '../components/map'
+import { TripStats } from '../components/trip-stats'
 import { Route } from '../maps'
 import { RootState } from '../redux/reducers'
 import { createRecentBlogPostInfosSelector } from '../redux/selectors/blog'
+import { combinedRoutesAndTripsSelector, totalRouteLengthsInKm } from '../redux/selectors/route'
 
 const Mainpage = styled.div`
 	width: 100%;
@@ -29,7 +31,7 @@ const MapContainer = styled.div`
 	width: 90%;
 	height: 60vh;
 	min-height: 400px;
-	padding-top: 32px;
+	padding-top: 16px;
 	margin: auto;
 
 	@media (min-width: 1200px) {
@@ -71,18 +73,21 @@ interface MainPageProps {
 	slideshowItems: ReadonlyArray<HeroCarouselItem>
 	autoplaySlideshow: boolean
 	routes: ReadonlyArray<{ trip: Trip; route: Route }>
+	tripStats: TripStats
 }
 
 const _MainPage = ({
 	blogPostInfos,
 	slideshowItems,
 	autoplaySlideshow,
-	routes
+	routes,
+	tripStats
 }: MainPageProps) => (
 	<Mainpage>
 		<HeroCarousel items={slideshowItems} autoplay={autoplaySlideshow} />
 		<BlogPostListContainer>
 			<MoreBelowIndicator />
+			<TripStats {...tripStats} />
 			<MapContainer>
 				<Map routes={routes} />
 			</MapContainer>
@@ -106,20 +111,22 @@ const recentBlogPostInfosSelector = createRecentBlogPostInfosSelector(
 	DISPLAYED_BLOG_POST_COUNT
 )
 
-const routesSelector = createSelector(
-	(state: RootState) => state.route.routesByTripShortName,
-	(state: RootState) => state.trip.trips,
-	(routesByTripShortName, trips) =>
-		trips.map(trip => ({
-			trip,
-			route: routesByTripShortName[trip.shortName]
-		}))
+const tripStatsSelector = createSelector(
+	combinedRoutesAndTripsSelector,
+	totalRouteLengthsInKm,
+	(state: RootState) => state.trip.countries,
+	(routes, totalRoutesLength, totalCountries) => ({
+		trips: routes.length,
+		countries: totalCountries,
+		kilometers: totalRoutesLength
+	})
 )
 
 export const MainPage = connect((state: RootState) => ({
 	blogPostInfos: recentBlogPostInfosSelector(state),
 	slideshowItems: slideshowItemsSelector(state),
-	routes: routesSelector(state),
+	routes: combinedRoutesAndTripsSelector(state),
+	tripStats: tripStatsSelector(state),
 	autoplaySlideshow:
 		state.common.isPageVisible &&
 		state.common.bodyScrollY < window.innerHeight

@@ -1,17 +1,17 @@
 import { Epic, ofType } from 'redux-observable'
 import { map, switchMap, take } from 'rxjs/operators'
 
-import { fetchTrips } from '../../api/trip'
+import { fetchTripDetails } from '../../api/trip'
 import { RootActions } from '../actions'
-import { updateTrips } from '../actions/trip'
+import { updateTripsDetails } from '../actions/trip'
 import { RootState } from '../reducers'
 
-const loadTrips$: Epic<RootActions, RootActions, RootState> = action$ =>
+const loadTripDetails$: Epic<RootActions, RootActions, RootState> = action$ =>
 	action$.pipe(
 		ofType('INIT'),
 		take(1),
-		switchMap(fetchTrips),
-		map(updateTrips)
+		switchMap(fetchTripDetails),
+		map(updateTripsDetails)
 	)
 
-export default loadTrips$
+export default loadTripDetails$

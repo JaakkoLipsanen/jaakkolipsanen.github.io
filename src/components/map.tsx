@@ -173,6 +173,11 @@ const gmapsStyle = [
 		]
 	},
 	{
+		featureType: 'administrative',
+		elementType: 'geometry.fill',
+		stylers: [{ visibility: 'off' }]
+	},
+	{
 		featureType: 'all',
 		elementType: 'labels.text',
 		stylers: [

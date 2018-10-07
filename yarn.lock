@@ -44,6 +44,10 @@
   version "3.30.13"
   resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.30.13.tgz#71220c6a0ec0b39044de71ae59d696379acebcb6"
 
+"@types/haversine@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@types/haversine/-/haversine-1.1.0.tgz#fe6f9e2908148fff04b0eb9216b53c5fcd55ffe6"
+
 "@types/history@^4.6.2":
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.0.tgz#2fac51050c68f7d6f96c5aafc631132522f4aa3f"
@@ -3141,6 +3145,10 @@ hash.js@^1.0.0, hash.js@^1.0.3:
   dependencies:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
+
+haversine@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/haversine/-/haversine-1.1.0.tgz#0b2380cb6d9c10e9f1224fc2b513cc61018d5ff7"
 
 he@1.1.x:
   version "1.1.1"

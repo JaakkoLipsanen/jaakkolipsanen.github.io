@@ -13,7 +13,7 @@ export const aws = {
 	blogPostsListUrl: `${AWS_BASE_URL}/cycle/blog/posts.txt`,
 	getBlogPostUrl: (blogPostName: string) =>
 		`${AWS_BASE_URL}/cycle/blog/posts/${blogPostName}/post.txt`,
-	tripInfosUrl: `${AWS_BASE_URL}/cycle/routes/trips.json`,
+	tripInfosUrl: `${AWS_BASE_URL}/cycle/tours.json`,
 	getRouteUrl: (trip: Trip) =>
 		`${AWS_BASE_URL}/cycle/routes/${trip.shortName
 			.toLowerCase()
