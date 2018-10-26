@@ -1,3 +1,4 @@
+import * as R from 'ramda'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
@@ -9,6 +10,7 @@ import { shuffle } from '../common'
 import { BlogPostPreview } from '../components/blog-post-preview'
 import { HeroCarousel, HeroCarouselItem } from '../components/hero-carousel'
 import Map from '../components/map'
+import { TripSelector } from '../components/trip-selector'
 import { TripStats } from '../components/trip-stats'
 import { Route } from '../maps'
 import { changeSelectedTrip as changeSelectedTripAction } from '../redux/actions/map'
@@ -29,26 +31,32 @@ const BlogPostListContainer = styled.div`
 `
 
 const MapContainer = styled.div`
-	width: 90%;
+	width: 100%;
 	height: 60vh;
 	min-height: 400px;
 	padding-top: 16px;
 	margin: auto;
-	margin-bottom: 24px;
+	margin-bottom: 8px;
 
 	@media (min-width: 1200px) {
 		width: calc(1200px * 0.9);
 	}
 `
 
+const CONTENT_MAX_WIDTH = '90%'
+const MaxWidthContainer = styled.div`
+	margin: auto;
+	max-width: ${CONTENT_MAX_WIDTH};
+`
+
 const BlogPostList = styled.div`
-	width: 90%;
-	padding-top: 32px;
+	width: 100%;
+	padding-top: 20px;
 	margin: auto;
 	overflow: hidden;
 
 	display: grid;
-	grid-gap: 4%;
+	grid-gap: 0 32px;
 	grid-template-columns: repeat(1, 1fr);
 
 	@media (min-width: 900px) {
@@ -92,20 +100,30 @@ const _MainPage = ({
 	<Mainpage>
 		<HeroCarousel items={slideshowItems} autoplay={autoplaySlideshow} />
 		<BlogPostListContainer>
-			<MoreBelowIndicator />
-			<TripStats {...tripStats} />
-			<MapContainer>
-				<Map
-					routes={routes}
+			<MaxWidthContainer>
+				<MoreBelowIndicator />
+				<TripStats {...tripStats} />
+				<MapContainer>
+					<Map
+						routes={routes}
+						selectedTripShortName={selectedTripShortName}
+						changeSelectedTrip={changeSelectedTrip}
+					/>
+				</MapContainer>
+				<TripSelector
+					trips={R.pluck('trip', routes)}
 					selectedTripShortName={selectedTripShortName}
 					changeSelectedTrip={changeSelectedTrip}
 				/>
-			</MapContainer>
-			<BlogPostList>
-				{blogPostInfos.map(blogPost => (
-					<BlogPostPreview key={blogPost.name} blogPostInfo={blogPost} />
-				))}
-			</BlogPostList>
+				<BlogPostList>
+					{blogPostInfos.map(blogPost => (
+						<BlogPostPreview
+							key={blogPost.name}
+							blogPostInfo={blogPost}
+						/>
+					))}
+				</BlogPostList>
+			</MaxWidthContainer>
 		</BlogPostListContainer>
 	</Mainpage>
 )

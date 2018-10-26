@@ -77,44 +77,6 @@ const MapContainer = styled.div`
 	background-color: gray;
 `
 
-const TripSelectContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	margin-top: 8px;
-	max-width: 100%;
-	flex-wrap: wrap;
-`
-
-type TripSelectButtonProps = { selected: boolean }
-const TripSelectButton = styled.button<TripSelectButtonProps>`
-	appearance: none;
-	outline: none;
-	border: none;
-
-	display: flex;
-	justify-content: center;
-	min-height: 2em;
-	cursor: pointer;
-	margin-top: -1px; /* make borders overlap so that no double borders */
-	margin-left: -1px;
-
-	border: 1px solid darkgray;
-
-	&:first-child {
-		border-radius: 5px 0 0 5px;
-	}
-
-	&:last-child {
-		border-radius: 0px 5px 5px 0px;
-	}
-
-	${({ selected }) =>
-		selected &&
-		`
-		background-color: lightgray;
-	`};
-`
-
 type GoogleMapsApi = typeof google.maps
 type MapProps = {
 	routes: ReadonlyArray<{ trip: Trip; route?: Route }>
@@ -197,7 +159,6 @@ class Map extends React.Component<MapProps, {}> {
 	}
 
 	render() {
-		const { routes } = this.props
 		return (
 			<>
 				<MapContainer>
@@ -219,24 +180,6 @@ class Map extends React.Component<MapProps, {}> {
 						yesIWantToUseGoogleMapApiInternals
 					/>
 				</MapContainer>
-				{/* todo move these controls outside of this component (into TripSelector component or something?) and make this component just take the 'selectedTrip' as prop */}
-				<TripSelectContainer>
-					{routes.map(({ trip }) => (
-						<TripSelectButton
-							selected={
-								this.props.selectedTripShortName === trip.shortName
-							}
-							onClick={this.props.changeSelectedTrip.bind(
-								null,
-								this.props.selectedTripShortName === trip.shortName
-									? undefined
-									: trip.shortName
-							)}
-						>
-							{trip.shortName}
-						</TripSelectButton>
-					))}
-				</TripSelectContainer>
 			</>
 		)
 	}

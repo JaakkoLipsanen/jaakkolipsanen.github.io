@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { createSelector } from 'reselect'
-import { matchRoute, Route } from '../routing/routes'
-import { Navbar } from '../components/navbar'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
+
+import { Navbar } from '../components/navbar'
 import { RootState } from '../redux/reducers'
+import { matchRoute, Route } from '../routing/routes'
 
 interface AppProps {
 	currentRoute: Route

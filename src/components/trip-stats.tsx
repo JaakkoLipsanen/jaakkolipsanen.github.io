@@ -28,7 +28,7 @@ const TripStatsItem = (props: { count: number; text: string }) => (
 )
 
 const TripStatsItemsContainer = styled.div`
-	width: 90%;
+	width: 100%;
 	margin: auto;
 	display: flex;
 	justify-content: center;
