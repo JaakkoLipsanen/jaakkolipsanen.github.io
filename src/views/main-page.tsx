@@ -11,6 +11,7 @@ import { HeroCarousel, HeroCarouselItem } from '../components/hero-carousel'
 import Map from '../components/map'
 import { TripStats } from '../components/trip-stats'
 import { Route } from '../maps'
+import { changeSelectedTrip as changeSelectedTripAction } from '../redux/actions/map'
 import { RootState } from '../redux/reducers'
 import { createRecentBlogPostInfosSelector } from '../redux/selectors/blog'
 import { combinedRoutesAndTripsSelector, totalRouteLengthsInKm } from '../redux/selectors/route'
@@ -33,6 +34,7 @@ const MapContainer = styled.div`
 	min-height: 400px;
 	padding-top: 16px;
 	margin: auto;
+	margin-bottom: 24px;
 
 	@media (min-width: 1200px) {
 		width: calc(1200px * 0.9);
@@ -74,6 +76,8 @@ interface MainPageProps {
 	autoplaySlideshow: boolean
 	routes: ReadonlyArray<{ trip: Trip; route: Route }>
 	tripStats: TripStats
+	selectedTripShortName?: string
+	changeSelectedTrip: (selectedTripShortName?: string) => void
 }
 
 const _MainPage = ({
@@ -81,7 +85,9 @@ const _MainPage = ({
 	slideshowItems,
 	autoplaySlideshow,
 	routes,
-	tripStats
+	tripStats,
+	selectedTripShortName,
+	changeSelectedTrip
 }: MainPageProps) => (
 	<Mainpage>
 		<HeroCarousel items={slideshowItems} autoplay={autoplaySlideshow} />
@@ -89,7 +95,11 @@ const _MainPage = ({
 			<MoreBelowIndicator />
 			<TripStats {...tripStats} />
 			<MapContainer>
-				<Map routes={routes} />
+				<Map
+					routes={routes}
+					selectedTripShortName={selectedTripShortName}
+					changeSelectedTrip={changeSelectedTrip}
+				/>
 			</MapContainer>
 			<BlogPostList>
 				{blogPostInfos.map(blogPost => (
@@ -122,12 +132,21 @@ const tripStatsSelector = createSelector(
 	})
 )
 
-export const MainPage = connect((state: RootState) => ({
+const mapStateToProps = (state: RootState) => ({
 	blogPostInfos: recentBlogPostInfosSelector(state),
 	slideshowItems: slideshowItemsSelector(state),
 	routes: combinedRoutesAndTripsSelector(state),
 	tripStats: tripStatsSelector(state),
+	selectedTripShortName: state.map.selectedTripShortName,
 	autoplaySlideshow:
 		state.common.isPageVisible &&
 		state.common.bodyScrollY < window.innerHeight
-}))(_MainPage)
+})
+
+export const MainPage = connect(
+	mapStateToProps,
+	dispatch => ({
+		changeSelectedTrip: (selectedTripShortName?: string) =>
+			dispatch(changeSelectedTripAction(selectedTripShortName))
+	})
+)(_MainPage)

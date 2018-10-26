@@ -57,7 +57,7 @@ const polylinesFromRoute = (
 
 const boundsFromPolylines = (
 	gmapsApi: GoogleMapsApi,
-	polylines: google.maps.Polyline[]
+	polylines: ReadonlyArray<google.maps.Polyline>
 ) => {
 	const bounds = new gmapsApi.LatLngBounds()
 	polylines.forEach(pl =>
@@ -77,14 +77,61 @@ const MapContainer = styled.div`
 	background-color: gray;
 `
 
+const TripSelectContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	margin-top: 8px;
+	max-width: 100%;
+	flex-wrap: wrap;
+`
+
+type TripSelectButtonProps = { selected: boolean }
+const TripSelectButton = styled.button<TripSelectButtonProps>`
+	appearance: none;
+	outline: none;
+	border: none;
+
+	display: flex;
+	justify-content: center;
+	min-height: 2em;
+	cursor: pointer;
+	margin-top: -1px; /* make borders overlap so that no double borders */
+	margin-left: -1px;
+
+	border: 1px solid darkgray;
+
+	&:first-child {
+		border-radius: 5px 0 0 5px;
+	}
+
+	&:last-child {
+		border-radius: 0px 5px 5px 0px;
+	}
+
+	${({ selected }) =>
+		selected &&
+		`
+		background-color: lightgray;
+	`};
+`
+
 type GoogleMapsApi = typeof google.maps
 type MapProps = {
 	routes: ReadonlyArray<{ trip: Trip; route?: Route }>
+	selectedTripShortName?: string
+	changeSelectedTrip: (tripShortName?: string) => void
 }
 
 class Map extends React.Component<MapProps, {}> {
 	private gmap?: google.maps.Map
 	private gmapsApi?: GoogleMapsApi
+	private polylinesByTripName: {
+		[tripShortName: string]: ReadonlyArray<google.maps.Polyline>
+	} = {}
+
+	get polylines() {
+		return R.flatten(R.values(this.polylinesByTripName))
+	}
 
 	isGmapsApiInitialized() {
 		return Boolean(this.gmapsApi)
@@ -96,6 +143,15 @@ class Map extends React.Component<MapProps, {}> {
 			this.isGmapsApiInitialized()
 		) {
 			this.updatePolylines()
+		}
+
+		if (
+			!R.equals(
+				prevProps.selectedTripShortName,
+				this.props.selectedTripShortName
+			)
+		) {
+			this.updateSelectedTrips()
 		}
 	}
 
@@ -111,42 +167,77 @@ class Map extends React.Component<MapProps, {}> {
 			return
 		}
 
-		const _gmap = this.gmap
-		const _gmapsApi = this.gmapsApi
+		this.polylinesByTripName = this.props.routes
+			.filter(r => r.route)
+			.reduce((acc, cur, i) => {
+				const polylines = polylinesFromRoute(this.gmapsApi!, cur.route!, i)
+				acc[cur.trip.shortName] = polylines
+				polylines.forEach(pl =>
+					google.maps.event.addListener(pl, 'click', () =>
+						this.props.changeSelectedTrip(cur.trip.shortName)
+					)
+				)
+				return acc
+			}, {})
 
-		// flatten typing doesnt work?
-		const polylines: google.maps.Polyline[] = R.flatten(
-			this.props.routes
-				.filter(r => r.route)
-				.map((route, i) => polylinesFromRoute(_gmapsApi, route.route!, i))
-		)
-
-		_gmap.fitBounds(boundsFromPolylines(_gmapsApi, polylines))
-		polylines.forEach(pl => pl.setMap(_gmap))
-
+		this.updateSelectedTrips()
 		this.forceUpdate()
 	}
 
+	updateSelectedTrips() {
+		const selectedPolylines = this.props.selectedTripShortName
+			? this.polylinesByTripName[this.props.selectedTripShortName]
+			: this.polylines
+
+		this.polylines.forEach(pl => pl.setMap(null))
+		selectedPolylines.forEach(pl => pl.setMap(this.gmap!))
+		this.gmap!.fitBounds(
+			boundsFromPolylines(this.gmapsApi!, selectedPolylines)
+		)
+	}
+
 	render() {
+		const { routes } = this.props
 		return (
-			<MapContainer>
-				<GoogleMapReact
-					bootstrapURLKeys={{
-						key: 'AIzaSyD8wWPNJVCrVC8so3gXNy9GXX4DGBj_--I'
-					}}
-					defaultCenter={{ lat: 59.938043, lng: 30.337157 }}
-					defaultZoom={5}
-					options={{
-						styles: gmapsStyle,
-						mapTypeId:
-							this.gmapsApi && (this.gmapsApi.MapTypeId.TERRAIN as any)
-					}}
-					onGoogleApiLoaded={({ map, maps }) =>
-						this.onGoogleApiLoaded(map, maps)
-					}
-					yesIWantToUseGoogleMapApiInternals
-				/>
-			</MapContainer>
+			<>
+				<MapContainer>
+					<GoogleMapReact
+						bootstrapURLKeys={{
+							key: 'AIzaSyD8wWPNJVCrVC8so3gXNy9GXX4DGBj_--I'
+						}}
+						defaultCenter={{ lat: 59.938043, lng: 30.337157 }}
+						defaultZoom={5}
+						options={{
+							styles: gmapsStyle,
+							mapTypeId:
+								this.gmapsApi &&
+								(this.gmapsApi.MapTypeId.TERRAIN as any)
+						}}
+						onGoogleApiLoaded={({ map, maps }) =>
+							this.onGoogleApiLoaded(map, maps)
+						}
+						yesIWantToUseGoogleMapApiInternals
+					/>
+				</MapContainer>
+				{/* todo move these controls outside of this component (into TripSelector component or something?) and make this component just take the 'selectedTrip' as prop */}
+				<TripSelectContainer>
+					{routes.map(({ trip }) => (
+						<TripSelectButton
+							selected={
+								this.props.selectedTripShortName === trip.shortName
+							}
+							onClick={this.props.changeSelectedTrip.bind(
+								null,
+								this.props.selectedTripShortName === trip.shortName
+									? undefined
+									: trip.shortName
+							)}
+						>
+							{trip.shortName}
+						</TripSelectButton>
+					))}
+				</TripSelectContainer>
+			</>
 		)
 	}
 }
